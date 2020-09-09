@@ -7,39 +7,38 @@
 
 clear
 
-echo "
-  ___        _      _                  
- / _ \ _   _ _ _ __ _ _ __  _   _ _  __
-| | | | | | | | '__| | '_ \| | | \ \/ /
-| |_| | |_| | | |  | | | | | |_| |>  < 
- \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\
+echo " ------------------------------------------------------------------------------ 
+ INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
+ ------------------------------------------------------------------------------
+   ___        _      _                  
+  / _ \ _   _ _ _ __ _ _ __  _   _ _  __
+ | | | | | | | | '__| | '_ \| | | \ \/ /
+ | |_| | |_| | | |  | | | | | |_| |>  < 
+  \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\
                                        
-
-INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
-(p) 2019-2020 Licencia GPLv3, Autor: Charlie Martínez® 
-Página web: https://www.quirinux.org   "
+ 
+ (p) 2019-2020 Licencia GPLv3, Autor: Charlie Martínez® 
+ Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org   "
 
 sleep 1
 
-echo "--------------------------------------------------------------------
-| Ejecutar como ROOT. Sólo valido para Debian Buster.              | 
-| El código fuente requiere modificaciones si se pretende instalar |
-| lar sobre Devuan.                                                |
---------------------------------------------------------------------"                                               
+echo "
+ --------------------------------------------------------------------
+ | Ejecutar como ROOT. Sólo valido para Debian Buster.              | 
+ | El código requiere modificaciones si se pretende usar en Devuan. |
+ --------------------------------------------------------------------"                                               
 
 sleep 0.1
 
 echo "
-
-1 Comenzar la instalación (podrás confirmar cada paso)
-0 Salir.
-
+ 1 Comenzar la instalación (podrás confirmar cada paso).
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -56,32 +55,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-INSTALAR WGET
---------------------------------------------------------------
-
-Necesario para el resto de la instalación. Si ya lo tienes 
-instalado, puedes saltearte este paso. Si no estás seguro, 
-elije la opción 1. 
-
+echo " ------------------------------------------------------------------------------
+ INSTALAR WGET
+ ------------------------------------------------------------------------------
+ 
+ Necesario para el resto de la instalación. Si ya lo tienes 
+ instalado, puedes saltearte este paso. Si no estás seguro, 
+ elije la opción 1. 
 
 
 
 
 
-		
 
 
-1 Instalar WGET (necesario para el resto de la instalación)
-2 Saltar este paso
-0 Salir
+
+
+ 1 Instalar WGET (necesario para el resto de la instalación).
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -110,16 +108,13 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-CONFIGURAR EXCEPCIONES NOPASSWD
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ CONFIGURAR EXCEPCIONES NOPASSWD
+ ------------------------------------------------------------------------------
 
-Se crearán los archivos 0pwfeedback, live, mintupdate y quiri-
-nux en la carpeta /etc/sudoers.d/ conforme vienen 
-preinstalados en Quirinux 2.0.
-
-
+ Se crearán los archivos 0pwfeedback, live, mintupdate y quirinux en la 
+ carpeta /etc/sudoers.d/ conforme vienen preinstalados en Quirinux 2.0.
+ 
 
 
 
@@ -127,15 +122,17 @@ preinstalados en Quirinux 2.0.
 		
 
 
-1 Agregar archivos a /etc/sudoers.d/
-2 Saltar este paso
-0 Salir
+
+
+ 1 Agregar archivos a /etc/sudoers.d/
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -164,32 +161,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-DESINSTALAR KERNELS ANTERIORES 4.x
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ DESINSTALAR KERNELS ANTERIORES 4.x
+ ------------------------------------------------------------------------------
 
-Si instalaste kernel AVL 5.4.28 de baja latencia que Quirinux
-trae por defecto y estás ejecutándolo ahora, puedes 
-desinstalar los kernels anteriores. 
-
-CUIDADO! Si no lo sabes con exactitud es preferible que salte-
-es este paso, ya que un error podría dejar inutilizado tu sis-
-tema.
-
+ Si instalaste kernel AVL 5.4.28 de baja latencia que Quirinux trae por 
+ defecto y estás ejecutándolo ahora, puedes desinstalar los kernels anteriores.
+   
+ CUIDADO! Si no lo sabes con exactitud es preferible que te saltes este paso
+ ya que un error podría dejar inutilizado tu sistema
+ 
+ 
 
 
 
 
-1 Eliminar kernels de Debian Buster (CUIDADO!)
-2 Saltar este paso
-0 Salir
+
+ 1 Eliminar kernels de Debian Buster (CUIDADO!).
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -216,33 +212,32 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-CONFIGURAR CPU PARA MAYOR PERFORMANCE
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------ 
+ CONFIGURAR CPU PARA MAYOR PERFORMANCE
+ ------------------------------------------------------------------------------
 
-Quirinux está pensado para trabajar en producción, por eso 
-viene con la configuración de CPU establecida para mayor 
-performance. 
+ Quirinux está pensado para trabajar en producción, por eso viene con la confi-
+ guración de CPU establecida para mayor performance.
 
-ADVERTENCIA: Esto podría reducir la duración de 
-la carga de las baterías en los equipos portátiles. 
+ ADVERTENCIA: Esto podría reducir la duración de la carga de las baterías en 
+ los equipos portátiles. 
 
 
 
 
 
 
-1 Configurar CPU para mayor performance.
-2 Saltar este paso
-0 Salir
+
+ 1 Configurar CPU para mayor performance.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -272,15 +267,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
+ ------------------------------------------------------------------------------
 
-Activar el soporte multiarquitectura, que quizás necesites a 
-la hora de instalar algun controlador. 
-
-
+ Activar el soporte multiarquitectura, que quizás necesites a la hora de insta-
+ lar algun controlador. 
 
 
 
@@ -289,15 +281,17 @@ la hora de instalar algun controlador.
 
 		
 
-1 Activar soporte multiarquitectura
-2 Saltar este paso
-0 Salir
+
+
+ 1 Activar soporte multiarquitectura.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -316,37 +310,38 @@ sudo dpkg --add-architecture i386
 "0")
 
 exit 0
-;; 
+
+;;
+ 
 esac 
 
 clear
 
-echo "
---------------------------------------------------------------
-AGREGAR REPOSITORIOS APT LIBRES ADICIONALES + REPO-CONFIG
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ AGREGAR REPOSITORIOS APT LIBRES ADICIONALES + REPO-CONFIG
+ ------------------------------------------------------------------------------
 
-Repositorios 100% libres necesarios para instalar o 
-actualizar: Kernel AVLinux, conversor de video Mystiq, el ges-
-tor de software de Mint y el editor de video Cinelerra.
+ Repositorios 100% libres necesarios para instalar o actualizar: 
+ Kernel AVLinux, conversor de video Mystiq, el gestor de software de software
+ de Mint LMDE4 y el editor de video Cinelerra.
 
-Se instalará también el programa Repo-Config, que rive para
-activar o desactivar los repositorios non-free y contrib de
-Debian.
+ Se instalará también el programa Repo-Config, que rive para activar o desacti-
+ var los repositorios non-free y contrib de Debian.
 
 
 
 
 
-1 Agregar repositorios libres adicionales + Repo-Config
-2 Saltar este paso
-0 Salir
+
+ 1 Agregar repositorios libres adicionales + Repo-Config.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -375,32 +370,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-ACTIVAR REPOSITORIOS NO LIBRES (NON-FREE CONTRIB)
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ ACTIVAR REPOSITORIOS NO LIBRES NON-FREE CONTRIB
+ ------------------------------------------------------------------------------
 
-Útiles para instalar controladores privativos de hardware (si 
-los necesitas). Requiere haber instalado los repositorios li- 
-bres adicionales. Si no lo hiciste en el paso anterior, 
-puedes hacerlo ahora (opción 3). 
+ Útiles para instalar controladores privativos de hardware (si los necesitas).
+ Requiere haber instalado los repositorios libres adicionales. Si no lo hiciste
+ en el paso anterior, puedes hacerlo ahora (opción 3). 
+ 
+ Si agregaste los repositorios libres adicionales, siempre podrás activar o 
+ desactivar los repositorios non-free yendo a Aplicaciones / Otros / 
+ Repo-Config (este programa se instala junto con los repositorios libres 
+ adicionales)
+ 
 
-Si agregaste los repositorios libres adicionales, siempre po-
-drás activar o desactivar los repositorios non-free y contrib
-con Repo-Config (se instala con los respositorios libres 
-libres adicionales).
 
-		
 
-1 Activar repositorios no libres
-2 Saltar este paso
-3 Agregar repositorios libres adicionales y proceder a opc. 1
-0 Salir
+ 1 Activar repositorios no libres.
+ 2 Saltar este paso.
+ 3 Agregar repositorios libres adicionales + opción 1.
+ 0 Salir.
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -443,15 +437,13 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-INSTALAR CONTROLADORES LIBRES PARA ACELERADORAS NVIDIA
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ INSTALAR CONTROLADORES LIBRES PARA ACELERADORAS NVIDIA
+ ------------------------------------------------------------------------------
 
-Quirinux trae preinstalados los controladores libres para las 
-placas de video NVidia Si no los necesitas, puedes saltearte 
-este paso.
-
+ Quirinux trae preinstalados los controladores libres para las tarjetas de  
+ video NVidia. Si no los necesitas, puedes saltar este paso.
+ 
 
 
 
@@ -460,15 +452,16 @@ este paso.
 
 
 
-1 Instalar controladores libres para Nvidia
-2 Saltar este paso
-0 Salir
+
+ 1 Instalar controladores libres para Nvidia.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc
+read -p " Tu respuesta-> " opc
  
 case $opc in
 
@@ -497,32 +490,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-INSTALAR CONTROLADORES PRIVATIVOS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ INSTALAR CONTROLADORES PRIVATIVOS (Requiere non-free contrib activados)
+ ------------------------------------------------------------------------------
 
-Quirinux trae una gran cantidad de firmware preinstalado, por-
-que fue pensado para funcionar en modo live en la mayor 
-cantidad de hardware posible. Si no los necesitas o prefieres 
-instalar manualmente y por tu cuenta sólo aquellos que te ha-
-gan falta, puedes saltearte este paso.
+ Quirinux trae una gran cantidad de firmware preinstalado, porque fue pensado 
+ para funcionar en modo live en la mayor de hardware posible. Puedes saltar 
+ este paso si tu hardware (incluyendo placa wifi) está funcionando bien o si
+ necesitas algún driver específico pero prefieres buscarlo e instalarlo por
+ tu cuenta en lugar de instalar todos ahora (los que necesitas y los que no).
 
-ADVERTENCIA: Requiere activar los repositorios non-free y con-
-trib. Si agregaste los repositorios libres adicionales puedes
-activarlos ahora con el  programa menú Aplicaciones / otros / 
-Repo-Config. Si no agregaste, necesitaras agregarlos (opc. 3). 
+   ADVERTENCIA: Si agregaste los repositorios libres adicionales al comienzo 
+ de la instalación pero no activaste los repositorios non-free y contrib,   
+ puedes activarlos ahora: Aplicaciones / Otros / Repo-Config. Si no agregaste 
+ los repositorios libres adicionales y necesitas esta característica, puedes 
+ agregarlos ahora (opción 3)
 
-
-1 Instalar firmware
-2 Saltar este paso
-3 Agregar repositorios libres adicionales, 
-  activar non-free contrib  y proceder a opc. 1
-0 Salir
+ 1 Instalar firmware.
+ 2 Saltar este paso.
+ 3 Agregar repositorios libres adicionales, 
+   activar non-free contrib + opción 1.
+ 0 Salir.
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -584,32 +576,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-INSTALAR CODECS Y FORMATOS PRIVATIVOS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ INSTALAR CODECS Y FORMATOS PRIVATIVOS (Requiere non-free contrib activados)
+ ------------------------------------------------------------------------------
 
-Necesarios para reproducir algunos formatos como Adobe Flash y 
-trabajar con archivos comprimidos con extensión .rar.
+ Necesarios para reproducir algunos formatos como Adobe Flash y trabajar con 
+ archivos comprimidos con extensión .rar.
 
-ADVERTENCIA: Requiere activar los repositorios non-free y con-
-trib. Si agregaste los repositorios libres adicionales puedes
-activarlos ahora con el  programa menú Aplicaciones / otros / 
-Repo-Config. Si no agregaste, necesitaras agregarlos (opc. 3). 
-
-
+   ADVERTENCIA: Si agregaste los repositorios libres adicionales al comienzo 
+ de la instalación pero no activaste los repositorios non-free y contrib,   
+ puedes activarlos ahora: Aplicaciones / Otros / Repo-Config. Si no agregaste 
+ los repositorios libres adicionales y necesitas esta característica, puedes 
+ agregarlos ahora (opción 3) 
 
 
 
-1 Instalar codecs y formatos privativos
-2 Saltar este paso
-3 Agregar repositorios libres adicionales, 
-  activar non-free contrib  y proceder a opc. 1
-0 Salir
+
+ 1 Instalar codecs y formatos privativos.
+ 2 Saltar este paso.
+ 3 Agregar repositorios libres adicionales 
+   y activar non-free contrib + opción 1.
+ 0 Salir.
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -661,32 +652,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: INSTALAR PAQUETES BASE
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR PAQUETES BASE (Requiere repositorios adicionales)
+ ------------------------------------------------------------------------------
 
-Instalación de diversos programas de uso general. Esta base 
-viene preinstalada en todas las ediciones de Quirinux 2.0. 
-fusiona utilidades de Mint y Opensuse con Debian y algunas 
-adicionales (imagine, pdfarranger, video-downloader, etc)
+ Instalación de diversos programas de uso general. Esta base viene 
+ preinstalada en todas las ediciones de Quirinux 2.0.
+ fusiona utilidades de Mint y Opensuse con Debian y algunas como imagine, pdf-
+ pdfarranger y video-downloader, entre otras.
 
-ADVERTENCIA: Requiere haber agregado los repositorios libres
-adicionales. Si no los has activado al comienzo de la  
-instalación, puedes hacerlo ahora (opción 3)
+  ADVERTENCIA: Si activaste los repositorios libres adicionales al comienzo de 
+ instalación, puedes hacerlo ahora con la opción número 3. 
  
+
 
 
 
 1 Instalar paquetes base de Mint, OpenSuse y extras.
 2 Saltar este paso.
-3 Agregar repositorios libres adicionales y proceder opc. 1
-0 Salir
+3 Agregar repositorios libres adicionales + opción 1.
+0 Salir.
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -695,7 +685,7 @@ case $opc in
 # INSTALANDO PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in figlet photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger plank build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d thunderbird shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba gnome-color-manager liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi qmmp bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings qmmp vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre dispcalgui catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in figlet photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger plank build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d thunderbird shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba gnome-color-manager liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre dispcalgui catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -768,7 +758,7 @@ sudo apt-get update -y
 
 # INSTALANDO PAQUETES BASE DE BUSTER
 
-for paquetes_buster in figlet photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger plank build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d thunderbird shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba gnome-color-manager liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi qmmp bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings qmmp vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre dispcalgui catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in figlet photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger plank build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d thunderbird shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba gnome-color-manager liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre dispcalgui catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -836,32 +826,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: INSTALAR GESTOR DE SOFTWARE DE MINT LMDE4
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR GESTOR DE SOFTWARE DE MINT LMDE4
+ ------------------------------------------------------------------------------
 
-Mint LMDE4 (basado en Debian Buster incluye un cómodo gestor
-de software gráfico mucho más ligero que gnome-software. Por 
-defecto, permite instalar paquetes tipo Flatpak. 
-Se instalará, además, la utilidad 'Flatpak-Config'
-con la que podrás activar o desactivar esta caracteristica,
-sin perjuicio de que puedes elegir ahora tu preferencia.
+ Mint LMDE4 (basado en Debian Buster) incluye un cómodo gestor de software grá-
+ fico mucho más ligero que gnome-software. Por defecto, permite instalar 
+ paquetes tipo Flatpak. 
+ 
+ Se instalará, además, la utilidad 'Flatpak-Config' con la que podrás activar o 
+ desactivar esta caracteristica, sin perjuicio de que puedes elegir ahora tu 
+ preferencia.
 
-ADVERTENCIA: Requiere repositorios libres adicionales. Si no
-los activo al comienzo de la instalación, puede hacerlo ahora
-(opciones 4 y 5).
+ ADVERTENCIA: Requiere repositorios libres adicionales. Si no
+ los activo al comienzo de la instalación, puede hacerlo ahora
+ (opciones 4 y 5).
 
-1 Instalar gestor de software de Mint (con soporte Flatpak)
-2 Saltar este paso
-3 Instalar gestor de software de Mint (sin soporte Flatpak)
-4 Agregar repositorios libres adicionales y proceder a opc. 1
-5 Agregar repositorios libres adicionales y proceder a opc. 2
-0 Salir
-
+ 1 Instalar gestor de software de Mint (con soporte Flatpak).
+ 2 Saltar este paso.
+ 3 Instalar gestor de software de Mint (sin soporte Flatpak).
+ 4 Agregar repositorios libres adicionales + opción 1.
+ 5 Agregar repositorios libres adicionales + opción 3.
+ 0 Salir.
 "
 
-read -p "Tu respuesta-> " opc
+read -p " Tu respuesta-> " opc
  
 case $opc in
 
@@ -918,15 +907,13 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: LIBREOFFICE 6.4.6
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR O ACTUALIZAR A LIBREOFFICE 6.4.6
+ ------------------------------------------------------------------------------
 
-Se instalará LibreOffice versión 6.4.6.
-y se eliminarán las versiones anteriores que haya en el sistema.
-
-
+ Se instalará LibreOffice versión 6.4.6. con los diccionarios y traducciones 
+ incluidas en Quirinux 2.0  y se eliminarán las versiones anteriores que haya 
+ en el sistema.
 
 
 
@@ -934,15 +921,17 @@ y se eliminarán las versiones anteriores que haya en el sistema.
 
 
 
-1 Instalar LibreOffice 6.4.6
-2 Saltar este paso
-0 Salir
+
+
+ 1 Instalar LibreOffice 6.4.6.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -982,14 +971,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: IMPRESORAS Y ESCÁNERES
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: IMPRESORAS Y ESCÁNERES
+ ------------------------------------------------------------------------------
 
-Intalación de controladores de impresión y escaneo 100 % 
-libres (no incluye hplip ni controladores privativos de otros
-fabricantes.
+ Intalación de controladores de impresión y escaneo 100 % libres (no incluye 
+ hplip ni controladores privativos de otros fabricantes)
 
 
 
@@ -998,15 +985,17 @@ fabricantes.
 
 
 
-1 Instalar controladores libres para impresoras y escáneres
-2 Saltar este paso
-0 Salir
+
+
+1 Instalar controladores libres para impresoras y escáneres.
+2 Saltar este paso.
+0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1051,13 +1040,11 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: PAQUETES DE RED
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: PAQUETES DE RED
+ ------------------------------------------------------------------------------
 
-Intalación de controladores de red 100 % libres.
-
+ Intalación de controladores de red 100 % libres.
 
 
 
@@ -1067,15 +1054,17 @@ Intalación de controladores de red 100 % libres.
 
 
 
-1 Instalar controladores libres para red
-2 Saltar este paso
-0 Salir
+
+
+ 1 Instalar controladores libres para red.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1106,31 +1095,31 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: CONTROLADORES AMD LIBRES Y PRIVATIVOS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: CONTROLADORES AMD LIBRES Y PRIVATIVOS (non-free optativo)
+ ------------------------------------------------------------------------------
 
-Intalación de controladores de video AMD (si los necesitas)
+ Intalación de controladores de video AMD (si los necesitas)
 
-ADVERTENCIA: Si optas por instalar también los controladores 
-no-libres necesitarás tener activados los repositorios 
-privativos. Si no los activaste aún, puedes hacerlo desde 
-el menú Aplicaciones / Otras / Repo-Config
-
-
-
+   ADVERTENCIA: La opción 1 requiere activar repositorios non-free. 
+ Si agregaste los repositorios libres adicionales al comienzo de la instalación 
+ pero no activaste los repositorios non-free y contrib, puedes activarlos 
+ ahora: Aplicaciones / Otros / Repo-Config. Si no agregaste los repositorios 
+ libres adicionales y necesitas esta característica, puedes 
+ agregarlos ahora con la opción número 3.  
 
 
-1 Instalar controladores para AMD (libres y privativos)
-2 Saltar este paso
-3 Instalar controladores para AMD (sólo los libres)
-0 Salir
 
+
+1 Instalar controladores para AMD (libres y privativos).
+2 Saltar este paso.
+3 Agregar repositorios libres adicionales, activar non-free + opción 1.
+4 Instalar controladores para AMD (sólo los libres).
+0 Salir.
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1151,7 +1140,31 @@ sudo apt-get autoremove --purge -y
 
 "3")
 
-# INSTALANDO CONTROLADORES DE VIDEO AMD LIBRES
+# AGREGA REPOSITORIOS LIBRES ADICIONALES
+
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo apt-get update -y
+
+# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
+
+sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo apt-get update -y
+
+# INSTALANDO CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
+
+sudo apt-get update -y
+for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
+sudo apt-get install -f
+sudo apt-get autoremove --purge -y
+
+
+;;
+
+"4")
+
+# INSTALANDO SÓLO CONTROLADORES DE VIDEO AMD LIBRES
 
 sudo apt-get update -y
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
@@ -1170,14 +1183,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: SCREENSAVER
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: SCREENSAVER
+ ------------------------------------------------------------------------------
 
-Instalación del protector de pantalla screensaver gluclo, que 
-es un relój de fichas similar al de MacOS.
-
+ Instalación del protector de pantalla screensaver gluclo, que es un relój de
+ retro similar al de MacOS.
 
 
 
@@ -1186,15 +1197,17 @@ es un relój de fichas similar al de MacOS.
 
 
 
-1 Instalar screensaver gluclo simil MacOs
-2 Saltar este paso
-0 Salir
+
+
+ 1 Instalar screensaver gluclo (simil Relój de fichas de MacOs).
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1232,13 +1245,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: AJUSTES DE SONIDO
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: AJUSTES DE SONIDO
+ ------------------------------------------------------------------------------
 
-Reinstalar PulseAudio puede solucionar algunas incidencias que 
-ocurren al instalar algunas aplicaciones de Quirinux.
+ Reinstalar PulseAudio puede solucionar algunas incidencias que ocurren al ins-
+ talar algunas aplicaciones de Quirinux.
 
 
 
@@ -1248,15 +1260,15 @@ ocurren al instalar algunas aplicaciones de Quirinux.
 
 
  
-1 Reinstalar PulseAudio
-2 Saltar este paso
-0 Salir
+ 1 Reinstalar PulseAudio.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1290,12 +1302,11 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX GENERAL: TRADUCCIONES DE FIREFOX
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX GENERAL: TRADUCCIONES DE FIREFOX
+ ------------------------------------------------------------------------------
 
-Instalación de traducciones para Mozilla Firefox.
+ Instalación de traducciones para Mozilla Firefox.
 
 
 
@@ -1306,15 +1317,16 @@ Instalación de traducciones para Mozilla Firefox.
 
 
  
-1 Instalar traducciones de Firefox
-2 Saltar este paso
-0 Salir
+
+ 1 Instalar traducciones de Firefox.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1343,31 +1355,30 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX PRO: INSTALAR CONTROLADORES WACOM
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR CONTROLADORES WACOM
+ ------------------------------------------------------------------------------
 
-Hasta ahora, instalamos paquetes disponibles en la edición GE-
-NERAL.A partir de ahora, ingresamos en el terreno de Quirinux 
-Edicion PRO.
+ Hasta ahora, instalamos paquetes disponibles en la edición GENERAL. A partir 
+ de ahora, ingresamos en el terreno de Quirinux Edicion PRO.
 
-Instalar controladores libres para las tabletas gráficas 
-de la marca Wacom.
+ Instalar controladores libres para las tabletas gráficas de la marca Wacom.
 
 
 
 
 
-1 Instalar controladores de Wacom
-2 Saltar este paso
-0 Salir
+
+
+1 Instalar controladores de Wacom.
+2 Saltar este paso.
+0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc
+read -p " Tu respuesta-> " opc
  
 case $opc in
 
@@ -1401,14 +1412,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX PRO: INSTALAR CONTROLADORES GENIUS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR CONTROLADORES GENIUS
+ ------------------------------------------------------------------------------
 
-Instalar controladores libres para tabletas gŕaficas Genius, 
-incluidos en Quirinux Edición Pro.
-
+ Instalar controladores libres para tabletas gŕaficas Genius antiguas,
+ incluidos en Quirinux Edición Pro.
 
 
 
@@ -1417,15 +1426,16 @@ incluidos en Quirinux Edición Pro.
 
 
 
-1 Instalar controladores de Genius
-2 Saltar este paso
-0 Salir
+
+ 1 Instalar controladores de Genius.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1456,25 +1466,25 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX PRO: INSTALAR PTXCONF
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR PTXCONF
+ ------------------------------------------------------------------------------
 
-Ptxconf es una utilidad programada en Perl, que sirve para ma-
-pear una tableta gráfica a un sólo monitor cuando se utiliza 
-más de uno. Gestiona de manera gráfica el comando xorg 
-map-to-input y resulta muy útil bajo el escritorio xfce.
-
+ Ptxconf es una utilidad programada en Perl, que sirve para mapear una tableta 
+ gráfica a un sólo monitor cuando se utiliza más de uno. Gestiona de manera 
+ gráfica el comando xorg map-to-input y resulta muy útil bajo el escritorio 
+ xfce, predeterminado en Quirinux. Si no usas xfce, puedes saltar este paso.
 
 
 
 
 
 
-1 Instalar Ptxconf
-2 Saltar este paso
-0 Salir
+
+
+ 1 Instalar Ptxconf.
+ 2 Saltar este paso.
+ 0 Salir.
 
 
 
@@ -1517,14 +1527,12 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX PRO: GIMP + PLUGINS
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX PRO: GIMP + PLUGINS
+ ------------------------------------------------------------------------------
 
-Instalación completa del editor profesional de imágenes GIMP,
-como alternativa a Photoshop. Se instala desde los 
-repositorios oficiales de Debian Buster.
+ Instalación completa del editor profesional de imágenes GIMP, como alternativa 
+ a Adobe Photoshop. Se instala desde los repositorios oficiales de Debian Buster.
 
 
 
@@ -1533,9 +1541,11 @@ repositorios oficiales de Debian Buster.
 
 
 
-1 Instalar GIMP
-2 Saltar este paso
-0 Salir
+
+
+1 Instalar GIMP.
+2 Saltar este paso.
+0 Salir.
 
 
 
@@ -1570,25 +1580,25 @@ esac
 
 clear
 
-echo "
---------------------------------------------------------------
-QUIRINUX PRO: GIMP EDICIÓN QUIRINUX
---------------------------------------------------------------
+echo " ------------------------------------------------------------------------------
+ QUIRINUX PRO: GIMP EDICIÓN QUIRINUX
+ ------------------------------------------------------------------------------
 
-Se agrega un programa llamado Configurar-Gimp que sirve para 
-convertir a Gimp en 'Gimp Edición Quirinux'. Este programa  
-permite utilizar Gimp con los íconos y/o atajos de Photoshop 
-y revertir los cambios en cualquier momento, a diferencia de 
-otras utilidades similares que no posibilitan deshacer los 
-cambios. 
+ Se agrega un programa llamado Configurar-Gimp que sirve para convertir a Gimp 
+ en 'Gimp Edición Quirinux'. Este programa permite utilizar Gimp con los íconos 
+ y/o atajos de Photoshop y revertir los cambios en cualquier momento, a 
+ diferencia de  otras utilidades similares que no posibilitan deshacer los cam-
+ bios. 
 
-Requiere haber instalado GIMP en el paso anterior.
-
+ Requiere haber instalado GIMP en el paso anterior. Si no lo hiciste puedes ha-
+ cerlo ahora (opción 3).
 
 
-1 Instalar Gimp Edición Quirinux
-2 Saltar este paso
-0 Salir
+
+ 1 Instalar Gimp Edición Quirinux.
+ 2 Saltar este paso.
+ 3 Instalar GIMP + Plugins + opcion 1.
+ 0 Salir.
 
 
 
@@ -1625,6 +1635,36 @@ sudo apt-get autoremove --purge -y
 
 ;;
 
+"3")
+
+# INSTALAR GIMP 2.10 DESDE BUSTER
+
+sudo apt-get update -y
+for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALANDO CONVERSOR PARA GIMP EDICIÓN QUIRINUX
+
+sudo apt-get update -y
+sudo mkdir -p /opt/tmp/gimp/
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
+sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
+sudo chmod 777 -R /home/
+sudo rm -rf /home/*/.config/GIMP
+sudo rm -rf /root/.config/GIMP 
+sudo rm -rf /usr/share/gimp 
+sudo rm -rf /etc/skel/.config/GIMP 
+for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
+sudo chmod 777 -R /home/
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+;;
+
 "0")
 
 exit 0
@@ -1636,9 +1676,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: ESPECIALIZADOS ESTÁNDAR
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Instalación de más programas especializados que Quirinux 2.0 
 Pro incluye pero que se pueden instalar desde los repositorios 
@@ -1689,9 +1729,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: INSTALAR CINELERRA
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Instalación del editor de video profesional Cinelerra, 
 alternativa que supera en prestaciones a Adobe Premiere. Si no 
@@ -1740,9 +1780,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: COMPILAR E INSTALAR OPENTOONZ
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Descargar código fuente e instalar compilando desde el código
 la versión más nueva del programa de animación profesional 
@@ -1827,9 +1867,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: INSTALAR PROGRAMAS DESDE EPOSITORIO QUIRINUX
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Conjunto de programas compilados y optimizados que se 
 descargan desde el repositorio Quirinux y no están presentes 
@@ -1962,9 +2002,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Entangle es un programa similar a EOS que sirve para cámaras
 reflex de los fabricantes más conocidos. 
@@ -2019,9 +2059,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: VERSION MÁS NUEVA DE BLENDER
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 A diferencia de Quirinux General, Quirinux Pro incluye una 
 versión más reciente del programa Blender.
@@ -2075,9 +2115,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: VERSION MÁS NUEVA DE INKSCAPE
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 A diferencia de Quirinux General, Quirinux Pro incluye una 
 versión más reciente del programa Inkscape.
@@ -2131,9 +2171,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 QUIRINUX PRO: VERSION MÁS NUEVA DE ARDOUR
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 A diferencia de Quirinux General, Quirinux Pro incluye la ver-
 sión más reciente de Ardour que, pero la misma está compilada
@@ -2224,9 +2264,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 CONFIGURACIÓN ESPECÍFICA: ÍCONOS Y TEMAS DE ESCRITORIO
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Instalación de temas de escritorio e íconos de Quirinux, 
 eliminando o no los que tienes instalados actualmente.
@@ -2392,9 +2432,9 @@ esac
 clear
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 CONFIGURACIÓN ESPECÍFICA: TIPOGRAFÍAS
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Puedes instalar las fuentes de Quirinux eliminando o sin 
 eliminar las que tienes instaladas en la actualidad.
@@ -2466,9 +2506,9 @@ esac
 clear 
 
 echo "
---------------------------------------------------------------
+------------------------------------------------------------------------------
 CONFIGURACIÓN ESPECÍFICA DE QUIRINUX
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Remover componentes que Quirinux no incluye 
 
@@ -2564,9 +2604,9 @@ esac
 clear
 
 echo "         
---------------------------------------------------------------
+------------------------------------------------------------------------------
 ¡FIN DE LA INSTALACIÓN!
---------------------------------------------------------------
+------------------------------------------------------------------------------
 
 A continuación, se borrarán los archivos temporales.
 
