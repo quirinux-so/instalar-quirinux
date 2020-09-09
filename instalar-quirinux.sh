@@ -824,6 +824,8 @@ sudo dpkg -i /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+;;
+
 "0")
 
 exit 0
@@ -842,7 +844,6 @@ QUIRINUX GENERAL: INSTALAR GESTOR DE SOFTWARE DE MINT LMDE4
 Mint LMDE4 (basado en Debian Buster incluye un cómodo gestor
 de software gráfico mucho más ligero que gnome-software. Por 
 defecto, permite instalar paquetes tipo Flatpak. 
-
 Se instalará, además, la utilidad 'Flatpak-Config'
 con la que podrás activar o desactivar esta caracteristica,
 sin perjuicio de que puedes elegir ahora tu preferencia.
