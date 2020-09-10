@@ -11,8 +11,10 @@ Este instalador funciona por consola, en modo de texto y no es desatendido: cada
 Programado para Debian Buster y probado con éxito en AV Linux, Linux Mint LMDE4 y Q4OS, o sea, distribuciones basadas en Debian Buster.
 NO COMPATIBLE CON: Devuan Beowult, derivadas como Etertics, GobMis, etc. Tampoco es compatible con Ubuntu. Para utilizarlo con distros que no sean Debian Buster, es necesario modificar el código fuente en lo que concierne a paquetes de instalación / desinstalación de base y sources.list 
 ### Instrucciones
-sudo chmod 755 instalar-quirinux.sh
-sudo ./instalar-quirinux.sh
+sudo chmod 755 instalar-quirinux.sh <br>
+su root (o sudo su, si está habilitado)<br>
+./instalar-quirinux.sh<br>
+Es preferible ejecutar este script de la forma indicada, en lugar de sudo ./instalar-quirinux.sh
 #### Autores
 Charlie Martínez, haciendo uso de la libertad de distribución de la licencia GPL, ha programado este instalador pero no guarda relación con el desarrollo de gran parte del software que instala, el cual ha sido liberado casi en su totalidad bajo licencia GPLv3. Este script está liberado también bajo licencia GPLv3. Este script proporciona formas de instalar, de manera optativa, firmware privativo (publicado bajo licencias no libres que permiten su redistribución). 
 #### Avisos legales
