@@ -8,7 +8,8 @@ Lo que hará el script es modificar los archivos de configuración de Buster par
 ## Detalles adicionales
 Este instalador funciona por consola, en modo de texto y no es desatendido: cada paso requiere ser confirmado por el usuario. 
 ### Compatibilidad
-Desarrollado para Quirinux GNU/Linux 2.0. Probado con éxito en Debian Buster, Devuan Beowulf, Quirinux 2.0, Etertics, Mint LMDE4 y Ubuntu 20.04. 
+Programado para Debian Buster y probado con éxito en AV Linux, Linux Mint LMDE4 y Q4OS, o sea, distribuciones basadas en Debian Buster.
+NO COMPATIBLE CON: Devuan Beowult, derivadas como Etertics, GobMis. Tampoco es compatible con Ubuntu. Para utilizarlo con distros que no sean Debian Buster, es necesario modificar el código fuente en lo que concierne a paquetes de instalación / desinstalación de base y sources.list 
 ### Instrucciones
 sudo chmod 755 instalar-quirinux.sh
 sudo ./instalar-quirinux.sh
