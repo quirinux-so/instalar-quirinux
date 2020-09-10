@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
-# Versión:	1.00
+# Versión:	1.00 EN DESARROLLO (ALPHA)
 
 clear
 
