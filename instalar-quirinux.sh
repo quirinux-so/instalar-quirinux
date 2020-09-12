@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
-# Versión:	1.00-Alfa
+# Versión:	1.00 EN DESARROLLO (ALPHA)
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -174,9 +174,9 @@ clear
 
 "0")
 
-exit 0
-
 clear
+
+exit 0
 
 ;; 
 
@@ -228,14 +228,6 @@ clear
 
 ;;
 
-"0")
-
-clear
-
-exit 0
-
-;; 
-
 "3")
 
 sudo mkdir /opt/tmp
@@ -284,9 +276,13 @@ echo " -------------------------------------------------------------------------
 
 "
 
+"0")
+
+clear
+
 exit 0
 
-;;
+;; 
 
 esac 
 
@@ -310,6 +306,7 @@ echo " -------------------------------------------------------------------------
  1 Configurar CPU para mayor performance.
  2 Saltar este paso (recomendado para laptops).
  0 Salir.
+
 
 
 "
@@ -404,8 +401,8 @@ clear
 
 exit 0
 
-;;
- 
+;; 
+
 esac 
 
 clear
@@ -468,7 +465,7 @@ exit 0
 
 ;; 
 
-esac 
+esac  
 
 clear
 
@@ -723,6 +720,7 @@ echo " -------------------------------------------------------------------------
  característica, puedes agregarlos ahora (opción 3)
 
 
+
  1 Instalar codecs y formatos privativos.
  2 Saltar este paso.
  3 Agregar repositorios adicionales + activar non-free contrib + opción 1.
@@ -810,10 +808,10 @@ echo " -------------------------------------------------------------------------
 
 
 
-1 Instalar paquetes base (recomendado)
-2 Saltar este paso.
-3 Agregar repositorios adicionales + opción 1.
-0 Salir.
+ 1 Instalar paquetes base (recomendado)
+ 2 Saltar este paso.
+ 3 Agregar repositorios adicionales + opción 1.
+ 0 Salir.
 
 
 "
@@ -1168,7 +1166,6 @@ echo " -------------------------------------------------------------------------
 
 
 
-
  1 Instalar controladores libres para impresoras y escáneres (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -1243,7 +1240,6 @@ echo " -------------------------------------------------------------------------
 
 
 
-
  1 Instalar controladores libres para red.
  2 Saltar este paso.
  0 Salir.
@@ -1298,10 +1294,9 @@ echo " -------------------------------------------------------------------------
  non-free. Si agregaste los repositorios adicionales pero no activaste los 
  repositorios non-free y contrib, puedes activarlos 
  ahora: ${bold}Aplicaciones / Otros / Repo-Config.${normal} 
- Si no agregaste los repositorios libres adicionales y necesitas esta 
+  
+ Si no agregaste los repositorios libres adicionales y necesitas esta
  característica, puedes agregarlos ahora (opción 3).  
-
-
 
 
  1 Instalar controladores para AMD (libres y privativos).
@@ -1404,7 +1399,6 @@ echo " -------------------------------------------------------------------------
 
 
 
-
  1 Instalar screensaver gluclo (simil Relój de fichas de MacOs).
  2 Saltar este paso.
  0 Salir.
@@ -1459,7 +1453,9 @@ exit 0
 
 esac 
 
-clear
+;; 
+
+esac 
 
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: AJUSTES DE SONIDO
@@ -1535,8 +1531,7 @@ echo " -------------------------------------------------------------------------
 
 
 
-
-
+ 
 
  
 
@@ -1593,6 +1588,7 @@ echo " -------------------------------------------------------------------------
   ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
  borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
  sin eliminar nada. 
+
 
 
 
@@ -1856,28 +1852,29 @@ esac
 clear 
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX GENERAL NO INCLUYE
+ QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
  -----------------------------------------------------------------------------
 
-Remover componentes que Quirinux no incluye 
+ Remover componentes que Quirinux GENERAL no incluye.
 
-ADVERTENCIA: Quirinux procura ahorrar espacio para adelgazar
-las ISO de instalación en modo live, por tal motivo se 
-borraran conjuntos de caracteres no occidentales, idiomas, 
-diccionarios y toda la documentación (manuales, archivos read-
-me de Debian, etc de la carpeta /usr/share/doc/ 
-
-
-
+ ${bold} ADVERTENCIA:${normal} Quirinux procura ahorrar espacio para adelgazar las ISO de 
+ instalación en modo live, por tal motivo se borraran conjuntos de caracteres 
+ no occidentales, idiomas, diccionarios y toda la documentación (manuales, 
+ archivos readme de Debian, etc de la carpeta /usr/share/doc/ 
  
-1 Remover componentes que no vienen en Quirinux (CUIDADO!)
-2 Saltar este paso
-0 Salir
+
+
+
+
+ 1 Remover componentes que no vienen en Quirinux (CUIDADO!).
+ 2 Saltar este paso (recomendado).
+ 0 Salir.
+
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -1959,7 +1956,7 @@ exit 0
 esac 
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL INSTALADO
+ ¡QUIRINUX GENERAL INSTALADO!
  -----------------------------------------------------------------------------
 
  Hasta ahora, instalamos paquetes disponibles en la edición GENERAL. Puedes 
@@ -1973,9 +1970,8 @@ echo " -------------------------------------------------------------------------
  las características hasta convertir a Quirinux General en Quirinux PRO. 
 
 
-
- 1 Continuar con la instalación de Quirinux PRO (recomendado)
- 2 Borrar temporales y salir. 
+ 1 Borrar temporales y salir
+ 2 Continuar con la instalación de Quirinux PRO (recomendado) 
  0 Salir sin borrar los temporales. 
 
 
@@ -1986,13 +1982,13 @@ read -p " Tu respuesta-> " opc
  
 case $opc in
 
-"1") 
+"2") 
 
 clear
 
 ;;
 
-"2")
+"1")
 
 clear
 
@@ -2055,6 +2051,7 @@ echo " -------------------------------------------------------------------------
  krita-l10n dvd-styler obs-studio obs-plugins
 
 
+
  1 Instalar especializados estándar (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -2111,8 +2108,6 @@ echo " -------------------------------------------------------------------------
  ${bold}MyPaint, AzPAinter:${normal} Alternativas Corel Painter y SAI
  ${bold}Belle, Godot:${normal} Desarrollo de videojuegos 
  ${bold}Quinema:${normal} Scripts de animación de Ernesto Bazzano 
-
-
 
 
  1 Instalar Especializados Quirinux
@@ -2259,7 +2254,6 @@ echo " -------------------------------------------------------------------------
 
 
 
-
  1 Instalar GIMP + Plugins (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -2322,11 +2316,11 @@ echo " -------------------------------------------------------------------------
 
 
 
+
  1 Instalar Gimp Edición Quirinux (recomendado).
  2 Saltar este paso.
  3 Instalar GIMP + Plugins + opcion 1.
  0 Salir.
-
 
 
 "
@@ -2465,14 +2459,6 @@ clear
 
 ;;
 
-"0")
-
-exit 0
-
-;;
- 
-esac 
-
 "3")
 
 clear
@@ -2497,10 +2483,20 @@ sudo rm -rf /opt/tmp/*
 
 ;;
 
+"0")
+
+clear
+
+exit 0
+
+;;
+
+esac 
+
 clear
 
 echo " -----------------------------------------------------------------------------
-QUIRINUX PRO: COMPILAR E INSTALAR OPENTOONZ
+ QUIRINUX PRO: COMPILAR E INSTALAR OPENTOONZ
  -----------------------------------------------------------------------------
 
  Descargar código fuente e instalar compilando desde el código la versión más
@@ -2620,9 +2616,9 @@ clear
 
 "0")
 
-exit 0
-
 clear
+
+exit 0
 
 ;; 
 
@@ -2644,7 +2640,6 @@ echo " -------------------------------------------------------------------------
 
 
 
- 
  1 Instalar o actualizar a una versión reciente de Blender (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2709,7 +2704,6 @@ echo " -------------------------------------------------------------------------
 
 
 
- 
  1 Instalar o actualizar una versión más reciente de Inkscape (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2783,7 +2777,7 @@ echo " -------------------------------------------------------------------------
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -2924,7 +2918,6 @@ echo " -------------------------------------------------------------------------
  
 
  
-
 
 
 
@@ -3141,7 +3134,7 @@ echo " -------------------------------------------------------------------------
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
 case $opc in
 
@@ -3303,7 +3296,7 @@ esac
 clear 
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: BORRAR COMPONENTES QUE QUIRINUX PRO NO INCLUYE
+ QUIRINUX PRO: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
  -----------------------------------------------------------------------------
 
  Remover componentes que Quirinux PRO no incluye. 
@@ -3320,6 +3313,7 @@ echo " -------------------------------------------------------------------------
  1 Remover componentes que no vienen en Quirinux PRO (CUIDADO!)
  2 Saltar este paso
  0 Salir
+
 
 
 "
@@ -3408,10 +3402,10 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
-¡FIN DE LA INSTALACIÓN!
+ ¡FIN DE LA INSTALACIÓN!
  -----------------------------------------------------------------------------
 
-A continuación, se borrarán los archivos temporales.
+ A continuación, se borrarán los archivos temporales.
 
 
 
@@ -3422,18 +3416,17 @@ A continuación, se borrarán los archivos temporales.
 
 
 
-1 Borrar archivos temporales y salir
-0 Salir sin borrar los archivos temporales 
-
+ 1 Borrar archivos temporales y salir
+ 0 Salir sin borrar los archivos temporales 
 
 
 
 
 "
 
-read -p "Tu respuesta-> " opc 
+read -p " Tu respuesta-> " opc 
 
-case $opc
+case $opc in
 
 "1") 
 
@@ -3473,6 +3466,14 @@ sudo rm -rf /.git
 exit 0
 
 ;; 
+
+"2")
+
+clear
+
+exit 0
+
+;;
 
 "0")
 
