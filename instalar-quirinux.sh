@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
-# Versión:	1.00 EN DESARROLLO (ALPHA)
+# Versión:	1.00-Beta
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -32,14 +32,13 @@ echo "
  --------------------------------------------------------------------
  | Ejecutar como ROOT. Sólo valido para Debian Buster.              | 
  | El código requiere modificaciones si se pretende usar en Devuan. |
+ | ó Ubuntu.                                                        |
  --------------------------------------------------------------------"                                               
-
 sleep 0.1
 
 echo "
  1 Comenzar la instalación (podrás confirmar cada paso).
  0 Salir.
-
 "
 
 read -p " Tu respuesta-> " opc 
@@ -126,10 +125,10 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: CONFIGURAR EXCEPCIONES NOPASSWD
  -----------------------------------------------------------------------------
  Se crearán los archivos 0pwfeedback, live, mintupdate y quirinux en la 
- carpeta /etc/sudoers.d/conforme vienen preinstalados en Quirinux 2.0.
+ carpeta /etc/sudoers.d/conforme vienen en Quirinux 2.0.
  
-
-
+ Posibilitan que el sistema no requiera contraseñas para tareas cotidianas,
+ sobretodo en modo live.
 
 
 		
@@ -187,8 +186,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: DESINSTALAR KERNELS ANTERIORES 4.x
  -----------------------------------------------------------------------------
- Si ya instalaste kernel AVL 5.4.28 de baja latencia que Quirinux trae por 
- defecto y estás ejecutándolo ahora, puedes desinstalar los kernels 
+ Si ya instalaste el kernel AVL 5.4.28 de baja latencia que Quirinux trae  
+ por defecto y estás ejecutándolo ahora, puedes desinstalar los kernels 
  anteriores.
   
  ${bold} ¡CUIDADO!${normal} Si no lo sabes con exactitud es preferible 
@@ -196,7 +195,7 @@ echo " -------------------------------------------------------------------------
  tu sistema.
 
  ${bold} TRUCO${normal} Puedes instalar el Kernel AVL 5.4.28 ahora 
- (opción 3), luego tendrás que reiniciar y retomar la instalación saltando
+ (opción 3). Luego tendrás que reiniciar y retomar la instalación saltando
  hasta este paso. 
 
  1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
@@ -261,10 +260,10 @@ echo " -------------------------------------------------------------------------
  AV Linux y Quirinux 2.0. 
 
  Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador. Luego podrás volver a ejecutar este programa de instalación
- y saltar todos los pasos hasta llegar a ${bold}DESINSTALAR KERNELS ANTERIORES 4.x${normal}
-
-		
+ el ordenador. Luego podrás volver a ejecutar este programa de instalación,
+ saltar todos los pasos hasta llegar a ${bold}DESINSTALAR KERNELS ANTERIORES 4.x,${normal}
+ elegir la opción 1 (Eliminar kernels de Debian Buster) y continuar con la
+ instalación.		
 
 
 
@@ -275,6 +274,7 @@ echo " -------------------------------------------------------------------------
 
 
 "
+;;
 
 "0")
 
@@ -294,17 +294,17 @@ echo " -------------------------------------------------------------------------
  Quirinux está pensado para trabajar en producción, por eso viene con la 
  configuración de CPU establecida para mayor performance.
 
- ${bold} ADVERTENCIA:${normal} Esto podría reducir la duración de la carga 
- de las baterías en los equipos portátiles. 
+ ${bold} TRUCO: ${normal}Aunque el modo de mayor performance puede reducir 
+ la carga de las baterías en los equipos portátiles, en este paso también 
+ se instalará el programa ${bold}CPUFreqManager${normal} con el que podrás 
+ cambiar tu preferencia cuando quieras:
+ ${bold}columna derecha del programa > Governor${normal}
 
 
 
 
-
-
-
- 1 Configurar CPU para mayor performance.
- 2 Saltar este paso (recomendado para laptops).
+ 1 Configurar CPU para mayor performance (recomendado)
+ 2 Saltar este paso.
  0 Salir.
 
 
@@ -322,9 +322,11 @@ clear
 
 # CONFIGURACIÓN DE RENDIMIENTO PREDETERMINADA DE QUIRINUX
 
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
 sudo mkdir -p /opt/tmp/cpu
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nkWBfXRo2Xs4kXE/download' -O /opt/tmp/cpu/quirinux-cpu.deb
-sudo dpkg -i /opt/tmp/cpu/quirinux-cpu.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo dpkg -i /opt/tmp/cpu/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -408,21 +410,21 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: AGREGAR REPOSITORIOS ADICIONALES + REPO-CONFIG
+ QUIRINUX GENERAL: AGREGAR REPOSITORIOS ADICIONALES NECESARIOS
  -----------------------------------------------------------------------------
  Para instalar o actualizar el Kernel AVL, el conversor de video Mystiq
- el gestor de software y utilidad de backup Mint LMDE4 y el editor de video
+ el gestor de software, la utilidad de backup y el editor de video
  profesional de Cinelerra, Quirinux necesita agregar algunos repositorios 
  adicionales, que son 100% libres. 
 
- En este paso se instalará también el programa Repo-Config, 
- que rive para activar o desactivar los repositorios non-free 
- y contrib de Debian.
+ 
+ 
+ 
 
 
 
 
- 1 Agregar repositorios libres adicionales + Repo-Config (recomendado).
+ 1 Agregar los repositorios adicionales necesarios (recomendado).
  2 Saltar este paso.
  0 Salir.
 
@@ -440,9 +442,24 @@ clear
 
 # AGREGA REPOSITORIOS LIBRES ADICIONALES
 
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # Borrar archivos temporales 
@@ -470,23 +487,23 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: ACTIVAR REPOSITORIOS NON-FREE CONTRIB
+ QUIRINUX GENERAL: REPO-CONFIG Y REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS
  -----------------------------------------------------------------------------
  Para instalar controladores privativos de hardware, por ejemplo para algunas
  placas WiFi que de otra forma no funcionan, es necesario activar los 
  repositorios non-free y contrib. También para formatos privativos como RAR.
 
- Requiere haber instalado los repositorios libres adicionales. Si no lo 
- hiciste en el paso anterior, puedes hacerlo ahora (opción 3). 
- 
-  ${bold} TRUCO: ${normal}Si agregaste los repositorios adicionales en el
- paso anterior, siempre podrás activar o desactivar los repositorios
- non-free contrib yendo a: ${bold}Aplicaciones > Otros > Repo-Config${normal} 
- (Repo-Config se instala junto con los repositorios libres  adicionales).
+ Los repositorios backports permiten descargar versiones algo más modernas
+ del software estable de Debian. 
   
- 1 Activar repositorios no libres (ante la duda, recomendado).
+ ${bold} TRUCO: ${normal}En este paso también se instalará el programa  
+ Repo-Config con el que siempre podrás modificar tu preferencia
+ yendo a: ${bold}Aplicaciones > Otros > Repo-Config${normal} 
+ 
+  
+ 1 Instalar Repo-Config y activar non-ree contrib y backports (recomendado).
  2 Saltar este paso.
- 3 Agregar repositorios adicionales + opción 1.
+ 3 Sólo instalar Repo-Config.
  0 Salir.
 
 
@@ -500,10 +517,21 @@ case $opc in
 
 clear
 
-# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
+# INSTALAR REPO-CONFIG
 
-sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo mkdir -p /opt/tmp/repo-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
+
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo apt-get update -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
 
 ;;
 
@@ -517,16 +545,11 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# INSTALAR REPO-CONFIG
 
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo apt-get update -y
-
-# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
-
-sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo mkdir -p /opt/tmp/repo-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # Borrar archivos temporales 
@@ -614,15 +637,15 @@ echo " -------------------------------------------------------------------------
  necesitas algún driver específico pero prefieres buscarlo e instalarlo por
  tu cuenta en lugar de instalar ahora todos los que necesitas y los que no.
 
-   ${bold}ADVERTENCIA:${normal} Requiere los activar non-free y contrib.
- Si no los activaste aún pero agregaste los repositorios libres adicionales,  
- puedes activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
- Si no agregaste los repositorios adicionales y necesitas esta
- característica, puedes agregarlos ahora (opción 3)
+   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
+ Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
+ activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+ 
+ 
 
  1 Instalar firmware (recomendado si no te funciona la placa WiFi).
  2 Saltar este paso.
- 3 Agregar repositorios adicionales + activar non-free contrib + opción 1.
+ 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
  0 Salir.
 
 
@@ -664,16 +687,16 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# INSTALAR REPO-CONFIG
 
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo mkdir -p /opt/tmp/repo-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
-# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
-sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 sudo apt-get update -y
 
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
@@ -713,17 +736,17 @@ echo " -------------------------------------------------------------------------
  como Adobe Flash y trabajar con archivos comprimidos con extensión .rar.
  Si piensas que los necesitarás, puedes instalarlos ahora.
 
-   ${bold}ADVERTENCIA:${normal} Requiere los activar non-free y contrib.
- Si no los activaste aún pero agregaste los repositorios libres adicionales,  
- puedes activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
- Si no agregaste los repositorios adicionales y necesitas esta 
- característica, puedes agregarlos ahora (opción 3)
+   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
+ Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
+ activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+ 
+ 
 
 
 
  1 Instalar codecs y formatos privativos.
  2 Saltar este paso.
- 3 Agregar repositorios adicionales + activar non-free contrib + opción 1.
+ 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
  0 Salir.
 
 
@@ -756,16 +779,16 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# INSTALAR REPO-CONFIG
 
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo mkdir -p /opt/tmp/repo-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
-# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
-sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 sudo apt-get update -y
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
@@ -810,7 +833,7 @@ echo " -------------------------------------------------------------------------
 
  1 Instalar paquetes base (recomendado)
  2 Saltar este paso.
- 3 Agregar repositorios adicionales + opción 1.
+ 3 Agregar los repositorios adicionales necesarios + opción 1.
  0 Salir.
 
 
@@ -899,11 +922,26 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
 
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
@@ -1000,8 +1038,8 @@ echo " -------------------------------------------------------------------------
  1 Instalar gestor de software de Mint con soporte Flatpak (recomendado).
  2 Saltar este paso.
  3 Instalar gestor de software de Mint sin soporte Flatpak.
- 4 Agregar repositorios libres adicionales + opción 1.
- 5 Agregar repositorios libres adicionales + opción 3.
+ 4 Agregar los repositorios adicionales necesarios + opción 1.
+ 5 Agregar los repositorios adicionales necesarios + opción 3.
  0 Salir.
 "
 
@@ -1065,6 +1103,95 @@ sudo apt-get autoremove --purge -y
 sudo rm -rf /opt/tmp/*
 
 ;;
+
+"4)"
+
+# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
+
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo apt-get update -y
+
+# INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
+
+sudo apt-get update -y
+sudo apt-get install mintinstall -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR FLATPAK-CONFIG
+
+sudo mkdir -p /opt/tmp/flatpak-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"5")
+
+# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
+
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo apt-get update -y
+
+# INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
+
+sudo apt-get update -y
+sudo apt-get install mintinstall -y
+sudo apt-get remove --purge flatpak
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR FLATPAK-CONFIG
+
+sudo mkdir -p /opt/tmp/flatpak-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
 
 "0")
 
@@ -1228,8 +1355,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: PAQUETES DE RED
  -----------------------------------------------------------------------------
-
  Intalación de controladores de red 100 % libres.
+
 
 
 
@@ -1287,21 +1414,21 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: CONTROLADORES AMD LIBRES Y/O PRIVATIVOS 
  -----------------------------------------------------------------------------
-
  Intalación de controladores de video AMD (si los necesitas)
 
-   ${bold}ADVERTENCIA:${normal} La opción 1 requiere activar repositorios 
- non-free. Si agregaste los repositorios adicionales pero no activaste los 
- repositorios non-free y contrib, puedes activarlos 
- ahora: ${bold}Aplicaciones / Otros / Repo-Config.${normal} 
+   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
+ Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
+ activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+
   
- Si no agregaste los repositorios libres adicionales y necesitas esta
- característica, puedes agregarlos ahora (opción 3).  
+
+
+
 
 
  1 Instalar controladores para AMD (libres y privativos).
  2 Saltar este paso.
- 3 Agregar repositorios libres adicionales, activar non-free + opción 1.
+ 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
  4 Instalar controladores para AMD (sólo los libres).
  0 Salir.
 
@@ -1334,16 +1461,16 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# INSTALAR REPO-CONFIG
 
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo mkdir -p /opt/tmp/repo-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
-# ACTIVA REPOSITORIOS NON-FREE Y CONTRIB DE DEBIAN 
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
-sudo cp -r -a /opt/apt/non-free/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 sudo apt-get update -y
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
@@ -1387,9 +1514,9 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: SCREENSAVER
  -----------------------------------------------------------------------------
-
  Instalación del protector de pantalla screensaver gluclo, que es un relój de
  retro similar al de MacOS.
+
 
 
 
@@ -1453,16 +1580,14 @@ exit 0
 
 esac 
 
-;; 
-
-esac 
+clear
 
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: AJUSTES DE SONIDO
  -----------------------------------------------------------------------------
-
  Reinstalar PulseAudio puede solucionar algunas incidencias que ocurren al ins-
  talar algunas aplicaciones de Quirinux.
+
 
 
 
@@ -1523,10 +1648,10 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: TRADUCCIONES DE FIREFOX
  -----------------------------------------------------------------------------
-
  Instalación de traducciones para Mozilla Firefox.
-
-
+ 
+ Agrega los ficheros de lenguaje de los idiomas que vienen preinstalados en 
+ Quirinux. 
 
 
 
@@ -1536,7 +1661,7 @@ echo " -------------------------------------------------------------------------
  
 
  1 Instalar traducciones de Firefox.
- 2 Saltar este paso.
+ 2 Saltar este paso. (recomendado)
  0 Salir.
 
 
@@ -1581,14 +1706,14 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR TIPOGRAFÍAS
  -----------------------------------------------------------------------------
-
  Puedes instalar las fuentes que vienen preinstaladas en Quirinux, 
  incluyendo las de Microsoft. 
 
-  ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
- borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
- sin eliminar nada. 
-
+  ${bold} ADVERTENCIA: ${normal}Si eliges eliminar tus tipografías actuales, 
+ puede que dejes de poder visualizar tu sistema  este programa. En ese caso
+ necesitarás reiniciar tu ordenador -cuando veas que este programa se 
+ en cuentre detenido- y volver a iniciar este programa saltando los pasos 
+ anteriores y este mismo para continuar.
 
 
 
@@ -1670,12 +1795,12 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: ÍCONOS Y TEMAS DE ESCRITORIO
  -----------------------------------------------------------------------------
-
  Instalación de temas de escritorio, íconos y menú de Quirinux GENERAL.
 
  ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
  borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
  sin eliminar nada. 
+
 
 
 
@@ -1854,7 +1979,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
  -----------------------------------------------------------------------------
-
  Remover componentes que Quirinux GENERAL no incluye.
 
  ${bold} ADVERTENCIA:${normal} Quirinux procura ahorrar espacio para adelgazar las ISO de 
@@ -1862,6 +1986,7 @@ echo " -------------------------------------------------------------------------
  no occidentales, idiomas, diccionarios y toda la documentación (manuales, 
  archivos readme de Debian, etc de la carpeta /usr/share/doc/ 
  
+
 
 
 
@@ -1958,7 +2083,6 @@ esac
 echo " -----------------------------------------------------------------------------
  ¡QUIRINUX GENERAL INSTALADO!
  -----------------------------------------------------------------------------
-
  Hasta ahora, instalamos paquetes disponibles en la edición GENERAL. Puedes 
  salir ahora o ingresar en el terreno de ${bold}Quirinux Edicion PRO${normal}.
  Todo lo que trae Quirinux GENERAL, también lo trae Quirinux PRO, sólo que
@@ -1968,6 +2092,7 @@ echo " -------------------------------------------------------------------------
  Si sales ahora, de todas formas siempre podrás reiniciar este programa y 
  saltar hasta este paso si luego decides retomar la instalación y ampliar
  las características hasta convertir a Quirinux General en Quirinux PRO. 
+
 
 
  1 Borrar temporales y salir
@@ -2254,6 +2379,7 @@ echo " -------------------------------------------------------------------------
 
 
 
+
  1 Instalar GIMP + Plugins (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -2415,7 +2541,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: INSTALAR CINELERRA
  -----------------------------------------------------------------------------
-
  Instalación del editor de video profesional Cinelerra, 
  alternativa que supera en prestaciones a Adobe Premiere. 
 
@@ -2430,7 +2555,7 @@ echo " -------------------------------------------------------------------------
 
  1 Instalar Cinelerra (recomendado)
  2 Saltar este paso
- 3 Agregar respositorios libres adicionales + opción 1.
+ 3 Agregar respositorios libres adicionales necesarios + opción 1.
  0 Salir
 
 
@@ -2463,11 +2588,26 @@ clear
 
 clear
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
 
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/3JEdtCsaMQcB5ek/download' -O /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/quirinux-apt-1.0-q2_amd64.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
@@ -2498,13 +2638,13 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: COMPILAR E INSTALAR OPENTOONZ
  -----------------------------------------------------------------------------
-
  Descargar código fuente e instalar compilando desde el código la versión más
  nueva del programa de animación profesional OpenToonz, con el que puedes 
  reemplazar a Toon Boom Harmony.
 
   ${bold}ADVERTENCIA:${normal} El proceso de compilación de este programa
  es lento, pero vale la pena. 
+
 
 
 
@@ -2629,12 +2769,13 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: VERSION MÁS NUEVA DE BLENDER
  -----------------------------------------------------------------------------
-
  A diferencia de Quirinux GENERAL, Quirinux PRO incluye una versión más 
  reciente del programa Blender.
 
  Blender no sólo sirve para animación 3D: en sus últimas versiones incorpora
  herramientas muy atractivas para la animación 2D y 2.5D. 
+
+
 
 
 
@@ -2693,12 +2834,13 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: VERSIÓN MÁS NUEVA DE INKSCAPE
  -----------------------------------------------------------------------------
-
  A diferencia de Quirinux GENERAL, Quirinux PRO incluye una versión más 
  reciente del programa Inkscape.
 
  Con Inkscape puedes hacer reemplazar a Adobe Illustrator, incluso puedes
  editar proyectos .ai
+
+
 
 
 
@@ -2757,7 +2899,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: VERSIÓN MÁS NUEVA DE ARDOUR
  -----------------------------------------------------------------------------
-
  El paquete Quirinux GENERAL trae${bold}Ardour5${normal}, y PRO actualiza a 
  ${bold}Ardour6${normal}. Entre otras mejoras, incorpora compesación de 
  latencia, importar mp3 sin necesidad de convertir a wav y grabación con 
@@ -2768,6 +2909,7 @@ echo " -------------------------------------------------------------------------
  Puedes compilar e instalar la actualización ahora
 
  ${bold} ADVERTENCIA:${normal} Este proceso es muy largo y tarda mucho.
+
  
  1 Actualizar a Ardour6 (recomendado para sonidistas profesionales)
  2 Saltar este paso
@@ -2852,7 +2994,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
  -----------------------------------------------------------------------------
-
  Entangle es un programa similar a EOS que sirve para cámaras reflex de los  
  fabricantes más conocidos.
 
@@ -2863,6 +3004,7 @@ echo " -------------------------------------------------------------------------
  Puedes instalarlo ejecutando -SIN permisos de root- el script 
  ${bold}instalar-plugin-entangle-NOROOT.sh${normal} que encontrarás en la 
  carpeta ${bold}/opt/stopmo-preview-plugin${normal} luego de la descarga.
+
 
  1 Descargar Plugin stopmo-preview para Entangle
  2 Saltar este paso
@@ -2913,8 +3055,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: INSTALAR CONTROLADORES PARA TABLETAS WACOM
  -----------------------------------------------------------------------------
-
  Instalar controladores libres para las tabletas gráficas de la marca Wacom.
+
  
 
  
@@ -3114,12 +3256,12 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: ÍCONOS Y TEMAS DE ESCRITORIO
  -----------------------------------------------------------------------------
-
  Instalación de temas de escritorio e íconos de Quirinux PRO.
 
  ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
  borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
  sin eliminar nada. 
+
 
 
 
@@ -3298,7 +3440,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
  -----------------------------------------------------------------------------
-
  Remover componentes que Quirinux PRO no incluye. 
 
  ADVERTENCIA: Quirinux procura ahorrar espacio para adelgazar
@@ -3306,6 +3447,7 @@ echo " -------------------------------------------------------------------------
  borraran conjuntos de caracteres no occidentales, idiomas, 
  diccionarios y toda la documentación (manuales, archivos read-
  me de Debian, etc de la carpeta /usr/share/doc/ 
+
 
 
 
@@ -3404,8 +3546,8 @@ clear
 echo " -----------------------------------------------------------------------------
  ¡FIN DE LA INSTALACIÓN!
  -----------------------------------------------------------------------------
-
  A continuación, se borrarán los archivos temporales.
+
 
 
 
