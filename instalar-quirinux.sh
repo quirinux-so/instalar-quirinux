@@ -524,7 +524,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
@@ -552,7 +552,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # Borrar archivos temporales 
