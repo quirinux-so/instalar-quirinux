@@ -501,7 +501,7 @@ echo " -------------------------------------------------------------------------
   
  ${bold} TRUCO: ${normal}En este paso también se instalará el programa  
  Repo-Config con el que siempre podrás modificar tu preferencia
- yendo a: ${bold}Aplicaciones > Otros > Repo-Config${normal} 
+ yendo a: ${bold}}Aplicaciones > Sistema > Repo-Config${normal} 
  
   
  1 Instalar Repo-Config y activar non-ree contrib y backports (recomendado).
@@ -642,7 +642,7 @@ echo " -------------------------------------------------------------------------
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
 
@@ -741,7 +741,7 @@ echo " -------------------------------------------------------------------------
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
 
@@ -1421,7 +1421,7 @@ echo " -------------------------------------------------------------------------
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Otros > Repo-Config.${normal} 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
 
   
 
