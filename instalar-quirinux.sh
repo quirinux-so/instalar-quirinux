@@ -2153,6 +2153,8 @@ sudo rm -rf /var/cache/apt/partial/*.deb
 sudo rm -rf /opt/tmp/*
 sudo rm -rf /.git
 
+exit 0
+
 ;;
 
 "0")
@@ -3549,7 +3551,7 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- ¡FIN DE LA INSTALACIÓN!
+ QUIRINUX PRO INSTALADO ¡FIN DE LA INSTALACIÓN!
  -----------------------------------------------------------------------------
  A continuación, se borrarán los archivos temporales.
 
