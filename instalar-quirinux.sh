@@ -78,7 +78,7 @@ echo " -------------------------------------------------------------------------
 
 
 
- 1 Instalar GIT y WGET (necesario para el resto de la instalación).
+ 1 Instalar programas necesarios para el resto de la instalación 
  2 Saltar este paso.
  0 Salir.
 
@@ -272,8 +272,10 @@ echo " -------------------------------------------------------------------------
 
 
 
-
 "
+
+exit 0
+
 ;;
 
 "0")
@@ -323,6 +325,7 @@ clear
 # CONFIGURACIÓN DE RENDIMIENTO PREDETERMINADA DE QUIRINUX
 
 for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
 sudo mkdir -p /opt/tmp/cpu
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nkWBfXRo2Xs4kXE/download' -O /opt/tmp/cpu/quirinux-cpu.deb
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
