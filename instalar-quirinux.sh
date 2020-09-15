@@ -1284,6 +1284,179 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
+ QUIRINUX GENERAL: GIMP + PLUGINS
+ -----------------------------------------------------------------------------
+ Instalación completa del editor profesional de imágenes GIMP, como 
+ alternativa  a Adobe Photoshop. Se instala desde los repositorios oficiales 
+ de Debian Buster.
+
+ ${bold} TRUCO:${normal} Si tienes instalado Gimp desde snap, flatpak
+ o appimage, es necesario volver a instalarlo con esta opción si luego 
+ quieres agregar el complemento para configurar atajos y/o íconos de 
+ Photoshop. 
+
+
+
+
+ 1 Instalar GIMP + Plugins (recomendado)
+ 2 Saltar este paso.
+ 0 Salir.
+
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# Desinstalar GIMP desde snap y flatpak
+
+sudo snap remove gimp
+sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
+
+# INSTALAR GIMP 2.10 DESDE BUSTER
+
+sudo apt-get update -y
+for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX GENERAL: GIMP EDICIÓN QUIRINUX
+ -----------------------------------------------------------------------------
+ Se agrega un programa llamado ${bold}Configurar-Gimp${normal} que sirve para 
+ convertir a Gimp  en ${bold}Gimp Edición Quirinux.${normal} Este programa 
+ permite utilizar Gimp con los íconos  y/o atajos de Photoshop y revertir los 
+ cambios en cualquier momento, a  diferencia de  otras utilidades similares
+ que no posibilitan deshacer los cambios. 
+
+ ${bold} ADVERTENCIA${normal} Requiere haber instalado GIMP en el paso 
+ anterior. Si no lo hiciste, puedes hacerlo ahora (opción 3).
+
+
+
+
+ 1 Instalar Gimp Edición Quirinux (recomendado).
+ 2 Saltar este paso.
+ 3 Instalar GIMP + Plugins + opcion 1.
+ 0 Salir.
+
+
+"
+
+read -p " Tu respuesta-> " opc
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
+
+sudo apt-get update -y
+sudo mkdir -p /opt/tmp/gimp/
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
+sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
+sudo chmod 777 -R /home/
+sudo rm -rf /home/*/.config/GIMP
+sudo rm -rf /root/.config/GIMP 
+sudo rm -rf /usr/share/gimp 
+sudo rm -rf /etc/skel/.config/GIMP 
+for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
+sudo chmod 777 -R /home/
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"3")
+
+clear
+
+# INSTALAR GIMP 2.10 DESDE BUSTER
+
+sudo apt-get update -y
+for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
+
+sudo apt-get update -y
+sudo mkdir -p /opt/tmp/gimp/
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
+sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
+sudo chmod 777 -R /home/
+sudo rm -rf /home/*/.config/GIMP
+sudo rm -rf /root/.config/GIMP 
+sudo rm -rf /usr/share/gimp 
+sudo rm -rf /etc/skel/.config/GIMP 
+for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
+sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
+sudo chmod 777 -R /home/
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
+clear
+
+echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: IMPRESORAS Y ESCÁNERES
  -----------------------------------------------------------------------------
 
@@ -2370,178 +2543,6 @@ exit 0
 
 esac
 
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: GIMP + PLUGINS
- -----------------------------------------------------------------------------
- Instalación completa del editor profesional de imágenes GIMP, como 
- alternativa  a Adobe Photoshop. Se instala desde los repositorios oficiales 
- de Debian Buster.
-
- ${bold} TRUCO:${normal} Si tienes instalado Gimp desde snap, flatpak
- o appimage, es necesario volver a instalarlo con esta opción si luego 
- quieres agregar el complemento para configurar atajos y/o íconos de 
- Photoshop. 
-
-
-
-
- 1 Instalar GIMP + Plugins (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# Desinstalar GIMP desde snap y flatpak
-
-sudo snap remove gimp
-sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
-
-# INSTALAR GIMP 2.10 DESDE BUSTER
-
-sudo apt-get update -y
-for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: GIMP EDICIÓN QUIRINUX
- -----------------------------------------------------------------------------
- Se agrega un programa llamado ${bold}Configurar-Gimp${normal} que sirve para 
- convertir a Gimp  en ${bold}Gimp Edición Quirinux.${normal} Este programa 
- permite utilizar Gimp con los íconos  y/o atajos de Photoshop y revertir los 
- cambios en cualquier momento, a  diferencia de  otras utilidades similares
- que no posibilitan deshacer los cambios. 
-
- ${bold} ADVERTENCIA${normal} Requiere haber instalado GIMP en el paso 
- anterior. Si no lo hiciste, puedes hacerlo ahora (opción 3).
-
-
-
-
- 1 Instalar Gimp Edición Quirinux (recomendado).
- 2 Saltar este paso.
- 3 Instalar GIMP + Plugins + opcion 1.
- 0 Salir.
-
-
-"
-
-read -p " Tu respuesta-> " opc
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
-sudo apt-get update -y
-sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
-sudo chmod 777 -R /home/
-sudo rm -rf /home/*/.config/GIMP
-sudo rm -rf /root/.config/GIMP 
-sudo rm -rf /usr/share/gimp 
-sudo rm -rf /etc/skel/.config/GIMP 
-for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
-sudo chmod 777 -R /home/
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# INSTALAR GIMP 2.10 DESDE BUSTER
-
-sudo apt-get update -y
-for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
-sudo apt-get update -y
-sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
-sudo chmod 777 -R /home/
-sudo rm -rf /home/*/.config/GIMP
-sudo rm -rf /root/.config/GIMP 
-sudo rm -rf /usr/share/gimp 
-sudo rm -rf /etc/skel/.config/GIMP 
-for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
-sudo chmod 777 -R /home/
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
 
 clear
 
