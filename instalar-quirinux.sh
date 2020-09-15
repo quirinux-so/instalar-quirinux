@@ -1107,7 +1107,7 @@ sudo rm -rf /opt/tmp/*
 
 ;;
 
-"4)"
+"4")
 
 # AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
 
