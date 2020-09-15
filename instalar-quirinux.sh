@@ -501,7 +501,7 @@ echo " -------------------------------------------------------------------------
   
  ${bold} TRUCO: ${normal}En este paso también se instalará el programa  
  Repo-Config con el que siempre podrás modificar tu preferencia
- yendo a: ${bold}Aplicaciones > Sistema > Repo-Config${normal} 
+ yendo a: ${bold}}Aplicaciones > Sistema > Repo-Config${normal} 
  
   
  1 Instalar Repo-Config y activar non-ree contrib y backports (recomendado).
@@ -635,14 +635,14 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR CONTROLADORES PRIVATIVOS 
  -----------------------------------------------------------------------------
  Quirinux trae una gran cantidad de firmware preinstalado, porque fue pensado 
- para funcionar en modo live en la mayor variedad de hardware posible. Puedes 
- saltar este paso si tu hardware (incluyendo placa WiFi) está funcionando 
- bien o si necesitas algún driver específico pero prefieres buscarlo e 
- instalarlo por tu cuenta en lugar de instalar ahora todos los disponibles.
+ para funcionar en modo live en la mayor de hardware posible. Puedes saltar 
+ este paso si tu hardware (incluyendo placa WiFi) está funcionando bien o si
+ necesitas algún driver específico pero prefieres buscarlo e instalarlo por
+ tu cuenta en lugar de instalar ahora todos los que necesitas y los que no.
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
- Si instalaste Repo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
+ Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
 
@@ -694,7 +694,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
@@ -741,7 +741,7 @@ echo " -------------------------------------------------------------------------
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
 
@@ -786,7 +786,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
@@ -1196,6 +1196,8 @@ sudo apt-get autoremove --purge -y
 
 sudo rm -rf /opt/tmp/*
 
+;;
+
 "0")
 
 clear
@@ -1421,7 +1423,7 @@ echo " -------------------------------------------------------------------------
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
+ activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
 
   
 
@@ -1468,7 +1470,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
 sudo apt-get update -y
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
