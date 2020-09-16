@@ -853,7 +853,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -949,7 +949,7 @@ sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze aegisub lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 k3d shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip digikam screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2350,7 +2350,7 @@ echo " -------------------------------------------------------------------------
  defecto:
 
  manuskript birdfont skanlite pencil2d devede vokoscreen-ng soundconverter 
- hugin guvcview calf-plugins invada-studio-plugins-ladspa 
+ hugin guvcview calf-plugins invada-studio-plugins-ladspa aegisub
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
  krita-l10n dvd-styler obs-studio obs-plugins
@@ -2376,7 +2376,7 @@ clear
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, ETC
 
 sudo apt-get update -y
-for paquetes_estandar in manuskript gnome-color-manager dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin guvcview calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin guvcview calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
