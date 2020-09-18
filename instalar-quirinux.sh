@@ -2804,40 +2804,41 @@ sudo make install
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Descarga y copia en ícono del menú de inicio de OpenToonz
+# Descarga y copia en ícono del menú de inicio
 
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/opentoonz/opentoonz-icon.tar
-sudo rm /opt/opentoonz/bin/opentoonz
 sudo tar -xf /opt/opentoonz/opentoonz-icon.tar -C /
 
-# Creando comando de inicio de OpenToonz
+# Creando comando de inicio
 
 sudo chmod -R 775 /opt/opentoonz
 sudo chown -R $USER /opt/opentoonz
 
-FILE="/usr/local/bin/imagine2"
+FILE="/usr/local/bin/opentoonz"
 
 if [ -f "$FILE" ]; then
 
 sudo rm /usr/local/bin/opentoonz
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
+mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
+mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod -R 4755 /usr/local/bin/opentoonz
+sudo chmod 777 /usr/local/bin/opentoonz
 
 else
 
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
+mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
+mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod -R 4755 /usr/local/bin/opentoonz
+sudo chmod 777 /usr/local/bin/opentoonz
 
 fi
 
-# Borrar archivos temporales 
+# Borrar archivos temporales
 
 sudo rm -rf /opt/tmp/*
-
+sudo rm /opt/opentoonz/opentoonz-icon.tar
 ;;
 
 "2")
