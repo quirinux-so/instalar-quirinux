@@ -2105,7 +2105,8 @@ sudo apt-get install -f -y
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
 # También instala menú principal de Quirinux y modifica algunos archivos más.
 
-sudo apt-get install grub
+sudo apt-get install grub -y
+sudo apt-get install grub2 -y
 sudo mkdir -p /opt/tmp/config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
 sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /
@@ -2178,7 +2179,8 @@ sudo apt-get autoremove --purge -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX'
 
-sudo apt-get install grub
+sudo apt-get install grub -y
+sudo apt-get install grub2 -y
 sudo mkdir -p /opt/tmp/config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
 sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /
@@ -3328,6 +3330,8 @@ sudo apt-get install -f -y
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
 # También instala menú principal de Quirinux y modifica algunos archivos más.
 
+sudo apt-get install grub -y
+sudo apt-get install grub2 -y
 sudo mkdir -p /opt/tmp/config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
 sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /
@@ -3400,6 +3404,8 @@ sudo apt-get autoremove --purge -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX'
 
+sudo apt-get install grub -y
+sudo apt-get install grub2 -y
 sudo mkdir -p /opt/tmp/config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
 sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /
