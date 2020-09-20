@@ -935,7 +935,15 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur xpat evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
+
+sudo mkdir -p /opt/tmp/chimiboga
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
+sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2804,41 +2812,40 @@ sudo make install
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Descarga y copia en ícono del menú de inicio
+# Descarga y copia en ícono del menú de inicio de OpenToonz
 
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/opentoonz/opentoonz-icon.tar
+sudo rm /opt/opentoonz/bin/opentoonz
 sudo tar -xf /opt/opentoonz/opentoonz-icon.tar -C /
 
-# Creando comando de inicio
+# Creando comando de inicio de OpenToonz
 
 sudo chmod -R 775 /opt/opentoonz
 sudo chown -R $USER /opt/opentoonz
 
-FILE="/usr/local/bin/opentoonz"
+FILE="/usr/local/bin/imagine2"
 
 if [ -f "$FILE" ]; then
 
 sudo rm /usr/local/bin/opentoonz
-mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
+sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
+sudo chmod -R 4755 /usr/local/bin/opentoonz
 
 else
 
-mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
+sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
+sudo chmod -R 4755 /usr/local/bin/opentoonz
 
 fi
 
-# Borrar archivos temporales
+# Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
-sudo rm /opt/opentoonz/opentoonz-icon.tar
+
 ;;
 
 "2")
