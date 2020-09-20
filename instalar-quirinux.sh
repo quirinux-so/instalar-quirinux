@@ -1580,7 +1580,7 @@ clear
 # INSTALAR PQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
 sudo apt-get update -y
-for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsane xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
+for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
 sudo apt-get install -f -y
 sudo apt-get update
 sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
@@ -2445,7 +2445,7 @@ echo " -------------------------------------------------------------------------
  hugin guvcview calf-plugins invada-studio-plugins-ladspa aegisub
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
- krita-l10n dvd-styler obs-studio obs-plugins digikam
+ krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
 
 
 
@@ -2465,10 +2465,10 @@ case $opc in
 
 clear
 
-# INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, ETC
+# INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
 sudo apt-get update -y
-for paquetes_estandar in manuskript digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin guvcview calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin guvcview calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
