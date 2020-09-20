@@ -947,9 +947,9 @@ sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR PAQUETES ACTUALIZABLES
+# INSTALAR PAQUETE ACTUALIZABLE DE ARDOUR
 
-for paquetes_actualizables in ardour inkscape; do sudo apt-get install -y $paquetes_actualizables; done
+for paquetes_actualizables in ardour; do sudo apt-get install -y $paquetes_actualizables; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1043,9 +1043,9 @@ for paquetes_buster in evolution photopc openshot usermode cheese cheese-common 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR PAQUETES ACTUALIZABLES
+# INSTALAR PAQUETE ACTUALIZABLE DE ARDOUR
 
-for paquetes_actualizables in ardour inkscape; do sudo apt-get install -y $paquetes_actualizables; done
+for paquetes_actualizables in ardour; do sudo apt-get install -y $paquetes_actualizables; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2505,7 +2505,7 @@ echo " -------------------------------------------------------------------------
  ${bold}MyPaint, AzPAinter:${normal} Alternativas Corel Painter y SAI
  ${bold}Belle, Godot:${normal} Desarrollo de videojuegos 
  ${bold}Quinema:${normal} Scripts de animación de Ernesto Bazzano 
-
+ ${bold}Inkscape:${normal} Dibujo vectorial, verion más reciente que la de Debian
 
  1 Instalar Especializados Quirinux
  2 Saltar este paso
@@ -2522,6 +2522,17 @@ case $opc in
 "1") 
 
 clear
+
+# INSTALANDO INKSCAPE
+
+sudo apt-get update -y
+for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
+sudo mkdir -p /opt/tmp/inkscape
+sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
 
 # INSTALAR TUPITUBE
 
@@ -2904,71 +2915,6 @@ for paquetes_remover_blender in remove --purge blender-data; do sudo apt-get rem
 sudo mkdir -p /opt/tmp/blender283
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/PfagSW43yP9yGiX/download' -O /opt/tmp/blender283/blender-2.83-q2_amd64.deb
 sudo dpkg -i /opt/tmp/blender283/blender-2.83-q2_amd64.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: VERSIÓN MÁS NUEVA DE INKSCAPE
- -----------------------------------------------------------------------------
- A diferencia de Quirinux GENERAL, Quirinux PRO incluye una versión más 
- reciente del programa Inkscape.
-
- Con Inkscape puedes hacer reemplazar a Adobe Illustrator, incluso puedes
- editar proyectos .ai
-
-
-
-
-
-
-
- 1 Instalar o actualizar una versión más reciente de Inkscape (recomendado)
- 2 Saltar este paso
- 0 Salir
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# ACTUALIZANDO INKSCAPE
-
-sudo apt-get update -y
-for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
-sudo mkdir -p /opt/tmp/inkscape
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
