@@ -2955,7 +2955,7 @@ echo " -------------------------------------------------------------------------
  Puedes compilar e instalar la actualización ahora
 
  ${bold} ADVERTENCIA:${normal} Este proceso es muy largo y tarda mucho.
-
+ También se reinstalará Pulseaudio.
  
  1 Actualizar a Ardour6 (recomendado para sonidistas profesionales)
  2 Saltar este paso
@@ -3012,6 +3012,18 @@ sudo chmod 777 /opt/tmp/ardour6-postinstall.tar
 cd /opt/tmp/
 sudo tar -xvf /opt/tmp/ardour6-postinstall.tar
 sudo cp -rf -a /opt/tmp/ardour6-postinstall/usr/* /usr/
+
+# REINSTALAR PULSEAUDIO
+
+sudo apt-get update -y
+sudo apt-get remove --purge pulseuadio pavucontrol -y
+sudo apt-get clean
+sudo apt-get autoremove --purge -y
+sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
+sudo apt-get update -y
+sudo apt-get install pulseaudio rtkit pavucontrol -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
 # Borrar archivos temporales 
 
