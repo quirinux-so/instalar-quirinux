@@ -870,7 +870,7 @@ sudo tar -xf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
 cd /opt/ptxconf
 sudo python setup.py install
 sudo apt-get install -f -y
-sudo apt-get install libappindicator1
+sudo apt-get install libappindicator1 -y
 sudo mkdir -p /opt/tmp/python-appindicator
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo dpkg -i /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
