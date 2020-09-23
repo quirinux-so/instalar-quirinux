@@ -870,7 +870,7 @@ sudo tar -xf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
 cd /opt/ptxconf
 sudo python setup.py install
 sudo apt-get install -f -y
-sudo apt-get install libappindicator1 -y
+sudo apt-get install libappindicator1
 sudo mkdir -p /opt/tmp/python-appindicator
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo dpkg -i /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
@@ -935,7 +935,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in xdemineur kpat ktorrent evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur xpat ktorrent evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1039,7 +1039,7 @@ sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in xdemineur kpat ktorrent evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur xpat ktorrent evolution photopc openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi audacious bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings audacious vlc gdebi simple-scan gir1.2-entangle-0.1 ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2060,6 +2060,63 @@ esac
 
 clear
 
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR SOPORTE PARA VIRTUALIZACIÓN
+ -----------------------------------------------------------------------------
+
+ Instala los paquetes aqemu, qemu-kvm, qemu-system-data, intel-microcode, 
+ amd-microcode, quemu-system, útiles para crear máquinas virtuales e 
+ instalar dentro sistemas operativos completos cuando se necesita ejecutar, 
+ por ejemplo, alguna aplicación de Microsoft Windows. 
+ 
+ Requiere un mother compatible con virtualización. 
+ 
+
+
+
+
+ 1 Instalar soporte para virtualización (recomendado)
+ 2 Saltar este paso.
+ 0 Salir.
+
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR PAQUETES DE VIRTUALIZACIÓN
+
+sudo apt-get update -y
+for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
+sudo apt-get install -f -y
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: ÍCONOS Y TEMAS DE ESCRITORIO
  -----------------------------------------------------------------------------
@@ -2955,7 +3012,7 @@ echo " -------------------------------------------------------------------------
  Puedes compilar e instalar la actualización ahora
 
  ${bold} ADVERTENCIA:${normal} Este proceso es muy largo y tarda mucho.
- También se reinstalará Pulseaudio.
+
  
  1 Actualizar a Ardour6 (recomendado para sonidistas profesionales)
  2 Saltar este paso
@@ -3012,18 +3069,6 @@ sudo chmod 777 /opt/tmp/ardour6-postinstall.tar
 cd /opt/tmp/
 sudo tar -xvf /opt/tmp/ardour6-postinstall.tar
 sudo cp -rf -a /opt/tmp/ardour6-postinstall/usr/* /usr/
-
-# REINSTALAR PULSEAUDIO
-
-sudo apt-get update -y
-sudo apt-get remove --purge pulseuadio pavucontrol -y
-sudo apt-get clean
-sudo apt-get autoremove --purge -y
-sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
-sudo apt-get update -y
-sudo apt-get install pulseaudio rtkit pavucontrol -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
 
 # Borrar archivos temporales 
 
