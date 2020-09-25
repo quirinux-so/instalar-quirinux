@@ -2891,24 +2891,23 @@ sudo tar -xf /opt/opentoonz/opentoonz-icon.tar -C /
 sudo chmod -R 775 /opt/opentoonz
 sudo chown -R $USER /opt/opentoonz
 
-FILE="/usr/local/bin/imagine2"
+FILE="/usr/local/bin/opentoonz"
 
 if [ -f "$FILE" ]; then
 
 sudo rm /usr/local/bin/opentoonz
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
 sudo chmod -R 4755 /usr/local/bin/opentoonz
 
 else
 
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/run-opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
 sudo chmod -R 4755 /usr/local/bin/opentoonz
 
 fi
+
 
 # Borrar archivos temporales 
 
