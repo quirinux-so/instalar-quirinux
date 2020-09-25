@@ -2896,18 +2896,21 @@ FILE="/usr/local/bin/opentoonz"
 if [ -f "$FILE" ]; then
 
 sudo rm /usr/local/bin/opentoonz
+mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
+mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod -R 4755 /usr/local/bin/opentoonz
+sudo chmod 777 /usr/local/bin/opentoonz
 
 else
 
+mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
+mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod -R 4755 /usr/local/bin/opentoonz
+sudo chmod 777 /usr/local/bin/opentoonz
 
 fi
-
 
 # Borrar archivos temporales 
 
