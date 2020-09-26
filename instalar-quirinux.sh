@@ -877,6 +877,10 @@ sudo dpkg -i /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+# Agrega entrada al inicio
+
+for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a /opt/tmp/ptxtemp/.config $usuarios_ptx; done
+
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
