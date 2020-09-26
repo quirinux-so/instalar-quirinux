@@ -834,7 +834,7 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR PTXCONF
  -----------------------------------------------------------------------------
- Ptxconf es una utilidad programada en Perl, que sirve para mapear una  
+ Ptxconf es una utilidad programada por wenhsinjen, que sirve para mapear una  
  tableta gráfica a un sólo monitor cuando se utiliza más de uno. Gestiona de 
  manera gráfica el comando xorg map-to-input y resulta muy útil bajo el  
  escritorio xfce, predeterminado en Quirinux. 
