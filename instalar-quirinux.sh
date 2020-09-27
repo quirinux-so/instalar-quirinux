@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
-# Versión:	1.00-Beta
+# Versión:	1.00-RC_1
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -462,7 +462,7 @@ sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # Borrar archivos temporales 
@@ -666,7 +666,7 @@ clear
 
 sudo apt-get update -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
-sudo tar -xf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
+sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
 sudo dpkg -i /opt/tmp/quirinux-firmware/*
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
 sudo dpkg -i /opt/tmp/quirinux-i915-q2_amd64.deb
@@ -706,7 +706,7 @@ sudo apt-get update -y
 
 sudo apt-get update -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
-sudo tar -xf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
+sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
 sudo dpkg -i /opt/tmp/quirinux-firmware/*
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
 sudo dpkg -i /opt/tmp/quirinux-i915-q2_amd64.deb
@@ -866,7 +866,7 @@ clear
 
 sudo mkdir -p /opt/tmp/ptxtemp
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/ajaj7dRJFp8PJFK/download' -O /opt/tmp/ptxtemp/ptxconf.tar
-sudo tar -xf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
+sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
 cd /opt/ptxconf
 sudo python setup.py install
 sudo apt-get install -f -y
@@ -951,9 +951,17 @@ sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR PAQUETE ACTUALIZABLE DE ARDOUR
+# INSTALAR ARDOUR 6
 
-for paquetes_actualizables in ardour; do sudo apt-get install -y $paquetes_actualizables; done
+sudo mkdir -p /opt/tmp/ardour6
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR PLUGINS PARA ARDOUR
+
+for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1038,7 +1046,7 @@ sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
@@ -1047,12 +1055,19 @@ for paquetes_buster in xdemineur xpat ktorrent evolution photopc openshot usermo
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR PAQUETE ACTUALIZABLE DE ARDOUR
+# INSTALAR ARDOUR 6
 
-for paquetes_actualizables in ardour; do sudo apt-get install -y $paquetes_actualizables; done
+sudo mkdir -p /opt/tmp/ardour6
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+# INSTALAR PLUGINS PARA ARDOUR
+
+for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 # INSTALAR EXTRAS DE MINT Y OPENSUSE
 
 for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_extra; done
@@ -1222,7 +1237,7 @@ sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
@@ -1267,7 +1282,7 @@ sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
@@ -1305,9 +1320,9 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR O ACTUALIZAR A LIBREOFFICE 6.4.6
+ QUIRINUX GENERAL: INSTALAR O ACTUALIZAR A LIBREOFFICE 7
  -----------------------------------------------------------------------------
- Se instalará LibreOffice versión 6.4.6. con los diccionarios y traducciones 
+ Se instalará LibreOffice versión 7 con los diccionarios y traducciones 
  incluidas en Quirinux 2.0  y se eliminarán las versiones anteriores 
  instaladas en el sistema (si las hay).
 
@@ -1319,7 +1334,7 @@ echo " -------------------------------------------------------------------------
 
 
 
- 1 Instalar LibreOffice 6.4.6 (recomendado)
+ 1 Instalar LibreOffice 7 (recomendado)
  2 Saltar este paso.
  0 Salir.
 
@@ -1339,19 +1354,23 @@ clear
 
 sudo apt-get update -y
 sudo apt-get remove --purge libreoffice* hunspell* myspell* mythes* aspell* hypen* -y
-sudo mkdir -p /opt/tmp/libreoffice
-sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # INSTALAR LIBREOFFICE
 
 sudo apt-get update -y
+sudo mkdir -p /opt/tmp/libreoffice
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/kbkjPqrJSRmZmPk/download' -O /opt/tmp/libreoffice/libreoffice.tar
-sudo tar -xf /opt/tmp/libreoffice/libreoffice.tar -C /
-cd /opt/tmp/libreoffice
-sudo dpkg -i *.deb
+sudo tar -xvf /opt/tmp/libreoffice/libreoffice.tar -C /opt/tmp/libreoffice/
+sudo dpkg -i /opt/tmp/libreoffice/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
+# Personalizar íconos de libreoffice
+
+sudo rm /usr/share/applications/libreoffice*
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NgTmBAAaCPK6w9W/download' -O /opt/tmp/libreoffice/libreoffice7-icons.deb
+sudo dpkg -i /opt/tmp/libreoffice/libreoffice7-icons.deb
 
 # Borrar archivos temporales 
 
@@ -2503,7 +2522,7 @@ echo " -------------------------------------------------------------------------
  defecto:
 
  manuskript birdfont skanlite pencil2d devede vokoscreen-ng soundconverter 
- hugin guvcview calf-plugins invada-studio-plugins-ladspa aegisub
+ hugin guvcview invada-studio-plugins-ladspa aegisub
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
  krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
@@ -2779,7 +2798,7 @@ sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
@@ -2853,9 +2872,10 @@ for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_
 
 # Descarga y compila el código fuente de OpenToonz
 
-mkdir /opt/tmp
-cd /opt/tmp
-git clone https://github.com/opentoonz/opentoonz
+mkdir -p /opt/tmp/opentoonz
+sudo wget  --no-check-certificate 'https://github.com/opentoonz/opentoonz/archive/v1.4.0.tar.gz' -O /opt/tmp/opentoonz/opentoonz-1.4.0.tar.gz
+tar -xzvf /opt/tmp/opentoonz/opentoonz-1.4.0.tar.gz -C /opt/tmp/
+cd /opt/tmp/opentoonz-1.4.0
 mkdir -p $HOME/.config/OpenToonz
 cp -r opentoonz/stuff $HOME/.config/OpenToonz/
 cat << EOF > $HOME/.config/OpenToonz/SystemVar.ini
@@ -2871,11 +2891,11 @@ TOONZPROJECTS="$HOME/.config/OpenToonz/stuff/projects"
 TOONZROOT="$HOME/.config/OpenToonz/stuff"
 TOONZSTUDIOPALETTE="$HOME/.config/OpenToonz/stuff/studiopalette"
 EOF
-cd /opt/tmp/opentoonz/thirdparty/tiff-4.0.3
+cd /opt/tmp/opentoonz-1.4.0/thirdparty/tiff-4.0.3
 ./configure --with-pic --disable-jbig
 make -j$(nproc)
 cd ../../
-cd /opt/tmp/opentoonz/toonz
+cd /opt/tmp/opentoonz-1.4.0/toonz
 mkdir build
 cd build
 cmake ../sources
@@ -3005,101 +3025,6 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: VERSIÓN MÁS NUEVA DE ARDOUR
- -----------------------------------------------------------------------------
- El paquete Quirinux GENERAL trae${bold}Ardour5${normal}, y PRO actualiza a 
- ${bold}Ardour6${normal}. Entre otras mejoras, incorpora compesación de 
- latencia, importar mp3 sin necesidad de convertir a wav y grabación con 
- escucha sobre track en reproducción.
-
- Este paquete aún no se encuentra disponible de manera nativa para    
- Debian y requiere ser compilado (al igual que OpenToonz 1.4).
- Puedes compilar e instalar la actualización ahora
-
- ${bold} ADVERTENCIA:${normal} Este proceso es muy largo y tarda mucho.
-
- 
- 1 Actualizar a Ardour6 (recomendado para sonidistas profesionales)
- 2 Saltar este paso
- 0 Salir
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# DESCARGAR VERSIONES ANTERIORES DE ARDOUR
-
-sudo apt-get update
-for paquetes_ardour5 in ardour ardour-data; do sudo apt-get remove --purge -y $paquetes_ardour5; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR DEPENDENCIAS NECESARIAS PARA COMPILAR ARDOUR
-
-sudo apt-get update
-for paquetes_ardour in libboost-all-dev libasound2-dev libglib2.0-dev glibmm-2.4-dev libsndfile1-dev libcurl4-gnutls-dev liblo-dev libtag1-dev vamp-plugin-sdk librubberband-dev libfftw3-dev libaubio-dev libxml2-dev libcwiid-dev libjack-jackd2-dev jackd qjackctl liblrdf0-dev libsamplerate-dev lv2-dev libserd-dev libsord-dev libsratom-dev liblilv-dev libgtkmm-2.4-dev libarchive-dev git xjadeo; do sudo apt-get install -y $paquetes_ardour; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# DESCARGAR EL CÓDIGO FUENTE DE ARDOUR
-
-cd /opt/tmp/
-git clone git://git.ardour.org/ardour/ardour.git
-
-# COMPILAR CÓDIGO FUENTE DE ARDOUR
-
-cd /opt/tmp/ardour
-./waf configure
-sudo ./waf install
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# DESCARGÁNDO ÍCONO Y PERSONALIZACIONES DE ARDOUR
-
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YjPGEJcENG6qXDt/download' -O /opt/tmp/ardour6-postinstall.tar
-sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt/tmp/*
-sudo chmod 777 /opt/tmp/ardour6-postinstall.tar
-
-# INSTALAR ACCESO DIRECTO DE ARDOUR
-
-cd /opt/tmp/
-sudo tar -xvf /opt/tmp/ardour6-postinstall.tar
-sudo cp -rf -a /opt/tmp/ardour6-postinstall/usr/* /usr/
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
  QUIRINUX PRO: DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
  -----------------------------------------------------------------------------
  Entangle es un programa similar a EOS que sirve para cámaras reflex de los  
@@ -3133,7 +3058,7 @@ clear
 
 sudo mkdir -p /opt/stopmo-preview-plugin
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Qd8CtZBN6a6STAY/download' -O /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar
-sudo tar -xf /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar -C /opt/stopmo-preview-plugin/
+sudo tar -xvf /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar -C /opt/stopmo-preview-plugin/
 for paquetes_python in python2-gobject; do sudo apt-get install -y $paquetes_python; done
 sudo rm /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar
 sudo chmod 777 /opt/stopmo-preview-plugin/instalar-plugin-entangle-NOROOT.sh
