@@ -361,7 +361,7 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
  -----------------------------------------------------------------------------
  Activar el soporte multiarquitectura (32 bits). Quizás lo necesites a la 
- hora de instalar algun controlador, por ejemplo algún tipo de impresora. 
+ hora de instalar algun controlador, por ejemplo los de las tabletas GENIUS.
 
 
 
@@ -831,6 +831,167 @@ clear
 
 clear
 
+echo " -----------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR CONTROLADORES PARA TABLETAS WACOM
+ -----------------------------------------------------------------------------
+ Instalar controladores libres para las tabletas gráficas de la marca Wacom.
+
+ 
+
+ 
+
+
+
+
+
+
+
+ 1 Instalar controladores de Wacom.
+ 2 Saltar este paso.
+ 0 Salir.
+
+
+
+"
+
+read -p " Tu respuesta-> " opc
+ 
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
+
+sudo apt-get update -y
+sudo apt-get install build-essential autoconf linux-headers-$uname -r
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
+cd /opt/tmp
+tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2 
+cd input-wacom-0.46.0 
+if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX GENERAL: INSTALAR CONTROLADORES PARA TABLETAS GENIUS
+ -----------------------------------------------------------------------------
+ Instalar controladores libres para tabletas gŕaficas Genius antiguas,
+ incluidos en Quirinux Edición Pro.
+
+  ${bold}ADVERTENCIA:${normal} Requiere soporte para 32 bits. Si no lo instalaste antes, 
+ puedes hacerlo con la opción 3. 
+
+
+
+
+
+
+
+ 1 Instalar controladores de Genius.
+ 2 Saltar este paso.
+ 3 Instalar soporte para 32 bits + opción 1.
+ 0 Salir.
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
+
+sudo apt-get update -y
+sudo mkdir -p /opt/tmp/quirinux-genius
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo dpkg -i /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"3")
+
+clear
+
+# Instalar soporte para 32 bits
+
+sudo dpkg --add-architecture i386
+
+# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
+
+sudo apt-get update -y
+sudo mkdir -p /opt/tmp/quirinux-genius
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo dpkg -i /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo dpkg -i /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR PTXCONF
  -----------------------------------------------------------------------------
@@ -3064,137 +3225,6 @@ sudo rm /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar
 sudo chmod 777 /opt/stopmo-preview-plugin/instalar-plugin-entangle-NOROOT.sh
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR CONTROLADORES PARA TABLETAS WACOM
- -----------------------------------------------------------------------------
- Instalar controladores libres para las tabletas gráficas de la marca Wacom.
-
- 
-
- 
-
-
-
-
-
-
-
- 1 Instalar controladores de Wacom.
- 2 Saltar este paso.
- 0 Salir.
-
-
-
-"
-
-read -p " Tu respuesta-> " opc
- 
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
-
-sudo apt-get update -y
-sudo apt-get install build-essential autoconf linux-headers-$uname -r
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
-cd /opt/tmp
-tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2 
-cd input-wacom-0.46.0 
-if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR CONTROLADORES PARA TABLETAS GENIUS
- -----------------------------------------------------------------------------
- Instalar controladores libres para tabletas gŕaficas Genius antiguas,
- incluidos en Quirinux Edición Pro.
-
-
-
-
-
-
-
-
-
-
- 1 Instalar controladores de Genius.
- 2 Saltar este paso.
- 0 Salir.
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
-
-sudo apt-get update -y
-sudo mkdir -p /opt/tmp/quirinux-genius
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
 
 ;;
 
