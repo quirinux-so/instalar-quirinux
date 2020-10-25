@@ -1976,7 +1976,7 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR SOPORTE PARA VIRTUALIZACIÓN
  -----------------------------------------------------------------------------
  Instala los paquetes aqemu, qemu-kvm, qemu-system-data, intel-microcode, 
- amd-microcode, quemu-system, útiles para crear máquinas virtuales e 
+ amd-microcode, quemu-system, libvirt, útiles para crear máquinas virtuales e 
  instalar dentro sistemas operativos completos cuando se necesita ejecutar, 
  por ejemplo, alguna aplicación de Microsoft Windows. 
  
@@ -1998,7 +1998,7 @@ clear
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
 sudo apt-get update -y
-for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
+for paquetes_virtualizacion in aqemu libvirt qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
 sudo apt-get install -f -y
 
 ;;
@@ -3624,9 +3624,3 @@ exit 0
 ;; 
 
 esac 
-
-# NOTAS, TAREAS PENDIENTES
-
-# Terminar de organizar los temas, y agregar opción para Temas de Edición I-PRO.
-
-# for paquetes_ipro in cairo; do sudo apt-get install -y $paquetes_ipro;done
