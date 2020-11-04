@@ -1104,7 +1104,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent evolution photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi  bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi  bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1216,7 +1216,7 @@ sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in xdemineur tumbler default-jre tumbler-plugins-extra ffmpegthumbnailer xpat dia cairo ktorrent chromium evolution photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur tumbler default-jre tumbler-plugins-extra ffmpegthumbnailer xpat dia cairo ktorrent chromium photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1982,6 +1982,11 @@ echo " -------------------------------------------------------------------------
  
  Requiere un mother compatible con virtualización. 
  
+
+
+
+
+
  1 Instalar soporte para virtualización (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -1998,7 +2003,7 @@ clear
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
 sudo apt-get update -y
-for paquetes_virtualizacion in aqemu virt-manager libvirt qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
+for paquetes_virtualizacion in aqemu libvirt qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
 sudo apt-get install -f -y
 
 ;;
