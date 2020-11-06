@@ -3124,6 +3124,65 @@ exit 0
 
 ;; 
 
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR TAHOMA2D
+ -----------------------------------------------------------------------------
+ Tomando como base OpenToonz, Tahoma presenta una interfáz gráfica simplifi-
+ cada y más idónea para quienes dibujan directamente en digital. Además, 
+ este programa permite algo que OpenToonz en GNU/Linux todavía no: realizar
+ animaciones en StopMotion y podemos decir que sirve para reemplazar a 
+ Dragonframe. 
+ 
+
+
+
+
+
+
+ 1 Instalar Tahoma2D (recomendado)
+ 2 Saltar este paso
+ 0 Salir
+
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# Descarga Tahoma2D de los repositorios de Quirinux
+
+mkdir -p /opt/tmp/tahoma2d
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MWt7cqqGgQCdYby/download' -O /opt/tmp/tahoma2d/tahoma-1.1-q2_amd64.deb
+sudo dpkg -i /opt/tmp/tahoma2d/*.deb
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
 esac 
 
 clear
