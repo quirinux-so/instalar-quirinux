@@ -737,7 +737,7 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR CODECS Y FORMATOS PRIVATIVOS 
  -----------------------------------------------------------------------------
  Ciertos codecs privativos son necesarios para reproducir algunos formatos 
- como Adobe Flash y trabajar con archivos comprimidos con extensión .rar.
+ multimedia y trabajar con archivos comprimidos con extensión .rar.
  Si piensas que los necesitarás, puedes instalarlos ahora.
 
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
@@ -768,11 +768,15 @@ clear
 
 sudo apt-get update -y
 for paquetes_codecs in pepperflashplugin-nonfree browser-plugin-freshplayer-pepperflash mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
-sudo mkdir -p /opt/tmp/flash
-wget --no-check-certificate 'http://my.opendesktop.org/s/Q2ETzdcmEiCgHRN/download' -O /opt/tmp/flash/flash.tar.gz
-tar zxpvf /opt/tmp/flash/flash.tar.gz -C /opt/tmp/flash/
-sudo cp /opt/tmp/flash/libflashplayer.so /usr/lib/mozilla/plugins/
-sudo cp -r /opt/tmp/flash/usr/* /usr
+
+# Se desactiva soporte para Flash, atendiendo al fin del soporte anunciado. 
+
+# sudo mkdir -p /opt/tmp/flash
+# wget --no-check-certificate 'http://my.opendesktop.org/s/Q2ETzdcmEiCgHRN/download' -O /opt/tmp/flash/flash.tar.gz
+# tar zxpvf /opt/tmp/flash/flash.tar.gz -C /opt/tmp/flash/
+# sudo cp /opt/tmp/flash/libflashplayer.so /usr/lib/mozilla/plugins/
+# sudo cp -r /opt/tmp/flash/usr/* /usr
+
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
