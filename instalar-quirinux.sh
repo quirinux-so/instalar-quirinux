@@ -230,6 +230,8 @@ clear
 
 "3")
 
+clear
+
 sudo mkdir /opt/tmp
 
 echo "# Download Kernel"; sleep 1s
@@ -418,8 +420,8 @@ echo " -------------------------------------------------------------------------
  -----------------------------------------------------------------------------
  Para instalar o actualizar el Kernel AVL, el conversor de video Mystiq
  el gestor de software, la utilidad de backup y el editor de video
- profesional de Cinelerra, Quirinux necesita agregar algunos repositorios 
- adicionales, que son 100% libres. 
+ profesional de Cinelerra (Quirinux Pro), Quirinux necesita agregar algunos 
+ repositorios adicionales, que son 100% libres. 
 
  
  
@@ -767,16 +769,7 @@ clear
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
 sudo apt-get update -y
-for paquetes_codecs in pepperflashplugin-nonfree browser-plugin-freshplayer-pepperflash mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
-
-# Se desactiva soporte para Flash, atendiendo al fin del soporte anunciado. 
-
-# sudo mkdir -p /opt/tmp/flash
-# wget --no-check-certificate 'http://my.opendesktop.org/s/Q2ETzdcmEiCgHRN/download' -O /opt/tmp/flash/flash.tar.gz
-# tar zxpvf /opt/tmp/flash/flash.tar.gz -C /opt/tmp/flash/
-# sudo cp /opt/tmp/flash/libflashplayer.so /usr/lib/mozilla/plugins/
-# sudo cp -r /opt/tmp/flash/usr/* /usr
-
+for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -807,14 +800,10 @@ sudo apt-get update -y
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
 sudo apt-get update -y
-for paquetes_codecs in pepperflashplugin-nonfree browser-plugin-freshplayer-pepperflash mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
-sudo mkdir -p /opt/tmp/flash
-wget --no-check-certificate 'http://my.opendesktop.org/s/Q2ETzdcmEiCgHRN/download' -O /opt/tmp/flash/flash.tar.gz
-tar zxpvf /opt/tmp/flash/flash.tar.gz -C /opt/tmp/flash/
-sudo cp /opt/tmp/flash/libflashplayer.so /usr/lib/mozilla/plugins/
-sudo cp -r /opt/tmp/flash/usr/* /usr
+for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
 
 # Borrar archivos temporales 
 
@@ -1108,7 +1097,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi  bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc guvcview   usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi  bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1220,7 +1209,15 @@ sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in xdemineur tumbler default-jre tumbler-plugins-extra ffmpegthumbnailer xpat dia cairo ktorrent chromium photopc guvcview openshot usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in xdemineur tumbler default-jre tumbler-plugins-extra ffmpegthumbnailer xpat dia cairo ktorrent chromium photopc guvcview   usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR EDITOR DE VIDEO OLIVE
+
+sudo mkdir -p /opt/tmp/olive
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
+sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1976,6 +1973,8 @@ esac
 
 clear
 
+
+
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR SOPORTE PARA VIRTUALIZACIÓN
  -----------------------------------------------------------------------------
@@ -2006,9 +2005,14 @@ clear
 
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
-sudo apt-get update -y
-for paquetes_virtualizacion in aqemu libvirt qemu-kvm qemu-system-data qemu-system intel-microcode amd-microcode; do sudo apt-get install -y $paquetes_virtualizacion; done
-sudo apt-get install -f -y
+ sudo apt-get update -y
+ for paquetes_virtualizacion in aqemu, qemu-kvm, qemu-system-data, qemu-block-extra, intel-microcode, amd-microcode, qemu-system, libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
+ sudo apt-get install -f -y
+
+# sudo mkdir -p /opt/tmp/virtualbox
+# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nHKTyB4qdbCMGBY/download' -O /opt/tmp/virtualbox/virtualbox.deb
+# cd /opt/tmp/virtualbox
+# sudo dpkg -i virtualbox.deb
 
 ;;
 
