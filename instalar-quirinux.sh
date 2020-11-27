@@ -8,14 +8,20 @@
 
 # Documentación:
 #
-# 1. Comentarios
+# 1. Convenciones
+#
+# 1.1 Comentarios
 #
 # COMENTARIOS EN MAYÚSCULAS = Referidos al qué (lo que el programa hace)
 # Comentarios en Minusculas = Referidos al cómo (código).
 #
-# 2. Convenciones
+# 1.2 Nomenclaturas
 #
-# 2.1 Bucles
+# paquetes_nombre = paquete_grupo
+# _grupo = conjunto paquetes según su utilidad.
+# Ejemplo: paquetes_red
+#
+# 2. Bucles
 #
 # Este programa realiza la instalación de numerosos paquetes desde los repositorios
 # APT de Debian. En ocasiones, podría ocurrir que algunos de esos paquetes no estén
@@ -24,11 +30,7 @@
 #
 # for paquetes_nombre in paquete1 paquete2 ; do sudo apt-get install -y $paquetes_nombre; done sudo apt-get install -f -y
 #
-# 2.2 Nomenclaturas
-#
-# Nomenclatura paquetes_nombre = paquete_grupo
-# _grupo = conjunto paquetes según su utilidad.
-# Ejemplo: paquetes_red
+
 
 
 # Estilos
