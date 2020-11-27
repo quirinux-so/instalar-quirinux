@@ -6,6 +6,33 @@
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
 # Versión:	1.00-RC_1
 
+# Documentación:
+#
+# 1. Comentarios
+#
+# COMENTARIOS EN MAYÚSCULAS = Referidos al qué (lo que el programa hace)
+# Comentarios en Minusculas = Referidos al cómo (código).
+#
+# 2. Convenciones
+#
+# 2.1 Bucles
+#
+# Este programa realiza la instalación de numerosos paquetes desde los repositorios
+# APT de Debian. En ocasiones, podría ocurrir que algunos de esos paquetes no estén
+# disponibles. Para evitar que el script se interrumpa, se decide realizar todas las
+# instalaciones de este tipo con bucles con la siguientes estructura:
+#
+# for paquetes_nombre in paquete1 paquete2 ; do sudo apt-get install -y $paquetes_nombre; done sudo apt-get install -f -y
+#
+# 2.2 Nomenclaturas
+#
+# Nomenclatura paquetes_nombre = paquete_grupo
+# _grupo = conjunto paquetes según su utilidad.
+# Ejemplo: paquetes_red
+
+
+# Estilos
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 ${bold}
@@ -66,8 +93,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR GIT Y WGET 
  -----------------------------------------------------------------------------
- Este programa necesitará las utilidades git, wget y 
- software-properties-common  para poder descargar los paquetes que instalará. 
+ Este programa necesitará las utilidades git y wget, necesarias para poder 
+ descargar los paquetes que se instalar a lo largo de la ejecución.
  Si los tienes instalados, puedes saltar este paso. Si no estás seguro/a, 
  elije la opción 1. 
 
@@ -97,7 +124,7 @@ clear
 # INSTALAR WGET, GIT Y SOFTWARE-PROPERTIES-COMMON
 
 sudo apt-get update -y
-for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
+for paquetes_necesarios in wget git; do sudo apt-get install -y $paquetes_necesarios; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
