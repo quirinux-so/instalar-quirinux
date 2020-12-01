@@ -6,35 +6,6 @@
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
 # Versión:	1.00-RC_1
 
-# Documentación:
-#
-# 1. Convenciones
-#
-# 1.1 Comentarios
-#
-# COMENTARIOS EN MAYÚSCULAS = Referidos al qué (lo que el programa hace)
-# Comentarios en Minusculas = Referidos al cómo (código).
-#
-# 1.2 Nomenclaturas
-#
-# paquetes_nombre = paquete_grupo
-# _grupo = conjunto paquetes según su utilidad.
-# Ejemplo: paquetes_red
-#
-# 2. Bucles
-#
-# Este programa realiza la instalación de numerosos paquetes desde los repositorios
-# APT de Debian. En ocasiones, podría ocurrir que algunos de esos paquetes no estén
-# disponibles. Para evitar que el script se interrumpa, se decide realizar todas las
-# instalaciones de este tipo con bucles con la siguientes estructura:
-#
-# for paquetes_nombre in paquete1 paquete2 ; do sudo apt-get install -y $paquetes_nombre; done sudo apt-get install -f -y
-#
-
-
-
-# Estilos
-
 bold=$(tput bold)
 normal=$(tput sgr0)
 ${bold}
@@ -95,8 +66,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR GIT Y WGET 
  -----------------------------------------------------------------------------
- Este programa necesitará las utilidades git y wget, necesarias para poder 
- descargar los paquetes que se instalar a lo largo de la ejecución.
+ Este programa necesitará las utilidades git, wget y 
+ software-properties-common  para poder descargar los paquetes que instalará. 
  Si los tienes instalados, puedes saltar este paso. Si no estás seguro/a, 
  elije la opción 1. 
 
@@ -126,7 +97,7 @@ clear
 # INSTALAR WGET, GIT Y SOFTWARE-PROPERTIES-COMMON
 
 sudo apt-get update -y
-for paquetes_necesarios in wget git; do sudo apt-get install -y $paquetes_necesarios; done
+for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2034,9 +2005,9 @@ clear
 
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
- sudo apt-get update -y
- for paquetes_virtualizacion in aqemu, qemu-kvm, qemu-system-data, qemu-block-extra, intel-microcode, amd-microcode, qemu-system, libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
- sudo apt-get install -f -y
+sudo apt-get update -y
+for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
+sudo apt-get install -f -y
 
 # sudo mkdir -p /opt/tmp/virtualbox
 # sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nHKTyB4qdbCMGBY/download' -O /opt/tmp/virtualbox/virtualbox.deb
