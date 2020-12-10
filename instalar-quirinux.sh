@@ -1097,7 +1097,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc guvcview   usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi  bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in bluetooth bluez bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1109,17 +1109,13 @@ sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR ARDOUR 6
+# INSTALAR UTILIDADES DE PANTALLA MX
 
-sudo mkdir -p /opt/tmp/ardour6
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR PLUGINS PARA ARDOUR
-
-for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
+sudo mkdir -p /opt/tmp/mx
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/EW8iS7od7rcdEWL/download' -O /opt/tmp/mx/mx-tweaks.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7FbFxCM9P9Yty7/download' -O /opt/tmp/mx/mx-viewer.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jb8qz5biNXZGti2/download' -O /opt/tmp/mx/mx-tweaks-data.deb
+sudo dpkg -i /opt/tmp/mx/m*
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1209,7 +1205,8 @@ sudo apt-get update -y
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in xdemineur tumbler default-jre tumbler-plugins-extra ffmpegthumbnailer xpat dia cairo ktorrent chromium photopc guvcview   usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin mate-calc gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools dconf-editor xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee rapid-photo-downloader bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get update -y
+for paquetes_buster in bluetooth bluez bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1221,22 +1218,19 @@ sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR ARDOUR 6
-
-sudo mkdir -p /opt/tmp/ardour6
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR PLUGINS PARA ARDOUR
-
-for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
 # INSTALAR EXTRAS DE MINT Y OPENSUSE
 
 for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_extra; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR UTILIDADES DE PANTALLA MX
+
+sudo mkdir -p /opt/tmp/mx
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/EW8iS7od7rcdEWL/download' -O /opt/tmp/mx/mx-tweaks.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7FbFxCM9P9Yty7/download' -O /opt/tmp/mx/mx-viewer.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jb8qz5biNXZGti2/download' -O /opt/tmp/mx/mx-tweaks-data.deb
+sudo dpkg -i /opt/tmp/mx/m*
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2502,7 +2496,7 @@ esac
 clear 
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
+ QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX  GENERAL NO INCLUYE
  -----------------------------------------------------------------------------
  Remover componentes que Quirinux GENERAL no incluye.
 
@@ -2535,7 +2529,7 @@ clear
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
 sudo apt-get update -y
-for paquetes_remover_idiomas_firefox in firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
+for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2575,7 +2569,7 @@ sudo apt-get autoremove --purge -y
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 
-for paquetes_remover_programas in xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop aqemu virt-manager qemu zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox python-wicd wicd wicd-daemon wicd-gtk keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
+for paquetes_remover_programas in xsane xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop aqemu virt-manager qemu zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox python-wicd wicd wicd-daemon wicd-gtk keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2699,7 +2693,7 @@ echo " -------------------------------------------------------------------------
  defecto:
 
  manuskript birdfont skanlite pencil2d devede vokoscreen-ng soundconverter 
- hugin invada-studio-plugins-ladspa aegisub
+ hugin invada-studio-plugins-ladspa aegisub, xsane, guvcview
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
  krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
@@ -2725,7 +2719,7 @@ clear
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
 sudo apt-get update -y
-for paquetes_estandar in manuskript xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript guvcview  xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3241,6 +3235,70 @@ sudo apt-get autoremove --purge -y
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
+
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR ARDOUR 6
+ -----------------------------------------------------------------------------
+ Ardour es el equivalente a Pro Tools para Linux. 
+ Se trata de un editor multipistas profesional, que sirve para grabar, mez-
+ clar y masterizar una banda sonora completa. 
+ 
+ Quirinux Pro incluye la versión más actual. 
+ 
+
+ 
+ 
+ 
+
+
+ 1 Instalar Ardour 6
+ 2 Saltar este paso
+ 0 Salir
+
+
+
+"
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR ARDOUR 6
+
+sudo mkdir -p /opt/tmp/ardour6
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR PLUGINS PARA ARDOUR
+
+for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
 ;;
 
