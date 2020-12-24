@@ -1109,13 +1109,11 @@ sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR UTILIDADES DE PANTALLA MX
+# INSTALAR EDITOR DE VIDEO OLIVE
 
-sudo mkdir -p /opt/tmp/mx
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/EW8iS7od7rcdEWL/download' -O /opt/tmp/mx/mx-tweaks.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7FbFxCM9P9Yty7/download' -O /opt/tmp/mx/mx-viewer.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jb8qz5biNXZGti2/download' -O /opt/tmp/mx/mx-tweaks-data.deb
-sudo dpkg -i /opt/tmp/mx/m*
+sudo mkdir -p /opt/tmp/olive
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
+sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1149,7 +1147,7 @@ sudo dpkg -i /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.de
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR DENSIFY (PARA REDUCIR ARCHIVOS PDF
+# INSTALAR DENSIFY (para reducir archivos PDF)
 
 sudo mkdir -p /opt/tmp/densify
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
@@ -1157,11 +1155,19 @@ sudo dpkg -i /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR IMAGINE (PARA REDUCIR IMÁGENES
+# INSTALAR IMAGINE (para reducir imágenes)
 
 sudo mkdir -p /opt/tmp/imagine
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo dpkg -i /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
+
+sudo mkdir -p /opt/tmp/openboard
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
+sudo dpkg -i /opt/tmp/openboard/openboard.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1224,16 +1230,6 @@ for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_ex
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR UTILIDADES DE PANTALLA MX
-
-sudo mkdir -p /opt/tmp/mx
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/EW8iS7od7rcdEWL/download' -O /opt/tmp/mx/mx-tweaks.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7FbFxCM9P9Yty7/download' -O /opt/tmp/mx/mx-viewer.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jb8qz5biNXZGti2/download' -O /opt/tmp/mx/mx-tweaks-data.deb
-sudo dpkg -i /opt/tmp/mx/m*
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
 # INSTALAR CONFIGURADOR PARA SAMBA DE UBUNTU
 
 sudo mkdir -p /opt/tmp/samba
@@ -1258,7 +1254,7 @@ sudo dpkg -i /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.de
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR DENSIFY (PARA REDUCIR ARCHIVOS PDF
+# INSTALAR DENSIFY (Para reducir archivos PDF)
 
 sudo mkdir -p /opt/tmp/densify
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
@@ -1266,13 +1262,22 @@ sudo dpkg -i /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR IMAGINE (PARA REDUCIR IMÁGENES
+# INSTALAR IMAGINE (Para reducir imágenes)
 
 sudo mkdir -p /opt/tmp/imagine
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo dpkg -i /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
+# INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
+
+sudo mkdir -p /opt/tmp/openboard
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
+sudo dpkg -i /opt/tmp/openboard/openboard.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
 
 # Borrar archivos temporales 
 
