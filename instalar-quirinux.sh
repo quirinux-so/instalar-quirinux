@@ -2795,7 +2795,7 @@ sudo apt-get autoremove --purge -y
 sudo apt-get update -y
 sudo mkdir -p /opt/tmp/tupitube
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Zrce88JXLRjiqXF/download' -O /opt/tmp/tupitube/tupitube-desk-0.2.15-q2_amd64.deb
-sudo dpkg -i /opt/tmp/tupitube/tupitube-desk-0.2.15-q2_amd64.deb 
+sudo dpkg -i /opt/tmp/tupitube/tupitube-desk-0.2.17_amd64.deb 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3863,4 +3863,6 @@ exit 0
 
 ;; 
 
-esac
+esac 
+
+
