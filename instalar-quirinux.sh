@@ -294,73 +294,6 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: CONFIGURAR CPU PARA MAYOR PERFORMANCE
- -----------------------------------------------------------------------------
- Quirinux está pensado para trabajar en producción, por eso viene con la 
- configuración de CPU establecida para mayor performance.
-
- ${bold} TRUCO: ${normal}Aunque el modo de mayor performance puede reducir 
- la carga de las baterías en los equipos portátiles, en este paso también 
- se instalará el programa ${bold}CPUFreqManager${normal} con el que podrás 
- cambiar tu preferencia cuando quieras:
- ${bold}columna derecha del programa > Governor${normal}
-
-
-
-
- 1 Configurar CPU para mayor performance (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-
-
-
-"
-
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# CONFIGURACIÓN DE RENDIMIENTO PREDETERMINADA DE QUIRINUX
-
-for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
-sudo apt-get install -f
-sudo mkdir -p /opt/tmp/cpu
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nkWBfXRo2Xs4kXE/download' -O /opt/tmp/cpu/quirinux-cpu.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo dpkg -i /opt/tmp/cpu/*.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
  -----------------------------------------------------------------------------
  Activar el soporte multiarquitectura (32 bits). Quizás lo necesites a la 
@@ -1101,6 +1034,16 @@ for paquetes_buster in bluetooth h264enc bluez gvfs-backends bluez-cups bluez-ob
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+# INSTALA FREQUTILS
+
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
+sudo mkdir -p /opt/tmp/cpu
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo dpkg -i /opt/tmp/cpu/*.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
 # INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
 
 sudo mkdir -p /opt/tmp/chimiboga
@@ -1213,6 +1156,24 @@ sudo apt-get update -y
 
 sudo apt-get update -y
 for paquetes_buster in bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALA FREQUTILS
+
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
+sudo mkdir -p /opt/tmp/cpu
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo dpkg -i /opt/tmp/cpu/*.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
+
+sudo mkdir -p /opt/tmp/chimiboga
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
+sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
