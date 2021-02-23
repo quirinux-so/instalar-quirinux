@@ -1793,6 +1793,12 @@ sudo getweb 1000
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+sudo mkdir -p /opt/tmp/epson
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/BD3dowKgjdsPw9W/download' -O /opt/tmp/epson/epsonscan.tar
+sudo tar -xvf /opt/tmp/epson/epsonscan.tar /opt/tmp/epson/
+cd /opt/tmp/epson/epsonscan
+./install.sh
+
 ;;
 
 "2")
