@@ -300,10 +300,10 @@ echo " -------------------------------------------------------------------------
  configuración de CPU establecida para mayor performance.
 
  ${bold} TRUCO: ${normal}Aunque el modo de mayor performance puede reducir 
- la carga de las baterías en los equipos portátiles y aumentar el nivel de ruido 
- del equipo, en este paso también se instalará el programa ${bold}CPUFreqManager${normal} 
- con el que podrás cambiar tu preferencia cuando quieras:
- ${bold}columna derecha del programa > Governor${normal}
+ la carga de las baterías en los equipos portátiles y aumentar el nivel 
+ de ruido  del equipo, en este paso también se instalará el programa 
+ ${bold}CPUFreqManager${normal} con el que podrás cambiar tu preferencia 
+ cuando quieras: ${bold}columna derecha del programa > Governor${normal}
 
 
 
