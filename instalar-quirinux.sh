@@ -3164,6 +3164,8 @@ fi
 sudo rm -rf /opt/tmp/*
 sudo rm /opt/opentoonz/opentoonz-icon.tar
 
+;;
+
 "2")
 
 clear
