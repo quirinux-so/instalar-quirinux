@@ -1097,7 +1097,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in pitivi converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1106,14 +1106,6 @@ sudo apt-get autoremove --purge -y
 sudo mkdir -p /opt/tmp/chimiboga
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
 sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR EDITOR DE VIDEO OLIVE
-
-sudo mkdir -p /opt/tmp/olive
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1212,15 +1204,7 @@ sudo apt-get update -y
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR EDITOR DE VIDEO OLIVE
-
-sudo mkdir -p /opt/tmp/olive
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
+for paquetes_buster in pitivi converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2908,6 +2892,64 @@ exit 0
 
 esac
 
+
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR OLIVE EDITOR
+ -----------------------------------------------------------------------------
+ Instalación del editor de video Olive, 
+ Sencillo, con pocas opciones aunque muy estable. . 
+
+   
+ 
+ 
+
+
+
+
+
+
+ 1 Instalar Olive (recomendado)
+ 2 Saltar este paso
+ 0 Salir
+ 
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR EDITOR DE VIDEO OLIVE
+
+sudo mkdir -p /opt/tmp/olive
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
+sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;;
+
+esac 
 
 clear
 
