@@ -187,7 +187,7 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: DESINSTALAR KERNELS ANTERIORES 4.x
  -----------------------------------------------------------------------------
- Si ya instalaste el kernel AVL 5.4.28 de baja latencia que Quirinux trae  
+ Si ya instalaste el kernel AVL 5.9.1 de baja latencia que Quirinux trae  
  por defecto y estás ejecutándolo ahora, puedes desinstalar los kernels 
  anteriores.
   
@@ -201,7 +201,7 @@ echo " -------------------------------------------------------------------------
 
  1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
  2 Saltar este paso (recomendado).
- 3 Instalar ahora el kernel AVL 5.4.28 (requiere reiniciar).
+ 3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
  0 Salir.
 
 
@@ -234,18 +234,24 @@ clear
 
 sudo mkdir /opt/tmp
 
+# echo "# Download Kernel"; sleep 1s
+# wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+
+# echo "# Dowload Headers"; sleep 1s
+# wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
+
 echo "# Download Kernel"; sleep 1s
-wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 
 echo "# Dowload Headers"; sleep 1s
-wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
+wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
 
 echo "# Instalando el nuevo kernel"; sleep 1s
-sudo dpkg -i /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb 
-sudo dpkg -i /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 
@@ -258,7 +264,7 @@ clear
 echo " -----------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
  -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de baja latencia AVL 5.4.28 
+ Felicidades, acabas de instalar el kernel de baja latencia AVL 5.9.1
  compilado por Trulan Martin. El mismo que viene por defecto en la distro
  AV Linux y Quirinux 2.0. 
 
@@ -859,7 +865,7 @@ clear
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
 sudo apt-get update -y
-sudo apt-get install build-essential autoconf linux-headers-$uname -r
+sudo apt-get install build-essential autoconf linux-headers-$uname -u
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2 
@@ -1097,7 +1103,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in pitivi converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1115,13 +1121,15 @@ for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_ex
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR CONFIGURADOR PARA SAMBA DE UBUNTU
+# INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-sudo mkdir -p /opt/tmp/samba
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo apt-get install -f -y
-sudo touch /etc/libuser.conf
+# sudo apt-get install samba
+# sudo mkdir -p /opt/tmp/samba
+# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+# sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+# sudo apt-get install -f -y
+# sudo touch /etc/libuser.conf
+
 
 # INSTALAR MUGSHOT
 
@@ -1204,7 +1212,7 @@ sudo apt-get update -y
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in pitivi converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm samba liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1214,13 +1222,14 @@ for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_ex
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# INSTALAR CONFIGURADOR PARA SAMBA DE UBUNTU
+# INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-sudo mkdir -p /opt/tmp/samba
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo apt-get install -f -y
-sudo touch /etc/libuser.conf
+# sudo apt-get install samba
+# sudo mkdir -p /opt/tmp/samba
+# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+# sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+# sudo apt-get install -f -y
+# sudo touch /etc/libuser.conf
 
 # INSTALAR MUGSHOT
 
@@ -3166,109 +3175,6 @@ sudo rm /opt/opentoonz/opentoonz-icon.tar
 
 ;;
 
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;;
-
-clear
-
-echo "--------------------------------------------------------------
-INSTALACIÓN FINALIZADA CON ÉXITO
---------------------------------------------------------------
- 
-¡Felicidades! OpenToonz Estable 1.4 ya está en tu sistema y puedes
-abrirlo yendo a ${bold}Aplicaciones > Gráficos > OpenToonz${normal} o desde 
-la terminal con el comando ${bold}opentoonz${normal}
-"
-
-exit 0
-
-;;
-
-"2")
-
-# COMPILANDO OPENTOONZ DESDE SU CÓDIGO FUENTE
-
-sudo apt-get update -y
-for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libqt5multimedia5-plugins; do sudo apt-get install -y $paquetes_opentoonz; done
-for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_opentoonz2; done
-mkdir /opt/tmp
-cd /opt/tmp
-git clone https://github.com/opentoonz/opentoonz
-mkdir -p $HOME/.config/OpenToonz
-cp -r opentoonz/stuff $HOME/.config/OpenToonz/
-cat << EOF > $HOME/.config/OpenToonz/SystemVar.ini
-[General]
-OPENTOONZROOT="$HOME/.config/OpenToonz/stuff"
-OpenToonzPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
-TOONZCACHEROOT="$HOME/.config/OpenToonz/stuff/cache"
-TOONZCONFIG="$HOME/.config/OpenToonz/stuff/config"
-TOONZFXPRESETS="$HOME/.config/OpenToonz/stuff/fxs"
-TOONZLIBRARY="$HOME/.config/OpenToonz/stuff/library"
-TOONZPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
-TOONZPROJECTS="$HOME/.config/OpenToonz/stuff/projects"
-TOONZROOT="$HOME/.config/OpenToonz/stuff"
-TOONZSTUDIOPALETTE="$HOME/.config/OpenToonz/stuff/studiopalette"
-EOF
-cd /opt/tmp/opentoonz/thirdparty/tiff-4.0.3
-./configure --with-pic --disable-jbig
-make -j$(nproc)
-cd ../../
-cd /opt/tmp/opentoonz/toonz
-mkdir build
-cd build
-cmake ../sources
-make -j$(nproc)
-sudo make install 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Descarga y copia en ícono del menú de inicio de OpenToonz
-
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz/opentoonz-icon.tar
-sudo mv /opt/tmp/opentoonz /opt/tmp/opentoonz-tmp
-sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /
-
-# Creando comando de inicio de OpenToonz
-
-sudo chmod -R 775 /opt/opentoonz
-sudo chown -R $USER /opt/opentoonz
-
-FILE="/usr/local/bin/opentoonz"
-
-if [ -f "$FILE" ]; then
-
-sudo rm /usr/local/bin/opentoonz
-mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
-cd /usr/local/bin
-sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
-
-else
-
-mv /opt/tmp/opentoonz /opt/opentoonz/bin/opentoonz
-cd /usr/local/bin
-sudo ln -s /opt/opentoonz/bin/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
-
-fi
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
 
 "2")
 
