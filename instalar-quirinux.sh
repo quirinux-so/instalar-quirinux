@@ -187,24 +187,24 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: DESINSTALAR KERNELS ANTERIORES 4.x
  -----------------------------------------------------------------------------
- Si ya instalaste el kernel AVL 5.4.28 de baja latencia que Quirinux trae  
- por defecto y estás ejecutándolo ahora, puedes desinstalar los kernels 
- anteriores.
+ Si ya instalaste algunos de los kernels que Quirinux adopta (AVL y/o 
+ Liquorix) y estás utilizando alguno de estos ellos ahora, puedes desinstalar
+ los kernels  anteriores.
   
  ${bold} ¡CUIDADO!${normal} Si no lo sabes con exactitud es preferible 
  que te saltes este paso, ya que un error podría dejar inutilizado 
  tu sistema.
 
- ${bold} TRUCO${normal} Puedes instalar el Kernel AVL 5.4.28 ahora 
- (opción 3). Luego tendrás que reiniciar y retomar la instalación saltando
- hasta este paso. 
-
+ ${bold} TRUCO${normal} Puedes instalar el Kernel AVL o el Liquorix ahora 
+ (opciones 3 y 4). Luego tendrás que reiniciar y retomar la instalación 
+ saltando hasta este paso. El sistema iniciará con el kernel de más versión
+ más reciente. 
+ 
  1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
  2 Saltar este paso (recomendado).
  3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
- 4 Instalar Kernel Liquorix de alto rendimiento
+ 4 Instalar Kernel Liquorix 5.11 (requiere reiniciar)
  0 Salir.
-
 
 "
 
@@ -235,10 +235,10 @@ clear
 
 sudo mkdir /opt/tmp
 
- echo "# Download Kernel"; sleep 1s
+ echo "# Download Kernel AVL"; sleep 1s
  wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
 
- echo "# Dowload Headers"; sleep 1s
+ echo "# Dowload Headers AVL"; sleep 1s
  wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
 
 # echo "# Download Kernel"; sleep 1s
@@ -250,7 +250,7 @@ sudo mkdir /opt/tmp
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
 
-echo "# Instalando el nuevo kernel"; sleep 1s
+echo "# Instalando el nuevo kernel AVL"; sleep 1s
 
 sudo dpkg -i /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
 sudo dpkg -i /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
@@ -270,22 +270,23 @@ sudo rm -rf /opt/tmp/*
 "4")
 
 clear
+ 
+sudo chmod 777 -R /opt/tmp/
+sudo chown $USER /opt/tmp/*
 
-curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash
-sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
+echo "# Download Kernel Liquorix"; sleep 1s
+wget --no-check-certificate 'http://my.opendesktop.org/s/EdoQ7SSTp2mp738/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+
+echo "# Dowload Headers Liquorix"; sleep 1s
+wget  --no-check-certificate 'http://my.opendesktop.org/s/miS4NKEAB3fyR9w/download' -O /opt/tmp/linux-headers-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
+
+echo "# Instalando el nuevo kernel Liquorix"; sleep 1s
+sudo dpkg -i /opt/tmp/linux-headers-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
+sudo dpkg -i /opt/tmp/linux-image-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
 
 # Borrar archivos temporales 
 
-sudo rm -rf /var/lib/apt/lists/lock/* 
-sudo rm -rf /var/cache/apt/archives/lock/* 
-sudo rm -rf /var/lib/dpkg/lock/*
-sudo rm -rf /lib/live/mount/rootfs/*
-sudo rm -rf /lib/live/mount/*
-sudo rm -rf /var/cache/apt/archives/*.deb
-sudo rm -rf /var/cache/apt/archives/partial/*.deb
-sudo rm -rf /var/cache/apt/partial/*.deb
 sudo rm -rf /opt/tmp/*
-sudo rm -rf /.git
 
 esac 
 
