@@ -187,7 +187,7 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: DESINSTALAR KERNELS ANTERIORES 4.x
  -----------------------------------------------------------------------------
- Si ya instalaste el kernel AVL 5.9.1 de baja latencia que Quirinux trae  
+ Si ya instalaste el kernel AVL 5.4.28 de baja latencia que Quirinux trae  
  por defecto y estás ejecutándolo ahora, puedes desinstalar los kernels 
  anteriores.
   
@@ -234,24 +234,29 @@ clear
 
 sudo mkdir /opt/tmp
 
+ echo "# Download Kernel"; sleep 1s
+ wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+
+ echo "# Dowload Headers"; sleep 1s
+ wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
+
 # echo "# Download Kernel"; sleep 1s
-# wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+# wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 
 # echo "# Dowload Headers"; sleep 1s
-# wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
-
-echo "# Download Kernel"; sleep 1s
-wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
-echo "# Dowload Headers"; sleep 1s
-wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+# wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
 
 echo "# Instalando el nuevo kernel"; sleep 1s
-sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+
+sudo dpkg -i /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
+sudo dpkg -i /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+
+# sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+# sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 
@@ -1291,7 +1296,7 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR OLIVE EDITOR
+ QUIRINUX GENERAL: INSTALAR OLIVE EDITOR
  -----------------------------------------------------------------------------
  Instalación del editor de video Olive, 
  Sencillo, con pocas opciones aunque muy estable. . 
