@@ -185,15 +185,14 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: DESINSTALAR KERNELS ANTERIORES 4.x
+ QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
- Si ya instalaste algunos de los kernels que Quirinux adopta (AVL y/o 
+ Si ya instalaste algunos de los kernels que Quirinux adopta (AVL, XanMod ó
  Liquorix) y estás utilizando alguno de estos ellos ahora, puedes desinstalar
  los kernels  anteriores.
   
  ${bold} ¡CUIDADO!${normal} Si no lo sabes con exactitud es preferible 
- que te saltes este paso, ya que un error podría dejar inutilizado 
- tu sistema.
+ que te saltes este paso, ya que podrías dejar inutilizado  tu sistema.
 
  ${bold} TRUCO${normal} Puedes instalar el Kernel AVL o el Liquorix ahora 
  (opciones 3 y 4). Luego tendrás que reiniciar y retomar la instalación 
@@ -204,6 +203,7 @@ echo " -------------------------------------------------------------------------
  2 Saltar este paso (recomendado).
  3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
  4 Instalar Kernel Liquorix 5.11 (requiere reiniciar)
+ 5 Instalar Kernel XanMod (requiere reiniciar)
  0 Salir.
 
 "
@@ -289,6 +289,30 @@ sudo dpkg -i /opt/tmp/linux-image-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd
 sudo rm -rf /opt/tmp/*
 
 esac 
+
+"5")
+
+clear
+
+sudo chmod 777 -R /opt/tmp/
+sudo chown $USER /opt/tmp/*
+
+echo "# Download Kernel Xmod"; sleep 1s
+wget --no-check-certificate 'http://my.opendesktop.org/s/yd3aLNpg4BFQZLs/download' -O /opt/tmp/linux-image-xmod.deb
+
+echo "# Dowload Headers Xmod"; sleep 1s
+wget  --no-check-certificate 'http://my.opendesktop.org/s/aw69Bo6ZRL2cBCf/download' -O /opt/tmp/linux-headers-xmod.deb
+
+echo "# Instalando el nuevo kernel Xmod"; sleep 1s
+sudo dpkg -i /opt/tmp/linux-headers-xmod.deb
+sudo dpkg -i /opt/tmp/linux-image-xmod.deb
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+esac 
+
 
 clear
 
@@ -2752,7 +2776,7 @@ sudo apt-get autoremove --purge -y
 # LIMPIEZA FINAL 
 
 sudo rm -rf /var/lib/apt/lists/lock/* 
-sudo rm -rf /var/cache/apt/archives/lock/* 
+sudo rm -rf /var/cache/apt/archives/lock/*
 sudo rm -rf /var/lib/dpkg/lock/*
 sudo rm -rf /lib/live/mount/rootfs/*
 sudo rm -rf /lib/live/mount/*
