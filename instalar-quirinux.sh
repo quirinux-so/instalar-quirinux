@@ -202,6 +202,7 @@ echo " -------------------------------------------------------------------------
  1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
  2 Saltar este paso (recomendado).
  3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
+ 4 Instalar Kernel Liquorix de alto rendimiento
  0 Salir.
 
 
@@ -263,6 +264,30 @@ sudo apt-get autoremove --purge -y
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
+
+;;
+
+"4")
+
+clear
+
+curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash
+sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
+
+# Borrar archivos temporales 
+
+sudo rm -rf /var/lib/apt/lists/lock/* 
+sudo rm -rf /var/cache/apt/archives/lock/* 
+sudo rm -rf /var/lib/dpkg/lock/*
+sudo rm -rf /lib/live/mount/rootfs/*
+sudo rm -rf /lib/live/mount/*
+sudo rm -rf /var/cache/apt/archives/*.deb
+sudo rm -rf /var/cache/apt/archives/partial/*.deb
+sudo rm -rf /var/cache/apt/partial/*.deb
+sudo rm -rf /opt/tmp/*
+sudo rm -rf /.git
+
+esac 
 
 clear
 
