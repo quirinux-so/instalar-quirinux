@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
-# Versión:	1.00-RC_1
+# Versión:	1.00-RC_2
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -1123,12 +1123,12 @@ sudo apt-get autoremove --purge -y
 
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-# sudo apt-get install samba
-# sudo mkdir -p /opt/tmp/samba
-# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-# sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-# sudo apt-get install -f -y
-# sudo touch /etc/libuser.conf
+sudo apt-get install samba
+sudo mkdir -p /opt/tmp/samba
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo apt-get install -f -y
+sudo touch /etc/libuser.conf
 
 
 # INSTALAR MUGSHOT
@@ -1224,12 +1224,12 @@ sudo apt-get autoremove --purge -y
 
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-# sudo apt-get install samba
-# sudo mkdir -p /opt/tmp/samba
-# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-# sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-# sudo apt-get install -f -y
-# sudo touch /etc/libuser.conf
+sudo apt-get install samba
+sudo mkdir -p /opt/tmp/samba
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo apt-get install -f -y
+sudo touch /etc/libuser.conf
 
 # INSTALAR MUGSHOT
 
@@ -1285,6 +1285,64 @@ clear
 exit 0
 
 ;; 
+
+esac 
+
+clear
+
+echo " -----------------------------------------------------------------------------
+ QUIRINUX PRO: INSTALAR OLIVE EDITOR
+ -----------------------------------------------------------------------------
+ Instalación del editor de video Olive, 
+ Sencillo, con pocas opciones aunque muy estable. . 
+
+   
+ 
+ 
+
+
+
+
+
+
+ 1 Instalar Olive (recomendado)
+ 2 Saltar este paso
+ 0 Salir
+ 
+
+
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+# INSTALAR EDITOR DE VIDEO OLIVE
+
+sudo mkdir -p /opt/tmp/olive
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
+sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+;;
+
+"2")
+
+clear
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;;
 
 esac 
 
@@ -2030,7 +2088,7 @@ exit 0
 
 esac 
 
-
+clear
 
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: SCREENSAVER
@@ -2697,7 +2755,7 @@ echo " -------------------------------------------------------------------------
  defecto:
 
  manuskript birdfont skanlite pencil2d devede vokoscreen-ng soundconverter 
- hugin invada-studio-plugins-ladspa aegisub, xsane, guvcview
+ hugin invada-studio-plugins-ladspa aegisub, xsane, guvcview, kdenlive
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
  krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
@@ -2723,7 +2781,7 @@ clear
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
 sudo apt-get update -y
-for paquetes_estandar in manuskript guvcview  xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2900,65 +2958,6 @@ exit 0
 ;; 
 
 esac
-
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR OLIVE EDITOR
- -----------------------------------------------------------------------------
- Instalación del editor de video Olive, 
- Sencillo, con pocas opciones aunque muy estable. . 
-
-   
- 
- 
-
-
-
-
-
-
- 1 Instalar Olive (recomendado)
- 2 Saltar este paso
- 0 Salir
- 
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR EDITOR DE VIDEO OLIVE
-
-sudo mkdir -p /opt/tmp/olive
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;;
-
-esac 
 
 clear
 
@@ -3820,5 +3819,4 @@ exit 0
 ;; 
 
 esac 
-
 
