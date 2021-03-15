@@ -311,10 +311,6 @@ sudo dpkg -i /opt/tmp/linux-image-xmod.deb
 
 sudo rm -rf /opt/tmp/*
 
-;;
-
-esac 
-
 clear
 
 echo " -----------------------------------------------------------------------------
