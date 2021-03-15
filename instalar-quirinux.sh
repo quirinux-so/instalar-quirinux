@@ -187,21 +187,19 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
- Si ya instalaste algunos de los kernels que Quirinux adopta (AVL o XanMod) 
- y estás utilizando alguno de estos ellos ahora, puedes desinstalar
- los kernels  anteriores.
-  
- ${bold} ¡CUIDADO!${normal} Si no lo sabes con exactitud es preferible 
- que te saltes este paso, ya que podrías dejar inutilizado  tu sistema.
-
- ${bold} TRUCO${normal} Puedes instalar el Kernel AVL o el Liquorix ahora 
- (opciones 3 y 4). Luego tendrás que reiniciar y retomar la instalación 
- saltando hasta este paso. El sistema iniciará con el kernel de más versión
- más reciente. 
  
- 1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
- 2 Saltar este paso (recomendado).
- 3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
+ Puedes instalar el Kernel AVL de baja latencia o el Xanmod de alto rendimiento.
+ Luego tendrás que reiniciar y retomar la instalación, para que los controladores
+ que instales se incorporen al kernel nuevo. 
+ 
+ 
+
+ 
+ 
+ 
+  
+ 1 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
+ 2 Saltar este paso (recomendado). 
  4 Instalar Kernel XanMod 5.11.6 (requiere reiniciar)
  0 Salir.
 
@@ -211,24 +209,7 @@ read -p " Tu respuesta-> " opc
 
 case $opc in
 
-"1") 
-
-clear
-
-# SE ELIMINAN LOS KERNELS 4.X
-
-for paquetes_kernels in linux-headers-4* linux-image-4* linux-image-amd64; do sudo apt-get remove --purge -y $paquetes_kernels; done
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
+"1")
 
 clear
 
@@ -287,6 +268,14 @@ echo " -------------------------------------------------------------------------
 "
 
 exit 0
+
+;;
+
+
+
+"2")
+
+clear
 
 ;;
 
@@ -374,7 +363,6 @@ echo " -------------------------------------------------------------------------
 
 
 "
-
 
 read -p " Tu respuesta-> " opc 
 
