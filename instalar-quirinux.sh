@@ -288,9 +288,11 @@ sudo dpkg -i /opt/tmp/linux-image-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd
 
 sudo rm -rf /opt/tmp/*
 
-esac 
-
 "5")
+
+;;
+
+esac
 
 clear
 
