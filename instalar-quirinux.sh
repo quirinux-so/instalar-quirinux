@@ -187,8 +187,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
- Si ya instalaste algunos de los kernels que Quirinux adopta (AVL, XanMod ó
- Liquorix) y estás utilizando alguno de estos ellos ahora, puedes desinstalar
+ Si ya instalaste algunos de los kernels que Quirinux adopta (AVL o XanMod) 
+ y estás utilizando alguno de estos ellos ahora, puedes desinstalar
  los kernels  anteriores.
   
  ${bold} ¡CUIDADO!${normal} Si no lo sabes con exactitud es preferible 
@@ -202,8 +202,7 @@ echo " -------------------------------------------------------------------------
  1 Eliminar kernels de Debian Buster ${bold}(¡CUIDADO!)${normal}.
  2 Saltar este paso (recomendado).
  3 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
- 4 Instalar Kernel Liquorix 5.11 (requiere reiniciar)
- 5 Instalar Kernel XanMod (requiere reiniciar)
+ 4 Instalar Kernel XanMod 5.11.6 (requiere reiniciar)
  0 Salir.
 
 "
@@ -265,32 +264,34 @@ sudo apt-get autoremove --purge -y
 
 sudo rm -rf /opt/tmp/*
 
+echo " -----------------------------------------------------------------------------
+ NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
+ -----------------------------------------------------------------------------
+ Felicidades, acabas de instalar el kernel de baja latencia AVL 5.9.1
+ compilado por Trulan Martin. El mismo que viene por defecto en la distro
+ AV Linux y Quirinux 2.0. 
+
+ Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
+ el ordenador. Luego podrás volver a ejecutar este programa de instalación,
+ saltar todos los pasos hasta llegar a ${bold}DESINSTALAR KERNELS ANTERIORES 4.x,${normal}
+ elegir la opción 1 (Eliminar kernels de Debian Buster) y continuar con la
+ instalación.		
+
+
+
+ ¡Hasta luego!
+
+
+
+
+"
+
+exit 0
+
 ;;
+
 
 "4")
-
-clear
- 
-sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt/tmp/*
-
-echo "# Download Kernel Liquorix"; sleep 1s
-wget --no-check-certificate 'http://my.opendesktop.org/s/EdoQ7SSTp2mp738/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
-
-echo "# Dowload Headers Liquorix"; sleep 1s
-wget  --no-check-certificate 'http://my.opendesktop.org/s/miS4NKEAB3fyR9w/download' -O /opt/tmp/linux-headers-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
-
-echo "# Instalando el nuevo kernel Liquorix"; sleep 1s
-sudo dpkg -i /opt/tmp/linux-headers-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
-sudo dpkg -i /opt/tmp/linux-image-5.11.0-6.2-liquorix-amd64_5.11-17.1~buster_amd64.deb
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"5")
 
 clear
 
@@ -316,9 +317,9 @@ clear
 echo " -----------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
  -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de baja latencia AVL 5.9.1
- compilado por Trulan Martin. El mismo que viene por defecto en la distro
- AV Linux y Quirinux 2.0. 
+ Felicidades, acabas de instalar el kernel de baja latencia XANMOD 5.11.6
+ 
+ 
 
  Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
  el ordenador. Luego podrás volver a ejecutar este programa de instalación,
