@@ -476,8 +476,8 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: AGREGAR REPOSITORIOS ADICIONALES NECESARIOS
  -----------------------------------------------------------------------------
- Para instalar o actualizar el Kernel AVL, el conversor de video Mystiq
- el gestor de software, la utilidad de backup y el editor de video
+ Para instalar y/o actualizar los nucleos AVL y Xenmod el conversor de video 
+ Mystiq el gestor de software, la utilidad de backup y el editor de video
  profesional de Cinelerra (Quirinux Pro), Quirinux necesita agregar algunos 
  repositorios adicionales, que son 100% libres. 
 
@@ -2769,6 +2769,7 @@ sudo apt-get update --fix-missing
 sudo apt-get install -f
 sudo apt-get update -y
 sudo apt-get autoremove --purge -y
+sudo apt-get install -f
 
 # LIMPIEZA FINAL 
 
@@ -3030,7 +3031,6 @@ echo " -------------------------------------------------------------------------
 
  1 Instalar Cinelerra (recomendado)
  2 Saltar este paso
- 3 Agregar respositorios libres adicionales necesarios + opción 1.
  0 Salir
 
 
@@ -3047,7 +3047,9 @@ clear
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
 sudo apt-get update -y
-for paquetes_cinelerra in cin; do sudo apt-get install -y $paquetes_cinelerra; done
+mkdir -p /opt/tmp/cinelerra
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
+sudo dpkg -i /opt/tmp/cinelerra.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3059,44 +3061,6 @@ clear
 
 ;;
 
-"3")
-
-clear
-
-# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
-
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-sudo apt-get update -y
-
-# INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
-
-sudo apt-get update -y
-for paquetes_cinelerra in cin; do sudo apt-get install -y $paquetes_cinelerra; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
 
 "0")
 
