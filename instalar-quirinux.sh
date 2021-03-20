@@ -198,9 +198,9 @@ echo " -------------------------------------------------------------------------
  
  
   
- 1 Instalar ahora el kernel AVL 5.9.1 (requiere reiniciar).
+ 1 Instalar ahora el kernel AVL (requiere reiniciar).
  2 Saltar este paso (recomendado). 
- 4 Instalar Kernel XanMod 5.11.6 (requiere reiniciar)
+ 3 Instalar Kernel XanMod (requiere reiniciar)
  0 Salir.
 
 "
@@ -213,13 +213,13 @@ case $opc in
 
 clear
 
-sudo mkdir /opt/tmp
+sudo mkdir /opt/tmp/kernel-avl
 
  echo "# Download Kernel AVL"; sleep 1s
- wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+ wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/kernel-avl/linux-image-5.4.28avl2-lowlatency.deb
 
  echo "# Dowload Headers AVL"; sleep 1s
- wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
+ wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
 
 # echo "# Download Kernel"; sleep 1s
 # wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
@@ -232,8 +232,8 @@ sudo chown $USER /opt/tmp/*
 
 echo "# Instalando el nuevo kernel AVL"; sleep 1s
 
-sudo dpkg -i /opt/tmp/linux-headers-5.4.28avl2-lowlatency.deb
-sudo dpkg -i /opt/tmp/linux-image-5.4.28avl2-lowlatency.deb
+sudo dpkg -i /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
+sudo dpkg -i /opt/tmp/kernel-avllinux-image-5.4.28avl2-lowlatency.deb
 
 # sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
 # sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
@@ -248,7 +248,7 @@ sudo rm -rf /opt/tmp/*
 echo " -----------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
  -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de baja latencia AVL 5.9.1
+ Felicidades, acabas de instalar el kernel de baja latencia AVL.
  compilado por Trulan Martin. El mismo que viene por defecto en la distro
  AV Linux y Quirinux 2.0. 
 
@@ -280,33 +280,55 @@ clear
 ;;
 
 
-"4")
+"3")
 
 clear
 
-sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt/tmp/*
-
-echo "# Download Kernel Xmod"; sleep 1s
-wget --no-check-certificate 'http://my.opendesktop.org/s/yd3aLNpg4BFQZLs/download' -O /opt/tmp/linux-image-xmod.deb
-
-echo "# Dowload Headers Xmod"; sleep 1s
-wget  --no-check-certificate 'http://my.opendesktop.org/s/aw69Bo6ZRL2cBCf/download' -O /opt/tmp/linux-headers-xmod.deb
+echo "# Agregando repositorios Xmod"; sleep 1s
+echo 'deb http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-kernel.list
+wget -qO - https://dl.xanmod.org/gpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
 
 echo "# Instalando el nuevo kernel Xmod"; sleep 1s
-sudo dpkg -i /opt/tmp/linux-headers-xmod.deb
-sudo dpkg -i /opt/tmp/linux-image-xmod.deb
+sudo apt update && sudo apt install linux-xanmod-lts
 
-# Borrar archivos temporales 
+# CONFIGURANDO PAQUETES
 
+sudo dpkg --configure -a
+
+# LIMPIANDO CACHE
+
+sudo apt-get clean && sudo apt-get autoclean
+
+# REGENERANDO CACHE
+
+sudo apt-get update --fix-missing
+
+# CONFIGURANDO DEPENDENCIAS
+
+sudo apt-get install -f
+sudo apt-get update -y
+sudo apt-get autoremove --purge -y
+sudo apt-get install -f
+
+# LIMPIEZA FINAL 
+
+sudo rm -rf /var/lib/apt/lists/lock/* 
+sudo rm -rf /var/cache/apt/archives/lock/*
+sudo rm -rf /var/lib/dpkg/lock/*
+sudo rm -rf /lib/live/mount/rootfs/*
+sudo rm -rf /lib/live/mount/*
+sudo rm -rf /var/cache/apt/archives/*.deb
+sudo rm -rf /var/cache/apt/archives/partial/*.deb
+sudo rm -rf /var/cache/apt/partial/*.deb
 sudo rm -rf /opt/tmp/*
+sudo rm -rf /.git
 
 clear
 
 echo " -----------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
  -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de baja latencia XANMOD 5.11.6
+ Felicidades, acabas de instalar el kernel de alto rendimiento XANMOD.
  
  
 
@@ -1144,7 +1166,7 @@ clear
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n- firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1158,7 +1180,7 @@ sudo apt-get autoremove --purge -y
 
 # INSTALAR EXTRAS DE MINT Y OPENSUSE
 
-for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in mintbackup timeshift mystiq; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1253,7 +1275,7 @@ sudo apt-get update -y
 # INSTALAR PAQUETES BASE DE BUSTER
 
 sudo apt-get update -y
-for paquetes_buster in converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n- firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode cheese cheese-common libcheese-gtk25 libcheese8 go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2242,64 +2264,6 @@ sudo apt-get autoremove --purge -y
 sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
 sudo apt-get update -y
 sudo apt-get install pulseaudio rtkit pavucontrol -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: TRADUCCIONES DE FIREFOX
- -----------------------------------------------------------------------------
- Instalación de traducciones para Mozilla Firefox.
- 
- Agrega los ficheros de lenguaje de los idiomas que vienen preinstalados en 
- Quirinux. 
-
-
-
-
- 
-
- 
-
- 1 Instalar traducciones de Firefox.
- 2 Saltar este paso. (recomendado)
- 0 Salir.
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR TRADUCCIONES DE FIREFOX
-
-sudo apt-get update -y
-for paquetes_idiomas_firefox in firefox-l10n-es firefox-l10n-gl firefox-l10n-it firefox-l10n-pt firefox-l10n-pt-br firefox-l10n-de firefox-l10n-en-gb; do sudo apt-get install -y $paquetes_idiomas_firefox; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3824,4 +3788,3 @@ exit 0
 ;; 
 
 esac 
-
