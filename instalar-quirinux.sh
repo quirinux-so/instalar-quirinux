@@ -188,19 +188,20 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
  
- Puedes instalar el Kernel AVL de baja latencia o el Xanmod de alto rendimiento.
- Luego tendrás que reiniciar y retomar la instalación, para que los controladores
- que instales se incorporen al kernel nuevo. 
- 
+ Puedes instalar el Kernel AVL de baja latencia, el Xanmod de alto rendimiento
+ o Linux-Libre (sin blobs privativos). Luego tendrás que reiniciar y retomar 
+ la instalación, para que los controladores que instales se incorporen al 
+ kernel nuevo. 
  
 
  
  
  
   
- 1 Instalar ahora el kernel AVL (requiere reiniciar).
+ 1 Instalar ahora el kernel AVL 
  2 Saltar este paso (recomendado). 
- 3 Instalar Kernel XanMod (requiere reiniciar)
+ 3 Instalar Kernel XanMod 
+ 4 Instalar Kernel Linux-Libre 
  0 Salir.
 
 "
@@ -221,12 +222,6 @@ sudo mkdir /opt/tmp/kernel-avl
  echo "# Dowload Headers AVL"; sleep 1s
  wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
 
-# echo "# Download Kernel"; sleep 1s
-# wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
-# echo "# Dowload Headers"; sleep 1s
-# wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
 
@@ -234,10 +229,6 @@ echo "# Instalando el nuevo kernel AVL"; sleep 1s
 
 sudo dpkg -i /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
 sudo dpkg -i /opt/tmp/kernel-avllinux-image-5.4.28avl2-lowlatency.deb
-
-# sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-# sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 
@@ -249,14 +240,14 @@ echo " -------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
  -----------------------------------------------------------------------------
  Felicidades, acabas de instalar el kernel de baja latencia AVL.
- compilado por Trulan Martin. El mismo que viene por defecto en la distro
- AV Linux y Quirinux 2.0. 
+ compilado por Trulan Martin. 
+
 
  Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador. Luego podrás volver a ejecutar este programa de instalación,
- saltar todos los pasos hasta llegar a ${bold}DESINSTALAR KERNELS ANTERIORES 4.x,${normal}
- elegir la opción 1 (Eliminar kernels de Debian Buster) y continuar con la
- instalación.		
+ el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
+ a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
+ al siguiente a este y continuar con la instalación.
+	
 
 
 
@@ -333,10 +324,53 @@ echo " -------------------------------------------------------------------------
  
 
  Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador. Luego podrás volver a ejecutar este programa de instalación,
- saltar todos los pasos hasta llegar a ${bold}DESINSTALAR KERNELS ANTERIORES 4.x,${normal}
- elegir la opción 1 (Eliminar kernels de Debian Buster) y continuar con la
- instalación.		
+ el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
+ a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
+ al siguiente a este y continuar con la instalación.
+	
+
+
+
+ ¡Hasta luego!
+
+
+
+
+"
+
+exit 0
+
+;;
+
+"4")
+
+clear
+
+sudo mkdir -p /opt/tmp/libre
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linux-libre.tar
+sudo tar -xvf /opt/tmp/libre/linux-libre.tar -C /opt/tmp/libre/
+sudo apt-get update -y
+sudo chmod 777 -R /opt/tmp/
+sudo chown $USER /opt/tmp/*
+echo "# Instalando el nuevo kernel AVL"; sleep 1s
+sudo dpkg -i /opt/tmp/libre/*.deb
+
+# Borrar archivos temporales 
+
+sudo rm -rf /opt/tmp/*
+
+echo " -----------------------------------------------------------------------------
+ NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
+ -----------------------------------------------------------------------------
+ Felicidades, acabas de instalar el kernel Linux-Libre, sin blobs privativos
+ de la Free Software Fundation,
+ 
+
+ Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
+ el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
+ a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
+ al siguiente a este y continuar con la instalación.
+ 		
 
 
 
