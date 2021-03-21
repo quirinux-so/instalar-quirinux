@@ -346,18 +346,20 @@ exit 0
 
 clear
 
+echo "# Instalando el kernel Linux-Libre"; sleep 1s
 sudo mkdir -p /opt/tmp/libre
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linux-libre.tar
 sudo tar -xvf /opt/tmp/libre/linux-libre.tar -C /opt/tmp/libre/
 sudo apt-get update -y
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
-echo "# Instalando el nuevo kernel AVL"; sleep 1s
+echo "# Instalando el kernel Linux-Libre"; sleep 1s
 sudo dpkg -i /opt/tmp/libre/*.deb
 
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
+clear
 
 echo " -----------------------------------------------------------------------------
  NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
