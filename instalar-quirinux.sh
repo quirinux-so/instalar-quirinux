@@ -200,9 +200,9 @@ echo " -------------------------------------------------------------------------
   
  1 Instalar ahora el kernel AVL 
  2 Saltar este paso (recomendado). 
- 3 Instalar Kernel XanMod 
- 4 Instalar Kernel Linux-Libre 
- 0 Salir.
+ 3 Instalar Kernel Linux-Libre  
+ 0 Salir
+ 
 
 "
 
@@ -262,8 +262,6 @@ exit 0
 
 ;;
 
-
-
 "2")
 
 clear
@@ -272,77 +270,6 @@ clear
 
 
 "3")
-
-clear
-
-echo "# Agregando repositorios Xmod"; sleep 1s
-echo 'deb http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-kernel.list
-wget -qO - https://dl.xanmod.org/gpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
-
-echo "# Instalando el nuevo kernel Xmod"; sleep 1s
-sudo apt update && sudo apt install linux-xanmod-lts
-
-# CONFIGURANDO PAQUETES
-
-sudo dpkg --configure -a
-
-# LIMPIANDO CACHE
-
-sudo apt-get clean && sudo apt-get autoclean
-
-# REGENERANDO CACHE
-
-sudo apt-get update --fix-missing
-
-# CONFIGURANDO DEPENDENCIAS
-
-sudo apt-get install -f
-sudo apt-get update -y
-sudo apt-get autoremove --purge -y
-sudo apt-get install -f
-
-# LIMPIEZA FINAL 
-
-sudo rm -rf /var/lib/apt/lists/lock/* 
-sudo rm -rf /var/cache/apt/archives/lock/*
-sudo rm -rf /var/lib/dpkg/lock/*
-sudo rm -rf /lib/live/mount/rootfs/*
-sudo rm -rf /lib/live/mount/*
-sudo rm -rf /var/cache/apt/archives/*.deb
-sudo rm -rf /var/cache/apt/archives/partial/*.deb
-sudo rm -rf /var/cache/apt/partial/*.deb
-sudo rm -rf /opt/tmp/*
-sudo rm -rf /.git
-
-clear
-
-echo " -----------------------------------------------------------------------------
- NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
- -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de alto rendimiento XANMOD.
- 
- 
-
- Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
- a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
- al siguiente a este y continuar con la instalación.
-	
-
-
-
- ¡Hasta luego!
-
-
-
-
-"
-
-exit 0
-
-;;
-
-"4")
 
 clear
 
