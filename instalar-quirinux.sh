@@ -188,11 +188,11 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
  
- Puedes instalar el Kernel AVL de baja latencia, el Xanmod de alto rendimiento
- o Linux-Libre (sin blobs privativos). Luego tendrás que reiniciar y retomar 
- la instalación, para que los controladores que instales se incorporen al 
- kernel nuevo. 
- 
+ Puedes instalar el Kernel AVL de baja latencia o el Linux-Libre (sin blobs
+ privativos), ambos incluidos en Quirinux. Luego tendrás que reiniciar y 
+ retomar la instalación, para que los controladores que instales se incorporen 
+ al kernel nuevo (en el caso de Linux-Libre sería recomendable no instalarle
+ controladores privativos... para que siga siendo libre).
 
  
  
@@ -228,7 +228,7 @@ sudo chown $USER /opt/tmp/*
 echo "# Instalando el nuevo kernel AVL"; sleep 1s
 
 sudo dpkg -i /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
-sudo dpkg -i /opt/tmp/kernel-avllinux-image-5.4.28avl2-lowlatency.deb
+sudo dpkg -i /opt/tmp/kernel-avl/linux-image-5.4.28avl2-lowlatency.deb
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 
