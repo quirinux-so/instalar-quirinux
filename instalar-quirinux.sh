@@ -327,72 +327,6 @@ esac
 clear
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: CONFIGURAR CPU PARA MAYOR PERFORMANCE
- -----------------------------------------------------------------------------
- Quirinux está pensado para trabajar en producción, por eso viene con la 
- configuración de CPU establecida para mayor performance.
-
- ${bold} TRUCO: ${normal}Aunque el modo de mayor performance puede reducir 
- la carga de las baterías en los equipos portátiles y aumentar el nivel 
- de ruido  del equipo, en este paso también se instalará el programa 
- ${bold}CPUFreqManager${normal} con el que podrás cambiar tu preferencia 
- cuando quieras: ${bold}columna derecha del programa > Governor${normal}
-
-
-
-
- 1 Configurar CPU para mayor performance (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-
-
-
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# CONFIGURACIÓN DE RENDIMIENTO PREDETERMINADA DE QUIRINUX
-
-for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
-sudo apt-get install -f
-sudo mkdir -p /opt/tmp/cpu
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nkWBfXRo2Xs4kXE/download' -O /opt/tmp/cpu/quirinux-cpu.deb
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo dpkg -i /opt/tmp/cpu/*.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
  -----------------------------------------------------------------------------
  Activar el soporte multiarquitectura (32 bits). Quizás lo necesites a la 
@@ -1205,6 +1139,16 @@ sudo dpkg -i /opt/tmp/quirinux-libre/quirinux-libre.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
+
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
+sudo mkdir -p /opt/tmp/cpu
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo dpkg -i /opt/tmp/cpu/*.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
@@ -1310,6 +1254,16 @@ sudo apt-get autoremove --purge -y
 sudo mkdir -p /opt/tmp/quirinux-libre
 sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
 sudo dpkg -i /opt/tmp/quirinux-libre/quirinux-libre.deb
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
+
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
+sudo mkdir -p /opt/tmp/cpu
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo dpkg -i /opt/tmp/cpu/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3766,4 +3720,5 @@ exit 0
 ;; 
 
 esac 
+
 
