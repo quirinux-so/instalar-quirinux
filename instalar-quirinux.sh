@@ -1358,9 +1358,9 @@ echo " -------------------------------------------------------------------------
  Si no los agregaste antes, puedes hacerlo ahora (opciones 4 y 5).
 
 
- 1 Instalar gestor de software de Mint con soporte Flatpak (recomendado).
+ 1 Instalar gestor de software de Mint con soporte Flatpak 
  2 Saltar este paso.
- 3 Instalar gestor de software de Mint sin soporte Flatpak.
+ 3 Instalar gestor de software de Mint sin soporte Flatpak (recomendado)
  4 Agregar los repositorios adicionales necesarios + opción 1.
  5 Agregar los repositorios adicionales necesarios + opción 3.
  0 Salir.
