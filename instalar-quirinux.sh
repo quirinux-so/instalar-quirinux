@@ -3,8 +3,9 @@
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
-# Descripción:	Convierte una instalación limpia de Debian Buster en Quirinux 2.0
+# Descripción:	Convierte una instalación limpia de Debian Buster XFCE en Quirinux 2.0
 # Versión:	1.00-RC_2
+
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -32,7 +33,7 @@ echo "
  --------------------------------------------------------------------
  | Ejecutar como ROOT. Sólo valido para Debian Buster.              | 
  | El código requiere modificaciones si se pretende usar en Devuan. |
- | ó Ubuntu.                                                        |
+ | ó Ubuntu. Se sugiere leer el código antes de utilizar.           |
  --------------------------------------------------------------------"                                               
 sleep 0.1
 
@@ -156,7 +157,7 @@ clear
 
 sudo mkdir -p /opt/tmp/sudoers
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/QiGdK8pC4SjKL8p/download' -O /opt/tmp/sudoers/quirinux-sudoers-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/sudoers/quirinux-sudoers-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/sudoers/quirinux-sudoers-1.0-q2_amd64.deb
 sudo chmod 755 -R /etc/sudoers.d/
 sudo chown root:root -R /etc/sudoers.d
 
@@ -227,8 +228,8 @@ sudo chown $USER /opt/tmp/*
 
 echo "# Instalando el nuevo kernel AVL"; sleep 1s
 
-sudo dpkg -i /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
-sudo dpkg -i /opt/tmp/kernel-avl/linux-image-5.4.28avl2-lowlatency.deb
+sudo apt install .//opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
+sudo apt install .//opt/tmp/kernel-avl/linux-image-5.4.28avl2-lowlatency.deb
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 
@@ -277,11 +278,11 @@ echo "# Instalando el kernel Linux-Libre"; sleep 1s
 sudo mkdir -p /opt/tmp/libre
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linux-libre.tar
 sudo tar -xvf /opt/tmp/libre/linux-libre.tar -C /opt/tmp/libre/
-sudo apt-get update -y
+
 sudo chmod 777 -R /opt/tmp/
 sudo chown $USER /opt/tmp/*
 echo "# Instalando el kernel Linux-Libre"; sleep 1s
-sudo dpkg -i /opt/tmp/libre/*.deb
+sudo apt install .//opt/tmp/libre/*.deb
 
 # Borrar archivos temporales 
 
@@ -493,8 +494,8 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt-get update -y
+sudo apt install .//opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
@@ -521,8 +522,8 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt-get update -y
+sudo apt install .//opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
+
 
 # Borrar archivos temporales 
 
@@ -575,7 +576,7 @@ clear
 
 # INSTALAR CONTROLADORES LIBRES DE NVIDIA
 
-sudo apt-get update -y
+
 for paquetes_nvidia in bumblebee; do sudo apt-get install -y $paquetes_nvidia; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -633,12 +634,12 @@ clear
 
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
-sudo apt-get update -y
+
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
 sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
-sudo dpkg -i /opt/tmp/quirinux-firmware/*
+sudo apt install .//opt/tmp/quirinux-firmware/*
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quirinux-i915-q2_amd64.deb
+sudo apt install .//opt/tmp/quirinux-i915-q2_amd64.deb
 for paquetes_firmware in hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -663,22 +664,22 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
-sudo apt-get update -y
+sudo apt install .//opt/tmp/apt/repo-config-1.0-q2_amd64.deb
+
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-sudo apt-get update -y
+
 
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
-sudo apt-get update -y
+
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
 sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
-sudo dpkg -i /opt/tmp/quirinux-firmware/*
+sudo apt install .//opt/tmp/quirinux-firmware/*
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quirinux-i915-q2_amd64.deb
+sudo apt install .//opt/tmp/quirinux-i915-q2_amd64.deb
 for paquetes_firmware in hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -734,7 +735,7 @@ clear
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
-sudo apt-get update -y
+
 for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -755,17 +756,17 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
-sudo apt-get update -y
+sudo apt install .//opt/tmp/apt/repo-config-1.0-q2_amd64.deb
+
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-sudo apt-get update -y
+
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
-sudo apt-get update -y
+
 for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -824,7 +825,7 @@ clear
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
-sudo apt-get update -y
+
 sudo apt-get install build-essential autoconf linux-headers-$uname -u
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
@@ -891,14 +892,14 @@ clear
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/quirinux-genius
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
-sudo dpkg -i /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo apt install .//opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -925,14 +926,14 @@ sudo dpkg --add-architecture i386
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/quirinux-genius
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
-sudo dpkg -i /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
+sudo apt install .//opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -997,7 +998,7 @@ sudo apt-get install -f -y
 sudo apt-get install libappindicator1 -y
 sudo mkdir -p /opt/tmp/python-appindicator
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-sudo dpkg -i /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+sudo apt install .//opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1062,7 +1063,7 @@ clear
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-sudo apt-get update -y
+
 for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1071,7 +1072,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/chimiboga
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
-sudo dpkg -i /opt/tmp/chimiboga/chimiboga.deb
+sudo apt install .//opt/tmp/chimiboga/chimiboga.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1086,7 +1087,7 @@ sudo apt-get autoremove --purge -y
 sudo apt-get install samba
 sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo apt install .//opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt-get install -f -y
 sudo touch /etc/libuser.conf
 
@@ -1095,7 +1096,7 @@ sudo touch /etc/libuser.conf
 
 sudo mkdir -p /opt/tmp/mugshot
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
-sudo dpkg -i /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
+sudo apt install .//opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1103,7 +1104,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/video-downloader
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
-sudo dpkg -i /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
+sudo apt install .//opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1111,7 +1112,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/densify
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
-sudo dpkg -i /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
+sudo apt install .//opt/tmp/densify/densify-0.3.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1119,7 +1120,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/imagine
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
-sudo dpkg -i /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
+sudo apt install .//opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1127,7 +1128,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/openboard
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
-sudo dpkg -i /opt/tmp/openboard/openboard.deb
+sudo apt install .//opt/tmp/openboard/openboard.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1135,7 +1136,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/quirinux-libre
 sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
-sudo dpkg -i /opt/tmp/quirinux-libre/quirinux-libre.deb
+sudo apt install .//opt/tmp/quirinux-libre/quirinux-libre.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1145,7 +1146,7 @@ for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done
 sudo apt-get install -f
 sudo mkdir -p /opt/tmp/cpu
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo dpkg -i /opt/tmp/cpu/*.deb
+sudo apt install .//opt/tmp/cpu/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1185,11 +1186,11 @@ fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-sudo apt-get update -y
+
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-sudo apt-get update -y
+
 for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1205,7 +1206,7 @@ sudo apt-get autoremove --purge -y
 sudo apt-get install samba
 sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo dpkg -i /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo apt install .//opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt-get install -f -y
 sudo touch /etc/libuser.conf
 
@@ -1213,7 +1214,7 @@ sudo touch /etc/libuser.conf
 
 sudo mkdir -p /opt/tmp/mugshot
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
-sudo dpkg -i /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
+sudo apt install .//opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1221,7 +1222,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/video-downloader
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
-sudo dpkg -i /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
+sudo apt install .//opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1229,7 +1230,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/densify
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
-sudo dpkg -i /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
+sudo apt install .//opt/tmp/densify/densify-0.3.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1237,7 +1238,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/imagine
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
-sudo dpkg -i /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
+sudo apt install .//opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1245,7 +1246,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/openboard
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
-sudo dpkg -i /opt/tmp/openboard/openboard.deb
+sudo apt install .//opt/tmp/openboard/openboard.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1253,7 +1254,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/quirinux-libre
 sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
-sudo dpkg -i /opt/tmp/quirinux-libre/quirinux-libre.deb
+sudo apt install .//opt/tmp/quirinux-libre/quirinux-libre.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1263,7 +1264,7 @@ for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done
 sudo apt-get install -f
 sudo mkdir -p /opt/tmp/cpu
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo dpkg -i /opt/tmp/cpu/*.deb
+sudo apt install .//opt/tmp/cpu/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1320,7 +1321,7 @@ clear
 
 sudo mkdir -p /opt/tmp/olive
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo dpkg -i /opt/tmp/olive/olive-quirinux.deb
+sudo apt install .//opt/tmp/olive/olive-quirinux.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 ;;
@@ -1376,7 +1377,7 @@ clear
 
 # INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
 
-sudo apt-get update -y
+
 sudo apt-get install mintinstall -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1385,7 +1386,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/flatpak-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1407,7 +1408,7 @@ clear
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-sudo apt-get update -y
+
 sudo apt-get install mintinstall -y
 sudo apt-get remove --purge flatpak
 sudo apt-get install -f -y
@@ -1417,7 +1418,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/flatpak-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1449,11 +1450,11 @@ fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-sudo apt-get update -y
+
 
 # INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
 
-sudo apt-get update -y
+
 sudo apt-get install mintinstall -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1462,7 +1463,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/flatpak-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1494,11 +1495,11 @@ fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-sudo apt-get update -y
+
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-sudo apt-get update -y
+
 sudo apt-get install mintinstall -y
 sudo apt-get remove --purge flatpak
 sudo apt-get install -f -y
@@ -1508,7 +1509,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/flatpak-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1563,17 +1564,17 @@ clear
 
 # REMOVER INSTALACIONES ANTERIORES DE LIBREOFFICE Y DICCIONARIOS
 
-sudo apt-get update -y
+
 sudo apt-get remove --purge libreoffice* hunspell* myspell* mythes* aspell* hypen* -y
 sudo apt-get autoremove --purge -y
 
 # INSTALAR LIBREOFFICE
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/libreoffice
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/kbkjPqrJSRmZmPk/download' -O /opt/tmp/libreoffice/libreoffice.tar
 sudo tar -xvf /opt/tmp/libreoffice/libreoffice.tar -C /opt/tmp/libreoffice/
-sudo dpkg -i /opt/tmp/libreoffice/*.deb
+sudo apt install .//opt/tmp/libreoffice/*.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1581,7 +1582,7 @@ sudo apt-get autoremove --purge -y
 
 sudo rm /usr/share/applications/libreoffice*
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NgTmBAAaCPK6w9W/download' -O /opt/tmp/libreoffice/libreoffice7-icons.deb
-sudo dpkg -i /opt/tmp/libreoffice/libreoffice7-icons.deb
+sudo apt install .//opt/tmp/libreoffice/libreoffice7-icons.deb
 
 # Borrar archivos temporales 
 
@@ -1645,7 +1646,7 @@ sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
 
 # INSTALAR GIMP 2.10 DESDE BUSTER
 
-sudo apt-get update -y
+
 for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1703,10 +1704,10 @@ clear
 
 # INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/gimp/
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
+sudo apt install .//opt/tmp/gimp/gimp-quirinux.deb
 sudo chmod 777 -R /home/
 sudo rm -rf /home/*/.config/GIMP
 sudo rm -rf /root/.config/GIMP 
@@ -1743,17 +1744,17 @@ sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
 
 # INSTALAR GIMP 2.10 DESDE BUSTER
 
-sudo apt-get update -y
+
 for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/gimp/
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo dpkg -i /opt/tmp/gimp/gimp-quirinux.deb
+sudo apt install .//opt/tmp/gimp/gimp-quirinux.deb
 sudo chmod 777 -R /home/
 sudo rm -rf /home/*/.config/GIMP
 sudo rm -rf /root/.config/GIMP 
@@ -1818,7 +1819,7 @@ clear
 
 # INSTALAR PQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
-sudo apt-get update -y
+
 for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
 sudo apt-get install -f -y
 sudo apt-get update
@@ -1898,7 +1899,7 @@ clear
 
 # INSTALAR PAQUETES DE RED LIBRES
 
-sudo apt-get update -y
+
 for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo modemmanager modem-manager-gui modem-manager-gui-help usb-modeswitch usb-modeswitch-data wvdial; do sudo apt-get install -y $paquetes_red; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -1957,7 +1958,7 @@ clear
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
 
-sudo apt-get update -y
+
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
 sudo apt-get autoremove --purge -y
@@ -1978,17 +1979,17 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/apt/repo-config-1.0-q2_amd64.deb
-sudo apt-get update -y
+sudo apt install .//opt/tmp/apt/repo-config-1.0-q2_amd64.deb
+
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-sudo apt-get update -y
+
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
 
-sudo apt-get update -y
+
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
 sudo apt-get autoremove --purge -y
@@ -2005,7 +2006,7 @@ clear
 
 # INSTALAR SÓLO CONTROLADORES DE VIDEO AMD LIBRES
 
-sudo apt-get update -y
+
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
 sudo apt-get autoremove --purge -y
@@ -2056,14 +2057,14 @@ clear
 
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
-sudo apt-get update -y
+
 for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
 sudo apt-get install -f -y
 
 # sudo mkdir -p /opt/tmp/virtualbox
 # sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nHKTyB4qdbCMGBY/download' -O /opt/tmp/virtualbox/virtualbox.deb
 # cd /opt/tmp/virtualbox
-# sudo dpkg -i virtualbox.deb
+# sudo apt install ./virtualbox.deb
 
 ;;
 
@@ -2118,7 +2119,7 @@ clear
 
 # INSTALAR SCREENSAVER GLUCLO
 
-sudo apt-get update -y
+
 for paquetes_screensaver in xscreensaver xscreensaver-gl-extra xscreensaver-data-extra build-essential libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libx11-dev; do sudo apt-get install -y $paquetes_screensaver; done
 for paquetes_gnome_screensaver in gnome-screensaver; do sudo apt-get remove --purge -y $paquetes_gnome_screensaver; done
 sudo mkdir -p /opt/tmp/screensaver
@@ -2189,12 +2190,12 @@ clear
 
 # REINSTALAR PULSEAUDIO
 
-sudo apt-get update -y
+
 sudo apt-get remove --purge pulseuadio pavucontrol -y
 sudo apt-get clean
 sudo apt-get autoremove --purge -y
 sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
-sudo apt-get update -y
+
 sudo apt-get install pulseaudio rtkit pavucontrol -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -2365,7 +2366,7 @@ sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
 
 sudo mkdir -p /opt/tmp/winbugs
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo dpkg -i /opt/tmp/winbugs/winbugs-icons.deb
+sudo apt install .//opt/tmp/winbugs/winbugs-icons.deb
 sudo apt-get install -f -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
@@ -2438,7 +2439,7 @@ sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
 
 sudo mkdir -p /opt/tmp/winbugs
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo dpkg -i /opt/tmp/winbugs/winbugs-icons.deb
+sudo apt install .//opt/tmp/winbugs/winbugs-icons.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2527,7 +2528,7 @@ clear
 
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-sudo apt-get update -y
+
 for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -2652,7 +2653,7 @@ sudo apt-get update --fix-missing
 # CONFIGURANDO DEPENDENCIAS
 
 sudo apt-get install -f
-sudo apt-get update -y
+
 sudo apt-get autoremove --purge -y
 sudo apt-get install -f
 
@@ -2718,7 +2719,7 @@ clear
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
-sudo apt-get update -y
+
 for paquetes_estandar in manuskript kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -2776,21 +2777,21 @@ clear
 
 # INSTALANDO INKSCAPE
 
-sudo apt-get update -y
+
 for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
 sudo mkdir -p /opt/tmp/inkscape
 sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 
 # INSTALAR TUPITUBE
 
-sudo apt-get update -y
+
 sudo mkdir -p /opt/tmp/tupitube
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Zrce88JXLRjiqXF/download' -O /opt/tmp/tupitube/tupitube-desk-0.2.15-q2_amd64.deb
-sudo dpkg -i /opt/tmp/tupitube/tupitube-desk-0.2.17_amd64.deb 
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Zrce88JXLRjiqXF/download' -O /opt/tmp/tupitube/tupitube-desk-0.2.17-q2_amd64.deb
+sudo apt install .//opt/tmp/tupitube/tupitube-desk-0.2.17_amd64.deb 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2798,7 +2799,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/godot
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/w3R2NzrwwSMxPXC/download' -O /opt/tmp/godot/godot-2.3.3-q2_amd64.deb
-sudo dpkg -i /opt/tmp/godot/godot-2.3.3-q2_amd64.deb
+sudo apt install .//opt/tmp/godot/godot-2.3.3-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2806,7 +2807,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/storyboarder
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GePzTyxoYpM622t/download' -O /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
+sudo apt install .//opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2814,7 +2815,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/natron
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zBY3tinXbQpqDbB/download' -O /opt/tmp/natron/natron-2.3.15-q2_amd64.deb
-sudo dpkg -i /opt/tmp/natron/natron-2.3.15-q2_amd64.deb
+sudo apt install .//opt/tmp/natron/natron-2.3.15-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2822,7 +2823,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/azpainter
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AojjBiP7NmoSBsA/download' -O /opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
-sudo dpkg -i /opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
+sudo apt install .//opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2830,7 +2831,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/enve
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/enve/enve-0.0.0-q2_amd64.deb
+sudo apt install .//opt/tmp/enve/enve-0.0.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2838,14 +2839,14 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/quinema
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zREfipBzSxYXFTK/download' -O /opt/tmp/quinema/quinema_1.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/quinema/quinema_1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/quinema/quinema_1.0-q2_amd64.deb
 sudo apt-get install -f -y
 
 # INSTALAR QSTOPMOTION
 
 sudo mkdir -p /opt/tmp/qstopmotion
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MznJgLCFeWeQMGd/download' -O /opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
-sudo dpkg -i /opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
+sudo apt install .//opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2855,7 +2856,7 @@ sudo apt-get autoremove --purge -y
 sudo mkdir -p /opt/tmp/akvcam
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/2BL5CgEa3YgMx2g/download' -O /opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
 sudo chmod 777 -R /opt/tmp/akvcam/
-sudo dpkg -i /opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
+sudo apt install .//opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2863,7 +2864,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/belle
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/pQw6Yyytaz8TQ46/download' -O /opt/tmp/belle/belle-0.7-q2_amd64.deb
-sudo dpkg -i /opt/tmp/belle/belle-0.7-q2_amd64.deb
+sudo apt install .//opt/tmp/belle/belle-0.7-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2871,7 +2872,7 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/mypaint
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/TZL8554kj8HLjsK/download' -O /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
-sudo dpkg -i /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
+sudo apt install .//opt/tmp/mypaint/mypaint-2-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2931,10 +2932,10 @@ clear
 
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
-sudo apt-get update -y
+
 mkdir -p /opt/tmp/cinelerra
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
-sudo dpkg -i /opt/tmp/cinelerra.deb
+sudo apt install .//opt/tmp/cinelerra.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2989,14 +2990,14 @@ case $opc in
 
 # Instala dependencias del instalador de OpenToonz
 
-sudo apt-get update -y
+
 for paquetes_wget in wget git software-properties-common; do sudo apt-get install -y $paquetes_wget; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # Instala dependencias de OpenToonz
 
-sudo apt-get update -y
+
 for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libqt5multimedia5-plugins; do sudo apt-get install -y $paquetes_opentoonz; done
 for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_opentoonz2; done
 
@@ -3129,7 +3130,7 @@ clear
 
 mkdir -p /opt/tmp/tahoma2d
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MWt7cqqGgQCdYby/download' -O /opt/tmp/tahoma2d/tahoma-1.1-q2_amd64.deb
-sudo dpkg -i /opt/tmp/tahoma2d/*.deb
+sudo apt install .//opt/tmp/tahoma2d/*.deb
 
 # Borrar archivos temporales 
 
@@ -3188,11 +3189,11 @@ clear
 
 # ACTUALIZANDO BLENDER
 
-sudo apt-get update -y
+
 for paquetes_remover_blender in remove --purge blender-data; do sudo apt-get remove --purge -y $paquetes_remover_blender; done
 sudo mkdir -p /opt/tmp/blender283
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/PfagSW43yP9yGiX/download' -O /opt/tmp/blender283/blender-2.83-q2_amd64.deb
-sudo dpkg -i /opt/tmp/blender283/blender-2.83-q2_amd64.deb
+sudo apt install .//opt/tmp/blender283/blender-2.83-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3254,7 +3255,7 @@ clear
 
 sudo mkdir -p /opt/tmp/ardour6
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo dpkg -i /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
+sudo apt install .//opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3402,7 +3403,7 @@ sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
 
 sudo mkdir -p /opt/tmp/winbugs
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo dpkg -i /opt/tmp/winbugs/winbugs-icons.deb
+sudo apt install .//opt/tmp/winbugs/winbugs-icons.deb
 sudo apt-get install -f -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
@@ -3475,7 +3476,7 @@ sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
 
 sudo mkdir -p /opt/tmp/winbugs
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo dpkg -i /opt/tmp/winbugs/winbugs-icons.deb
+sudo apt install .//opt/tmp/winbugs/winbugs-icons.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -3564,7 +3565,7 @@ clear
 
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-sudo apt-get update -y
+
 for paquetes_remover_idiomas_firefox in firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -3653,7 +3654,7 @@ echo " -------------------------------------------------------------------------
 
 
  1 Borrar archivos temporales y salir
- 0 Salir sin borrar los archivos temporales 
+ 0 Salir sin borrar los temporales
 
 
 
@@ -3683,21 +3684,21 @@ sudo apt-get update --fix-missing
 # CONFIGURANDO DEPENDENCIAS
 
 sudo apt-get install -f
-sudo apt-get update -y
+
 sudo apt-get autoremove --purge -y
 
-# LIMPIEZA FINAL 
+# LIMPIEZA FINAL (descomentar para crear la iso live)
 
-sudo rm -rf /var/lib/apt/lists/lock/* 
-sudo rm -rf /var/cache/apt/archives/lock/* 
-sudo rm -rf /var/lib/dpkg/lock/*
-sudo rm -rf /lib/live/mount/rootfs/*
-sudo rm -rf /lib/live/mount/*
-sudo rm -rf /var/cache/apt/archives/*.deb
-sudo rm -rf /var/cache/apt/archives/partial/*.deb
-sudo rm -rf /var/cache/apt/partial/*.deb
-sudo rm -rf /opt/tmp/*
-sudo rm -rf /.git
+# sudo rm -rf /var/lib/apt/lists/lock/* 
+# sudo rm -rf /var/cache/apt/archives/lock/* 
+# sudo rm -rf /var/lib/dpkg/lock/*
+# sudo rm -rf /lib/live/mount/rootfs/*
+# sudo rm -rf /lib/live/mount/*
+# sudo rm -rf /var/cache/apt/archives/*.deb
+# sudo rm -rf /var/cache/apt/archives/partial/*.deb
+# sudo rm -rf /var/cache/apt/partial/*.deb
+# sudo rm -rf /opt/tmp/*
+# sudo rm -rf /.git
 
 exit 0
 
