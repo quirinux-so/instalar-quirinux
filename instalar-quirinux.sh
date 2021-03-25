@@ -1077,7 +1077,7 @@ sudo apt-get autoremove --purge -y
 
 # INSTALAR EXTRAS DE MINT Y OPENSUSE
 
-for paquetes_extra in mintbackup timeshift mystiq; do sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in mintbackup mintupdate timeshift mystiq; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
