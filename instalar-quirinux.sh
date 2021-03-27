@@ -70,6 +70,12 @@ echo " -------------------------------------------------------------------------
  software-properties-common  para poder descargar los paquetes que instalará. 
  Si los tienes instalados, puedes saltar este paso. Si no estás seguro/a, 
  elije la opción 1. 
+ 
+
+
+
+
+
  1 Instalar programas necesarios para el resto de la instalación 
  2 Saltar este paso.
  0 Salir.
@@ -119,6 +125,11 @@ echo " -------------------------------------------------------------------------
  Posibilitan que el sistema no requiera contraseñas para tareas cotidianas,
  sobretodo en modo live.
 		
+ 
+
+
+
+
  1 Agregar archivos a /etc/sudoers.d/(recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -167,7 +178,6 @@ clear
 echo " -----------------------------------------------------------------------------
  QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
  -----------------------------------------------------------------------------
- 
  Puedes instalar el Kernel AVL de baja latencia o el Linux-Libre (sin blobs
  privativos), ambos incluidos en Quirinux. Luego tendrás que reiniciar y 
  retomar la instalación, para que los controladores que instales se incorporen 
@@ -177,6 +187,8 @@ echo " -------------------------------------------------------------------------
  
  
   
+
+
  1 Instalar ahora el kernel AVL 
  2 Saltar este paso (recomendado). 
  3 Instalar Kernel Linux-Libre  
@@ -224,6 +236,10 @@ echo " -------------------------------------------------------------------------
  a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
  al siguiente a este y continuar con la instalación.
 	
+
+
+
+
  ¡Hasta luego!
 "
 
@@ -267,7 +283,10 @@ echo " -------------------------------------------------------------------------
  el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
  a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
  al siguiente a este y continuar con la instalación.
- 		
+ 	
+	
+
+
  ¡Hasta luego!
 "
 
@@ -293,6 +312,14 @@ echo " -------------------------------------------------------------------------
  Activar el soporte multiarquitectura (32 bits). Quizás lo necesites a la 
  hora de instalar algun controlador, por ejemplo los de las tabletas GENIUS.
 		
+
+
+
+
+
+
+
+
  1 Activar soporte multiarquitectura (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -340,6 +367,10 @@ echo " -------------------------------------------------------------------------
  
  
  
+
+
+
+
  1 Agregar los repositorios adicionales necesarios (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -412,7 +443,7 @@ echo " -------------------------------------------------------------------------
  Repo-Config con el que siempre podrás modificar tu preferencia
  yendo a: ${bold}Aplicaciones > Sistema > Repo-Config${normal} 
  
-  
+
  1 Instalar Repo-Config y activar non-ree contrib y backports (recomendado).
  2 Saltar este paso.
  3 Sólo instalar Repo-Config.
@@ -486,6 +517,14 @@ echo " -------------------------------------------------------------------------
  Quirinux trae preinstalados los controladores libres para las tarjetas de  
  video NVidia. Si no los necesitas, puedes saltar este paso.
  
+
+
+
+
+
+
+
+
  1 Instalar controladores libres para Nvidia (sólo si los necesitas).
  2 Saltar este paso.
  0 Salir.
@@ -539,6 +578,7 @@ echo " -------------------------------------------------------------------------
  activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
+
  1 Instalar firmware (recomendado si no te funciona la placa WiFi).
  2 Saltar este paso.
  3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
@@ -587,14 +627,11 @@ sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/apt/./repo-config-1.0-q2_amd64.deb -y
 
-
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
-
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
-
 
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
 sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
@@ -634,6 +671,9 @@ echo " -------------------------------------------------------------------------
  activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
  
  
+
+
+
  1 Instalar codecs y formatos privativos.
  2 Saltar este paso.
  3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
@@ -713,6 +753,14 @@ echo " -------------------------------------------------------------------------
  Instalar controladores libres para las tabletas gráficas de la marca Wacom.
  
  
+
+
+
+
+
+
+
+
  1 Instalar controladores de Wacom.
  2 Saltar este paso.
  0 Salir.
@@ -769,6 +817,13 @@ echo " -------------------------------------------------------------------------
  incluidos en Quirinux Edición Pro.
   ${bold}ADVERTENCIA:${normal} Requiere soporte para 32 bits. Si no lo instalaste antes, 
  puedes hacerlo con la opción 3. 
+
+
+
+
+
+
+
  1 Instalar controladores de Genius.
  2 Saltar este paso.
  3 Instalar soporte para 32 bits + opción 1.
@@ -849,6 +904,12 @@ echo " -------------------------------------------------------------------------
  manera gráfica el comando xorg map-to-input y resulta muy útil bajo el  
  escritorio xfce, predeterminado en Quirinux. 
  Si no usas xfce, puedes saltar este paso.
+
+
+
+
+
+
  1 Instalar Ptxconf (recomendado si usas XFCE)
  2 Saltar este paso.
  0 Salir.
@@ -913,6 +974,10 @@ echo " -------------------------------------------------------------------------
   ${bold}ADVERTENCIA:${normal} Requiere los repositorios adicionales. 
  Si no los agregaste al comienzo de instalación, puedes hacerlo ahora 
  (opción 3). 
+
+
+
+
  1 Instalar paquetes base (recomendado)
  2 Saltar este paso.
  3 Agregar los repositorios adicionales necesarios + opción 1.
@@ -1036,9 +1101,7 @@ sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 
-
 # INSTALAR PAQUETES BASE DE BUSTER
-
 
 for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
@@ -1128,6 +1191,12 @@ echo " -------------------------------------------------------------------------
    
  
  
+
+
+
+
+
+
  1 Instalar Olive (recomendado)
  2 Saltar este paso
  0 Salir
@@ -1180,6 +1249,7 @@ echo " -------------------------------------------------------------------------
  de que puedes elegir ahora tu preferencia.
   ${bold}ADVERTENCIA:${normal} Requiere repositorios libres adicionales. 
  Si no los agregaste antes, puedes hacerlo ahora (opciones 4 y 5).
+
  1 Instalar gestor de software de Mint con soporte Flatpak 
  2 Saltar este paso.
  3 Instalar gestor de software de Mint sin soporte Flatpak (recomendado)
@@ -1352,6 +1422,12 @@ echo " -------------------------------------------------------------------------
  instaladas en el sistema (si las hay).
  Si ya tienes una versión de LibreOffice instalada y prefieres conservarla,
  puedes saltar este paso.
+
+
+
+
+
+
  1 Instalar LibreOffice 7 (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -1420,6 +1496,9 @@ echo " -------------------------------------------------------------------------
  oficiales de Debian Buster. Esto es necesario para luego poder instalar
  el complemento gimp-quirinux, que permite elegir una interfáz y atajos 
  de teclado similares a los de Photoshop. 
+
+
+
  1 Instalar GIMP + Plugins (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -1476,6 +1555,9 @@ echo " -------------------------------------------------------------------------
  ${bold} ADVERTENCIA${normal} No funciona con GIMP instalado desde snap, 
  o flatpak, por lo que requiere haber instalado GIMP en el paso 
  anterior. Si no lo hiciste, puedes hacerlo ahora (opción 3). 
+
+
+
  1 Instalar Gimp Edición Quirinux (recomendado).
  2 Saltar este paso.
  3 Instalar GIMP + Plugins + opcion 1.
@@ -1491,7 +1573,6 @@ case $opc in
 clear
 
 # INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
 
 sudo mkdir -p /opt/tmp/gimp/
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
@@ -1575,6 +1656,15 @@ echo " -------------------------------------------------------------------------
  -----------------------------------------------------------------------------
  Intalación de controladores de impresión y escaneo 100 % libres 
  (no incluye hplip ni controladores privativos de otros fabricantes)
+
+
+
+
+
+
+
+
+
  1 Instalar controladores libres para impresoras y escáneres (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -1641,6 +1731,15 @@ echo " -------------------------------------------------------------------------
  QUIRINUX GENERAL: PAQUETES DE RED
  -----------------------------------------------------------------------------
  Intalación de controladores de red 100 % libres.
+
+
+
+
+
+
+
+
+
  1 Instalar controladores libres para red.
  2 Saltar este paso.
  0 Salir.
@@ -1689,7 +1788,13 @@ echo " -------------------------------------------------------------------------
    ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
  Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
  activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
-  
+ Se instalan controladores libres (para algunos modelos de hardware) 
+ y privativos (cuando no hay libres).
+
+
+
+
+
  1 Instalar controladores para AMD (libres y privativos).
  2 Saltar este paso.
  3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
@@ -1784,6 +1889,10 @@ echo " -------------------------------------------------------------------------
  
  Requiere un mother compatible con virtualización. 
  
+
+
+
+
  1 Instalar soporte para virtualización (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -1798,7 +1907,6 @@ case $opc in
 clear
 
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
-
 
 for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
 sudo apt-get install -f -y
@@ -1833,6 +1941,8 @@ echo " -------------------------------------------------------------------------
  -----------------------------------------------------------------------------
  Instalación del protector de pantalla screensaver gluclo, que es un relój de
  retro similar al de MacOS.
+
+
 
 
 
@@ -1905,6 +2015,8 @@ echo " -------------------------------------------------------------------------
 
 
 
+
+
  1 Instalar (recomendado)
  2 Saltar este paso.
  0 Salir.
@@ -1951,6 +2063,14 @@ echo " -------------------------------------------------------------------------
  Reinstalar PulseAudio puede solucionar algunas incidencias que ocurren al ins-
  talar algunas aplicaciones de Quirinux.
  
+
+
+
+
+
+
+
+
  1 Reinstalar PulseAudio (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -1965,7 +2085,6 @@ case $opc in
 clear
 
 # REINSTALAR PULSEAUDIO
-
 
 sudo apt-get remove --purge pulseuadio pavucontrol -y
 sudo apt-get clean
@@ -2006,6 +2125,10 @@ echo " -------------------------------------------------------------------------
  necesitarás reiniciar tu ordenador -cuando veas que este programa se 
  en cuentre detenido- y volver a iniciar este programa saltando los pasos 
  anteriores y este mismo para continuar.
+
+
+
+
  1 Instalar fuentes (eliminando las actuales) (CUIDADO!)
  2 Saltar este paso
  3 Instalar fuentes (sin eliminar las actuales)
@@ -2085,6 +2208,13 @@ echo " -------------------------------------------------------------------------
  ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
  borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
  sin eliminar nada. 
+
+
+
+
+
+
+
  1 Instalar íconos y temas borrando los actuales. (CUIDADO!)
  2 Saltar este paso
  3 Instalar íconos y temas sin borrar los actuales (recomendado)
@@ -2260,6 +2390,11 @@ echo " -------------------------------------------------------------------------
  no occidentales, idiomas, diccionarios y toda la documentación (manuales, 
  archivos readme de Debian, etc de la carpeta /usr/share/doc/ 
  
+
+
+
+
+
  1 Remover componentes que no vienen en Quirinux (CUIDADO!).
  2 Saltar este paso (recomendado).
  0 Salir.
@@ -2359,6 +2494,9 @@ echo " -------------------------------------------------------------------------
  Si sales ahora, de todas formas siempre podrás reiniciar este programa y 
  saltar hasta este paso si luego decides retomar la instalación y ampliar
  las características hasta convertir a Quirinux General en Quirinux PRO. 
+
+
+
  1 Borrar temporales y salir
  2 Continuar con la instalación de Quirinux PRO (recomendado) 
  0 Salir sin borrar los temporales. 
@@ -2437,6 +2575,9 @@ echo " -------------------------------------------------------------------------
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
  krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
+
+
+
  1 Instalar especializados estándar (recomendado).
  2 Saltar este paso.
  0 Salir.
@@ -2491,6 +2632,7 @@ echo " -------------------------------------------------------------------------
  ${bold}Belle, Godot:${normal} Desarrollo de videojuegos 
  ${bold}Quinema:${normal} Scripts de animación de Ernesto Bazzano 
  ${bold}Inkscape:${normal} Dibujo vectorial, verion más reciente que la de Debian
+
  1 Instalar Especializados Quirinux
  2 Saltar este paso
  0 Salir
@@ -2614,6 +2756,12 @@ echo " -------------------------------------------------------------------------
   ${bold}ADVERTENCIA:${normal} Requiere repositorios libres adicionales. 
  Si no los activaste al comienzo de la instalación, puedes hacerlo ahora 
  (opción 3).
+
+
+
+
+
+
  1 Instalar Cinelerra (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2663,6 +2811,12 @@ echo " -------------------------------------------------------------------------
  reemplazar a Toon Boom Harmony.
   ${bold}ADVERTENCIA:${normal} El proceso de compilación de este programa
  es lento, pero vale la pena. 
+
+
+
+
+
+
  1 Descargar, compilar e instalar OpenToonz (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2790,6 +2944,11 @@ echo " -------------------------------------------------------------------------
  animaciones en StopMotion y podemos decir que sirve para reemplazar a 
  Dragonframe. 
  
+
+
+
+
+
  1 Instalar Tahoma2D (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2840,6 +2999,13 @@ echo " -------------------------------------------------------------------------
  reciente del programa Blender.
  Blender no sólo sirve para animación 3D: en sus últimas versiones incorpora
  herramientas muy atractivas para la animación 2D y 2.5D. 
+
+
+
+
+
+
+
  1 Instalar o actualizar a una versión reciente de Blender (recomendado)
  2 Saltar este paso
  0 Salir
@@ -2897,8 +3063,10 @@ echo " -------------------------------------------------------------------------
  Quirinux Pro incluye la versión más actual. 
  
  
+
  
  
+
  1 Instalar Ardour 6
  2 Saltar este paso
  0 Salir
@@ -2954,6 +3122,9 @@ echo " -------------------------------------------------------------------------
  Puedes instalarlo ejecutando -SIN permisos de root- el script 
  ${bold}instalar-plugin-entangle-NOROOT.sh${normal} que encontrarás en la 
  carpeta ${bold}/opt/stopmo-preview-plugin${normal} luego de la descarga.
+
+
+
  1 Descargar Plugin stopmo-preview para Entangle
  2 Saltar este paso
  0 Salir
@@ -3004,6 +3175,13 @@ echo " -------------------------------------------------------------------------
  ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
  borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
  sin eliminar nada. 
+
+
+
+
+
+
+
  1 Instalar íconos y temas borrando los actuales. (CUIDADO!)
  2 Saltar este paso
  3 Instalar íconos y temas sin borrar los actuales (recomendado)
@@ -3180,6 +3358,10 @@ echo " -------------------------------------------------------------------------
  diccionarios y toda la documentación (manuales, archivos read-
  me de Debian, etc de la carpeta /usr/share/doc/ 
  
+
+
+
+
  1 Remover componentes que no vienen en Quirinux PRO (CUIDADO!)
  2 Saltar este paso
  0 Salir
@@ -3272,6 +3454,16 @@ echo " -------------------------------------------------------------------------
  QUIRINUX PRO INSTALADO ¡FIN DE LA INSTALACIÓN!
  -----------------------------------------------------------------------------
  A continuación, se borrarán los archivos temporales.
+
+
+
+
+
+
+
+
+
+
  1 Borrar archivos temporales y salir
  0 Salir sin borrar los temporales
 "
