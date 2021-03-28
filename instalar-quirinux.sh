@@ -148,8 +148,8 @@ clear
 sudo mkdir -p /opt/tmp/sudoers
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/QiGdK8pC4SjKL8p/download' -O /opt/tmp/sudoers/quirinux-sudoers-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/sudoers/./quirinux-sudoers-1.0-q2_amd64.deb -y
-sudo chmod 755 -R /etc/sudoers.d/
 sudo chown root:root -R /etc/sudoers.d
+sudo chmod 755 -R /etc/sudoers.d/
 
 # Borrar archivos temporales 
 
@@ -264,7 +264,7 @@ sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/d
 sudo tar -xvf /opt/tmp/libre/linux-libre.tar -C /opt/tmp/libre/
 
 sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt/tmp/*
+sudo chown $USER /opt
 echo "# Instalando el kernel Linux-Libre"; sleep 1s
 sudo apt install /opt/tmp/libre/./*.deb -y
 
@@ -625,7 +625,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/apt/./repo-config-1.0-q2_amd64.deb -y
+sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
@@ -690,6 +690,9 @@ clear
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
+sudo mkdir -p /opt/tmp/rar
+sudo wget  --no-check-certificate 'https://my.opendesktop.org/s/AyRyqwg67fRmCJF/download' -O /opt/tmp/rar/rar.deb
+sudo apt install /opt/tmp/rar/./rar.deb -y
 
 for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
@@ -711,7 +714,7 @@ clear
 
 sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/apt/./repo-config-1.0-q2_amd64.deb -y
+sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
 
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
@@ -721,11 +724,9 @@ sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
-
 for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
 
 # Borrar archivos temporales 
 
@@ -776,8 +777,7 @@ clear
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
-
-sudo apt-get install build-essential autoconf linux-headers-$uname -u
+sudo apt-get install build-essential autoconf linux-headers-$uname -u -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2 
@@ -840,14 +840,11 @@ clear
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
-
 sudo mkdir -p /opt/tmp/quirinux-genius
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/./quirinux-genius/quirinux-genius-1.0-q2_amd64.deb -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
 sudo apt install /opt/tmp/./quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb -y
-
-
 
 # Borrar archivos temporales 
 
@@ -870,7 +867,6 @@ clear
 sudo dpkg --add-architecture i386
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
-
 
 sudo mkdir -p /opt/tmp/quirinux-genius
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
@@ -994,8 +990,7 @@ clear
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-
-for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1011,6 +1006,28 @@ for paquetes_extra in mintbackup mintupdate timeshift mystiq; do sudo apt-get in
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
+# REINSTALA REPOS LIBRES (por si minstources los desconfiguró).
+
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo apt-get update -y
+
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
 sudo apt-get install samba
@@ -1018,7 +1035,6 @@ sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
 sudo touch /etc/libuser.conf
-
 
 # INSTALAR MUGSHOT
 
@@ -1103,7 +1119,7 @@ sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1268,10 +1284,12 @@ clear
 
 # INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
 
-
+sudo apt-get upgrade -y
+sudo apt-get dist-ugprade -y
 sudo apt-get install mintinstall -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1297,11 +1315,13 @@ clear
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-
+sudo apt-get upgrade -y
+sudo apt-get dist-ugprade -y
 sudo apt-get install mintinstall -y
 sudo apt-get remove --purge flatpak
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+sudo apt-get upgrade -y
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1338,9 +1358,7 @@ sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 
-
 # INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
-
 
 sudo apt-get install mintinstall -y
 sudo apt-get install -f -y
@@ -1381,9 +1399,7 @@ sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 
-
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
-
 
 sudo apt-get install mintinstall -y
 sudo apt-get remove --purge flatpak
@@ -1399,77 +1415,6 @@ sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR O ACTUALIZAR A LIBREOFFICE 7
- -----------------------------------------------------------------------------
- Se instalará LibreOffice versión 7 con los diccionarios y traducciones 
- incluidas en Quirinux 2.0  y se eliminarán las versiones anteriores 
- instaladas en el sistema (si las hay).
- Si ya tienes una versión de LibreOffice instalada y prefieres conservarla,
- puedes saltar este paso.
-
-
-
-
-
-
- 1 Instalar LibreOffice 7 (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# REMOVER INSTALACIONES ANTERIORES DE LIBREOFFICE Y DICCIONARIOS
-
-
-sudo apt-get remove --purge libreoffice* hunspell* myspell* mythes* aspell* hypen* -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR LIBREOFFICE
-
-
-sudo mkdir -p /opt/tmp/libreoffice
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/kbkjPqrJSRmZmPk/download' -O /opt/tmp/libreoffice/libreoffice.tar
-sudo tar -xvf /opt/tmp/libreoffice/libreoffice.tar -C /opt/tmp/libreoffice/
-sudo apt install /opt/tmp/libreoffice/./*.deb -y
-
-# Personalizar íconos de libreoffice
-
-sudo rm /usr/share/applications/libreoffice*
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NgTmBAAaCPK6w9W/download' -O /opt/tmp/libreoffice/libreoffice7-icons.deb
-sudo apt install /opt/tmp/libreoffice/./libreoffice7-icons.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
 
 ;;
 
@@ -1518,7 +1463,6 @@ sudo snap remove gimp
 sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
 
 # INSTALAR GIMP 2.10 DESDE BUSTER
-
 
 for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
 sudo apt-get install -f -y
@@ -1680,10 +1624,9 @@ clear
 
 # INSTALAR PQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
-
 for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
 sudo apt-get install -f -y
-sudo apt-get update
+
 sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
 sudo apt-get remove --purge hplip -y
 sudo rm -rf /var/lib/hp
@@ -1703,9 +1646,10 @@ sudo apt-get autoremove --purge -y
 
 sudo mkdir -p /opt/tmp/epson
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/BD3dowKgjdsPw9W/download' -O /opt/tmp/epson/epsonscan.tar
-sudo tar -xvf /opt/tmp/epson/epsonscan.tar /opt/tmp/epson/
-cd /opt/tmp/epson/epsonscan
+cd /opt/tmp/epson
+sudo tar -xvf epsonscan.tar 
 ./install.sh
+sudo rm -rf /opt/tmp/*
 
 ;;
 
@@ -1754,7 +1698,6 @@ case $opc in
 clear
 
 # INSTALAR PAQUETES DE RED LIBRES
-
 
 for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo modemmanager modem-manager-gui modem-manager-gui-help usb-modeswitch usb-modeswitch-data wvdial; do sudo apt-get install -y $paquetes_red; done
 sudo apt-get install -f -y
@@ -1812,7 +1755,6 @@ clear
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
 
-
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
 sudo apt-get autoremove --purge -y
@@ -1835,14 +1777,11 @@ sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/apt/./repo-config-1.0-q2_amd64.deb -y
 
-
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
-
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
-
 
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
@@ -1859,7 +1798,6 @@ sudo rm -rf /opt/tmp/*
 clear
 
 # INSTALAR SÓLO CONTROLADORES DE VIDEO AMD LIBRES
-
 
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
