@@ -2224,10 +2224,6 @@ sudo echo "auto lo" >> /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
 
-# ELIMINANDO ACCIÓN DE THUNAR QUE NO FUNCIONA (SET AS WALLPAPER
-
-sudo rm /usr/lib/x86_64-linux-gnu/thunarx-3/thunar-wallpaper-plugin.so
-
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
@@ -2294,10 +2290,6 @@ sudo chmod 777 /etc/network/interfaces
 sudo echo "auto lo" >> /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
-
-# ELIMINANDO ACCIÓN DE THUNAR QUE NO FUNCIONA (SET AS WALLPAPER
-
-sudo rm /usr/lib/x86_64-linux-gnu/thunarx-3/thunar-wallpaper-plugin.so
 
 # Borrar archivos temporales 
 
@@ -2510,8 +2502,8 @@ echo " -------------------------------------------------------------------------
  hugin invada-studio-plugins-ladspa aegisub, xsane, guvcview, kdenlive
  vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
  pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
- krita-l10n dvd-styler obs-studio obs-plugins digikam xsane
-
+ krita-l10n dvd-styler obs-studio obs-plugins digikam xsane, sweethome3d
+ scribus
 
 
  1 Instalar especializados estándar (recomendado).
@@ -2530,7 +2522,7 @@ clear
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
 
-for paquetes_estandar in manuskript kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 
 # INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
@@ -3196,10 +3188,6 @@ sudo echo "auto lo" >> /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
 
-# ELIMINANDO ACCIÓN DE THUNAR QUE NO FUNCIONA (SET AS WALLPAPER
-
-sudo rm /usr/lib/x86_64-linux-gnu/thunarx-3/thunar-wallpaper-plugin.so
-
 # Borrar archivos temporales 
 
 sudo rm -rf /opt/tmp/*
@@ -3266,10 +3254,6 @@ sudo chmod 777 /etc/network/interfaces
 sudo echo "auto lo" >> /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
-
-# ELIMINANDO ACCIÓN DE THUNAR QUE NO FUNCIONA (SET AS WALLPAPER
-
-sudo rm /usr/lib/x86_64-linux-gnu/thunarx-3/thunar-wallpaper-plugin.so
 
 # Borrar archivos temporales 
 
