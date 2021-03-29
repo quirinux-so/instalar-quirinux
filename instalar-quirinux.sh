@@ -1026,11 +1026,12 @@ fi
 sudo mkdir -p /opt/tmp/apt
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo chown root:root -R /etc/apt
 sudo apt-get update -y
 
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-sudo apt-get install samba
+sudo apt-get install samba -y
 sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
@@ -1131,7 +1132,7 @@ sudo apt-get autoremove --purge -y
 
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
-sudo apt-get install samba
+sudo apt-get install samba -y
 sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
@@ -1289,7 +1290,6 @@ sudo apt-get dist-ugprade -y
 sudo apt-get install mintinstall -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1561,7 +1561,6 @@ sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
 
 sudo mkdir -p /opt/tmp/gimp/
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
@@ -1902,7 +1901,6 @@ case $opc in
 clear
 
 # INSTALAR SCREENSAVER GLUCLO
-
 
 for paquetes_screensaver in xscreensaver xscreensaver-gl-extra xscreensaver-data-extra build-essential libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libx11-dev; do sudo apt-get install -y $paquetes_screensaver; done
 for paquetes_gnome_screensaver in gnome-screensaver; do sudo apt-get remove --purge -y $paquetes_gnome_screensaver; done
@@ -2389,7 +2387,7 @@ sudo apt-get autoremove --purge -y
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 
-for paquetes_remover_programas in xsane xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop aqemu virt-manager qemu zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
+for paquetes_remover_programas in xsane xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -2534,6 +2532,12 @@ clear
 
 for paquetes_estandar in manuskript kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
+
+# INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
+
+sudo mkdir -p /opt/tmp/komika
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/eQrxHfx5QeeQtAL/download' -O /opt/tmp/komika/quirinu-komika.deb
+sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
 sudo apt-get autoremove --purge -y
 
 ;;
@@ -2586,19 +2590,16 @@ clear
 
 # INSTALANDO INKSCAPE
 
-
 for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
 sudo mkdir -p /opt/tmp/inkscape
 sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/inkscape/./inkscape-1.0-q2_amd64.deb -y
 
-
 # INSTALAR TUPITUBE
-
 
 sudo mkdir -p /opt/tmp/tupitube
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Zrce88JXLRjiqXF/download' -O /opt/tmp/tupitube/tupitube-desk-0.2.17-q2_amd64.deb
-sudo apt install /opt/tmp/tupitube/./tupitube-desk-0.2.17_amd64.deb -y
+sudo apt install /opt/tmp/tupitube/./tupitube-desk-0.2.17-q2_amd64.deb -y
 
 # INSTALAR GODOT
 
@@ -2715,10 +2716,10 @@ clear
 
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
-
 mkdir -p /opt/tmp/cinelerra
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
-sudo apt install /opt/tmp/./cinelerra.deb -y
+sudo apt install /opt/tmp/cinelerra/./cinelerra.deb -y
+sudo rm -rf /opt/tmp/*
 
 ;;
 
@@ -2768,13 +2769,11 @@ case $opc in
 
 # Instala dependencias del instalador de OpenToonz
 
-
 for paquetes_wget in wget git software-properties-common; do sudo apt-get install -y $paquetes_wget; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # Instala dependencias de OpenToonz
-
 
 for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libqt5multimedia5-plugins; do sudo apt-get install -y $paquetes_opentoonz; done
 for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_opentoonz2; done
@@ -2786,29 +2785,28 @@ sudo wget  --no-check-certificate 'https://github.com/opentoonz/opentoonz/archiv
 tar -xzvf /opt/tmp/opentoonz/opentoonz-1.4.0.tar.gz -C /opt/tmp/
 cd /opt/tmp/opentoonz-1.4.0
 mkdir -p $HOME/.config/OpenToonz
-cp -r stuff $HOME/.config/OpenToonz/
+cp -r /opt/tmp/opentoonz-1.4.0/stuff $HOME/.config/OpenToonz/
 cat << EOF > $HOME/.config/OpenToonz/SystemVar.ini
 [General]
 OPENTOONZROOT="$HOME/.config/OpenToonz/stuff"
 OpenToonzPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
 TOONZCACHEROOT="$HOME/.config/OpenToonz/stuff/cache"
 TOONZCONFIG="$HOME/.config/OpenToonz/stuff/config"
-TOONZFXPRESETS="$HOME/.config/OpenToonz/stuff/fxs"
-TOONZLIBRARY="$HOME/.config/OpenToonz/stuff/library"
+TOONZFXPRESETS="$HOME/.config/OpenToonz/stuff/projects/fxs"
+TOONZLIBRARY="$HOME/.config/OpenToonz/stuff/projects/library"
 TOONZPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
 TOONZPROJECTS="$HOME/.config/OpenToonz/stuff/projects"
 TOONZROOT="$HOME/.config/OpenToonz/stuff"
 TOONZSTUDIOPALETTE="$HOME/.config/OpenToonz/stuff/studiopalette"
 EOF
-cd /opt/tmp/opentoonz-1.4.0/thirdparty/tiff-4.0.3
+cd /opt/tmp/opentoonz-1.4.0/thirdparty/tiff-4.0.3 
 ./configure --with-pic --disable-jbig
 make -j$(nproc)
 cd ../../
-cd /opt/tmp/opentoonz-1.4.0/toonz
+cd toonz
 mkdir build
 cd build
 cmake ../sources
-make -j$(nproc)
 sudo make install 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -2816,12 +2814,10 @@ sudo apt-get autoremove --purge -y
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
 sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz/opentoonz-icon.tar
-sudo mv /opt/tmp/opentoonz /opt/tmp/opentoonz-tmp
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz-tmp/opentoonz-icon.tar
 sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /
-mv /opt/tmp/opentoonz /opt/opentoonz/opentoonz
 cp -r /opentoonz-icon/* /
-rm -r /opentoonz-icon/
+rm -r /opentoonz-icon
 
 # Creando comando de inicio de OpenToonz
 
@@ -2833,14 +2829,18 @@ FILE="/usr/local/bin/opentoonz"
 if [ -f "$FILE" ]; then
 
 sudo rm /usr/local/bin/opentoonz
-mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/opentoonz
+mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/
+touch /opt/opentoonz/opentoonz
+echo "/opt/opentoonz/bin/./opentoonz2" > /opt/opentoonz/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/opentoonz
 sudo chmod 777 /usr/local/bin/opentoonz
 
 else
 
-mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/opentoonz
+mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/
+touch /opt/opentoonz/opentoonz
+echo "/opt/opentoonz/bin/./opentoonz2" > /opt/opentoonz/opentoonz
 cd /usr/local/bin
 sudo ln -s /opt/opentoonz/opentoonz
 sudo chmod 777 /usr/local/bin/opentoonz
@@ -2851,6 +2851,9 @@ fi
 
 sudo rm -rf /opt/tmp/*
 sudo rm /opt/opentoonz/opentoonz-icon.tar
+sudo rm /opt/opentoonz/bin/opentoonz-1.4.0.tar.gz
+
+clear
 
 ;;
 
@@ -3356,7 +3359,7 @@ sudo apt-get autoremove --purge -y
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 
-for paquetes_remover_programas in xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop aqemu virt-manager qemu zulucrypt-cli zulucrypt-cli synapse balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
+for paquetes_remover_programas in xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli synapse balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
