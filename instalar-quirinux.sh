@@ -3052,9 +3052,9 @@ echo " -------------------------------------------------------------------------
  El plugin 'stopmo-preview' añade utilidad de stopmotion (papel cebolla y 
  podemos descargarlo a continuación pero necesita ser instalado sin permiso 
  de root. 
- Puedes instalarlo ejecutando -SIN permisos de root- el script 
- ${bold}instalar-plugin-entangle-NOROOT.sh${normal} que encontrarás en la 
- carpeta ${bold}/opt/stopmo-preview-plugin${normal} luego de la descarga.
+ Puedes instalarlo ejecutando -SIN permisos de root- el comando
+ ${bold}instalar-plugin-entanglenormal}.
+ 
 
 
 
@@ -3071,13 +3071,13 @@ case $opc in
 clear
 
 # DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
+# Luego será necesario ejecutar el comando instalar-plugin-entangle sin permisos de root.
 
-sudo mkdir -p /opt/stopmo-preview-plugin
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Qd8CtZBN6a6STAY/download' -O /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar
-sudo tar -xvf /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar -C /opt/stopmo-preview-plugin/
-for paquetes_python in python2-gobject; do sudo apt-get install -y $paquetes_python; done
-sudo rm /opt/stopmo-preview-plugin/stopmo-preview-plugin.tar
-sudo chmod 777 /opt/stopmo-preview-plugin/instalar-plugin-entangle-NOROOT.sh
+sudo mkdir -p /opt/tmp/
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/kRmqM6HAit8Px2F/download' -O /opt/tmp/entangle-plugin-stopmotion.deb
+for paquetes_python in python-gobject; do sudo apt-get install -y $paquetes_python; done
+sudo apt-get install python3-gi 
+sudo apt install /opt/tmp/./entangle-plugin-stopmotion.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
