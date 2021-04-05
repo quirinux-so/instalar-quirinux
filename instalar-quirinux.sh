@@ -3,146 +3,241 @@
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
-# Descripción:	Convierte una instalación limpia de Debian Buster XFCE en Quirinux 2.0
-# Versión:	1.00-RC_2
+# Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
+# Versión:	2.0 RC_3
 
-bold=$(tput bold)
-normal=$(tput sgr0)
-${bold}
-${normal}
+function _inicio() # Verifica si está instalado dialog, wget y git
+{
 
+if [ -f /usr/bin/dialog ] && [ -f /usr/bin/git ] && [ -f /usr/bin/wget ] && [ -f /usr/local/bin/quirinux-sudoers ] && [ -f /etc/apt/sources.list.d/linux-libre.list ]; then # Cumple con los requisitos, continúa
 clear
+_menuPrincipal
 
-echo " -----------------------------------------------------------------------------
- INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
- -----------------------------------------------------------------------------
-${bold}   ___        _      _                  
-  / _ \ _   _ _ _ __ _ _ __  _   _ _  __
- | | | | | | | | '__| | '_ \| | | \ \/ /
- | |_| | |_| | | |  | | | | | |_| |>  < 
-  \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\ ${normal}
-                                       
- 
- (p) 2019-2020 Licencia GPLv3, Autor: Charlie Martínez® 
- Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org   "
-
-sleep 1
-
-echo "
- --------------------------------------------------------------------
- | Ejecutar como ROOT. Sólo valido para Debian Buster.              | 
- | El código requiere modificaciones si se pretende usar en Devuan. |
- | ó Ubuntu. Se sugiere leer el código antes de utilizar.           |
- --------------------------------------------------------------------"                                               
-sleep 0.1
-
-echo "
- 1 Comenzar la instalación (podrás confirmar cada paso).
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
+else # No cumple con los requisitos, los instala y continúa
 clear
+_avisoInicio
 
+fi
+
+}
+
+function _instalarSueltos()
+{
+cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 22 76 16)
+options=(1 "Software de hogar y oficina" off 
+2 "Software gráfico y de edición multimedia" off 
+3 "GIMP Edición Quirinux" off 
+4 "Tipografías adicionales (incluye las de Windows)" off 
+5 "Temas y salvapantallas de Quirinux" off 
+6 "Centro de software sencillo de usar" off 
+7 "Compatibilidad con carpetas compartidas" off 
+8 "Herramientas para virtualizar otros sistemas" off 
+9 "Utilidad para usar digitalizadoras con 2 monitores" off 
+10 "Firmware para placas de red Wifi" off 
+11 "Controladores libres para hardware de red - excepto wifi" off 
+12 "Controladores libres para escáneres e impresoras" off 
+13 "Codecs privativos multimedia y RAR" off
+14 "Controladores libres para aceleradoras NVIDEA" off 
+15 "Controladores libres para aceleradoras AMD" off 
+16 "Controladores libres para WACOM" off 
+17 "Controladores libres para tabletas GENIUS" off 
+18 "Utilidades de backup y puntos de restauración" off 
+19 "Corrección de bugs (recomendado)" off)
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+case $choice in
+
+1) # "Programas para usuarios en general"
+_baseBusterGeneral 
+_utiles 
+_olive 
+_widd
 ;;
 
-"0")
+2) # "Programas para realizadores audiovisuales" 
+_baseBusterPro
+;;
+
+3) # "GIMP Edición Quirinux (con opción de atajos e íconos de Phoshop"
+_GIMP
+;;
+
+4) # "Tipografías adicionales (incluye las de Windows)
+_fuentes
+_tipografiasPro
+;;
+
+5) # "Temas y salvapantallas de Quirinux" 
+_temas 
+_salvapantallas
+;;
+
+6) # "Centro de software sencillo de usar (estilo Android)"
+_centro
+;;
+
+7) # "Compatibilidad con carpetas compartidas y redes de Microsoft" 
+_samba
+;;
+
+8) # "Herramientas para virtualizar otros sistemas operativos (AQEMU)" 
+_aqemu
+;;
+
+9) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+_ptxconf
+;;
+
+10) # "Firmware para placas de red Wifi"
+_firmwareWifi
+;;
+
+11) # "Controladores libres para hardware de red - excepto wifi"
+_libresRed
+;;
+
+12) # "Controladores libres para escáneres e impresoras" 
+_libresImpresoras
+;;
+
+13) # "Codecs privativos multimedia y RAR"
+_codecs
+;;
+
+14) # "Controladores libres para aceleradoras gráficas nVidia"
+_libresNvidia
+;;
+
+15) # "Controladores libres para aceleradoras gráficas AMD" 
+_libresAMD
+;;
+
+16) # "Controladores libres para digitalizadoras Wacom"
+_libresWacom
+;;
+
+17) # "Controladores libres para tabletas digitalizadoras Genius"
+_libresGenius
+;;
+
+18) # "Utilidades de backup y puntos de restauración"
+_mint
+;;
+
+19) # "Corrección de bugs (recomendado)"
+_pulseaudio
+;;
+
+esac
+done
+
+_menuPrincipal
+
+}
+
+function _menuPrincipal()
+
+{
+
+opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
+--stdout \
+--menu "Elije una opción" 16 50 5 \
+1 "Instalar Quirinux Edición General" \
+2 "Instalar Quirinux Edición Pro" \
+3 "Instalar componentes sueltos" \
+4 "Ayuda" \
+5 "Salir" )
+
+echo $opPrincipal
+
+if [[ $opPrincipal == 1 ]]; then # Instalar Quirinux Edición General 
+_instalarGeneral
+_menuPrincipal
+fi
+
+if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux Edición Pro 
+_instalarPro
+_menuPrincipal
+fi
+
+if [[ $opPrincipal == 3 ]]; then # Instalar componentes sueltos
+_instalarSueltos
+fi
+
+if [[ $opPrincipal == 4 ]]; then # Ayuda
+_ayuda
+fi
+
+if [[ $opPrincipal == 5 ]]; then # Salir
+clear
+_salir
+fi
+}
+
+function _instalarDialog()
+{
+sudo apt-get install dialog -y
+}
+
+function _ayuda()
+{
+
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "AYUDA" \
+--msgbox "\nEl sistema operativo Quirinux GNU/Linux Versión 2.0 está basado en Debian GNU/Linux versión 10 (Buster) XFCE, por lo que instalar la ISO de Quirinux o instalar este script sobre un sistema Debian recién instalado es prácticamente lo mismo. Recuerda que Quirinux está hecho sobre el escritorio XFCE (podrías usar otro, como el Gnome que viene con la ISO live oficial de Debian, pero nosotros no hemos probado su funcionamiento).\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
+_menuPrincipal
+}
+
+function _salir()
+{
 
 clear
-
 exit 0
 
-;; 
+}
 
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR GIT Y WGET 
- -----------------------------------------------------------------------------
- Este programa necesitará las utilidades git, wget y 
- software-properties-common  para poder descargar los paquetes que instalará. 
- Si los tienes instalados, puedes saltar este paso. Si no estás seguro/a, 
- elije la opción 1. 
- 
-
-
-
-
-
- 1 Instalar programas necesarios para el resto de la instalación 
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _preRequisitos()
+{
 
 # INSTALAR WGET Y GIT
 
+clear
 sudo apt-get update -y
 for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"2")
-
+function _instalarGeneral()
+{
 clear
+_centro
+_firmwareWifi
+_codecs
+_controladoresLibres
+_programasGeneral
+_pulseaudio
+_remover
+_limpiar
+}
 
-;;
-
-"0")
-
+function _controladoresLibres()
+{
 clear
+_libresNvidia 
+_libresAMD 
+_libresWacom 
+_libresGenius 
+_libresImpresoras 
+_libresRed
 
-exit 0
+}
 
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: CONFIGURAR EXCEPCIONES NOPASSWD
- -----------------------------------------------------------------------------
- Se crearán los archivos 0pwfeedback, live, mintupdate y quirinux en la 
- carpeta /etc/sudoers.d/conforme vienen en Quirinux 2.0.
- 
- Posibilitan que el sistema no requiera contraseñas para tareas cotidianas,
- sobretodo en modo live.
-		
- 
-
-
-
-
- 1 Agregar archivos a /etc/sudoers.d/(recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
+function _config()
+{
+	
 # CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
 
 sudo mkdir -p /opt/tmp/sudoers
@@ -151,240 +246,15 @@ sudo apt install /opt/tmp/sudoers/./quirinux-sudoers-1.0-q2_amd64.deb -y
 sudo chown root:root -R /etc/sudoers.d
 sudo chmod 755 -R /etc/sudoers.d/
 
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR NÚCLEOS DE QUIRINUX
- -----------------------------------------------------------------------------
- Puedes instalar el Kernel AVL de baja latencia o el Linux-Libre (sin blobs
- privativos), ambos incluidos en Quirinux. Luego tendrás que reiniciar y 
- retomar la instalación, para que los controladores que instales se incorporen 
- al kernel nuevo (en el caso de Linux-Libre sería recomendable no instalarle
- controladores privativos... para que siga siendo libre).
- 
- 
- 
-  
-
-
- 1 Instalar ahora el kernel AVL 
- 2 Saltar este paso (recomendado). 
- 3 Instalar Kernel Linux-Libre  
- 0 Salir
- 
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1")
-
-clear
-
-sudo mkdir /opt/tmp/kernel-avl
-
- echo "# Download Kernel AVL"; sleep 1s
- wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/kernel-avl/linux-image-5.4.28avl2-lowlatency.deb
-
- echo "# Dowload Headers AVL"; sleep 1s
- wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/kernel-avl/linux-headers-5.4.28avl2-lowlatency.deb
-
-sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt/tmp/*
-
-echo "# Instalando el nuevo kernel AVL"; sleep 1s
-
-sudo apt install /opt/tmp/kernel-avl/./linux-headers-5.4.28avl2-lowlatency.deb -y
-sudo apt install /opt/tmp/kernel-avl/./linux-image-5.4.28avl2-lowlatency.deb -y
-sudo apt-get remove --purge cryptsetup-initramfs -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-echo " -----------------------------------------------------------------------------
- NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
- -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel de baja latencia AVL.
- compilado por Trulan Martin. 
- Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
- a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
- al siguiente a este y continuar con la instalación.
-	
-
-
-
-
- ¡Hasta luego!
-"
-
-exit 0
-
-;;
-
-"2")
-
-clear
-
-;;
-
-
-"3")
-
-clear
-
-echo "# Instalando el kernel Linux-Libre"; sleep 1s
-sudo mkdir -p /opt/tmp/libre
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linux-libre.tar
-sudo tar -xvf /opt/tmp/libre/linux-libre.tar -C /opt/tmp/libre/
-
-sudo chmod 777 -R /opt/tmp/
-sudo chown $USER /opt
-echo "# Instalando el kernel Linux-Libre"; sleep 1s
-sudo apt install /opt/tmp/libre/./*.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-clear
-
-echo " -----------------------------------------------------------------------------
- NUEVO KERNEL INSTALADO ¡ES NECESARIO REINICIAR!
- -----------------------------------------------------------------------------
- Felicidades, acabas de instalar el kernel Linux-Libre, sin blobs privativos
- de la Free Software Fundation,
- 
- Para que tu sistema inicie con este nuevo kernel, es necesario que reinicies
- el ordenador y lo selecciones en el menú de arranque. Luego podrás volver 
- a ejecutar este programa de instalación, saltar todos los pasos hasta llegar 
- al siguiente a este y continuar con la instalación.
- 	
-	
-
-
- ¡Hasta luego!
-"
-
-exit 0
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: ACTIVAR SOPORTE PARA SOFTWARE DE 32 BITS
- -----------------------------------------------------------------------------
- Activar el soporte multiarquitectura (32 bits). Quizás lo necesites a la 
- hora de instalar algun controlador, por ejemplo los de las tabletas GENIUS.
-		
-
-
-
-
-
-
-
-
- 1 Activar soporte multiarquitectura (recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
 sudo dpkg --add-architecture i386
 
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: AGREGAR REPOSITORIOS ADICIONALES NECESARIOS
- -----------------------------------------------------------------------------
- Para instalar y/o actualizar los nucleos AVL y Xenmod el conversor de video 
- Mystiq el gestor de software, la utilidad de backup y el editor de video
- profesional de Cinelerra (Quirinux Pro), Quirinux necesita agregar algunos 
- repositorios adicionales, que son 100% libres. 
- 
- 
- 
-
-
-
-
- 1 Agregar los repositorios adicionales necesarios (recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
 # AGREGA REPOSITORIOS LIBRES ADICIONALES
+
+if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
+sudo rm /etc/apt/sources.list.d/debian.list
+fi
 
 if [ -e "/etc/apt/apt.conf.d" ]; then
 sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
@@ -406,57 +276,11 @@ sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/d
 sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
 sudo apt-get update -y
 
-# Borrar archivos temporales 
+if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
+sudo rm /etc/apt/sources.list.d/debian.list
+fi
 
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac  
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: REPO-CONFIG Y REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS
- -----------------------------------------------------------------------------
- Para instalar controladores privativos de hardware, por ejemplo para algunas
- placas WiFi que de otra forma no funcionan, es necesario activar los 
- repositorios non-free y contrib. También para formatos privativos como RAR.
- Los repositorios backports permiten descargar versiones algo más modernas
- del software estable de Debian. 
-  
- ${bold} TRUCO: ${normal}En este paso también se instalará el programa  
- Repo-Config con el que siempre podrás modificar tu preferencia
- yendo a: ${bold}Aplicaciones > Sistema > Repo-Config${normal} 
- 
-
- 1 Instalar Repo-Config y activar non-ree contrib y backports (recomendado).
- 2 Saltar este paso.
- 3 Sólo instalar Repo-Config.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+chown -R root:root /etc/apt
 
 # INSTALAR REPO-CONFIG
 
@@ -464,172 +288,30 @@ sudo mkdir -p /opt/tmp/repo-config
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
 
-
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+
+# INSTALAR COMANDO QUIRINUX-LIBRE
+
+sudo mkdir -p /opt/tmp/quirinux-libre
+sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
+sudo apt install /opt/tmp/quirinux-libre/./quirinux-libre.deb -y
+
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 sudo apt-get update -y
 
-# Borrar archivos temporales 
+# BORRA REPO REPETIDO
 
-sudo rm -rf /opt/tmp/*
+if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
+sudo rm /etc/apt/sources.list.d/debian.list
+fi
 
-;;
+}
 
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# INSTALAR REPO-CONFIG
-
-sudo mkdir -p /opt/tmp/repo-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
-
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR CONTROLADORES LIBRES PARA ACELERADORAS NVIDIA
- -----------------------------------------------------------------------------
- Quirinux trae preinstalados los controladores libres para las tarjetas de  
- video NVidia. Si no los necesitas, puedes saltar este paso.
- 
-
-
-
-
-
-
-
-
- 1 Instalar controladores libres para Nvidia (sólo si los necesitas).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc
- 
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONTROLADORES LIBRES DE NVIDIA
-
-
-for paquetes_nvidia in bumblebee; do sudo apt-get install -y $paquetes_nvidia; done 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR CONTROLADORES PRIVATIVOS 
- -----------------------------------------------------------------------------
- Quirinux trae una gran cantidad de firmware preinstalado, porque fue pensado 
- para funcionar en modo live en la mayor de hardware posible. Puedes saltar 
- este paso si tu hardware (incluyendo placa WiFi) está funcionando bien o si
- necesitas algún driver específico pero prefieres buscarlo e instalarlo por
- tu cuenta en lugar de instalar ahora todos los que necesitas y los que no.
-   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
- Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
- 
- 
-
- 1 Instalar firmware (recomendado si no te funciona la placa WiFi).
- 2 Saltar este paso.
- 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
-
-
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
-sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
-sudo apt install /opt/tmp/quirinux-firmware/./* -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
-sudo apt install /opt/tmp/./quirinux-i915-q2_amd64.deb -y
-for paquetes_firmware in hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# INSTALAR REPO-CONFIG
-
-sudo mkdir -p /opt/tmp/repo-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
-
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+function _firmwareWifi()
+{
 
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
@@ -638,55 +320,14 @@ sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
 sudo apt install /opt/tmp/quirinux-firmware/./* -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
 sudo apt install /opt/tmp/./quirinux-i915-q2_amd64.deb -y
-for paquetes_firmware in hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
+for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR CODECS Y FORMATOS PRIVATIVOS 
- -----------------------------------------------------------------------------
- Ciertos codecs privativos son necesarios para reproducir algunos formatos 
- multimedia y trabajar con archivos comprimidos con extensión .rar.
- Si piensas que los necesitarás, puedes instalarlos ahora.
-   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
- Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}Aplicaciones > Sistema > Repo-Config.${normal} 
- 
- 
-
-
-
- 1 Instalar codecs y formatos privativos.
- 2 Saltar este paso.
- 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _codecs()
+{
 
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
@@ -698,82 +339,20 @@ for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"2")
+function _libresNvidia()
+{
 
-clear
+# INSTALAR CONTROLADORES LIBRES DE NVIDIA
 
-;;
-
-"3")
-
-clear
-
-# INSTALAR REPO-CONFIG
-
-sudo mkdir -p /opt/tmp/repo-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
-
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
-
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-
-
-# INSTALAR CODECS Y FORMATOS PRIVATIVOS
-
-for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
+for paquetes_nvidia in bumblebee; do sudo apt-get install -y $paquetes_nvidia; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+}
 
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR CONTROLADORES PARA TABLETAS WACOM
- -----------------------------------------------------------------------------
- Instalar controladores libres para las tabletas gráficas de la marca Wacom.
- 
- 
-
-
-
-
-
-
-
-
- 1 Instalar controladores de Wacom.
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc
- 
-case $opc in
-
-"1") 
-
-clear
+function _libresWacom()
+{
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
@@ -786,57 +365,10 @@ if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR CONTROLADORES PARA TABLETAS GENIUS
- -----------------------------------------------------------------------------
- Instalar controladores libres para tabletas gŕaficas Genius antiguas,
- incluidos en Quirinux Edición Pro.
-  ${bold}ADVERTENCIA:${normal} Requiere soporte para 32 bits. Si no lo instalaste antes, 
- puedes hacerlo con la opción 3. 
-
-
-
-
-
-
-
- 1 Instalar controladores de Genius.
- 2 Saltar este paso.
- 3 Instalar soporte para 32 bits + opción 1.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _libresGenius()
+{
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
@@ -846,782 +378,12 @@ sudo apt install /opt/tmp/./quirinux-genius/quirinux-genius-1.0-q2_amd64.deb -y
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
 sudo apt install /opt/tmp/./quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb -y
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
+function _libresImpresoras()
+{
 
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# Instalar soporte para 32 bits
-
-sudo dpkg --add-architecture i386
-
-# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
-
-sudo mkdir -p /opt/tmp/quirinux-genius
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/quirinux-genius/./quirinux-genius-1.0-q2_amd64.deb -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
-sudo apt install /opt/tmp/quirinux-genius/./wizardpen_0.7.0-alpha2_i386.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac
-
-clear 
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR PTXCONF
- -----------------------------------------------------------------------------
- Ptxconf es una utilidad programada por wenhsinjen, que sirve para mapear una  
- tableta gráfica a un sólo monitor cuando se utiliza más de uno. Gestiona de 
- manera gráfica el comando xorg map-to-input y resulta muy útil bajo el  
- escritorio xfce, predeterminado en Quirinux. 
- Si no usas xfce, puedes saltar este paso.
-
-
-
-
-
-
- 1 Instalar Ptxconf (recomendado si usas XFCE)
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR UTILIDAD PTXCONF (MAPPING)
-
-sudo mkdir -p /opt/tmp/ptxtemp
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/ajaj7dRJFp8PJFK/download' -O /opt/tmp/ptxtemp/ptxconf.tar
-sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
-cd /opt/ptxconf
-sudo python setup.py install
-sudo apt-get install -f -y
-sudo apt-get install libappindicator1 -y
-sudo mkdir -p /opt/tmp/python-appindicator
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-
-# Agrega entrada al inicio
-
-for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR PROGRAMAS DE USO GENERAL
- -----------------------------------------------------------------------------
- Instalación de diversos programas de uso general. Esta base viene 
- preinstalada en todas las ediciones de Quirinux 2.0. y fusiona utilidades 
- de Mint y Opensuse con Debian y algunas extra como imagine, pdfarranger y 
- video-downloader, entre otras.
-  ${bold}ADVERTENCIA:${normal} Requiere los repositorios adicionales. 
- Si no los agregaste al comienzo de instalación, puedes hacerlo ahora 
- (opción 3). 
-
-
-
-
- 1 Instalar paquetes base (recomendado)
- 2 Saltar este paso.
- 3 Agregar los repositorios adicionales necesarios + opción 1.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR PAQUETES BASE DE BUSTER
-
-for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
-
-sudo mkdir -p /opt/tmp/chimiboga
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
-sudo apt install /opt/tmp/chimiboga/./chimiboga.deb -y
-
-# INSTALAR EXTRAS DE MINT Y OPENSUSE
-
-for paquetes_extra in mintbackup mintupdate timeshift mystiq; do sudo apt-get install -y $paquetes_extra; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REINSTALA REPOS LIBRES (por si minstources los desconfiguró).
-
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-sudo chown root:root -R /etc/apt
-sudo apt-get update -y
-
-# INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
-
-sudo apt-get install samba -y
-sudo mkdir -p /opt/tmp/samba
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
-sudo touch /etc/libuser.conf
-
-# INSTALAR MUGSHOT
-
-sudo mkdir -p /opt/tmp/mugshot
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
-sudo apt install /opt/tmp/mugshot/./mugshot_0.4.2-1_all.deb -y
-
-# INSTALAR PLUGIN PARA DESCARGAR VIDEOS EN FIREFOX
-
-sudo mkdir -p /opt/tmp/video-downloader
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
-sudo apt install /opt/tmp/video-downloader/./net.downloadhelper.coapp-1.5.0-1_amd64.deb -y
-
-# INSTALAR DENSIFY (para reducir archivos PDF)
-
-sudo mkdir -p /opt/tmp/densify
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
-sudo apt install /opt/tmp/densify/./densify-0.3.1-q2_amd64.deb -y
-
-# INSTALAR IMAGINE (para reducir imágenes)
-
-sudo mkdir -p /opt/tmp/imagine
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
-sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
-
-# INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
-
-sudo mkdir -p /opt/tmp/openboard
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
-sudo apt install /opt/tmp/openboard/./openboard.deb -y
-
-# INSTALAR COMANDO QUIRINUX-LIBRE
-
-sudo mkdir -p /opt/tmp/quirinux-libre
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
-sudo apt install /opt/tmp/quirinux-libre/./quirinux-libre.deb -y
-
-# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
-
-for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
-sudo apt-get install -f
-sudo mkdir -p /opt/tmp/cpu
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo apt install /opt/tmp/cpu/./*.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
-
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-
-# INSTALAR PAQUETES BASE DE BUSTER
-
-for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR EXTRAS DE MINT Y OPENSUSE
-
-for paquetes_extra in mintbackup mystiq; do sudo apt-get install -y $paquetes_extra; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
-
-sudo apt-get install samba -y
-sudo mkdir -p /opt/tmp/samba
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
-sudo touch /etc/libuser.conf
-
-# INSTALAR MUGSHOT
-
-sudo mkdir -p /opt/tmp/mugshot
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
-sudo apt install /opt/tmp/mugshot/./mugshot_0.4.2-1_all.deb -y
-
-# INSTALAR PLUGIN PARA DESCARGAR VIDEOS EN FIREFOX
-
-sudo mkdir -p /opt/tmp/video-downloader
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
-sudo apt install /opt/tmp/video-downloader/./net.downloadhelper.coapp-1.5.0-1_amd64.deb -y
-
-# INSTALAR DENSIFY (Para reducir archivos PDF)
-
-sudo mkdir -p /opt/tmp/densify
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
-sudo apt install /opt/tmp/densify/./densify-0.3.1-q2_amd64.deb -y
-
-# INSTALAR IMAGINE (Para reducir imágenes)
-
-sudo mkdir -p /opt/tmp/imagine
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
-sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
-
-# INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
-
-sudo mkdir -p /opt/tmp/openboard
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
-sudo apt install /opt/tmp/openboard/./openboard.deb -y
-
-# INSTALAR COMANDO QUIRINUX-LIBRE
-
-sudo mkdir -p /opt/tmp/quirinux-libre
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
-sudo apt install /opt/tmp/quirinux-libre/./quirinux-libre.deb -y
-
-# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
-
-for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
-sudo apt-get install -f
-sudo mkdir -p /opt/tmp/cpu
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo apt install /opt/tmp/cpu/./*.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR OLIVE EDITOR
- -----------------------------------------------------------------------------
- Instalación del editor de video Olive, 
- Sencillo, con pocas opciones aunque muy estable. . 
-   
- 
- 
-
-
-
-
-
-
- 1 Instalar Olive (recomendado)
- 2 Saltar este paso
- 0 Salir
- 
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR EDITOR DE VIDEO OLIVE
-
-sudo mkdir -p /opt/tmp/olive
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo apt install /opt/tmp/olive/./olive-quirinux.deb -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;;
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR GESTOR DE SOFTWARE DE MINT LMDE4
- -----------------------------------------------------------------------------
- Mint LMDE4 (basado en Debian Buster) incluye un cómodo gestor de software 
- gráfico mucho más ligero que otros como gnome-software. Se trata de 
- Mininstall, viene en Quirinux 2.0 y permite instalar paquetes tipo Flatpak. 
- 
- Se instalará, además, la utilidad 'Flatpak-Config' (exclusiva de Quirinux)  
- con la que podrás activar o desactivar esta caracteristica, sin perjuicio 
- de que puedes elegir ahora tu preferencia.
-  ${bold}ADVERTENCIA:${normal} Requiere repositorios libres adicionales. 
- Si no los agregaste antes, puedes hacerlo ahora (opciones 4 y 5).
-
- 1 Instalar gestor de software de Mint con soporte Flatpak 
- 2 Saltar este paso.
- 3 Instalar gestor de software de Mint sin soporte Flatpak (recomendado)
- 4 Agregar los repositorios adicionales necesarios + opción 1.
- 5 Agregar los repositorios adicionales necesarios + opción 3.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc
- 
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
-
-sudo apt-get upgrade -y
-sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR FLATPAK-CONFIG
-
-sudo mkdir -p /opt/tmp/flatpak-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
-
-sudo apt-get upgrade -y
-sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
-sudo apt-get remove --purge flatpak
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-sudo apt-get upgrade -y
-
-# INSTALAR FLATPAK-CONFIG
-
-sudo mkdir -p /opt/tmp/flatpak-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"4")
-
-# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
-
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-
-# INSTALAR GESTOR DE PAQUETES DE MINT CON FLATPAK
-
-sudo apt-get install mintinstall -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR FLATPAK-CONFIG
-
-sudo mkdir -p /opt/tmp/flatpak-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"5")
-
-# AGREGA REPOSITORIOS LIBRES ADICIONALES NECESARIOS
-
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
-
-# INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
-
-sudo apt-get install mintinstall -y
-sudo apt-get remove --purge flatpak
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR FLATPAK-CONFIG
-
-sudo mkdir -p /opt/tmp/flatpak-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: GIMP + PLUGINS
- -----------------------------------------------------------------------------
- Instalación completa del editor profesional de imágenes GIMP, como 
- alternativa  a Adobe Photoshop. Se instala desde los repositorios oficiales 
- de Debian Buster.
- ${bold} ATENCIÓN:${normal} Si ya tienes instalado GIMP desde snap o 
- o flatpak, se deinstalará y se re-instalará desde los repositorios
- oficiales de Debian Buster. Esto es necesario para luego poder instalar
- el complemento gimp-quirinux, que permite elegir una interfáz y atajos 
- de teclado similares a los de Photoshop. 
-
-
-
- 1 Instalar GIMP + Plugins (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# Desinstalar GIMP desde snap y flatpak
-
-sudo snap remove gimp
-sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
-
-# INSTALAR GIMP 2.10 DESDE BUSTER
-
-for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: GIMP EDICIÓN QUIRINUX
- -----------------------------------------------------------------------------
- Se agrega un programa llamado ${bold}Configurar-Gimp${normal} que sirve para 
- convertir a Gimp  en ${bold}Gimp Edición Quirinux.${normal} Este programa 
- permite utilizar Gimp con los íconos  y/o atajos de Photoshop y revertir los 
- cambios en cualquier momento, a  diferencia de  otras utilidades similares
- que no posibilitan deshacer los cambios. 
- ${bold} ADVERTENCIA${normal} No funciona con GIMP instalado desde snap, 
- o flatpak, por lo que requiere haber instalado GIMP en el paso 
- anterior. Si no lo hiciste, puedes hacerlo ahora (opción 3). 
-
-
-
- 1 Instalar Gimp Edición Quirinux (recomendado).
- 2 Saltar este paso.
- 3 Instalar GIMP + Plugins + opcion 1.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
-sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo apt install /opt/tmp/gimp/./gimp-quirinux.deb -y
-sudo chmod 777 -R /home/
-sudo rm -rf /home/*/.config/GIMP
-sudo rm -rf /root/.config/GIMP 
-sudo rm -rf /usr/share/gimp 
-sudo rm -rf /etc/skel/.config/GIMP 
-for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
-sudo chmod 777 -R /home/
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# Desinstalar GIMP desde snap y flatpak
-
-sudo snap remove gimp
-sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused
-
-# INSTALAR GIMP 2.10 DESDE BUSTER
-
-
-for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
-
-sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo apt install /opt/tmp/gimp/./gimp-quirinux.deb -y
-sudo chmod 777 -R /home/
-sudo rm -rf /home/*/.config/GIMP
-sudo rm -rf /root/.config/GIMP 
-sudo rm -rf /usr/share/gimp 
-sudo rm -rf /etc/skel/.config/GIMP 
-for usuarios in /home/*; do sudo yes | sudo cp -r -a /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /root/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
-sudo yes | sudo cp -rf -a /opt/gimp-quirinux/gimp-shop/usr/share /usr/
-sudo chmod 777 -R /home/
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: IMPRESORAS Y ESCÁNERES
- -----------------------------------------------------------------------------
- Intalación de controladores de impresión y escaneo 100 % libres 
- (no incluye hplip ni controladores privativos de otros fabricantes)
-
-
-
-
-
-
-
-
-
- 1 Instalar controladores libres para impresoras y escáneres (recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR PQUETES DE IMPRESIÓN Y ESCANEO LIBRES
+# INSTALAR PAQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
 for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
 sudo apt-get install -f -y
@@ -1650,51 +412,10 @@ sudo tar -xvf epsonscan.tar
 ./install.sh
 sudo rm -rf /opt/tmp/*
 
-;;
+}
 
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: PAQUETES DE RED
- -----------------------------------------------------------------------------
- Intalación de controladores de red 100 % libres.
-
-
-
-
-
-
-
-
-
- 1 Instalar controladores libres para red.
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _libresRed()
+{
 
 # INSTALAR PAQUETES DE RED LIBRES
 
@@ -1702,203 +423,285 @@ for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo modemmanag
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"2")
+function _libresAMD()
+{
 
-clear
-
-;;
-
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: CONTROLADORES AMD LIBRES Y/O PRIVATIVOS 
- -----------------------------------------------------------------------------
- Intalación de controladores de video AMD (si los necesitas)
-   ${bold}ADVERTENCIA:${normal} Requiere activar non-free y contrib.
- Si instalaste Rrepo-Config pero no activaste non-free y contrib, puedes 
- activarlos ahora: ${bold}}Aplicaciones > Sistema > Repo-Config.${normal} 
- Se instalan controladores libres (para algunos modelos de hardware) 
- y privativos (cuando no hay libres).
-
-
-
-
-
- 1 Instalar controladores para AMD (libres y privativos).
- 2 Saltar este paso.
- 3 Instalar Repo-Config + activar non-free contrib backports + opción 1.
- 4 Instalar controladores para AMD (sólo los libres).
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
-
-for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
-sudo apt-get install -f
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# INSTALAR REPO-CONFIG
-
-sudo mkdir -p /opt/tmp/repo-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/apt/./repo-config-1.0-q2_amd64.deb -y
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
-
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-
-# INSTALAR CONTROLADORES DE VIDEO AMD LIBRES Y PRIVATIVOS
-
-for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
-sudo apt-get install -f
-sudo apt-get autoremove --purge -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"4")
-
-clear
-
-# INSTALAR SÓLO CONTROLADORES DE VIDEO AMD LIBRES
+# INSTALAR CONTROLADORES DE VIDEO AMD LIBRES
 
 for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
 sudo apt-get install -f
 sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"0")
+function _programasGeneral()
+{
 
+_baseBusterGeneral
+_ptxconf
+_chimiboga
+_samba
+_utiles
+_olive
+_GIMP
+_aqemu
+_widc
+_mint
+_salvapantallas
+_fuentes
+_temas
+_red
+_pulseaudio
+
+}
+
+function _instalarPro()
+{
 clear
+_instalarGeneral		
+_baseBusterPro
+_tipografiasPro
+_especializadosPro
+}
 
-exit 0
+function _baseBusterGeneral()
+{
 
-;; 
+# INSTALAR PAQUETES BASE DE BUSTER
 
-esac 
+for paquetes_buster in firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools   xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
-clear
+}
 
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR SOPORTE PARA VIRTUALIZACIÓN
- -----------------------------------------------------------------------------
- Instala los paquetes aqemu, qemu-kvm, qemu-system-data, intel-microcode, 
- amd-microcode, quemu-system, libvirt, virt-manager para crear máquinas vir-
- tuales e instalar dentro sistemas operativos completos cuando se necesita 
- ejecutar, por ejemplo, alguna aplicación de Microsoft Windows. 
- 
- Requiere un mother compatible con virtualización. 
- 
+function _ptxconf()
+{
 
+# INSTALAR UTILIDAD PTXCONF (MAPPING)
 
+sudo mkdir -p /opt/tmp/ptxtemp
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/ajaj7dRJFp8PJFK/download' -O /opt/tmp/ptxtemp/ptxconf.tar
+sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
+cd /opt/ptxconf
+sudo python setup.py install
+sudo apt-get install -f -y
+sudo apt-get install libappindicator1 -y
+sudo mkdir -p /opt/tmp/python-appindicator
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
 
+# Agrega entrada al inicio para PTXCONFIG
 
- 1 Instalar soporte para virtualización (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-"
+for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
-read -p " Tu respuesta-> " opc 
+}
 
-case $opc in
+function _chimiboga()
+{
 
-"1") 
+# INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
 
-clear
+sudo mkdir -p /opt/tmp/chimiboga
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
+sudo apt install /opt/tmp/chimiboga/./chimiboga.deb -y
+
+}
+
+function _samba()
+{
+
+# INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
+
+sudo apt-get install samba -y
+sudo mkdir -p /opt/tmp/samba
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
+sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
+sudo touch /etc/libuser.conf
+
+}
+
+function _utiles()
+{
+
+# INSTALAR MUGSHOT
+
+sudo mkdir -p /opt/tmp/mugshot
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
+sudo apt install /opt/tmp/mugshot/./mugshot_0.4.2-1_all.deb -y
+
+# INSTALAR CONVERSOR MYSTIQ DESDE OPENSUSE
+
+for paquetes_mystiq in mystiq; do sudo apt-get install -y $paquetes_mystiq; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR PLUGIN PARA DESCARGAR VIDEOS EN FIREFOX
+
+sudo mkdir -p /opt/tmp/video-downloader
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
+sudo apt install /opt/tmp/video-downloader/./net.downloadhelper.coapp-1.5.0-1_amd64.deb -y
+
+# INSTALAR DENSIFY (para reducir archivos PDF)
+
+sudo mkdir -p /opt/tmp/densify
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
+sudo apt install /opt/tmp/densify/./densify-0.3.1-q2_amd64.deb -y
+
+# INSTALAR IMAGINE (para reducir imágenes)
+
+sudo mkdir -p /opt/tmp/imagine
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
+sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
+
+# INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
+
+sudo mkdir -p /opt/tmp/openboard
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
+sudo apt install /opt/tmp/openboard/./openboard.deb -y
+
+# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
+
+for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
+sudo apt-get install -f
+sudo mkdir -p /opt/tmp/cpu
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
+sudo apt install /opt/tmp/cpu/./*.deb -y
+
+}
+
+function _olive()
+{
+
+# INSTALAR EDITOR DE VIDEO OLIVE
+
+sudo mkdir -p /opt/tmp/olive
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
+sudo apt install /opt/tmp/olive/./olive-quirinux.deb -y
+}
+
+function _GIMP()
+{
+
+# Desinstalar GIMP desde snap y flatpak
+
+sudo snap remove gimp -y
+sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused -y
+
+# INSTALAR GIMP 2.10 DESDE BUSTER
+
+for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
+
+sudo mkdir -p /opt/tmp/gimp/
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
+sudo apt install /opt/tmp/gimp/./gimp-quirinux.deb -y
+
+sudo chmod 755 -R /home/
+
+sudo rm -rf /home/*/.config/GIMP
+sudo rm -rf /root/.config/GIMP 
+sudo rm -rf /usr/share/gimp 
+sudo rm -rf /etc/skel/.config/GIMP 
+
+for usuarios in /home/*; do sudo yes | sudo cp -r /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
+
+sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/.config /root/ 
+sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
+sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/usr/share /usr/
+
+sudo chmod 755 -R /home/
+}
+
+function _aqemu()
+{
 
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
 for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
 sudo apt-get install -f -y
 
-# sudo mkdir -p /opt/tmp/virtualbox
-# sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/nHKTyB4qdbCMGBY/download' -O /opt/tmp/virtualbox/virtualbox.deb
-# cd /opt/tmp/virtualbox
-# sudo apt install .virtualbox.deb -y
+}
 
-;;
+function _wicd()
+{
 
-"2")
+# INSTALAR WICD
 
-clear
+for paquetes_wicd in wicd; do sudo apt-get install -y $paquetes_wicd; done
+for paquetes_nm in network-manager; do sudo apt-get autoremove --purge -y $paquetes_nm; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"0")
+function _mint()
+{
 
-clear
+# INSTALAR MINTBACKUP, MINTUPDATE y TIMESHIFT
 
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: SCREENSAVER
- -----------------------------------------------------------------------------
- Instalación del protector de pantalla screensaver gluclo, que es un relój de
- retro similar al de MacOS.
+for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
 
+# REINSTALA REPOS LIBRES (por si minstources los desconfiguró).
 
+if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
+sudo rm /etc/apt/sources.list.d/debian.list
+fi
 
+if [ -e "/etc/apt/apt.conf.d" ]; then
+sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
+fi
+if [ -e "/etc/apt/auth.conf.d" ]; then
+sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
+fi
+if [ -e "/etc/apt/preferences.d" ]; then
+sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
+fi
+if [ -e "/etc/apt/sources.list.d" ]; then
+sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
+fi
+if [ -e "trusted.gpg.d" ]; then
+sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
+fi
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
+sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo apt-get update -y
 
+if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
+sudo rm /etc/apt/sources.list.d/debian.list
+fi
 
+}
 
+function _centro()
 
+{
+# INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
- 1 Instalar screensaver gluclo (simil Relój de fichas de MacOs).
- 2 Saltar este paso.
- 0 Salir.
-"
+sudo apt-get upgrade -y
+sudo apt-get dist-ugprade -y
+sudo apt-get install mintinstall -y
+sudo apt-get autoremove --purge flatpak -y
 
-read -p " Tu respuesta-> " opc 
+# INSTALAR FLATPAK-CONFIG
 
-case $opc in
+sudo mkdir -p /opt/tmp/flatpak-config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
+sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
 
-"1") 
+}
 
-clear
+function _salvapantallas()
+{
 
 # INSTALAR SCREENSAVER GLUCLO
 
@@ -1915,173 +718,10 @@ for usuarios in /home/*; do sudo yes | sudo cp /opt/tmp/screensaver/gluqlo-maste
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR GESTOR DE REDES WICD
- -----------------------------------------------------------------------------
- Este gestor es el que viene por defecto en Quirinux, en lugar de 
- Network-Manager.
- 
-
-
-
-
-
-
-
-
- 1 Instalar (recomendado)
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# INSTALAR WICD
-
-for paquetes_wicd in wicd; do sudo apt-get install -y $paquetes_wicd; done
-for paquetes_nm in network-manager; do sudo apt-get autoremove --purge -y $paquetes_nm; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: AJUSTES DE SONIDO
- -----------------------------------------------------------------------------
- Reinstalar PulseAudio puede solucionar algunas incidencias que ocurren al ins-
- talar algunas aplicaciones de Quirinux.
- 
-
-
-
-
-
-
-
-
- 1 Reinstalar PulseAudio (recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# REINSTALAR PULSEAUDIO
-
-sudo apt-get remove --purge pulseuadio pavucontrol -y
-sudo apt-get clean
-sudo apt-get autoremove --purge -y
-sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
-
-sudo apt-get install pulseaudio rtkit pavucontrol -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: INSTALAR TIPOGRAFÍAS
- -----------------------------------------------------------------------------
- Puedes instalar las fuentes que vienen preinstaladas en Quirinux, 
- incluyendo las de Microsoft. 
-  ${bold} ADVERTENCIA: ${normal}Si eliges eliminar tus tipografías actuales, 
- puede que dejes de poder visualizar tu sistema  este programa. En ese caso
- necesitarás reiniciar tu ordenador -cuando veas que este programa se 
- en cuentre detenido- y volver a iniciar este programa saltando los pasos 
- anteriores y este mismo para continuar.
-
-
-
-
- 1 Instalar fuentes (eliminando las actuales) (CUIDADO!)
- 2 Saltar este paso
- 3 Instalar fuentes (sin eliminar las actuales)
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# Borrar fuentes anteriores !!! (CUIDADO!)
-
-sudo rm -rf /usr/share/fonts/*
+function _fuentes()
+{
 
 # Descargando y copiando fuentes de Quirinux
 
@@ -2093,22 +733,6 @@ sudo chown $USER -R /opt/tmp/fuentes/
 sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
 sudo cp -r -a /opt/tmp/fuentes/quirinux-fuentes/* /
 
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
 # Descargando y copiando fuentes de Quirinux
 
 sudo mkdir -p /opt/tmp
@@ -2119,51 +743,11 @@ sudo chown $USER -R /opt/tmp/fuentes/
 sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
 sudo cp -r -a /opt/tmp/fuentes/quirinux-fuentes/* /
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
+function _temas()
+{
 
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: ÍCONOS Y TEMAS DE ESCRITORIO
- -----------------------------------------------------------------------------
- Instalación de temas de escritorio, íconos y menú de Quirinux GENERAL.
- ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
- borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
- sin eliminar nada. 
-
-
-
-
-
-
-
- 1 Instalar íconos y temas borrando los actuales. (CUIDADO!)
- 2 Saltar este paso
- 3 Instalar íconos y temas sin borrar los actuales (recomendado)
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
 
 # OTORGANDO PERMISOS PARA MODIFICAR TEMAS
 
@@ -2216,72 +800,10 @@ sudo chmod 777 -R /usr/share/desktop-base/
 sudo chmod 777 -R /usr/share/images/
 sudo chmod u+s /usr/sbin/hddtemp
 
-# ELIMINANDO ERRORES DE INICIO (RED
+}
 
-sudo rm -rf /etc/network/interfaces.d/setup
-sudo chmod 777 /etc/network/interfaces
-sudo echo "auto lo" >> /etc/network/interfaces
-sudo echo "iface lo inet loopback" /etc/network/interfaces
-sudo chmod 644 /etc/network/interfaces
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# OTORGANDO PERMISOS PARA MODIFICAR TEMAS
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod 777 -R /usr/share/fonts/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# INSTALAR TEMAS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/temas
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/o7rg7CpARw5CPLA/download' -O /opt/tmp/temas/quirinux-temas.tar
-sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
-
-# INSTALAR ÍCONOS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/winbugs
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo apt install /opt/tmp/winbugs/./winbugs-icons.deb v
-
-# MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX'
-
-sudo mkdir -p /opt/tmp/config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
-sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /opt/tmp/config/
-sudo cp -r /opt/tmp/config/quirinux-config/* /
-sudo update-grub
-sudo update-grub2
-
-# PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
-
-sudo chmod 777 -R /home/
-for usuarios2 in /home/*; do sudo yes | sudo cp -r -a /etc/skel/* $usuarios2; done
-
-# OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod u+s /usr/sbin/hddtemp
+function _red()
+{
 
 # ELIMINANDO ERRORES DE INICIO (RED
 
@@ -2291,53 +813,27 @@ sudo echo "auto lo" >> /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
+function _pulseaudio()
+{
 
-;;
+# REINSTALAR PULSEAUDIO
 
-"0")
+sudo apt-get remove --purge pulseuadio pavucontrol -y
+sudo apt-get clean
+sudo apt-get autoremove --purge -y
+sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
+sudo apt-get install pulseaudio rtkit pavucontrol -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 
-clear
+}
 
-exit 0
-
-;; 
-
-esac 
-
-clear 
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX GENERAL: BORRAR COMPONENTES QUE QUIRINUX  GENERAL NO INCLUYE
- -----------------------------------------------------------------------------
- Remover componentes que Quirinux GENERAL no incluye.
- ${bold} ADVERTENCIA:${normal} Quirinux procura ahorrar espacio para adelgazar las ISO de 
- instalación en modo live, por tal motivo se borraran conjuntos de caracteres 
- no occidentales, idiomas, diccionarios y toda la documentación (manuales, 
- archivos readme de Debian, etc de la carpeta /usr/share/doc/ 
- 
-
-
-
-
-
- 1 Remover componentes que no vienen en Quirinux (CUIDADO!).
- 2 Saltar este paso (recomendado).
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _remover()
+{
 
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
-
 
 for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
 sudo apt-get install -f -y
@@ -2387,62 +883,10 @@ sudo apt-get autoremove --purge -y
 
 sudo rm -rf /usr/share/doc/*
 
-# Borrar archivos temporales 
+}
 
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- ¡QUIRINUX GENERAL INSTALADO!
- -----------------------------------------------------------------------------
- Hasta ahora, instalamos paquetes disponibles en la edición GENERAL. Puedes 
- salir ahora o ingresar en el terreno de ${bold}Quirinux Edicion PRO${normal}.
- Todo lo que trae Quirinux GENERAL, también lo trae Quirinux PRO, sólo que
- que mientras GENERAL está pensada para uso general, PRO es un sistema hecho
- para la fotografía, la edición multimedia y el cine de animación.
- Si sales ahora, de todas formas siempre podrás reiniciar este programa y 
- saltar hasta este paso si luego decides retomar la instalación y ampliar
- las características hasta convertir a Quirinux General en Quirinux PRO. 
-
-
-
- 1 Borrar temporales y salir
- 2 Continuar con la instalación de Quirinux PRO (recomendado) 
- 0 Salir sin borrar los temporales. 
-"
-
-read -p " Tu respuesta-> " opc
- 
-case $opc in
-
-"2") 
-
-clear
-
-;;
-
-"1")
-
-clear
+function _limpiar()
+{
 
 # CONFIGURANDO PAQUETES
 
@@ -2461,69 +905,33 @@ sudo apt-get update --fix-missing
 sudo apt-get install -f
 
 sudo apt-get autoremove --purge -y
-sudo apt-get install -f
 
-# LIMPIEZA FINAL 
+# LIMPIEZA FINAL (descomentar para crear la iso live)
 
-sudo rm -rf /var/lib/apt/lists/lock/* 
-sudo rm -rf /var/cache/apt/archives/lock/*
-sudo rm -rf /var/lib/dpkg/lock/*
-sudo rm -rf /lib/live/mount/rootfs/*
-sudo rm -rf /lib/live/mount/*
-sudo rm -rf /var/cache/apt/archives/*.deb
-sudo rm -rf /var/cache/apt/archives/partial/*.deb
-sudo rm -rf /var/cache/apt/partial/*.deb
-sudo rm -rf /opt/tmp/*
-sudo rm -rf /.git
+# sudo rm -rf /var/lib/apt/lists/lock/* 
+# sudo rm -rf /var/cache/apt/archives/lock/* 
+# sudo rm -rf /var/lib/dpkg/lock/*
+# sudo rm -rf /lib/live/mount/rootfs/*
+# sudo rm -rf /lib/live/mount/*
+# sudo rm -rf /var/cache/apt/archives/*.deb
+# sudo rm -rf /var/cache/apt/archives/partial/*.deb
+# sudo rm -rf /var/cache/apt/partial/*.deb
+# sudo rm -rf /opt/tmp/*
+# sudo rm -rf /.git
+}
 
-exit 0
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: SELECCIÓN DE PROGRAMAS GRÁFICOS Y MULTIMEDIA
- -----------------------------------------------------------------------------
- Instalar programas gráficos y multimedia que se encuentran en los 
- repositorios oficiales de Debian Buster pero que no vienen instalados por
- defecto:
- manuskript birdfont skanlite pencil2d devede vokoscreen-ng soundconverter 
- hugin invada-studio-plugins-ladspa aegisub, xsane, guvcview, kdenlive
- vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples  
- pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic 
- krita-l10n dvd-styler obs-studio obs-plugins digikam xsane, sweethome3d
- scribus
-
-
- 1 Instalar especializados estándar (recomendado).
- 2 Saltar este paso.
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _baseBusterPro()
+{
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 
-
 for paquetes_estandar in manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
+
+}
+
+function _tipografiasPro()
+{
 
 # INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
 
@@ -2532,53 +940,10 @@ sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/eQrxHfx5QeeQtAL/d
 sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
 sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: PROGRAMAS EXCLUSIVOS DE ANIMACIÓN
- -----------------------------------------------------------------------------
- Conjunto de programas empaquetados especialmente para Quirinux y que no  
- están presentes en la mayoría de los respositorios oficiales de otras 
- distribuciones:
- 
- ${bold}Storyboarder:${normal} Alternativa a Toon Boom Storyboard Pro
- ${bold}Tupi, qStopMotion:${normal} Alternativas a Toon Boom Harmony y Dragonframe
- ${bold}Natron, Enve:${normal} Alternativas a Adobe After Effects
- ${bold}MyPaint, AzPAinter:${normal} Alternativas Corel Painter y SAI
- ${bold}Belle, Godot:${normal} Desarrollo de videojuegos 
- ${bold}Quinema:${normal} Scripts de animación de Ernesto Bazzano 
- ${bold}Inkscape:${normal} Dibujo vectorial, verion más reciente que la de Debian
-
- 1 Instalar Especializados Quirinux
- 2 Saltar este paso
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
+function _especializadosPro()
+{
 
 # INSTALANDO INKSCAPE
 
@@ -2604,6 +969,11 @@ sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
 sudo mkdir -p /opt/tmp/storyboarder
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GePzTyxoYpM622t/download' -O /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
 sudo apt install /opt/tmp/storyboarder/./storyboarder-2.0.0-q2_amd64.deb -y
+
+# INSTALAR KITSCENARIST
+sudo mkdir -p /opt/tmp/kitscenarist
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/26WpWbDH5g5nC6k/download' -O /opt/tmp/kitscenarist/kitscenarist64.deb
+sudo apt install /opt/tmp/kitscenarist/./kitscenarist64.deb -y
 
 # INSTALAR NATRON
 
@@ -2655,57 +1025,6 @@ sudo mkdir -p /opt/tmp/mypaint
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/TZL8554kj8HLjsK/download' -O /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
 sudo apt install /opt/tmp/mypaint/./mypaint-2-q2_amd64.deb -y
 
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR CINELERRA
- -----------------------------------------------------------------------------
- Instalación del editor de video profesional Cinelerra, 
- alternativa que supera en prestaciones a Adobe Premiere. 
-  ${bold}ADVERTENCIA:${normal} Requiere repositorios libres adicionales. 
- Si no los activaste al comienzo de la instalación, puedes hacerlo ahora 
- (opción 3).
-
-
-
-
-
-
- 1 Instalar Cinelerra (recomendado)
- 2 Saltar este paso
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
 mkdir -p /opt/tmp/cinelerra
@@ -2713,60 +1032,18 @@ sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/d
 sudo apt install /opt/tmp/cinelerra/./cinelerra.deb -y
 sudo rm -rf /opt/tmp/*
 
-;;
-
-"2")
-
-clear
-
-;;
-
-
-"0")
-
-clear
-
-exit 0
-
-;;
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: COMPILAR E INSTALAR OPENTOONZ
- -----------------------------------------------------------------------------
- Descargar código fuente e instalar compilando desde el código la versión más
- nueva del programa de animación profesional OpenToonz, con el que puedes 
- reemplazar a Toon Boom Harmony.
-  ${bold}ADVERTENCIA:${normal} El proceso de compilación de este programa
- es lento, pero vale la pena. 
-
-
-
-
-
-
- 1 Descargar, compilar e instalar OpenToonz (recomendado)
- 2 Saltar este paso
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
+# DESCARGAR Y COMPILAR OPENTOONZ
 
 # Instala dependencias del instalador de OpenToonz
 
+sudo apt-get update -y
 for paquetes_wget in wget git software-properties-common; do sudo apt-get install -y $paquetes_wget; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
 # Instala dependencias de OpenToonz
 
+sudo apt-get update -y
 for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libqt5multimedia5-plugins; do sudo apt-get install -y $paquetes_opentoonz; done
 for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_opentoonz2; done
 
@@ -2799,6 +1076,7 @@ cd toonz
 mkdir build
 cd build
 cmake ../sources
+make -j$(nproc)
 sudo make install 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -2806,15 +1084,19 @@ sudo apt-get autoremove --purge -y
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
 sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz-tmp/opentoonz-icon.tar
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz/opentoonz-icon.tar
+sudo mv /opt/tmp/opentoonz /opt/tmp/opentoonz-tmp
 sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /
+mv /opt/tmp/opentoonz /opt/opentoonz/opentoonz
 cp -r /opentoonz-icon/* /
-rm -r /opentoonz-icon
+rm -r /opentoonz-icon/
 
 # Creando comando de inicio de OpenToonz
 
 sudo chmod -R 775 /opt/opentoonz
 sudo chown -R $USER /opt/opentoonz
+
+FILE="/usr/local/bin/opentoonz"
 
 FILE="/usr/local/bin/opentoonz"
 
@@ -2847,113 +1129,13 @@ sudo rm /opt/opentoonz/bin/opentoonz-1.4.0.tar.gz
 
 clear
 
-;;
-
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR TAHOMA2D
- -----------------------------------------------------------------------------
- Tomando como base OpenToonz, Tahoma presenta una interfáz gráfica simplifi-
- cada y más idónea para quienes dibujan directamente en digital. Además, 
- este programa permite algo que OpenToonz en GNU/Linux todavía no: realizar
- animaciones en StopMotion y podemos decir que sirve para reemplazar a 
- Dragonframe. 
- 
-
-
-
-
-
- 1 Instalar Tahoma2D (recomendado)
- 2 Saltar este paso
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# Descarga Tahoma2D de los repositorios de Quirinux
+# INSTALAR TAHOMA 2D
 
 mkdir -p /opt/tmp/tahoma2d
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MWt7cqqGgQCdYby/download' -O /opt/tmp/tahoma2d/tahoma-1.1-q2_amd64.deb
 sudo apt install /opt/tmp/tahoma2d/./*.deb -y
 
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: VERSION MÁS NUEVA DE BLENDER
- -----------------------------------------------------------------------------
- A diferencia de Quirinux GENERAL, Quirinux PRO incluye una versión más 
- reciente del programa Blender.
- Blender no sólo sirve para animación 3D: en sus últimas versiones incorpora
- herramientas muy atractivas para la animación 2D y 2.5D. 
-
-
-
-
-
-
-
- 1 Instalar o actualizar a una versión reciente de Blender (recomendado)
- 2 Saltar este paso
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
 # ACTUALIZANDO BLENDER
-
 
 for paquetes_remover_blender in remove --purge blender-data; do sudo apt-get remove --purge -y $paquetes_remover_blender; done
 sudo mkdir -p /opt/tmp/blender283
@@ -2961,56 +1143,6 @@ sudo apt-get install -f -y
 sudo apt-get autoremove --purge -
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/PfagSW43yP9yGiX/download' -O /opt/tmp/blender283/blender-2.83-q2_amd64.deb
 sudo apt install /opt/tmp/blender283/./blender-2.83-q2_amd64.deb -y
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: INSTALAR ARDOUR 6
- -----------------------------------------------------------------------------
- Ardour es el equivalente a Pro Tools para Linux. 
- Se trata de un editor multipistas profesional, que sirve para grabar, mez-
- clar y masterizar una banda sonora completa. 
- 
- Quirinux Pro incluye la versión más actual. 
- 
- 
-
- 
- 
-
- 1 Instalar Ardour 6
- 2 Saltar este paso
- 0 Salir
-"
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
 
 # INSTALAR ARDOUR 6
 
@@ -3024,52 +1156,6 @@ for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; do
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-;;
-
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
- -----------------------------------------------------------------------------
- Entangle es un programa similar a EOS que sirve para cámaras reflex de los  
- fabricantes más conocidos.
- El plugin 'stopmo-preview' añade utilidad de stopmotion (papel cebolla y 
- podemos descargarlo a continuación pero necesita ser instalado sin permiso 
- de root. 
- Puedes instalarlo ejecutando -SIN permisos de root- el comando
- ${bold}instalar-plugin-entanglenormal}.
- 
-
-
-
- 1 Descargar Plugin stopmo-preview para Entangle
- 2 Saltar este paso
- 0 Salir
-"
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
 # DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
 # Luego será necesario ejecutar el comando instalar-plugin-entangle sin permisos de root.
 
@@ -3081,215 +1167,37 @@ sudo apt install /opt/tmp/./entangle-plugin-stopmotion.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-;;
+}
 
-"2")
-
-clear
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear
+function _avisoInicio()
+{
 
 echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: ÍCONOS Y TEMAS DE ESCRITORIO
+ INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
  -----------------------------------------------------------------------------
- Instalación de temas de escritorio e íconos de Quirinux PRO.
- ${bold} ADVERTENCIA: ${normal}A continuación puedes elegir si prefieres
- borrar tus íconos y temas actuales o simplemente agregar los de Quirinux
- sin eliminar nada. 
-
-
-
-
-
-
-
- 1 Instalar íconos y temas borrando los actuales. (CUIDADO!)
- 2 Saltar este paso
- 3 Instalar íconos y temas sin borrar los actuales (recomendado)
- 0 Salir
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# OTORGANDO PERMISOS PARA MODIFICAR TEMAS
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod 777 -R /usr/share/fonts/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# Borrando contenido original !!! (CUIDADO!)
-
-sudo rm -rf /usr/share/themes/*
-sudo rm -rf /usr/share/backgrounds/*
-sudo rm -rf /usr/share/desktop-base/*
-sudo rm -rf /usr/share/images/*
-
-# INSTALAR TEMAS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/temas
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/o7rg7CpARw5CPLA/download' -O /opt/tmp/temas/quirinux-temas.tar
-sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
-
-# INSTALAR ÍCONOS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/winbugs
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo apt install /opt/tmp/winbugs/./winbugs-icons.deb -y
-
-# MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
-# También instala menú principal de Quirinux y modifica algunos archivos más.
-
-sudo mkdir -p /opt/tmp/config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
-sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /opt/tmp/config/
-sudo cp -r /opt/tmp/config/quirinux-config/* /
-sudo update-grub
-sudo update-grub2
-
-# PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
-
-sudo chmod 777 -R /home/
-for usuarios2 in /home/*; do sudo yes | sudo cp -r -a /etc/skel/* $usuarios2; done
-
-# OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# ELIMINANDO ERRORES DE INICIO (RED
-
-sudo rm -rf /etc/network/interfaces.d/setup
-sudo chmod 777 /etc/network/interfaces
-sudo echo "auto lo" >> /etc/network/interfaces
-sudo echo "iface lo inet loopback" /etc/network/interfaces
-sudo chmod 644 /etc/network/interfaces
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
-
-;;
-
-"3")
-
-clear
-
-# OTORGANDO PERMISOS PARA MODIFICAR TEMAS
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod 777 -R /usr/share/fonts/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# INSTALAR TEMAS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/temas
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/o7rg7CpARw5CPLA/download' -O /opt/tmp/temas/quirinux-temas.tar
-sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
-
-# INSTALAR ÍCONOS DE QUIRINUX
-
-sudo mkdir -p /opt/tmp/winbugs
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo apt install /opt/tmp/winbugs/./winbugs-icons.deb -y
-
-# MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX'
-
-sudo mkdir -p /opt/tmp/config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
-sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /opt/tmp/config/
-sudo cp -r /opt/tmp/config/quirinux-config/* /
-sudo update-grub
-sudo update-grub2
-
-# PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
-
-sudo chmod 777 -R /home/
-for usuarios2 in /home/*; do sudo yes | sudo cp -r -a /etc/skel/* $usuarios2; done
-
-# OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
-
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# ELIMINANDO ERRORES DE INICIO (RED
-
-sudo rm -rf /etc/network/interfaces.d/setup
-sudo chmod 777 /etc/network/interfaces
-sudo echo "auto lo" >> /etc/network/interfaces
-sudo echo "iface lo inet loopback" /etc/network/interfaces
-sudo chmod 644 /etc/network/interfaces
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-clear 
-
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO: BORRAR COMPONENTES QUE QUIRINUX NO INCLUYE
- -----------------------------------------------------------------------------
- Remover componentes que Quirinux PRO no incluye. 
- ADVERTENCIA: Quirinux procura ahorrar espacio para adelgazar
- las ISO de instalación en modo live, por tal motivo se 
- borraran conjuntos de caracteres no occidentales, idiomas, 
- diccionarios y toda la documentación (manuales, archivos read-
- me de Debian, etc de la carpeta /usr/share/doc/ 
+${bold}   ___        _      _                  
+  / _ \ _   _ _ _ __ _ _ __  _   _ _  __
+ | | | | | | | | '__| | '_ \| | | \ \/ /
+ | |_| | |_| | | |  | | | | | |_| |>  < 
+  \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\ ${normal}
+                                       
  
+ (p) 2019-2021 Licencia GPLv3, Autor: Charlie Martínez® 
+ Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org   "
 
+sleep 1
 
+echo "
+ --------------------------------------------------------------------
+ | A continuación se instalarán algunos programas que el instalador | 
+ | de Quirinux necesita para funcionar y se agregarán, además, algu-|
+ | nos repositorios adicionales. Este procedimiento es 10%% seguro. |
+ --------------------------------------------------------------------"                                               
+sleep 0.1
 
-
- 1 Remover componentes que no vienen en Quirinux PRO (CUIDADO!)
- 2 Saltar este paso
- 0 Salir
+echo "
+ 1 Continuar
+ 0 Salir.
 "
 
 read -p " Tu respuesta-> " opc 
@@ -3300,66 +1208,10 @@ case $opc in
 
 clear
 
-# REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
-
-
-for paquetes_remover_idiomas_firefox in firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER TRADUCCIONES DE ESCRITORIO DE IDIOMAS QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_idiomas_task in task-albanian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_task; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER CONJUNTOS DE CARACTERES DE IDIOMAS QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_idiomas_ibus in inicatalan ipolish idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian  ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_ibus; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER DICCIONARIOS QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_idiomas_mythes in  myspell-et; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_mythes; done
-for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn  aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_aspell; done
-for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hunspell; done  
-for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_myspell; done
-for paquetes_remover_idiomas_hyphen in hyphen-hr hyphen-hu hyphen-lt; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hyphen; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER FUENTES QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_fonts; done 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER IDIOMAS DE LIBRE OFFICE QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_idiomas_libreoffice in libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el  libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_libreoffice; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
-
-for paquetes_remover_programas in xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli synapse balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# REMOVER DOCUMENTACIÓN
-
-sudo rm -rf /usr/share/doc/*
-
-# Borrar archivos temporales 
-
-sudo rm -rf /opt/tmp/*
-
-;;
-
-"2")
-
-clear
+_preRequisitos
+_instalarDialog
+_config
+_menuPrincipal
 
 ;;
 
@@ -3373,83 +1225,7 @@ exit 0
 
 esac 
 
-clear
+}
 
-echo " -----------------------------------------------------------------------------
- QUIRINUX PRO INSTALADO ¡FIN DE LA INSTALACIÓN!
- -----------------------------------------------------------------------------
- A continuación, se borrarán los archivos temporales.
+_inicio
 
-
-
-
-
-
-
-
-
-
- 1 Borrar archivos temporales y salir
- 0 Salir sin borrar los temporales
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-# CONFIGURANDO PAQUETES
-
-sudo dpkg --configure -a
-
-# LIMPIANDO CACHE
-
-sudo apt-get clean && sudo apt-get autoclean
-
-# REGENERANDO CACHE
-
-sudo apt-get update --fix-missing
-
-# CONFIGURANDO DEPENDENCIAS
-
-sudo apt-get install -f
-
-sudo apt-get autoremove --purge -y
-
-# LIMPIEZA FINAL (descomentar para crear la iso live)
-
-# sudo rm -rf /var/lib/apt/lists/lock/* 
-# sudo rm -rf /var/cache/apt/archives/lock/* 
-# sudo rm -rf /var/lib/dpkg/lock/*
-# sudo rm -rf /lib/live/mount/rootfs/*
-# sudo rm -rf /lib/live/mount/*
-# sudo rm -rf /var/cache/apt/archives/*.deb
-# sudo rm -rf /var/cache/apt/archives/partial/*.deb
-# sudo rm -rf /var/cache/apt/partial/*.deb
-# sudo rm -rf /opt/tmp/*
-# sudo rm -rf /.git
-
-exit 0
-
-;; 
-
-"2")
-
-clear
-
-exit 0
-
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
