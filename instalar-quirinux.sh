@@ -758,12 +758,12 @@ sudo chmod 777 -R /usr/share/images/
 sudo chmod 777 -R /usr/share/fonts/
 sudo chmod u+s /usr/sbin/hddtemp
 
-# Borrando contenido original !!! (CUIDADO!)
+# Descomentar para borrar los temas actuales:
 
-sudo rm -rf /usr/share/themes/*
-sudo rm -rf /usr/share/backgrounds/*
-sudo rm -rf /usr/share/desktop-base/*
-sudo rm -rf /usr/share/images/*
+# sudo rm -rf /usr/share/themes/*
+# sudo rm -rf /usr/share/backgrounds/*
+# sudo rm -rf /usr/share/desktop-base/*
+# sudo rm -rf /usr/share/images/*
 
 # INSTALAR TEMAS DE QUIRINUX
 
@@ -1191,7 +1191,7 @@ echo "
  --------------------------------------------------------------------
  | A continuación se instalarán algunos programas que el instalador | 
  | de Quirinux necesita para funcionar y se agregarán, además, algu-|
- | nos repositorios adicionales. Este procedimiento es 100% seguro. |
+ | nos repositorios adicionales. Este procedimiento es 10%% seguro. |
  --------------------------------------------------------------------"                                               
 sleep 0.1
 
@@ -1228,4 +1228,3 @@ esac
 }
 
 _inicio
-
