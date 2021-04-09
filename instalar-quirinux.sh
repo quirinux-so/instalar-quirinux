@@ -1191,7 +1191,7 @@ echo "
  --------------------------------------------------------------------
  | A continuación se instalarán algunos programas que el instalador | 
  | de Quirinux necesita para funcionar y se agregarán, además, algu-|
- | nos repositorios adicionales. Este procedimiento es 10%% seguro. |
+ | nos repositorios adicionales. Este procedimiento es 100% seguro. |
  --------------------------------------------------------------------"                                               
 sleep 0.1
 
