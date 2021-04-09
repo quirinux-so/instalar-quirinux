@@ -559,8 +559,8 @@ sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 sudo mkdir -p /opt/tmp/openboard
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard.deb
-sudo apt install /opt/tmp/openboard/./openboard.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard_1.3.0_amd64.deb
+sudo apt install /opt/tmp/openboard/./openboard_1.3.0_amd64.deb -y
 
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
