@@ -6,20 +6,249 @@
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0 RC_3
 
-function _inicio() # Verifica si está instalado dialog, wget y git
+# =========================================================================================
+# VERIFICAR REQUISITOS [CÓDIGO REUTILIZABLE]
+# =========================================================================================
+
+function _inicio() 
 {
 
-if [ -f /usr/bin/dialog ] && [ -f /usr/bin/git ] && [ -f /usr/bin/wget ] && [ -f /usr/local/bin/quirinux-sudoers ] && [ -f /etc/apt/sources.list.d/linux-libre.list ]; then # Cumple con los requisitos, continúa
-clear
-_menuPrincipal
+if [ -f /usr/bin/dialog ] && [ -f /usr/bin/git ] && [ -f /usr/bin/wget ] && [ -f /usr/local/bin/quirinux-sudoers ]; then # Cumple con los requisitos, continúa
+_menuRepositorios
 
 else # No cumple con los requisitos, los instala y continúa
 clear
 _avisoInicio
+_menuRepositorios
 
 fi
 
 }
+
+# =========================================================================================
+# INSTALAR PREREQUISITOS [CÓDIGO REUTILIZABLE]
+# =========================================================================================
+
+function _preRequisitos()
+{
+
+# INSTALAR WGET Y GIT
+
+clear
+sudo apt-get update -y
+for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
+
+}
+
+# =========================================================================================
+# INSTALAR DIALOG [CÓDIGO REUTILIZABLE]
+# =========================================================================================
+
+function _instalarDialog()
+{
+sudo apt-get install dialog -y
+}
+
+# =========================================================================================
+# FUNCION SALIR [CÓDIGO REUTILIZABLE]
+# =========================================================================================
+
+function _salir()
+{
+
+clear
+exit 0
+
+}
+
+# =========================================================================================
+# MENÚ CONDICIONAL [CASTELLANO]
+# =========================================================================================
+
+
+function _avisoInicio()
+{
+
+echo " -----------------------------------------------------------------------------
+ INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
+ -----------------------------------------------------------------------------
+${bold}   ___        _      _                  
+  / _ \ _   _ _ _ __ _ _ __  _   _ _  __
+ | | | | | | | | '__| | '_ \| | | \ \/ /
+ | |_| | |_| | | |  | | | | | |_| |>  < 
+  \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\ ${normal}
+                                       
+ 
+ (p) 2019-2021 Licencia GPLv3, Autor: Charlie Martínez® 
+ Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org   "
+
+sleep 1
+
+echo "
+ --------------------------------------------------------------------
+ | A continuación se instalarán algunos programas que el instalador | 
+ | de Quirinux necesita para funcionar y se agregarán, además, algu-|
+ | nos repositorios adicionales. Este procedimiento es 100% seguro. |
+ --------------------------------------------------------------------"                                               
+sleep 0.1
+
+echo "
+ 1 Continuar
+ 0 Salir.
+"
+
+read -p " Tu respuesta-> " opc 
+
+case $opc in
+
+"1") 
+
+clear
+
+_preRequisitos
+_instalarDialog
+_config
+
+;;
+
+"0")
+
+clear
+
+exit 0
+
+;; 
+
+esac 
+
+}
+
+# =========================================================================================
+# MENU REPOSITORIOS [CASTELLANO]
+# =========================================================================================
+
+function _menuRepositorios()
+
+{
+
+opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
+--stdout \
+--menu "Elije una opción" 16 62 6 \
+1 "Configurar repositorios extra para Debian Buster" \
+2 "Configurar repositorios extra para Devuan Beowulf" \
+3 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+4 "No configurar repositorios adicionales" \
+5 "Ayuda" \
+6 "Salir" )
+
+echo $opRepositorios
+
+if [[ $opRepositorios == 1 ]]; then # Instalar Quirinux Edición General 
+_sourcesDebian
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 2 ]]; then # Instalar Quirinux Edición Pro 
+_sourcesDevuan
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 3 ]]; then # Instalar componentes sueltos
+_sourcesUbuntu
+fi
+
+if [[ $opRepositorios == 3 ]]; then # Instalar componentes sueltos
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 5 ]]; then # AyudaRepositorios
+_ayudaRepositorios
+fi
+
+if [[ $opRepositorios == 6 ]]; then # Salir
+clear
+_salir
+fi
+}
+
+# =========================================================================================
+# AYUDA DEL MENÚ REPOSITORIOS [CASTELLANO]
+# =========================================================================================
+
+function _ayudaRepositorios()
+{
+
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "AYUDA" \
+--msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Buster XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). Si utilizas Debian XFCE o alguna derivada directa como Mint puedes instalar estos repositorios con tranquilidad. Ofrecemos la opción para instalar también repositorios de Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%. La opción más segura es la de no instalar repositorios, pero puede que algunas aplicaciones no se instalen (de todas formas, lo escencial funcionará)." 23 100
+_menuRepositorios
+}
+
+# =========================================================================================
+# MENÚ PRINCIPAL [CASTELLANO]
+# =========================================================================================
+
+function _menuPrincipal()
+
+{
+
+opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
+--stdout \
+--menu "Elije una opción" 16 50 5 \
+1 "Instalar Quirinux Edición General" \
+2 "Instalar Quirinux Edición Pro" \
+3 "Instalar componentes sueltos" \
+4 "Ayuda" \
+5 "Salir" )
+
+echo $opPrincipal
+
+if [[ $opPrincipal == 1 ]]; then # Instalar Quirinux Edición General 
+_instalarGeneral
+_menuPrincipal
+fi
+
+if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux Edición Pro 
+_instalarPro
+_menuPrincipal
+fi
+
+if [[ $opPrincipal == 3 ]]; then # Instalar componentes sueltos
+_instalarSueltos
+fi
+
+if [[ $opPrincipal == 4 ]]; then # Ayuda
+_ayudaPrincipal
+fi
+
+if [[ $opPrincipal == 5 ]]; then # Salir
+clear
+_salir
+fi
+}
+
+function _instalarDialog()
+{
+sudo apt-get install dialog -y
+}
+
+# =========================================================================================
+# AYUDA DEL MENÚ PRINCIPAL [CASTELLANO]
+# =========================================================================================
+
+function _ayudaPrincipal()
+{
+	
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "AYUDA" \
+--msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
+_menuPrincipal
+}
+
+
+# =========================================================================================
+# MENU INSTALAR COMPONENTES SUELTOS [CASTELLANO]
+# =========================================================================================
 
 function _instalarSueltos()
 {
@@ -138,77 +367,9 @@ _menuPrincipal
 
 }
 
-function _menuPrincipal()
-
-{
-
-opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
---stdout \
---menu "Elije una opción" 16 50 5 \
-1 "Instalar Quirinux Edición General" \
-2 "Instalar Quirinux Edición Pro" \
-3 "Instalar componentes sueltos" \
-4 "Ayuda" \
-5 "Salir" )
-
-echo $opPrincipal
-
-if [[ $opPrincipal == 1 ]]; then # Instalar Quirinux Edición General 
-_instalarGeneral
-_menuPrincipal
-fi
-
-if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux Edición Pro 
-_instalarPro
-_menuPrincipal
-fi
-
-if [[ $opPrincipal == 3 ]]; then # Instalar componentes sueltos
-_instalarSueltos
-fi
-
-if [[ $opPrincipal == 4 ]]; then # Ayuda
-_ayuda
-fi
-
-if [[ $opPrincipal == 5 ]]; then # Salir
-clear
-_salir
-fi
-}
-
-function _instalarDialog()
-{
-sudo apt-get install dialog -y
-}
-
-function _ayuda()
-{
-
-dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
---title "AYUDA" \
---msgbox "\nEl sistema operativo Quirinux GNU/Linux Versión 2.0 está basado en Debian GNU/Linux versión 10 (Buster) XFCE, por lo que instalar la ISO de Quirinux o instalar este script sobre un sistema Debian recién instalado es prácticamente lo mismo. Recuerda que Quirinux está hecho sobre el escritorio XFCE (podrías usar otro, como el Gnome que viene con la ISO live oficial de Debian, pero nosotros no hemos probado su funcionamiento).\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
-_menuPrincipal
-}
-
-function _salir()
-{
-
-clear
-exit 0
-
-}
-
-function _preRequisitos()
-{
-
-# INSTALAR WGET Y GIT
-
-clear
-sudo apt-get update -y
-for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
-
-}
+# =========================================================================================
+# FUNCIONES SIN SALIDA EN PANTALLA [NO NECESITAN TRADUCCIÓN]
+# =========================================================================================
 
 function _instalarGeneral()
 {
@@ -241,8 +402,8 @@ function _config()
 # CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
 
 sudo mkdir -p /opt/tmp/sudoers
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/QiGdK8pC4SjKL8p/download' -O /opt/tmp/sudoers/quirinux-sudoers-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/sudoers/./quirinux-sudoers-1.0-q2_amd64.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/QiGdK8pC4SjKL8p/download' -O /opt/tmp/sudoers/sudoersquirinux_1.0.0_all.deb
+sudo apt install /opt/tmp/sudoers/./sudoersquirinux_1.0.0_all.deb -y
 sudo chown root:root -R /etc/sudoers.d
 sudo chmod 755 -R /etc/sudoers.d/
 
@@ -250,64 +411,52 @@ sudo chmod 755 -R /etc/sudoers.d/
 
 sudo dpkg --add-architecture i386
 
-# AGREGA REPOSITORIOS LIBRES ADICIONALES
+}
 
-if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
-sudo rm /etc/apt/sources.list.d/debian.list
-fi
+function _sourcesDebian()
+{
 
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
+
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/sourcesquirinuxdebian_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./sourcesquirinuxdebian_1.0.0_all.deb
 sudo apt-get update -y
-
-if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
-sudo rm /etc/apt/sources.list.d/debian.list
-fi
-
 chown -R root:root /etc/apt
 
-# INSTALAR REPO-CONFIG
-
-sudo mkdir -p /opt/tmp/repo-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/qoP844Zns8niQqK/download' -O /opt/tmp/repo-config/repo-config-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/repo-config/./repo-config-1.0-q2_amd64.deb -y
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB Y BACKPORTS DE DEBIAN 
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
 
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
-# INSTALAR COMANDO QUIRINUX-LIBRE
+}
 
-sudo mkdir -p /opt/tmp/quirinux-libre
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/MzGBGDzeLDZHKzS/download' -O /opt/tmp/quirinux-libre/quirinux-libre.deb
-sudo apt install /opt/tmp/quirinux-libre/./quirinux-libre.deb -y
+function _sourcesDevuan()
+{
 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
+# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
+
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jSzsYgAkFa9eYPs/download' -O /opt/tmp/apt/sourcesquirinuxdevuan_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./sourcesquirinuxdevuan_1.0.0_all.deb
 sudo apt-get update -y
+chown -R root:root /etc/apt
 
-# BORRA REPO REPETIDO
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEVUAN
 
-if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
-sudo rm /etc/apt/sources.list.d/debian.list
-fi
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+}
+
+function _sourcesUbuntu()
+{
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
+
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate "http://cloud.opendesktop.org/s/cyqxpCTJ6yoFiAJ/download" -O /opt/tmp/apt/sourcesquirinuxubuntu_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./sourcesquirinuxubuntu_1.0.0_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
 }
 
 function _firmwareWifi()
@@ -375,8 +524,8 @@ function _libresGenius()
 sudo mkdir -p /opt/tmp/quirinux-genius
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
 sudo apt install /opt/tmp/./quirinux-genius/quirinux-genius-1.0-q2_amd64.deb -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb
-sudo apt install /opt/tmp/./quirinux-genius/wizardpen_0.7.0-alpha2_i386.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0_i386.deb
+sudo apt install /opt/tmp/./quirinux-genius/wizardpen_0.7.0_i386.deb -y
 
 }
 
@@ -559,8 +708,8 @@ sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 sudo mkdir -p /opt/tmp/openboard
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard_1.3.0_amd64.deb
-sudo apt install /opt/tmp/openboard/./openboard_1.3.0_amd64.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard_1.0.3_amd64.deb
+sudo apt install /opt/tmp/openboard/./openboard_1.0.3_amd64.deb -y
 
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
@@ -599,8 +748,8 @@ sudo apt-get autoremove --purge -y
 # INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
 
 sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimp-quirinux.deb
-sudo apt install /opt/tmp/gimp/./gimp-quirinux.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimpquirinux_1.0.0_amd64.deb
+sudo apt install /opt/tmp/gimp/./gimpquirinux_1.0.0_amd64.deb -y
 
 sudo chmod 755 -R /home/
 
@@ -672,8 +821,8 @@ if [ -e "trusted.gpg.d" ]; then
 sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
 fi
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/quirinux-apt.tar
-sudo tar -xvf /opt/tmp/apt/quirinux-apt.tar -C /
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/sourcesquirinux_1.0.0_amd64.deb
+sudo apt install /opt/tmp/apt/./sourcesquirinux_1.0.0_amd64.deb
 sudo apt-get update -y
 
 if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
@@ -774,8 +923,8 @@ sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
 # INSTALAR ÍCONOS DE QUIRINUX
 
 sudo mkdir -p /opt/tmp/winbugs
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/winbugs-icons.deb
-sudo apt install /opt/tmp/winbugs/./winbugs-icons.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/iconswinbugs_1.0.0_all.deb
+sudo apt install /opt/tmp/winbugs/./iconswinbugs_1.0.0_all.deb -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
 # También instala menú principal de Quirinux y modifica algunos archivos más.
@@ -888,6 +1037,10 @@ sudo rm -rf /usr/share/doc/*
 function _limpiar()
 {
 
+# LIMPIAR TEMPORALES
+
+sudo rm -rf /opt/tmp/*
+
 # CONFIGURANDO PAQUETES
 
 sudo dpkg --configure -a
@@ -916,7 +1069,6 @@ sudo apt-get autoremove --purge -y
 # sudo rm -rf /var/cache/apt/archives/*.deb
 # sudo rm -rf /var/cache/apt/archives/partial/*.deb
 # sudo rm -rf /var/cache/apt/partial/*.deb
-# sudo rm -rf /opt/tmp/*
 # sudo rm -rf /.git
 }
 
@@ -955,8 +1107,8 @@ sudo apt install /opt/tmp/inkscape/./inkscape-1.0-q2_amd64.deb -y
 # INSTALAR TUPITUBE
 
 sudo mkdir -p /opt/tmp/tupitube
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Zrce88JXLRjiqXF/download' -O /opt/tmp/tupitube/tupitube-desk-0.2.17-q2_amd64.deb
-sudo apt install /opt/tmp/tupitube/./tupitube-desk-0.2.17-q2_amd64.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/4C37F2wJ4ebAdLH/download' -O /opt/tmp/tupitube/tupitubedesk_0.2.17_amd64.deb
+sudo apt install /opt/tmp/tupitube/./tupitubedesk_0.2.17_amd64.deb -y
 
 # INSTALAR GODOT
 
@@ -1169,62 +1321,6 @@ sudo apt-get autoremove --purge -y
 
 }
 
-function _avisoInicio()
-{
-
-echo " -----------------------------------------------------------------------------
- INSTALAR QUIRINUX 2.0 SOBRE DEBIAN 10 (Buster)
- -----------------------------------------------------------------------------
-${bold}   ___        _      _                  
-  / _ \ _   _ _ _ __ _ _ __  _   _ _  __
- | | | | | | | | '__| | '_ \| | | \ \/ /
- | |_| | |_| | | |  | | | | | |_| |>  < 
-  \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\ ${normal}
-                                       
- 
- (p) 2019-2021 Licencia GPLv3, Autor: Charlie Martínez® 
- Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org   "
-
-sleep 1
-
-echo "
- --------------------------------------------------------------------
- | A continuación se instalarán algunos programas que el instalador | 
- | de Quirinux necesita para funcionar y se agregarán, además, algu-|
- | nos repositorios adicionales. Este procedimiento es 100% seguro. |
- --------------------------------------------------------------------"                                               
-sleep 0.1
-
-echo "
- 1 Continuar
- 0 Salir.
-"
-
-read -p " Tu respuesta-> " opc 
-
-case $opc in
-
-"1") 
-
-clear
-
-_preRequisitos
-_instalarDialog
-_config
+_inicio
 _menuPrincipal
 
-;;
-
-"0")
-
-clear
-
-exit 0
-
-;; 
-
-esac 
-
-}
-
-_inicio
