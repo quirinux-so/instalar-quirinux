@@ -1,20 +1,18 @@
 # instalar-quirinux.sh
 Autor: Charlie Martínez ®
 ## Acerca de este repositorio
-Quirinux es una imagen personalizada y compartida de Debian Buster que fue creada inicialmente con este script. Si ya cuentas con Debian Buster instalado, puedes utilizar este script para convertirlo en Quirinux. 
-
-Lo que hará el script es modificar los archivos de configuración de Buster para convertirlo en Quirinux 2.0, agregando los repositorios de Mint LMDE4, OpenSuse y Cinelerra, además de programas especialmente empaquetados en .deb para Quirinux (ej. Tupi, Storyboarder) y otros que se descargan y compilan directamente desde la versión más nueva de su código fuente (ej. Ardour, Opentoonz)
-
+Este script instala los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian Buster GNU/Linux XFCE. Si ya cuentas con Debian Buster XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados. 
+<br>
+Este script puede agregar los repositorios que Quirinux utiliza (Mint, OpenSuse y Cinelerra entre otros), además de programas especialmente empaquetados en .deb para Quirinux (ej. Tupi, Storyboarder) y otros que se descargan y compilan directamente desde la versión más nueva de su código fuente (ej. Opentoonz).
 ## Detalles adicionales
-Este instalador funciona por consola, en modo de texto y no es desatendido: cada paso requiere ser confirmado por el usuario. 
+Este instalador funciona por consola, con un menú en modo texto a color.
 ### Compatibilidad
-Programado para Debian Buster y probado con éxito en AV Linux, Linux Mint LMDE4 y Q4OS, o sea, distribuciones basadas en Debian Buster.
-NO COMPATIBLE CON: Devuan Beowult, derivadas como Etertics, GobMis, etc. Tampoco es compatible con Ubuntu. Para utilizarlo con distros que no sean Debian Buster, es necesario modificar el código fuente en lo que concierne a paquetes de instalación / desinstalación de base y sources.list 
+Programado para Debian Buster, en las últimas revisiones incluye la posibilidad de seleccionar repositorios para Devuan Beowulf y Ubuntu 20.04, distribuciones que no han sido probadas por lo que es posible que algunas aplicaciones no se instalen. También se agregó la posibilidad de no instalar repositorios adicionales, opción segura (aunque no se instalarán aquellos programas que provengan de los repositorios adicionales que se pretendía agregar). 
 ### Instrucciones
 sudo chmod 755 instalar-quirinux.sh <br>
-su root (o sudo su, si está habilitado)<br>
+su root<br>
 ./instalar-quirinux.sh<br>
-Es preferible ejecutar este script de la forma indicada, en lugar de sudo ./instalar-quirinux.sh
+Es preferible ejecutar este script iniciando sesión como root, en lugar utilizar de sudo ./instalar-quirinux.sh
 #### Autores
 Charlie Martínez, haciendo uso de la libertad de distribución de la licencia GPL, ha programado este instalador pero no guarda relación con el desarrollo de gran parte del software que instala, el cual ha sido liberado casi en su totalidad bajo licencia GPLv3. Este script está liberado también bajo licencia GPLv3. Este script proporciona formas de instalar, de manera optativa, firmware privativo (publicado bajo licencias no libres que permiten su redistribución). 
 #### Avisos legales
