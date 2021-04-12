@@ -1,13 +1,11 @@
 # instalar-quirinux.sh
 Autor: Charlie Martínez ®
 ## Acerca de este repositorio
-Este script instala los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian Buster GNU/Linux XFCE. Si ya cuentas con Debian Buster XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados. 
-<br>
-Este script puede agregar los repositorios que Quirinux utiliza (Mint, OpenSuse y Cinelerra entre otros), además de programas especialmente empaquetados en .deb para Quirinux (ej. Tupi, Storyboarder) y otros que se descargan y compilan directamente desde la versión más nueva de su código fuente (ej. Opentoonz).
+Este programa sirve para instalas los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian Buster GNU/Linux XFCE. Si ya cuentas con Debian Buster XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados.<br><br>
 ## Detalles adicionales
 Este instalador funciona por consola, con un menú en modo texto a color.
-### Compatibilidad
-Programado para Debian Buster, en las últimas revisiones incluye la posibilidad de seleccionar repositorios para Devuan Beowulf y Ubuntu 20.04, distribuciones que no han sido probadas por lo que es posible que algunas aplicaciones no se instalen. También se agregó la posibilidad de no instalar repositorios adicionales, opción segura (aunque no se instalarán aquellos programas que provengan de los repositorios adicionales que se pretendía agregar). 
+### Compatibilidad con distribuciones
+Programado para Debian Buster, en las últimas revisiones incluye opción para seleccionar repositorios para Devuan Beowulf y Ubuntu 20.04, distribuciones que no han sido probadas por lo que es posible que algunas aplicaciones no se instalen. Se guardarán carpetas de backup con todas las configuraciones de la carpeta /etc/apt, por lo que los cambios son revertibles. También se agregó la posibilidad de no instalar repositorios adicionales, opción segura (aunque no se instalarán aquellos programas que provengan de los repositorios adicionales que se pretendía agregar). 
 ### Instrucciones
 sudo chmod 755 instalar-quirinux.sh <br>
 su root<br>
