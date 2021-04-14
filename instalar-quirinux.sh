@@ -765,6 +765,8 @@ sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/.config /etc/skel/
 sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/usr/share /usr/
 
 sudo chmod 755 -R /home/
+sudo chmod 777 -R /home/*/.config
+
 }
 
 function _aqemu()
