@@ -1198,42 +1198,29 @@ sudo apt-get autoremove --purge -y
 # Instala dependencias de OpenToonz
 
 sudo apt-get update -y
-for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libqt5multimedia5-plugins; do sudo apt-get install -y $paquetes_opentoonz; done
-for paquetes_opentoonz2 in libmypaint-dev; do sudo apt-get install -y $paquetes_opentoonz2; done
+for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libmypaint-dev libopencv-dev libturbojpeg-dev -y $paquetes_opentoonz; done
 
 # Descarga y compila el código fuente de OpenToonz
 
-mkdir -p /opt/tmp/opentoonz
-sudo wget  --no-check-certificate 'https://github.com/opentoonz/opentoonz/archive/v1.4.0.tar.gz' -O /opt/tmp/opentoonz/opentoonz-1.4.0.tar.gz
-tar -xzvf /opt/tmp/opentoonz/opentoonz-1.4.0.tar.gz -C /opt/tmp/
-cd /opt/tmp/opentoonz-1.4.0
+sudo wget  --no-check-certificate 'https://github.com/opentoonz/opentoonz/archive/refs/tags/v1.5.0.tar.gz' -O /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz
+tar -xzvf /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz -C /opt/tmp/
+cd /opt/tmp/opentoonz-1.5.0
+
 mkdir -p $HOME/.config/OpenToonz
-cp -r /opt/tmp/opentoonz-1.4.0/stuff $HOME/.config/OpenToonz/
-cat << EOF > $HOME/.config/OpenToonz/SystemVar.ini
-[General]
-OPENTOONZROOT="$HOME/.config/OpenToonz/stuff"
-OpenToonzPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
-TOONZCACHEROOT="$HOME/.config/OpenToonz/stuff/cache"
-TOONZCONFIG="$HOME/.config/OpenToonz/stuff/config"
-TOONZFXPRESETS="$HOME/.config/OpenToonz/stuff/projects/fxs"
-TOONZLIBRARY="$HOME/.config/OpenToonz/stuff/projects/library"
-TOONZPROFILES="$HOME/.config/OpenToonz/stuff/profiles"
-TOONZPROJECTS="$HOME/.config/OpenToonz/stuff/projects"
-TOONZROOT="$HOME/.config/OpenToonz/stuff"
-TOONZSTUDIOPALETTE="$HOME/.config/OpenToonz/stuff/studiopalette"
-EOF
-cd /opt/tmp/opentoonz-1.4.0/thirdparty/tiff-4.0.3 
+cp -r /opt/tmp/opentoonz-1.5.0/stuff $HOME/.config/OpenToonz/
+cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
+
+cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
 ./configure --with-pic --disable-jbig
+cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
 make -j$(nproc)
 cd ../../
-cd toonz
+
+cd ../../
 mkdir build
-cd build
+mkdir build
 cmake ../sources
 make -j$(nproc)
-sudo make install 
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
