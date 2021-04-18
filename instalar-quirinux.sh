@@ -1202,33 +1202,39 @@ for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev 
 
 # Descarga y compila el código fuente de OpenToonz
 
+sudo apt-get update -y
+for paquetes_opentoonz in wget build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libmypaint-dev libopencv-dev libturbojpeg-dev; do sudo apt-get install -y $paquetes_opentoonz; done
+
+mkdir -p /opt/tmp/opentoonz
 sudo wget  --no-check-certificate 'https://github.com/opentoonz/opentoonz/archive/refs/tags/v1.5.0.tar.gz' -O /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz
 tar -xzvf /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz -C /opt/tmp/
 cd /opt/tmp/opentoonz-1.5.0
 
 mkdir -p $HOME/.config/OpenToonz
 cp -r /opt/tmp/opentoonz-1.5.0/stuff $HOME/.config/OpenToonz/
-cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
 
 cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
 ./configure --with-pic --disable-jbig
-cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
 make -j$(nproc)
 cd ../../
 
-cd ../../
+cd toonz
 mkdir build
-mkdir build
+cd build
 cmake ../sources
 make -j$(nproc)
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
+mkdir -p /opt/opentoonz
+mv /opt/tmp/opentoonz-1.5.0/toonz/build/* /opt/opentoonz/
 sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz/opentoonz-icon.tar
+sudo mv /opt/opentoonz/ /opt/opentoonz2
 sudo mv /opt/tmp/opentoonz /opt/tmp/opentoonz-tmp
 sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /
-mv /opt/tmp/opentoonz /opt/opentoonz/opentoonz
+sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /opt/tmp/opentoonz-tmp/
+mv /opt/tmp/opentoonz-tmp/opentoonz-icon/opt/tmp /opt/opentoonz/opentoonz/
 cp -r /opentoonz-icon/* /
 rm -r /opentoonz-icon/
 
@@ -1236,8 +1242,6 @@ rm -r /opentoonz-icon/
 
 sudo chmod -R 775 /opt/opentoonz
 sudo chown -R $USER /opt/opentoonz
-
-FILE="/usr/local/bin/opentoonz"
 
 FILE="/usr/local/bin/opentoonz"
 
@@ -1266,7 +1270,7 @@ fi
 
 sudo rm -rf /opt/tmp/*
 sudo rm /opt/opentoonz/opentoonz-icon.tar
-sudo rm /opt/opentoonz/bin/opentoonz-1.4.0.tar.gz
+sudo rm /opt/opentoonz/bin/opentoonz-1.5.0.tar.gz
 
 clear
 
