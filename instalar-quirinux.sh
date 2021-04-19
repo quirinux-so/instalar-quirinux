@@ -1193,12 +1193,14 @@ mkdir build
 cd build
 cmake ../sources
 make -j$(nproc)
+make install
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
 mkdir -p /opt/tmp/opentoonz
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oTxLzXBFCZR8Abi/download' -O /opt/tmp/opentoonz/opentoonzicon_1.5.0_amd64.deb
 apt install /opt/tmp/opentoonz/./opentoonzicon_1.5.0_amd64.deb
+
 
 # Borrar archivos temporales
 
