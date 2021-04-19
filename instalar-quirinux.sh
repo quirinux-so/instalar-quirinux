@@ -87,8 +87,8 @@ sleep 1
 echo "
  --------------------------------------------------------------------
  | A continuación se instalarán algunos programas que el instalador | 
- | de Quirinux necesita para funcionar y se agregarán, además, algu-|
- | nos repositorios adicionales. Este procedimiento es 100% seguro. |
+ | de Quirinux necesita para funcionar.                             |
+ |  Este procedimiento es 100% seguro.                              |
  --------------------------------------------------------------------"                                               
 sleep 0.1
 
@@ -1170,11 +1170,6 @@ for paquetes_wget in wget git software-properties-common; do sudo apt-get instal
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# Instala dependencias de OpenToonz
-
-sudo apt-get update -y
-for paquetes_opentoonz in build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libmypaint-dev libopencv-dev libturbojpeg-dev -y $paquetes_opentoonz; done
-
 # Descarga y compila el código fuente de OpenToonz
 
 sudo apt-get update -y
@@ -1201,51 +1196,13 @@ make -j$(nproc)
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
-mkdir -p /opt/opentoonz
-mv /opt/tmp/opentoonz-1.5.0/toonz/build/* /opt/opentoonz/
-sudo mv /opt/opentoonz/bin/opentoonz /opt/opentoonz/bin/opentoonz2
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FZz85jagrQLCjjB/download' -O /opt/tmp/opentoonz/opentoonz-icon.tar
-sudo mv /opt/opentoonz/ /opt/opentoonz2
-sudo mv /opt/tmp/opentoonz /opt/tmp/opentoonz-tmp
-sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /
-sudo tar -xvf /opt/tmp/opentoonz-tmp/opentoonz-icon.tar -C /opt/tmp/opentoonz-tmp/
-mv /opt/tmp/opentoonz-tmp/opentoonz-icon/opt/tmp /opt/opentoonz/opentoonz/
-cp -r /opentoonz-icon/* /
-rm -r /opentoonz-icon/
-
-# Creando comando de inicio de OpenToonz
-
-sudo chmod -R 775 /opt/opentoonz
-sudo chown -R $USER /opt/opentoonz
-
-FILE="/usr/local/bin/opentoonz"
-
-if [ -f "$FILE" ]; then
-
-sudo rm /usr/local/bin/opentoonz
-mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/
-touch /opt/opentoonz/opentoonz
-echo "/opt/opentoonz/bin/./opentoonz2" > /opt/opentoonz/opentoonz
-cd /usr/local/bin
-sudo ln -s /opt/opentoonz/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
-
-else
-
-mv /opt/tmp/opentoonz-tmp/* /opt/opentoonz/bin/
-touch /opt/opentoonz/opentoonz
-echo "/opt/opentoonz/bin/./opentoonz2" > /opt/opentoonz/opentoonz
-cd /usr/local/bin
-sudo ln -s /opt/opentoonz/opentoonz
-sudo chmod 777 /usr/local/bin/opentoonz
-
-fi
+mkdir -p /opt/tmp/opentoonz
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oTxLzXBFCZR8Abi/download' -O /opt/tmp/opentoonz/opentoonzicon_1.5.0_amd64.deb
+apt install /opt/tmp/opentoonz/./opentoonzicon_1.5.0_amd64.deb
 
 # Borrar archivos temporales
 
 sudo rm -rf /opt/tmp/*
-sudo rm /opt/opentoonz/opentoonz-icon.tar
-sudo rm /opt/opentoonz/bin/opentoonz-1.5.0.tar.gz
 
 clear
 
