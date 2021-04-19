@@ -734,38 +734,13 @@ sudo apt install /opt/tmp/olive/./olive-quirinux.deb -y
 function _GIMP()
 {
 
-# Desinstalar GIMP desde snap y flatpak
 
-sudo snap remove gimp -y
-sudo flatpak uninstall org.gimp.GIMP && flatpak uninstall --unused -y
 
-# INSTALAR GIMP 2.10 DESDE BUSTER
-
-for paquetes_gimp in gimp gimp-data gimp-gap gimp-gluas gimp-gmic gimp-gutenprint gimp-plugin-registry gimp-python gimp-texturize gimp-ufraw; do sudo apt-get install -y $paquetes_gimp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-# INSTALAR CONVERSOR PARA GIMP EDICIÓN QUIRINUX
+# INSTALAR GIMP EDICION QUIRINUX
 
 sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimpquirinux_1.0.0_amd64.deb
-sudo apt install /opt/tmp/gimp/./gimpquirinux_1.0.0_amd64.deb -y
-
-sudo chmod 755 -R /home/
-
-sudo rm -rf /home/*/.config/GIMP
-sudo rm -rf /root/.config/GIMP 
-sudo rm -rf /usr/share/gimp 
-sudo rm -rf /etc/skel/.config/GIMP 
-
-for usuarios in /home/*; do sudo yes | sudo cp -r /opt/gimp-quirinux/gimp-shop/.config $usuarios; done
-
-sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/.config /root/ 
-sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/.config /etc/skel/ 
-sudo yes | sudo cp -rf /opt/gimp-quirinux/gimp-shop/usr/share /usr/
-
-sudo chmod 755 -R /home/
-sudo chmod 777 -R /home/*/.config
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimpquirinux_2.1.0_all.deb
+sudo apt install /opt/tmp/gimp/./gimpquirinux_2.1.0_all.deb -y
 
 }
 
