@@ -62,6 +62,16 @@ exit 0
 }
 
 # =========================================================================================
+# FUNCION BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
+# =========================================================================================
+
+function _borratemp()
+{
+sudo rm -rf /opt/tmp/*
+clear
+}
+
+# =========================================================================================
 # MENÚ CONDICIONAL [CASTELLANO]
 # =========================================================================================
 
@@ -305,7 +315,7 @@ _salvapantallas
 ;;
 
 6) # "Centro de software sencillo de usar (estilo Android)"
-_centro
+_centroDeSoftware
 ;;
 
 7) # "Compatibilidad con carpetas compartidas y redes de Microsoft" 
@@ -374,7 +384,7 @@ _menuPrincipal
 function _instalarGeneral()
 {
 clear
-_centro
+_centroDeSoftware
 _firmwareWifi
 _codecs
 _controladoresLibres
@@ -393,7 +403,74 @@ _libresWacom
 _libresGenius 
 _libresImpresoras 
 _libresRed
+}
 
+function _programasGeneral()
+{
+
+_baseBusterGeneral
+_ptxconf
+_chimiboga
+_samba
+_utiles
+_olive
+_GIMP
+_aqemu
+_widc
+_mint
+_salvapantallas
+_fuentes
+_temas
+_red
+_pulseaudio
+
+}
+
+function _instalarPro()
+{
+clear
+_instalarGeneral		
+_baseBusterPro
+_tipografiasPro
+_especializadosPro
+}
+
+function _especializadosPro()
+{
+
+_inkscape
+_tupitube
+_godot
+_storyboarder
+_opentoonz
+_kitscenarist
+_natron
+_azpainter
+_enve
+_quinema
+_qstopmotion
+_camarasVirtuales
+_belle
+_mypaint
+_cinelerra
+_tahoma2D
+_blender
+_ardour
+_pluginEntangle
+_borratemp
+
+}
+
+function _utiles()
+{
+_mugshot
+_mystiq
+_pluginYoutube
+_densify
+_imagine
+_openboard
+_cpuCoreUtils
+_borratemp
 }
 
 function _config()
@@ -585,36 +662,6 @@ sudo apt-get autoremove --purge -y
 
 }
 
-function _programasGeneral()
-{
-
-_baseBusterGeneral
-_ptxconf
-_chimiboga
-_samba
-_utiles
-_olive
-_GIMP
-_aqemu
-_widc
-_mint
-_salvapantallas
-_fuentes
-_temas
-_red
-_pulseaudio
-
-}
-
-function _instalarPro()
-{
-clear
-_instalarGeneral		
-_baseBusterPro
-_tipografiasPro
-_especializadosPro
-}
-
 function _baseBusterGeneral()
 {
 
@@ -672,45 +719,62 @@ sudo touch /etc/libuser.conf
 
 }
 
-function _utiles()
+function _mugshot()
 {
-
 # INSTALAR MUGSHOT
 
 sudo mkdir -p /opt/tmp/mugshot
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
 sudo apt install /opt/tmp/mugshot/./mugshot_0.4.2-1_all.deb -y
+}
 
+function _mystiq
+{
 # INSTALAR CONVERSOR MYSTIQ DESDE OPENSUSE
 
 for paquetes_mystiq in mystiq; do sudo apt-get install -y $paquetes_mystiq; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+}
 
+function _pluginYoutube()
+{
 # INSTALAR PLUGIN PARA DESCARGAR VIDEOS EN FIREFOX
 
 sudo mkdir -p /opt/tmp/video-downloader
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DHsA7oxmBQw8adb/download' -O /opt/tmp/video-downloader/net.downloadhelper.coapp-1.5.0-1_amd64.deb
 sudo apt install /opt/tmp/video-downloader/./net.downloadhelper.coapp-1.5.0-1_amd64.deb -y
+}
 
+function _densify()
+{
 # INSTALAR DENSIFY (para reducir archivos PDF)
 
 sudo mkdir -p /opt/tmp/densify
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
 sudo apt install /opt/tmp/densify/./densify-0.3.1-q2_amd64.deb -y
+}
 
+function _imagine()
+{
 # INSTALAR IMAGINE (para reducir imágenes)
 
 sudo mkdir -p /opt/tmp/imagine
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
 sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
+}
 
+function _openboard()
+{
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 sudo mkdir -p /opt/tmp/openboard
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard_1.0.3_amd64.deb
 sudo apt install /opt/tmp/openboard/./openboard_1.0.3_amd64.deb -y
+}
 
+function _cpuCoreUtils()
+{
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
 for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
@@ -718,8 +782,9 @@ sudo apt-get install -f
 sudo mkdir -p /opt/tmp/cpu
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
 sudo apt install /opt/tmp/cpu/./*.deb -y
-
 }
+
+
 
 function _olive()
 {
@@ -808,7 +873,7 @@ fi
 
 }
 
-function _centro()
+function _centroDeSoftware()
 
 {
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
@@ -1071,95 +1136,8 @@ sudo apt-get autoremove --purge -y
 
 }
 
-function _especializadosPro()
+function _opentoonz()
 {
-
-# INSTALANDO INKSCAPE
-
-for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
-sudo mkdir -p /opt/tmp/inkscape
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/inkscape/./inkscape-1.0-q2_amd64.deb -y
-
-# INSTALAR TUPITUBE
-
-sudo mkdir -p /opt/tmp/tupitube
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/4C37F2wJ4ebAdLH/download' -O /opt/tmp/tupitube/tupitubedesk_0.2.17_amd64.deb
-sudo apt install /opt/tmp/tupitube/./tupitubedesk_0.2.17_amd64.deb -y
-
-# INSTALAR GODOT
-
-sudo mkdir -p /opt/tmp/godot
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/w3R2NzrwwSMxPXC/download' -O /opt/tmp/godot/godot-2.3.3-q2_amd64.deb
-sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
-
-# INSTALAR STORYBOARDER
-
-sudo mkdir -p /opt/tmp/storyboarder
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GePzTyxoYpM622t/download' -O /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
-sudo apt install /opt/tmp/storyboarder/./storyboarder-2.0.0-q2_amd64.deb -y
-
-# INSTALAR KITSCENARIST
-sudo mkdir -p /opt/tmp/kitscenarist
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/26WpWbDH5g5nC6k/download' -O /opt/tmp/kitscenarist/kitscenarist64.deb
-sudo apt install /opt/tmp/kitscenarist/./kitscenarist64.deb -y
-
-# INSTALAR NATRON
-
-sudo mkdir -p /opt/tmp/natron
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zBY3tinXbQpqDbB/download' -O /opt/tmp/natron/natron-2.3.15-q2_amd64.deb
-sudo apt install /opt/tmp/natron/./natron-2.3.15-q2_amd64.deb -y
-
-# INSTALAR AZPAINTER
-
-sudo mkdir -p /opt/tmp/azpainter
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AojjBiP7NmoSBsA/download' -O /opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
-sudo apt install /opt/tmp/azpainter/./azpainter-2.1.4-q2_amd64.deb -y
-
-# INSTALAR ENVE
-
-sudo mkdir -p /opt/tmp/enve
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.0-q2_amd64.deb
-sudo apt install /opt/tmp/enve/./enve-0.0.0-q2_amd64.deb -y
-
-# INSTALAR QUINEMA
-
-sudo mkdir -p /opt/tmp/quinema
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zREfipBzSxYXFTK/download' -O /opt/tmp/quinema/quinema_1.0-q2_amd64.deb
-sudo apt install /opt/tmp/quinema/./quinema_1.0-q2_amd64.deb -y
-
-# INSTALAR QSTOPMOTION
-
-sudo mkdir -p /opt/tmp/qstopmotion
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MznJgLCFeWeQMGd/download' -O /opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
-sudo apt install /opt/tmp/qstopmotion/./qstopmotion-2.5.0-q2_amd64.deb -y
-
-# INSTALAR CONTROLADORES PARA CÁMARAS VIRTUALES
-# Complemento útil para qStopMotion
-
-sudo mkdir -p /opt/tmp/akvcam
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/2BL5CgEa3YgMx2g/download' -O /opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
-sudo chmod 777 -R /opt/tmp/akvcam/
-sudo apt install /opt/tmp/akvcam/./akvcam-1.0-q2_amd64.deb -y
-
-# INSTALAR BELLE
-
-sudo mkdir -p /opt/tmp/belle
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/pQw6Yyytaz8TQ46/download' -O /opt/tmp/belle/belle-0.7-q2_amd64.deb
-sudo apt install /opt/tmp/belle/./belle-0.7-q2_amd64.deb -y
-
-# INSTALAR MYPAINT
-
-sudo mkdir -p /opt/tmp/mypaint
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/TZL8554kj8HLjsK/download' -O /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
-sudo apt install /opt/tmp/mypaint/./mypaint-2-q2_amd64.deb -y
-
-# INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
-
-mkdir -p /opt/tmp/cinelerra
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
-sudo apt install /opt/tmp/cinelerra/./cinelerra.deb -y
-sudo rm -rf /opt/tmp/*
 
 # DESCARGAR Y COMPILAR OPENTOONZ
 
@@ -1201,19 +1179,147 @@ mkdir -p /opt/tmp/opentoonz
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oTxLzXBFCZR8Abi/download' -O /opt/tmp/opentoonz/opentoonzicon_1.5.0_amd64.deb
 apt install /opt/tmp/opentoonz/./opentoonzicon_1.5.0_amd64.deb
 
+}
 
-# Borrar archivos temporales
-
-sudo rm -rf /opt/tmp/*
-
-clear
-
+function _tahoma2D()
+{
 # INSTALAR TAHOMA 2D
 
 mkdir -p /opt/tmp/tahoma2d
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MWt7cqqGgQCdYby/download' -O /opt/tmp/tahoma2d/tahoma-1.1-q2_amd64.deb
 sudo apt install /opt/tmp/tahoma2d/./*.deb -y
+}
 
+function _inkscape()
+{
+# INSTALANDO INKSCAPE
+
+for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
+sudo mkdir -p /opt/tmp/inkscape
+sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
+sudo apt install /opt/tmp/inkscape/./inkscape-1.0-q2_amd64.deb -y
+}
+
+function _tupitube()
+{
+# INSTALAR TUPITUBE
+
+sudo mkdir -p /opt/tmp/tupitube
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/4C37F2wJ4ebAdLH/download' -O /opt/tmp/tupitube/tupitubedesk_0.2.17_amd64.deb
+sudo apt install /opt/tmp/tupitube/./tupitubedesk_0.2.17_amd64.deb -y
+}
+
+function _godot()
+{
+# INSTALAR GODOT
+
+sudo mkdir -p /opt/tmp/godot
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/w3R2NzrwwSMxPXC/download' -O /opt/tmp/godot/godot-2.3.3-q2_amd64.deb
+sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
+}
+
+function _storyboarder()
+{
+# INSTALAR STORYBOARDER
+
+sudo mkdir -p /opt/tmp/storyboarder
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GePzTyxoYpM622t/download' -O /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
+sudo apt install /opt/tmp/storyboarder/./storyboarder-2.0.0-q2_amd64.deb -y
+}
+
+function _kitscenarist()
+{
+# INSTALAR KITSCENARIST
+sudo mkdir -p /opt/tmp/kitscenarist
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/26WpWbDH5g5nC6k/download' -O /opt/tmp/kitscenarist/kitscenarist64.deb
+sudo apt install /opt/tmp/kitscenarist/./kitscenarist64.deb -y
+}
+
+function _natron()
+# INSTALAR NATRON
+
+sudo mkdir -p /opt/tmp/natron
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zBY3tinXbQpqDbB/download' -O /opt/tmp/natron/natron-2.3.15-q2_amd64.deb
+sudo apt install /opt/tmp/natron/./natron-2.3.15-q2_amd64.deb -y
+}
+
+function _azpainter()
+{
+# INSTALAR AZPAINTER
+
+sudo mkdir -p /opt/tmp/azpainter
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AojjBiP7NmoSBsA/download' -O /opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
+sudo apt install /opt/tmp/azpainter/./azpainter-2.1.4-q2_amd64.deb -y
+}
+
+function _enve()
+{
+# INSTALAR ENVE
+
+sudo mkdir -p /opt/tmp/enve
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.0-q2_amd64.deb
+sudo apt install /opt/tmp/enve/./enve-0.0.0-q2_amd64.deb -y
+}
+
+function _quinema()
+{
+# INSTALAR QUINEMA
+
+sudo mkdir -p /opt/tmp/quinema
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zREfipBzSxYXFTK/download' -O /opt/tmp/quinema/quinema_1.0-q2_amd64.deb
+sudo apt install /opt/tmp/quinema/./quinema_1.0-q2_amd64.deb -y
+}
+
+function _qstopmotion()
+{
+# INSTALAR QSTOPMOTION
+
+sudo mkdir -p /opt/tmp/qstopmotion
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MznJgLCFeWeQMGd/download' -O /opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
+sudo apt install /opt/tmp/qstopmotion/./qstopmotion-2.5.0-q2_amd64.deb -y
+}
+
+function _camarasVirtuales()
+{
+# INSTALAR CONTROLADORES PARA CÁMARAS VIRTUALES
+# Complemento útil para qStopMotion
+
+sudo mkdir -p /opt/tmp/akvcam
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/2BL5CgEa3YgMx2g/download' -O /opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
+sudo chmod 777 -R /opt/tmp/akvcam/
+sudo apt install /opt/tmp/akvcam/./akvcam-1.0-q2_amd64.deb -y
+}
+
+function _belle()
+{
+# INSTALAR BELLE
+
+sudo mkdir -p /opt/tmp/belle
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/pQw6Yyytaz8TQ46/download' -O /opt/tmp/belle/belle-0.7-q2_amd64.deb
+sudo apt install /opt/tmp/belle/./belle-0.7-q2_amd64.deb -y
+}
+
+function _mypaint()
+{
+# INSTALAR MYPAINT
+
+sudo mkdir -p /opt/tmp/mypaint
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/TZL8554kj8HLjsK/download' -O /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
+sudo apt install /opt/tmp/mypaint/./mypaint-2-q2_amd64.deb -y
+}
+
+function _cinelerra()
+{
+# INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
+
+mkdir -p /opt/tmp/cinelerra
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
+sudo apt install /opt/tmp/cinelerra/./cinelerra.deb -y
+sudo rm -rf /opt/tmp/*
+}
+
+function _blender()
+{
 # ACTUALIZANDO BLENDER
 
 for paquetes_remover_blender in remove --purge blender-data; do sudo apt-get remove --purge -y $paquetes_remover_blender; done
@@ -1222,7 +1328,10 @@ sudo apt-get install -f -y
 sudo apt-get autoremove --purge -
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/PfagSW43yP9yGiX/download' -O /opt/tmp/blender283/blender-2.83-q2_amd64.deb
 sudo apt install /opt/tmp/blender283/./blender-2.83-q2_amd64.deb -y
+}
 
+function _ardour()
+{
 # INSTALAR ARDOUR 6
 
 sudo mkdir -p /opt/tmp/ardour6
@@ -1234,7 +1343,10 @@ sudo apt install /opt/tmp/ardour6/./ardour6-6.3-q2_amd64.deb -y
 for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+}
 
+function _pluginEntangle()
+{
 # DESCARGAR PLUGIN STOPMO-PREVIEW PARA ENTANGLE
 # Luego será necesario ejecutar el comando instalar-plugin-entangle sin permisos de root.
 
@@ -1245,7 +1357,6 @@ sudo apt-get install python3-gi
 sudo apt install /opt/tmp/./entangle-plugin-stopmotion.deb
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
 }
 
 _inicio
