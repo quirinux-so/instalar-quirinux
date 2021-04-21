@@ -1236,6 +1236,7 @@ sudo apt install /opt/tmp/kitscenarist/./kitscenarist64.deb -y
 }
 
 function _natron()
+{
 # INSTALAR NATRON
 
 sudo mkdir -p /opt/tmp/natron
