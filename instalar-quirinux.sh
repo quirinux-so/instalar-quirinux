@@ -1712,5 +1712,5 @@ sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 }
 
-_inicio
+_inicioCheck
 _menuPrincipal
