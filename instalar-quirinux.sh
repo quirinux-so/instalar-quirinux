@@ -10,27 +10,38 @@
 # DOC EN CASTELLANO
 # =========================================================================================
 
-# 1. ESTRUCTURA
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *											  *
+# * 1. ESTRUCTURA									  *
+# *											  *
+# * Emulando, salvando la distancia, a la programación orientada a objetos, este 	  *
+# * programa se encuentra estructurado en funciones para facilitar su modificación.    	  *
+# * Se sugiere utilizar un editor con navegación por símbolos como Geany para mayor 	  *
+# * comodidad.										  *
+# * Los menúes de usuario acceden a combinaciones diversas de estas funciones, en su  	  *
+# * mayoría reducidas a mínimas expresiones de procesos para mayor control de cada 	  *
+# * componente individual.								  *
+# * Las funciones cuyas referencias vienen por defecto comentadas (por cuestiones de  	  *
+# * seguridad) se encuentran al principio, para favorecer a una rápida auditoría.	  *			
+# *											  *	
+# * 2. REFERENCIAS COMENTADAS 								  *
+#											  *
+# * Las referencias a las funciones _borrarTemasActuales() y _limpiezaAgresiva() 	  *
+# * se encuentran comentadas para mayor seguridad de los usuarios finales. Se sugiere	  *
+# * descomentarlas al momento de generar una ISO, lo que contribuye a disminuir el peso	  *
+# * de la misma.									  *
+# *											  *
+# * 3. PENDIENTES									  *
+# *											  *
+# * Se prevee traducir este programa a los idiomas en los que Quirinux se distribuye:	  *
+# * inglés, gallego, portugués, alemán, francés, ruso, italiano. 			  *
+# *											  *
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-# Emulando, salvando la distancia, a la programación orientada a objetos, este programa 
-# se encuentra estructurado en funciones para facilitar su modificación. 
-# Se sugiere utilizar un editor con navegación por símbolos como Geany para mayor comodidad.
-# Los menúes de usuario acceden a combinaciones diversas de estas funciones, en su mayoría
-# reducidas a mínimas expresiones de procesos para mayor control de cada componente individual.
-# Las funciones cuyas referencias vienen por defecto comentadas (por cuestiones de seguridad)
-# se encuentran al principio, para favorecer a una rápida auditoría. 
+# =========================================================================================
+# FUNCIONES PARA GENERACION DE ISO (DESCOMENTAR REFERENCIAS)
+# =========================================================================================
 
-# 2. REFERENCIAS COMENTADAS 
-
-# Las referencias a las funciones _borrarTemasActuales() y _limpiezaAgresiva() 
-# se encuentran comentadas para mayor seguridad de los usuarios finales. Se sugiere
-# descomentarlas al momento de generar una ISO, lo que contribuye a disminuir el peso
-# de la misma.
-
-# 3. PENDIENTES
-
-# Se prevee traducir este programa a los idiomas en los que Quirinux se distribuye:
-# inglés, gallego, portugués, alemán, francés, ruso, italiano. 
 
 function _borrarTemasActuales()
 {
