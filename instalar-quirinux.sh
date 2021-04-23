@@ -75,20 +75,43 @@ sudo rm -rf /.git
 # VERIFICAR REQUISITOS [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
 
-function _inicio() 
+function _inicioCheck()
 {
+	
+FILE1="/usr/local/bin/dialog"
+FILE2="/usr/local/bin/wget"
+FILE3="/usr/local/bin/git"
 
-if [ -f /usr/bin/dialog ] && [ -f /usr/bin/git ] && [ -f /usr/bin/wget ] && [ -f /usr/local/bin/quirinux-sudoers ]; then # Cumple con los requisitos, continúa
+if [ ! -h ${FILE1} ]; then
+
+clear
+_menuCondicional
 _menuRepositorios
 
-else # No cumple con los requisitos, los instala y continúa
+fi
+
+if [ ! -h ${FILE2} ]; then
+
 clear
-_avisoInicio
+_menuCondicional
+_menuRepositorios
+
+fi
+
+if [ ! -h ${FILE3} ]; then
+
+clear
+_menuCondicional
 _menuRepositorios
 
 fi
 
 }
+
+function _menuCondicional()
+
+{
+
 
 # ===========================================================================================
 # INSTALAR PREREQUISITOS [CÓDIGO REUTILIZABLE]
@@ -139,37 +162,6 @@ clear
 # ===========================================================================================
 # MENÚ CONDICIONAL [CASTELLANO]
 # ===========================================================================================
-
-function _inicioCheck()
-{
-	
-FILE1="/usr/local/bin/dialog"
-FILE2="/usr/local/bin/wget"
-FILE3="/usr/local/bin/git"
-
-if [ ! -h ${FILE1} ]; then
-
-_menuCondicional
-
-fi
-
-if [ ! -h ${FILE2} ]; then
-
-_menuCondicional
-
-fi
-
-if [ ! -h ${FILE3} ]; then
-
-_menuCondicional
-
-fi
-
-}
-
-function _menuCondicional()
-
-{
 
 echo " -----------------------------------------------------------------------------
  INSTALAR COMPONENTES DE QUIRINUX 2.0
