@@ -58,6 +58,7 @@ function _limpiezaAgresiva()
 {
 
 clear
+_remover
 sudo rm -rf /var/lib/apt/lists/lock/* 
 sudo rm -rf /var/cache/apt/archives/lock/* 
 sudo rm -rf /var/lib/dpkg/lock/*
@@ -670,7 +671,6 @@ _codecs
 _controladoresLibres
 _programasGeneral
 _pulseaudio
-_remover
 _limpiar
 }
 
@@ -714,6 +714,7 @@ _instalarGeneral
 _baseBusterPro
 _tipografiasPro
 _especializadosPro
+_limpiar
 }
 
 function _especializadosPro()
@@ -1384,6 +1385,8 @@ sudo rm -rf /usr/share/doc/*
 
 function _limpiar()
 {
+	
+_borratemp
 
 # LIMPIAR TEMPORALES
 clear
