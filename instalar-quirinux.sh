@@ -6,41 +6,41 @@
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0 RC_4
 
-# =========================================================================================
+# ===========================================================================================
 # DOC EN CASTELLANO
-# =========================================================================================
+# ===========================================================================================
 
-# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-# *											  *
-# * 1. ESTRUCTURA									  *
-# *											  *
-# * Emulando, salvando la distancia, a la programación orientada a objetos, este 	  *
-# * programa se encuentra estructurado en funciones para facilitar su modificación.    	  *
-# * Se sugiere utilizar un editor con navegación por símbolos como Geany para mayor 	  *
-# * comodidad.										  *
-# * Los menúes de usuario acceden a combinaciones diversas de estas funciones, en su  	  *
-# * mayoría reducidas a mínimas expresiones de procesos para mayor control de cada 	  *
-# * componente individual.								  *
-# * Las funciones cuyas referencias vienen por defecto comentadas (por cuestiones de  	  *
-# * seguridad) se encuentran al principio, para favorecer a una rápida auditoría.	  *			
-# *											  *	
-# * 2. REFERENCIAS COMENTADAS 								  *
-#											  *
-# * Las referencias a las funciones _borrarTemasActuales() y _limpiezaAgresiva() 	  *
-# * se encuentran comentadas para mayor seguridad de los usuarios finales. Se sugiere	  *
-# * descomentarlas al momento de generar una ISO, lo que contribuye a disminuir el peso	  *
-# * de la misma.									  *
-# *											  *
-# * 3. PENDIENTES									  *
-# *											  *
-# * Se prevee traducir este programa a los idiomas en los que Quirinux se distribuye:	  *
-# * inglés, gallego, portugués, alemán, francés, ruso, italiano. 			  *
-# *											  *
-# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *                                                                                         *
+# * 1. ESTRUCTURA                                                                           *
+# *	                                                                                        *
+# * Emulando, salvando la distancia, a la programación orientada a objetos, este            *
+# * programa se encuentra estructurado en funciones para facilitar su modificación.         *
+# * Se sugiere utilizar un editor con navegación por símbolos como Geany para mayor         *
+# * comodidad.                                                                              *
+# * Los menúes de usuario acceden a combinaciones diversas de estas funciones, en su        *
+# * mayoría reducidas a mínimas expresiones de procesos para mayor control de cada          *
+# * componente individual.                                                                  *
+# * Las funciones cuyas referencias vienen por defecto comentadas (por cuestiones de        *
+# * seguridad) se encuentran al principio, para favorecer a una rápida auditoría.           *	
+# *                                                                                         *	
+# * 2. REFERENCIAS COMENTADAS                                                               *
+# *                                                                                         *
+# * Las referencias a las funciones _borrarTemasActuales() y _limpiezaAgresiva()            *
+# * se encuentran comentadas para mayor seguridad de los usuarios finales. Se sugiere       *
+# * descomentarlas al momento de generar una ISO, lo que contribuye a disminuir el peso     *
+# * de la misma.                                                                            *
+# *	                                                                                        *
+# * 3. PENDIENTES                                                                           *
+# *                                                                                         *
+# * Se prevee traducir este programa a los idiomas en los que Quirinux se distribuye:       *
+# * inglés, gallego, portugués, alemán, francés, ruso, italiano.                            *
+# *                                                                                         *
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-# =========================================================================================
+# ===========================================================================================
 # FUNCIONES PARA GENERACION DE ISO (DESCOMENTAR REFERENCIAS)
-# =========================================================================================
+# ===========================================================================================
 
 
 function _borrarTemasActuales()
@@ -70,9 +70,9 @@ sudo rm -rf /.git
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # VERIFICAR REQUISITOS [CÓDIGO REUTILIZABLE]
-# =========================================================================================
+# ===========================================================================================
 
 function _inicio() 
 {
@@ -89,9 +89,9 @@ fi
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # INSTALAR PREREQUISITOS [CÓDIGO REUTILIZABLE]
-# =========================================================================================
+# ===========================================================================================
 
 function _preRequisitos()
 {
@@ -104,18 +104,18 @@ for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # INSTALAR DIALOG [CÓDIGO REUTILIZABLE]
-# =========================================================================================
+# ===========================================================================================
 
 function _instalarDialog()
 {
 sudo apt-get install dialog -y
 }
 
-# =========================================================================================
+# ===========================================================================================
 # FUNCION SALIR [CÓDIGO REUTILIZABLE]
-# =========================================================================================
+# ===========================================================================================
 
 function _salir()
 {
@@ -125,9 +125,9 @@ exit 0
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # FUNCION BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
-# =========================================================================================
+# ===========================================================================================
 
 function _borratemp()
 {
@@ -135,9 +135,9 @@ sudo rm -rf /opt/tmp/*
 clear
 }
 
-# =========================================================================================
+# ===========================================================================================
 # MENÚ CONDICIONAL [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _avisoInicio()
 {
@@ -195,9 +195,9 @@ esac
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # MENU REPOSITORIOS [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _menuRepositorios()
 
@@ -248,9 +248,9 @@ _salir
 fi
 }
 
-# =========================================================================================
+# ===========================================================================================
 # AYUDA DEL MENÚ REPOSITORIOS [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _ayudaRepositorios()
 {
@@ -261,9 +261,9 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 _menuRepositorios
 }
 
-# =========================================================================================
+# ===========================================================================================
 # MENÚ PRINCIPAL [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _menuPrincipal()
 
@@ -319,9 +319,9 @@ function _instalarDialog()
 sudo apt-get install dialog -y
 }
 
-# =========================================================================================
+# ===========================================================================================
 # AYUDA DEL MENÚ PRINCIPAL [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _ayudaPrincipal()
 {
@@ -333,9 +333,9 @@ _menuPrincipal
 }
 
 
-# =========================================================================================
+# ===========================================================================================
 # MENU INSTALAR COMPONENTES SUELTOS [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 function _instalarSueltos()
 {
@@ -479,9 +479,9 @@ _menuPrincipal
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
-# =========================================================================================
+# ===========================================================================================
 
 _instalarProgramasSueltos()
 {
@@ -657,9 +657,9 @@ _menuPrincipal
 
 }
 
-# =========================================================================================
+# ===========================================================================================
 # FUNCIONES SIN SALIDA EN PANTALLA [NO NECESITAN TRADUCCIÓN]
-# =========================================================================================
+# ===========================================================================================
 
 function _instalarGeneral()
 {
