@@ -78,40 +78,22 @@ sudo rm -rf /.git
 function _inicioCheck()
 {
 	
-FILE1="/usr/bin/dialog"
-FILE2="/usr/bin/wget"
-FILE3="/usr/bin/git"
+FILE="/usr/local/bin/quirinux-sudoers"
 
-if [ ! -h ${FILE1} ]; then
+if [ ! -e ${FILE} ]; then
 
 clear
 _menuCondicional
 _menuRepositorios
 
-fi
-
-if [ ! -h ${FILE2} ]; then
+else
 
 clear
-_menuCondicional
-_menuRepositorios
-
-fi
-
-if [ ! -h ${FILE3} ]; then
-
-clear
-_menuCondicional
 _menuRepositorios
 
 fi
 
 }
-
-function _menuCondicional()
-
-{
-
 
 # ===========================================================================================
 # INSTALAR PREREQUISITOS [CÓDIGO REUTILIZABLE]
@@ -159,6 +141,10 @@ sudo rm -rf /opt/tmp/*
 clear
 }
 
+function _menuCondicional()
+
+{
+	
 # ===========================================================================================
 # MENÚ CONDICIONAL [CASTELLANO]
 # ===========================================================================================
