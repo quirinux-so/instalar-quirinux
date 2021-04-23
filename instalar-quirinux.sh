@@ -78,9 +78,9 @@ sudo rm -rf /.git
 function _inicioCheck()
 {
 	
-FILE1="/usr/local/bin/dialog"
-FILE2="/usr/local/bin/wget"
-FILE3="/usr/local/bin/git"
+FILE1="/usr/bin/dialog"
+FILE2="/usr/bin/wget"
+FILE3="/usr/bin/git"
 
 if [ ! -h ${FILE1} ]; then
 
