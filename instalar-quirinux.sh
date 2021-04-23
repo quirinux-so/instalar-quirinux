@@ -515,12 +515,13 @@ options=(
 18 "Natron (composición y FX)" off
 19 "Olive (editor de video sencillo)" off
 20 "Openboard (convertir pantalla en pizarra)" off
-21 "qStopMotion (animación stop-motion)" off
-22 "Quinema (herramientas para animación)" off
-23 "Storyboarder (editor de storyboards)" off
-24 "Tahoma (animación 2D y Stop-Motion)" off
-25 "Tupitube (animación 2D y stop-motion)" off
-26 "Wicd (gestión de red)" off) 
+21 "Opentoonz (animación 2D industrial)" off
+22 "qStopMotion (animación stop-motion)" off
+23 "Quinema (herramientas para animación)" off
+24 "Storyboarder (editor de storyboards)" off
+25 "Tahoma (animación 2D y Stop-Motion)" off
+26 "Tupitube (animación 2D y stop-motion)" off
+27 "Wicd (gestión de red)" off) 
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -628,31 +629,36 @@ clear
 _openboard
 ;;
 
-21) # "qStopMotion (animación stop-motion)"
+21) # "Opentoonz (animación 2D industrial)"
+clear
+_opentoonz
+;;
+
+22) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-22) # "Quinema (herramientas para animación)"
+23) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-23) # "Storyboarder (editor de storyboards)" 
+24) # "Storyboarder (editor de storyboards)" 
 _storyboarder
 ;;
 
-24) # "Tahoma (animación 2D y Stop-Motion)"
+25) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-25) # "Tupitube (animación 2D y stop-motion)"
+26) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-25) # "Wicd (gestión de red)"
+27) # "Wicd (gestión de red)"
 clear
 _wicd
 ;;
@@ -1157,34 +1163,6 @@ for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-# REINSTALA REPOS LIBRES (por si minstources los desconfiguró).
-clear
-if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
-sudo rm /etc/apt/sources.list.d/debian.list
-fi
-if [ -e "/etc/apt/apt.conf.d" ]; then
-sudo mv /etc/apt/apt.conf.d /etc/apt/apt.conf.d.bk
-fi
-if [ -e "/etc/apt/auth.conf.d" ]; then
-sudo mv /etc/apt/auth.conf.d /etc/apt/auth.conf.d.bk
-fi
-if [ -e "/etc/apt/preferences.d" ]; then
-sudo mv /etc/apt/preferences.d /etc/apt/preferences.d.bk
-fi
-if [ -e "/etc/apt/sources.list.d" ]; then
-sudo mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bk
-fi
-if [ -e "trusted.gpg.d" ]; then
-sudo mv /etc/apt/trusted.gpg.d /etc/apt/trusted.gpg.d.bk
-fi
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/sourcesquirinux_1.0.0_amd64.deb
-sudo apt install /opt/tmp/apt/./sourcesquirinux_1.0.0_amd64.deb
-sudo apt-get update -y
-if [ -e "/etc/apt/sources.list.d/debian.list" ]; then
-sudo rm /etc/apt/sources.list.d/debian.list
-fi
-
 }
 
 function _centroDeSoftware()
@@ -1446,9 +1424,10 @@ sudo apt-get autoremove --purge -y
 function _opentoonz()
 {
 
-# DESCARGAR Y COMPILAR OPENTOONZ
-
 clear
+
+# Descarga y compila el código fuente de OpenToonz
+
 sudo apt-get update -y
 for paquetes_opentoonz in wget build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libmypaint-dev libopencv-dev libturbojpeg-dev; do sudo apt-get install -y $paquetes_opentoonz; done
 
@@ -1474,10 +1453,11 @@ make install
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
-clear
 mkdir -p /opt/tmp/opentoonz
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oTxLzXBFCZR8Abi/download' -O /opt/tmp/opentoonz/opentoonzicon_1.5.0_amd64.deb
 apt install /opt/tmp/opentoonz/./opentoonzicon_1.5.0_amd64.deb
+
+clear
 
 }
 
