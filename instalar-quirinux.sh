@@ -830,7 +830,7 @@ sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb
 function _sourcesUbuntu()
 {
 
-# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
+# AGREGA REPOSITORIOS ADICIONALES PARA UBUNTU Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
 sudo mkdir -p /opt/tmp/apt
