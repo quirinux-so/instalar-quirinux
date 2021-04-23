@@ -140,7 +140,35 @@ clear
 # MENÚ CONDICIONAL [CASTELLANO]
 # ===========================================================================================
 
-function _avisoInicio()
+function _inicioCheck()
+{
+	
+FILE1="/usr/local/bin/dialog"
+FILE2="/usr/local/bin/wget"
+FILE3="/usr/local/bin/git"
+
+if [ ! -h ${FILE1} ]; then
+
+_menuCondicional
+
+fi
+
+if [ ! -h ${FILE2} ]; then
+
+_menuCondicional
+
+fi
+
+if [ ! -h ${FILE3} ]; then
+
+_menuCondicional
+
+fi
+
+}
+
+function _menuCondicional()
+
 {
 
 echo " -----------------------------------------------------------------------------
