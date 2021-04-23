@@ -336,18 +336,19 @@ options=(1 "Software de hogar y oficina" off
 5 "Centro de software sencillo de usar" off 
 6 "Compatibilidad con carpetas compartidas" off 
 7 "Herramientas para virtualizar otros sistemas" off 
-8 "Utilidad para usar digitalizadoras con 2 monitores" off 
-9 "Firmware para placas de red Wifi" off 
-10 "Controladores libres para hardware de red - excepto wifi" off 
-11 "Controladores libres para escáneres e impresoras" off 
-12 "Codecs privativos multimedia y RAR" off
-13 "Controladores libres para aceleradoras NVIDEA" off 
-14 "Controladores libres para aceleradoras AMD" off 
-15 "Controladores libres para WACOM" off 
-16 "Controladores libres para tabletas GENIUS" off 
-17 "Controladores para cámaras virtuales" off
-18 "Utilidades de backup y puntos de restauración" off 
-19 "Corrección de bugs (recomendado)" off)
+8 "Herramientas para generar imágenes ISO de Quirinux" off
+9 "Utilidad para usar digitalizadoras con 2 monitores" off 
+10 "Firmware para placas de red Wifi" off 
+11 "Controladores libres para hardware de red - excepto wifi" off 
+12 "Controladores libres para escáneres e impresoras" off 
+13 "Codecs privativos multimedia y RAR" off
+14 "Controladores libres para aceleradoras NVIDEA" off 
+15 "Controladores libres para aceleradoras AMD" off 
+16 "Controladores libres para WACOM" off 
+17 "Controladores libres para tabletas GENIUS" off 
+18 "Controladores para cámaras virtuales" off
+19 "Utilidades de backup y puntos de restauración" off 
+20 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -395,22 +396,27 @@ clear
 _aqemu
 ;;
 
-8) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+8) # "Herramientas para generar imagenes ISO de Quirinux" 
+clear 
+_eggs
+;;
+
+9) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
 clear
 _ptxconf
 ;;
 
-9) # "Firmware para placas de red Wifi"
+10) # "Firmware para placas de red Wifi"
 clear
 _firmwareWifi
 ;;
 
-10) # "Controladores libres para hardware de red - excepto wifi"
+11) # "Controladores libres para hardware de red - excepto wifi"
 clear
 _libresRed
 ;;
 
-11) # "Controladores libres para escáneres e impresoras"
+12) # "Controladores libres para escáneres e impresoras"
 clear 
 _libresImpresoras
 ;;
@@ -686,6 +692,7 @@ _fuentes
 _temas
 _red
 _pulseaudio
+_eggs
 
 }
 
@@ -791,6 +798,15 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+}
+
+function _eggs()
+{
+clear
+sudo mkdir -p /opt/tmp/eggs
+sudo wget --no-check-certificate "http://my.opendesktop.org/s/8JSsp6PNGpjtb6t/download" -O /opt/tmp/eggs/eggs_7.8.46-1_amd64.deb
+sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb
+	
 }
 
 function _sourcesUbuntu()
