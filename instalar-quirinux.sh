@@ -1647,8 +1647,8 @@ function _enve()
 
 clear
 sudo mkdir -p /opt/tmp/enve
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.0-q2_amd64.deb
-sudo apt install /opt/tmp/enve/./enve-0.0.0-q2_amd64.deb -y
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.1_amd64.deb
+sudo apt install /opt/tmp/enve/./enve-0.0.1_amd64.deb -y
 }
 
 function _quinema()
