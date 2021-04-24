@@ -371,7 +371,6 @@ case $choice in
 clear
 _instalarAVL
 _menuPrincipal
-
 ;;
 
 2) # "Instalar kernel GNU Linux-Libre"
@@ -384,6 +383,9 @@ _menuPrincipal
 clear 
 _menuPrincipal
 ;;
+
+esac
+done
 
 }
 
@@ -432,7 +434,7 @@ clear
 _baseBusterGeneral 
 _utiles 
 _olive 
-_widd
+_wicd
 ;;
 
 2) # "Programas para realizadores audiovisuales"
