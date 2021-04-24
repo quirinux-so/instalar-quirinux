@@ -278,13 +278,14 @@ function _menuPrincipal()
 
 opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
---menu "Elije una opción" 16 50 6 \
+--menu "Elije una opción" 16 50 7 \
 1 "Instalar Quirinux Edición General" \
 2 "Instalar Quirinux Edición Pro" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
-5 "Ayuda" \
-6 "Salir" )
+5 "Instalar núcleos" \
+6 "Ayuda" \
+7 "Salir" )
 
 echo $opPrincipal
 
@@ -310,12 +311,18 @@ clear
 _instalarProgramasSueltos
 fi
 
-if [[ $opPrincipal == 5 ]]; then # Ayuda
+if [[ $opPrincipal == 5 ]]; then # Instalar núcleos
+clear
+_menuNucleos
+_menuPrincipal
+fi
+
+if [[ $opPrincipal == 6 ]]; then # Ayuda
 clear
 _ayudaPrincipal
 fi
 
-if [[ $opPrincipal == 6 ]]; then # Salir
+if [[ $opPrincipal == 7 ]]; then # Salir
 clear
 _salir
 fi
@@ -337,6 +344,52 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
 --msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
 _menuPrincipal
+}
+
+# ===========================================================================================
+# MENÚ PRINCIPAL [CASTELLANO]
+# ===========================================================================================
+
+function _menuNucleos()
+
+{
+	
+cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 28 76 4)
+options=(
+
+1 "Instalar kernel AVL de baja latencia" off
+2 "Instalar kernel GNU Linux-Libre" off
+3 "Salir" off 
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+case $choice in
+
+1) # "Instalar kernel AVL de baja latencia"
+clear
+_instalarAVL
+_menuPrincipal
+
+;;
+
+2) # "Instalar kernel GNU Linux-Libre"
+clear 
+_instalarGNULinuxLibre
+_menuPrincipal
+;;
+
+3) # "Salir"
+clear 
+_menuPrincipal
+;;
+
+}
+
+function _instalarDialog()
+{
+sudo apt-get install dialog -y
 }
 
 
@@ -767,6 +820,42 @@ _cpuCoreUtils
 _borratemp
 }
 
+function _instalarGNULinuxLibre()
+{
+mkdir -p /opt/tmp/libre
+wget --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linuxlibre.tar
+sudo tar -xvf /opt/tmp/libre/linuxlibre.tar -C /opt/tmp/libre/
+sudo dpkg -i /opt/tmp/libre/*.deb -y
+sudo rm -rf /opt/tmp/*
+sudo apt-get remove --purge cryptsetup-initramfs -y
+sudo apt-get autoremove --purge -y
+sudo rm -rf /opt/tmp/*
+}
+
+function _instalarAVL()
+{
+
+mkdir -p /opt/tmp/avl
+wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/avl/linux-image-5.4.28avl2-lowlatency.deb
+# wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/avl/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+
+echo "# Dowload Headers"; sleep 1s
+wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/avl/linux-headers-5.4.28avl2-lowlatency.deb
+# wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/avl/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+
+sudo chmod 777 -R /opt/tmp/avl
+sudo chown $USER /opt/tmp/*
+
+sudo apt install /opt/tmp/avl/./linux-image-5.4.28avl2-lowlatency.deb -y
+sudo apt install /opt/tmp/avl/./linux-headers-5.4.28avl2-lowlatency.deb -y
+# sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+# sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+sudo apt-get remove --purge cryptsetup-initramfs -y
+sudo apt-get autoremove --purge -y
+sudo rm -rf /opt/tmp/*
+
+}
+
 function _config()
 {
 	
@@ -1035,6 +1124,7 @@ sudo mkdir -p /opt/tmp/samba
 sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
 sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
 sudo touch /etc/libuser.conf
+sudo chown root /etc/sudoers.d/samba
 
 }
 
