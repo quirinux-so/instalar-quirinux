@@ -355,11 +355,9 @@ function _menuNucleos()
 {
 	
 cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 28 76 4)
-options=(
-
-1 "Instalar kernel AVL de baja latencia" off
+options=(1 "Instalar kernel AVL de baja latencia" off
 2 "Instalar kernel GNU Linux-Libre" off
-3 "Salir" off 
+3 "Salir" off) 
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -386,6 +384,7 @@ _menuPrincipal
 
 esac
 done
+_menuPrincipal
 
 }
 
