@@ -347,7 +347,7 @@ _menuPrincipal
 }
 
 # ===========================================================================================
-# MENÚ PRINCIPAL [CASTELLANO]
+# MENÚ INSTALAR NUCLEOS [CASTELLANO]
 # ===========================================================================================
 
 function _menuNucleos()
@@ -356,8 +356,7 @@ function _menuNucleos()
 	
 cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 28 76 4)
 options=(1 "Instalar kernel AVL de baja latencia" off
-2 "Instalar kernel GNU Linux-Libre" off
-3 "Salir" off) 
+2 "Instalar kernel GNU Linux-Libre" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -377,13 +376,9 @@ _instalarGNULinuxLibre
 _menuPrincipal
 ;;
 
-3) # "Salir"
-clear 
-_menuPrincipal
-;;
-
 esac
 done
+_clear
 _menuPrincipal
 
 }
