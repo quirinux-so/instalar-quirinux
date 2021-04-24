@@ -821,11 +821,15 @@ function _instalarGNULinuxLibre()
 mkdir -p /opt/tmp/libre
 wget --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linuxlibre.tar
 sudo tar -xvf /opt/tmp/libre/linuxlibre.tar -C /opt/tmp/libre/
-sudo dpkg -i /opt/tmp/libre/*.deb -y
+sudo apt install /opt/tmp/libre/./*.deb -y
 sudo rm -rf /opt/tmp/*
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
 sudo rm -rf /opt/tmp/*
+sudo apt-get remove --purge cryptsetup-initramfs -y
+sudo apt-get autoremove --purge -y
+sudo rm -rf /opt/tmp/*
+
 }
 
 function _instalarAVL()
