@@ -2,7 +2,7 @@
 Autor: Charlie Martínez ®
 ## Acerca de este repositorio
 Este programa sirve para instalar los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian Buster GNU/Linux XFCE. Si ya cuentas con Debian Buster XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados.<br>
-## Detalles adicionales
+### Detalles adicionales
 Este instalador funciona por consola, con un menú en modo texto a color.
 ### Compatibilidad con distribuciones
 Programado para Debian Buster, en las últimas revisiones incluye opción para seleccionar repositorios para Devuan Beowulf y Ubuntu 20.04, distribuciones que no han sido probadas por lo que es posible que algunas aplicaciones no se instalen. Se guardarán carpetas de backup con todas las configuraciones de la carpeta /etc/apt, por lo que los cambios son revertibles. También se agregó la posibilidad de no instalar repositorios adicionales, opción segura (aunque no se instalarán aquellos programas que provengan de los repositorios adicionales que se pretendía agregar). 
