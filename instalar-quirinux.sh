@@ -1015,19 +1015,22 @@ function _libresImpresoras()
 # INSTALAR PAQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
 clear
-for paquetes_scaner_impresion in cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
+for paquetes_scaner_impresion in build-essential tix foomatic-filters groff dc cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord  flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr  printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
+sudo apt-get install cups
 sudo apt-get install -f -y
 sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
 sudo apt-get remove --purge hplip -y
+sudo rm -rf /usr/share/hplip
 sudo rm -rf /var/lib/hp
 sudo apt-get install printer-driver-foo2zjs printer-driver-foo2zjs-common -y
 sudo apt-get install tix groff dc cups cups-filters -y
+sudo wget --no-check-certificate 'https://www.quirinux.org/printers/getweb' -O /usr/sbin/getweb
 sudo getweb 1018
 sudo getweb 2430   
-sudo getweb 2300  
-sudo getweb 2200    
-sudo getweb cpwl    
-sudo getweb 1020  
+# sudo getweb 2300  
+# sudo getweb 2200    
+# sudo getweb cpwl    
+# sudo getweb 1020  
 sudo getweb 1018    
 sudo getweb 1005     
 sudo getweb 1000
