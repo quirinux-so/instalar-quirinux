@@ -1025,15 +1025,63 @@ sudo rm -rf /var/lib/hp
 sudo apt-get install printer-driver-foo2zjs printer-driver-foo2zjs-common -y
 sudo apt-get install tix groff dc cups cups-filters -y
 sudo wget --no-check-certificate 'https://www.quirinux.org/printers/getweb' -O /usr/sbin/getweb
-sudo getweb 1018
-sudo getweb 2430   
-# sudo getweb 2300  
-# sudo getweb 2200    
-# sudo getweb cpwl    
-# sudo getweb 1020  
-sudo getweb 1018    
-sudo getweb 1005     
-sudo getweb 1000
+getweb 1025  
+getweb 215	
+getweb 1500
+getweb 1600
+getweb 2600n
+getweb 1600w
+getweb 1680	
+getweb 1690
+getweb 2480	
+getweb 2490	
+getweb 2530	
+getweb 4690	
+getweb 6115	
+getweb 110	
+getweb 6121
+getweb 2200	
+getweb 2300
+getweb 2430
+# getweb cpwl	
+# getweb 300	
+# getweb 310	
+# getweb 315	
+# getweb 325	
+# getweb 360
+# getweb 365	
+# getweb 600	
+# getweb 610
+# getweb 2160	
+# getweb 3160	
+# getweb 3175	
+# getweb 3185
+# getweb 6110	
+# getweb 500	
+# getweb 301	
+# getweb c310	
+# getweb c511	
+# getweb c810	
+# getweb 3100	
+# getweb 3200
+# getweb 3300	
+# getweb 3400	
+# getweb 3530	
+# getweb 5100	
+# getweb 5200	
+# getweb 5500	
+# getweb 5600	
+# getweb 5800	
+# getweb 160	
+# getweb 1000
+# getweb 1005	
+getweb 1018	
+getweb 1020	
+getweb p1005	
+getweb p1006	
+getweb p1007	
+getweb p1008	
+getweb p1505
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 sudo mkdir -p /opt/tmp/epson
@@ -1042,6 +1090,8 @@ cd /opt/tmp/epson
 sudo tar -xvf epsonscan.tar 
 ./install.sh
 sudo rm -rf /opt/tmp/*
+
+}
 
 }
 
@@ -1407,6 +1457,9 @@ sudo apt-get autoremove --purge -y
 
 function _remover()
 {
+
+# REMOVER IRQBALANCE
+for paquetes_irq in irqbalance; do sudo apt-get remove --purge -y $paquetes_irq; done
 
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 clear
