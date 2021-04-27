@@ -1093,8 +1093,6 @@ sudo rm -rf /opt/tmp/*
 
 }
 
-}
-
 function _libresRed()
 {
 
