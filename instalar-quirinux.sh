@@ -488,42 +488,42 @@ clear
 _libresImpresoras
 ;;
 
-12) # "Codecs privativos multimedia y RAR"
+13) # "Codecs privativos multimedia y RAR"
 clear
 _codecs
 ;;
 
-13) # "Controladores libres para aceleradoras gráficas nVidia"
+14) # "Controladores libres para aceleradoras gráficas nVidia"
 clear
 _libresNvidia
 ;;
 
-14) # "Controladores libres para aceleradoras gráficas AMD"
+15) # "Controladores libres para aceleradoras gráficas AMD"
 clear 
 _libresAMD
 ;;
 
-15) # "Controladores libres para digitalizadoras Wacom"
+16) # "Controladores libres para digitalizadoras Wacom"
 clear
 _libresWacom
 ;;
 
-16) # "Controladores libres para tabletas digitalizadoras Genius"
+17) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-17) # "Controladores para cámaras virtuales"
+18) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-18) # "Utilidades de backup y puntos de restauración"
+19) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-19) # "Corrección de bugs (recomendado)"
+20) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
