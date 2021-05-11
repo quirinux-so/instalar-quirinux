@@ -2,7 +2,8 @@ All contributions by quirinux-so - charliemartinez:
 Copyright (c) Charlie Martínez
 All rights reserved.
 
-Quirinux and Charlie Martinez are registered trademarks of Carlos Mariano Martinez Bourio.
+Quirinux and Charlie Martinez are registered trademarks of 
+Carlos Mariano Martinez Bourio.
 
 All other contributions:
 Copyright (c) the respective contributors.
@@ -11,12 +12,15 @@ All rights reserved.
 Each contributor holds copyright over their respective contributions.
 The project versioning (Git) records all such contribution source information.
 
-The code is distributed under the GPLv2.0 license while all graphic material such as icons, wallpapers, manuals and documentation in general adopt the CC-BY-4.0 license.
+The code is distributed under the GPLv2.0 license while all graphic material 
+such as icons, wallpapers, manuals and documentation in general adopt 
+the CC-BY-4.0 license.
 
 The Quirinux logo created by:
 Copyright (c) Thomas Gaya.
 
-Other codes, logos and brands used and / or mentioned in the documentation belong to their respective authors.
+Other codes, logos and brands used and / or mentioned in the documentation 
+belong to their respective authors.
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met: 
