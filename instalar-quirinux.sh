@@ -857,8 +857,8 @@ function _sourcesDebian()
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/tyCN3iK2mAdJAEm/download' -O /opt/tmp/apt/sourcesquirinuxdebian_1.0.0_all.deb
-sudo apt install /opt/tmp/apt/./sourcesquirinuxdebian_1.0.0_all.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AonkGx2t9Ai8SAK/download' -O /opt/tmp/apt/repoconfigdeb_1.1.0_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -876,8 +876,8 @@ function _sourcesDevuan()
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/jSzsYgAkFa9eYPs/download' -O /opt/tmp/apt/sourcesquirinuxdevuan_1.0.0_all.deb
-sudo apt install /opt/tmp/apt/./sourcesquirinuxdevuan_1.0.0_all.deb
+sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NFX8FNzmLEEQifw/download' -O /opt/tmp/apt/repoconfigdev_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigdev_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -888,6 +888,19 @@ sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
 }
 
+function _sourcesUbuntu()
+{
+
+# AGREGA REPOSITORIOS ADICIONALES PARA UBUNTU
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget  --no-check-certificate "http://my.opendesktop.org/s/6b8X9LMWkHaymQY/download" -O /opt/tmp/apt/repoconfigubu_1.1.0_all.deb
+sudo apt install /opt/tmp/apt/./sourcesquirinuxubuntu_1.0.0_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+}
+
 function _eggs()
 {
 clear
@@ -895,19 +908,6 @@ sudo mkdir -p /opt/tmp/eggs
 sudo wget --no-check-certificate "http://my.opendesktop.org/s/8JSsp6PNGpjtb6t/download" -O /opt/tmp/eggs/eggs_7.8.46-1_amd64.deb
 sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb
 	
-}
-
-function _sourcesUbuntu()
-{
-
-# AGREGA REPOSITORIOS ADICIONALES PARA UBUNTU Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate "http://cloud.opendesktop.org/s/cyqxpCTJ6yoFiAJ/download" -O /opt/tmp/apt/sourcesquirinuxubuntu_1.0.0_all.deb
-sudo apt install /opt/tmp/apt/./sourcesquirinuxubuntu_1.0.0_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
 }
 
 function _firmwareWifi()
