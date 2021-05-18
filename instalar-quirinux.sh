@@ -187,7 +187,7 @@ function _menuRepositorios()
 
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
---menu "Elije una opción" 16 62 6 \
+--menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 6 \
 1 "Configurar repositorios extra para Debian Buster" \
 2 "Configurar repositorios extra para Devuan Beowulf" \
 3 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
@@ -794,40 +794,19 @@ _borratemp
 function _instalarGNULinuxLibre()
 {
 mkdir -p /opt/tmp/libre
-wget --no-check-certificate 'http://my.opendesktop.org/s/qnew98T6ZGyrgK4/download' -O /opt/tmp/libre/linuxlibre.tar
-sudo tar -xvf /opt/tmp/libre/linuxlibre.tar -C /opt/tmp/libre/
-sudo apt install /opt/tmp/libre/./*.deb -y
-sudo rm -rf /opt/tmp/*
+
+apt-get install linux-headers-4.19.182-gnu  linux-image-4.19.182-gnu linux-libre-4.19-headers linux-libre-4.19 freesh-keyring
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
-sudo rm -rf /opt/tmp/*
-sudo apt-get remove --purge cryptsetup-initramfs -y
-sudo apt-get autoremove --purge -y
-sudo rm -rf /opt/tmp/*
 
 }
 
 function _instalarAVL()
 {
 
-mkdir -p /opt/tmp/avl
-wget --no-check-certificate 'http://my.opendesktop.org/s/tybe5FaBMjzts4R/download' -O /opt/tmp/avl/linux-image-5.4.28avl2-lowlatency.deb
-# wget --no-check-certificate 'http://my.opendesktop.org/s/Mtty82em5dKM5na/download' -O /opt/tmp/avl/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
-echo "# Dowload Headers"; sleep 1s
-wget  --no-check-certificate 'http://my.opendesktop.org/s/Cx43SWj4w7LrTiY/download' -O /opt/tmp/avl/linux-headers-5.4.28avl2-lowlatency.deb
-# wget  --no-check-certificate 'http://my.opendesktop.org/s/YZ7rnzLZDbTiTN9/download' -O /opt/tmp/avl/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-
-sudo chmod 777 -R /opt/tmp/avl
-sudo chown $USER /opt/tmp/*
-
-sudo apt install /opt/tmp/avl/./linux-image-5.4.28avl2-lowlatency.deb -y
-sudo apt install /opt/tmp/avl/./linux-headers-5.4.28avl2-lowlatency.deb -y
-# sudo dpkg -i /opt/tmp/linux-headers-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
-# sudo dpkg -i /opt/tmp/linux-image-5.9.1avl1-lowlatency_5.9.1avl1-lowlatency-1_amd64.deb
+apt-get install linux-headers-5.4.28avl2-lowlatency linux-image-5.4.28avl2-lowlatency
 sudo apt-get remove --purge cryptsetup-initramfs -y
 sudo apt-get autoremove --purge -y
-sudo rm -rf /opt/tmp/*
 
 }
 
@@ -837,11 +816,7 @@ function _config()
 # CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
 
 clear
-sudo mkdir -p /opt/tmp/sudoers
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/QiGdK8pC4SjKL8p/download' -O /opt/tmp/sudoers/sudoersquirinux_1.0.0_all.deb
-sudo apt install /opt/tmp/sudoers/./sudoersquirinux_1.0.0_all.deb -y
-sudo chown root:root -R /etc/sudoers.d
-sudo chmod 755 -R /etc/sudoers.d/
+apt-get install sudoersquirinux -y
 
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
@@ -857,7 +832,7 @@ function _sourcesDebian()
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AonkGx2t9Ai8SAK/download' -O /opt/tmp/apt/repoconfigdeb_1.1.0_all.deb
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.0_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.0_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -876,7 +851,7 @@ function _sourcesDevuan()
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NFX8FNzmLEEQifw/download' -O /opt/tmp/apt/repoconfigdev_1.0.0_all.deb
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/repoconfigdev_1.0.0_all.deb' -O /opt/tmp/apt/repoconfigdev_1.0.0_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdev_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -895,8 +870,8 @@ function _sourcesUbuntu()
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget  --no-check-certificate "http://my.opendesktop.org/s/6b8X9LMWkHaymQY/download" -O /opt/tmp/apt/repoconfigubu_1.1.0_all.deb
-sudo apt install /opt/tmp/apt/./sourcesquirinuxubuntu_1.0.0_all.deb
+sudo wget  --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.0_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.0_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 }
@@ -916,11 +891,10 @@ function _firmwareWifi()
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
 clear
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/fMd6psxCXepG9fd/download' -O /opt/tmp/quirinux-firmware.tar
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/quirinux-firmware.tar' -O /opt/tmp/quirinux-firmware.tar
 sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
 sudo apt install /opt/tmp/quirinux-firmware/./* -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Nsa3B5GkeDp3yRk/download' -O /opt/tmp/quirinux-i915-q2_amd64.deb
-sudo apt install /opt/tmp/./quirinux-i915-q2_amd64.deb -y
+sudo apt-get install inteli915 -y
 for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done 
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -933,9 +907,6 @@ function _codecs()
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
 clear
-sudo mkdir -p /opt/tmp/rar
-sudo wget  --no-check-certificate 'https://my.opendesktop.org/s/AyRyqwg67fRmCJF/download' -O /opt/tmp/rar/rar.deb
-sudo apt install /opt/tmp/rar/./rar.deb -y
 for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
@@ -960,7 +931,7 @@ function _libresWacom()
 
 clear
 sudo apt-get install build-essential autoconf linux-headers-$uname -u -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Cp4yR3tt9gHeFEH/download' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2 
 cd input-wacom-0.46.0 
@@ -976,11 +947,7 @@ function _libresGenius()
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
 clear
-sudo mkdir -p /opt/tmp/quirinux-genius
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/LD8wnWefdNpDsSo/download' -O /opt/tmp/quirinux-genius/quirinux-genius-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/./quirinux-genius/quirinux-genius-1.0-q2_amd64.deb -y
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/X6S6zKycQEy9ygd/download' -O /opt/tmp/quirinux-genius/wizardpen_0.7.0_i386.deb
-sudo apt install /opt/tmp/./quirinux-genius/wizardpen_0.7.0_i386.deb -y
+apt-get install geniusconfig -y
 
 }
 
@@ -1060,11 +1027,8 @@ getweb p1505
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 sudo mkdir -p /opt/tmp/epson
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/BD3dowKgjdsPw9W/download' -O /opt/tmp/epson/epsonscan.tar
-cd /opt/tmp/epson
-sudo tar -xvf epsonscan.tar 
-./install.sh
-sudo rm -rf /opt/tmp/*
+apt-get install epsonscan -y
+epson-install 
 
 }
 
@@ -1111,14 +1075,14 @@ function _ptxconf()
 
 clear
 sudo mkdir -p /opt/tmp/ptxtemp
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/ajaj7dRJFp8PJFK/download' -O /opt/tmp/ptxtemp/ptxconf.tar
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
 sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
 cd /opt/ptxconf
 sudo python setup.py install
 sudo apt-get install -f -y
 sudo apt-get install libappindicator1 -y
 sudo mkdir -p /opt/tmp/python-appindicator
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gfCdMmfLaX627rj/download' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
 
 # Agrega entrada al inicio para PTXCONFIG
@@ -1133,9 +1097,7 @@ function _chimiboga()
 # INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
 
 clear
-sudo mkdir -p /opt/tmp/chimiboga
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Hmy6qMkGcR8TZdE/download' -O /opt/tmp/chimiboga/chimiboga.deb
-sudo apt install /opt/tmp/chimiboga/./chimiboga.deb -y
+apt-get install chimiboga -y
 
 }
 
@@ -1145,12 +1107,7 @@ function _samba()
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
 clear
-sudo apt-get install samba -y
-sudo mkdir -p /opt/tmp/samba
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/DH3fbW6oMXPQfqF/download' -O /opt/tmp/samba/system-config-samba_1.2.63-0ubuntu6_all.deb
-sudo apt install /opt/tmp/samba/./system-config-samba_1.2.63-0ubuntu6_all.deb -y
-sudo touch /etc/libuser.conf
-sudo chown root /etc/sudoers.d/samba
+apt-get install system-config-samba -y
 
 }
 
@@ -1160,9 +1117,8 @@ function _mugshot()
 # INSTALAR MUGSHOT
 
 clear
-sudo mkdir -p /opt/tmp/mugshot
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/gQydJFz5qcYBXYf/download' -O /opt/tmp/mugshot/mugshot_0.4.2-1_all.deb
-sudo apt install /opt/tmp/mugshot/./mugshot_0.4.2-1_all.deb -y
+apt-get install mugshot -y
+
 }
 
 function _mystiq
@@ -1182,9 +1138,8 @@ function _densify()
 # INSTALAR DENSIFY (para reducir archivos PDF)
 
 clear
-sudo mkdir -p /opt/tmp/densify
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/bp8pYAKSXKQ7dFZ/download' -O /opt/tmp/densify/densify-0.3.1-q2_amd64.deb
-sudo apt install /opt/tmp/densify/./densify-0.3.1-q2_amd64.deb -y
+apt-get install densify -y
+
 }
 
 function _imagine()
@@ -1193,9 +1148,8 @@ function _imagine()
 # INSTALAR IMAGINE (para reducir imágenes)
 
 clear
-sudo mkdir -p /opt/tmp/imagine
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/xeTmnR4JGgzJnTE/download' -O /opt/tmp/imagine/imagine-0.5.1-q2_amd64.deb
-sudo apt install /opt/tmp/imagine/./imagine-0.5.1-q2_amd64.deb -y
+apt-get install imagine -y
+
 }
 
 function _openboard()
@@ -1204,9 +1158,8 @@ function _openboard()
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 clear
-sudo mkdir -p /opt/tmp/openboard
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/t7rC79ZSXwpipRW/download' -O /opt/tmp/openboard/openboard_1.0.3_amd64.deb
-sudo apt install /opt/tmp/openboard/./openboard_1.0.3_amd64.deb -y
+apt-get install openboard -y
+
 }
 
 function _cpuCoreUtils()
@@ -1215,22 +1168,18 @@ function _cpuCoreUtils()
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
 clear
-for paquetes_cpu in cpufrequtils; do sudo apt-get install -y $paquetes_cpu; done 
-sudo apt-get install -f
-sudo mkdir -p /opt/tmp/cpu
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/KkH8atxtWTPLXdy/download' -O /opt/tmp/cpu/cpufreq_42-1_all.deb
-sudo apt install /opt/tmp/cpu/./*.deb -y
+apt-get install cpufreq -y
+
 }
 
 function _olive()
 {
 
-# INSTALAR EDITOR DE VIDEO OLIVE
+# INSTALAR EDITOR DE VIDEO OLIVE - Version elegida por Quirinux
 
 clear
-sudo mkdir -p /opt/tmp/olive
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/Tg9AZJf6R8ffFqD/download' -O /opt/tmp/olive/olive-quirinux.deb
-sudo apt install /opt/tmp/olive/./olive-quirinux.deb -y
+apt-get install oliveq -y
+
 }
 
 function _GIMP()
@@ -1239,9 +1188,7 @@ function _GIMP()
 # INSTALAR GIMP EDICION QUIRINUX
 
 clear
-sudo mkdir -p /opt/tmp/gimp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GHyPZZz9MgX7sdJ/download' -O /opt/tmp/gimp/gimpquirinux_2.1.0_all.deb
-sudo apt install /opt/tmp/gimp/./gimpquirinux_2.1.0_all.deb -y
+apt-get install gimp-quirinux gimp-paint-studio -y
 
 }
 
@@ -1297,9 +1244,7 @@ sudo rm /etc/apt/sources.list.d/official-package-repositories.list
 # INSTALAR FLATPAK-CONFIG
 
 clear
-sudo mkdir -p /opt/tmp/flatpak-config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/wwBY7B6rayeGQEw/download' -O /opt/tmp/flatpak-config/quirinux-flatpak-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/flatpak-config/./quirinux-flatpak-1.0-q2_amd64.deb -y
+apt-get install flatpakconfig -y
 
 }
 
@@ -1312,7 +1257,7 @@ clear
 for paquetes_screensaver in xscreensaver xscreensaver-gl-extra xscreensaver-data-extra build-essential libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libx11-dev; do sudo apt-get install -y $paquetes_screensaver; done
 for paquetes_gnome_screensaver in gnome-screensaver; do sudo apt-get remove --purge -y $paquetes_gnome_screensaver; done
 sudo mkdir -p /opt/tmp/screensaver
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/mEEcg2a7GrcLAx3/download' -O /opt/tmp/screensaver/gluqlo-master.tar
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/gluqlo-master.tar' -O /opt/tmp/screensaver/gluqlo-master.tar
 cd /opt/tmp/screensaver
 sudo tar -xvf /opt/tmp/screensaver/gluqlo-master.tar
 cd /opt/tmp/screensaver/gluqlo-master
@@ -1331,17 +1276,7 @@ function _fuentes()
 clear
 sudo mkdir -p /opt/tmp
 sudo mkdir -p /opt/tmp/fuentes
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oS7PZ4HqWTkNff7/download' -O /opt/tmp/fuentes/quirinux-fuentes.tar
-sudo chmod 777 -R /opt/tmp/fuentes/
-sudo chown $USER -R /opt/tmp/fuentes/
-sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
-sudo cp -r -a /opt/tmp/fuentes/quirinux-fuentes/* /
-
-# Descargando y copiando fuentes de Quirinux
-clear
-sudo mkdir -p /opt/tmp
-sudo mkdir -p /opt/tmp/fuentes
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oS7PZ4HqWTkNff7/download' -O /opt/tmp/fuentes/quirinux-fuentes.tar
+sudo wget  --no-check-certificate 'https://quirinux.ga/extras/quirinux-fuentes.tar' -O /opt/tmp/fuentes/quirinux-fuentes.tar
 sudo chmod 777 -R /opt/tmp/fuentes/
 sudo chown $USER -R /opt/tmp/fuentes/
 sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
@@ -1366,25 +1301,16 @@ sudo chmod u+s /usr/sbin/hddtemp
 
 # INSTALAR TEMAS DE QUIRINUX
 clear
-sudo mkdir -p /opt/tmp/temas
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/o7rg7CpARw5CPLA/download' -O /opt/tmp/temas/quirinux-temas.tar
-sudo tar -xvf /opt/tmp/temas/quirinux-temas.tar -C /
+apt-get install quirinuxtemas -y
 
 # INSTALAR ÍCONOS DE QUIRINUX
 clear
-sudo mkdir -p /opt/tmp/winbugs
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/NAwrJXnZYow9PHS/download' -O /opt/tmp/winbugs/iconswinbugs_1.0.0_all.deb
-sudo apt install /opt/tmp/winbugs/./iconswinbugs_1.0.0_all.deb -y
+apt-get install icons-winbugs -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
 # También instala menú principal de Quirinux y modifica algunos archivos más.
 clear
-sudo mkdir -p /opt/tmp/config
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/7WPCQjRSCjSMjSz/download' -O /opt/tmp/config/quirinux-config.tar
-sudo tar -xvf /opt/tmp/config/quirinux-config.tar -C /opt/tmp/config/
-sudo cp -r /opt/tmp/config/quirinux-config/* /
-sudo update-grub
-sudo update-grub2
+apt-get install quirinuxconfig -y
 
 # PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
 clear
@@ -1534,10 +1460,7 @@ function _tipografiasPro()
 
 # INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
 clear
-sudo mkdir -p /opt/tmp/komika
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/eQrxHfx5QeeQtAL/download' -O /opt/tmp/komika/quirinu-komika.deb
-sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
-sudo apt-get autoremove --purge -y
+apt-get install komikafont -y
 
 }
 
@@ -1573,11 +1496,8 @@ make install
 
 # Descarga y copia el ícono del menú de inicio de OpenToonz
 
-mkdir -p /opt/tmp/opentoonz
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/oTxLzXBFCZR8Abi/download' -O /opt/tmp/opentoonz/opentoonzicon_1.5.0_amd64.deb
-apt install /opt/tmp/opentoonz/./opentoonzicon_1.5.0_amd64.deb
-
 clear
+apt-get install icons-opentoonz -y
 
 }
 
@@ -1587,9 +1507,8 @@ function _tahoma2D()
 # INSTALAR TAHOMA 2D
 
 clear
-mkdir -p /opt/tmp/tahoma2d
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MWt7cqqGgQCdYby/download' -O /opt/tmp/tahoma2d/tahoma-1.1-q2_amd64.deb
-sudo apt install /opt/tmp/tahoma2d/./*.deb -y
+apt-get install tahoma2d -y
+
 }
 
 function _inkscape()
@@ -1598,10 +1517,8 @@ function _inkscape()
 # INSTALANDO INKSCAPE
 
 clear
-for paquetes_remover_inkscape in inkscape; do sudo apt-get remove --purge -y $paquetes_remover_inkscape; done
-sudo mkdir -p /opt/tmp/inkscape
-sudo wget --no-check-certificate 'http://my.opendesktop.org/s/7BWLio7HC4Rga3J/download' -O /opt/tmp/inkscape/inkscape-1.0-q2_amd64.deb
-sudo apt install /opt/tmp/inkscape/./inkscape-1.0-q2_amd64.deb -y
+apt-get install inkscapeq -y
+
 }
 
 function _tupitube()
@@ -1610,9 +1527,8 @@ function _tupitube()
 # INSTALAR TUPITUBE
 
 clear
-sudo mkdir -p /opt/tmp/tupitube
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/4C37F2wJ4ebAdLH/download' -O /opt/tmp/tupitube/tupitubedesk_0.2.17_amd64.deb
-sudo apt install /opt/tmp/tupitube/./tupitubedesk_0.2.17_amd64.deb -y
+apt-get install tupitubedesk -y
+
 }
 
 function _godot()
@@ -1621,9 +1537,8 @@ function _godot()
 # INSTALAR GODOT
 
 clear
-sudo mkdir -p /opt/tmp/godot
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/w3R2NzrwwSMxPXC/download' -O /opt/tmp/godot/godot-2.3.3-q2_amd64.deb
-sudo apt install /opt/tmp/godot/./godot-2.3.3-q2_amd64.deb -y
+apt-get install godot -y
+
 }
 
 function _storyboarder()
@@ -1632,9 +1547,8 @@ function _storyboarder()
 # INSTALAR STORYBOARDER
 
 clear
-sudo mkdir -p /opt/tmp/storyboarder
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GePzTyxoYpM622t/download' -O /opt/tmp/storyboarder/storyboarder-2.0.0-q2_amd64.deb
-sudo apt install /opt/tmp/storyboarder/./storyboarder-2.0.0-q2_amd64.deb -y
+apt-get install storyboarder -y
+
 }
 
 function _kitscenarist()
@@ -1643,9 +1557,8 @@ function _kitscenarist()
 # INSTALAR KITSCENARIST
 
 clear
-sudo mkdir -p /opt/tmp/kitscenarist
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/26WpWbDH5g5nC6k/download' -O /opt/tmp/kitscenarist/kitscenarist64.deb
-sudo apt install /opt/tmp/kitscenarist/./kitscenarist64.deb -y
+apt-get install kitscenarist -y
+
 }
 
 function _natron()
@@ -1654,9 +1567,8 @@ function _natron()
 # INSTALAR NATRON
 
 clear
-sudo mkdir -p /opt/tmp/natron
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zBY3tinXbQpqDbB/download' -O /opt/tmp/natron/natron-2.3.15-q2_amd64.deb
-sudo apt install /opt/tmp/natron/./natron-2.3.15-q2_amd64.deb -y
+apt-get install natron -y
+
 }
 
 function _azpainter()
@@ -1665,9 +1577,8 @@ function _azpainter()
 # INSTALAR AZPAINTER
 
 clear
-sudo mkdir -p /opt/tmp/azpainter
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/AojjBiP7NmoSBsA/download' -O /opt/tmp/azpainter/azpainter-2.1.4-q2_amd64.deb
-sudo apt install /opt/tmp/azpainter/./azpainter-2.1.4-q2_amd64.deb -y
+apt-get install azpainter -y
+
 }
 
 function _enve()
@@ -1676,9 +1587,8 @@ function _enve()
 # INSTALAR ENVE
 
 clear
-sudo mkdir -p /opt/tmp/enve
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/GAyMB7pt5K9MXnx/download' -O /opt/tmp/enve/enve-0.0.1_amd64.deb
-sudo apt install /opt/tmp/enve/./enve-0.0.1_amd64.deb -y
+apt-get install enve -y
+
 }
 
 function _quinema()
@@ -1687,20 +1597,18 @@ function _quinema()
 # INSTALAR QUINEMA
 
 clear
-sudo mkdir -p /opt/tmp/quinema
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/zREfipBzSxYXFTK/download' -O /opt/tmp/quinema/quinema_1.0-q2_amd64.deb
-sudo apt install /opt/tmp/quinema/./quinema_1.0-q2_amd64.deb -y
+apt-get install quinema -y
+
 }
 
 function _qstopmotion()
 {
 	
-# INSTALAR QSTOPMOTION
+# INSTALAR QSTOPMOTION - versión elegida por Quirinux
 
 clear
-sudo mkdir -p /opt/tmp/qstopmotion
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/MznJgLCFeWeQMGd/download' -O /opt/tmp/qstopmotion/qstopmotion-2.5.0-q2_amd64.deb
-sudo apt install /opt/tmp/qstopmotion/./qstopmotion-2.5.0-q2_amd64.deb -y
+apt-get install qstopmotionq -y
+
 }
 
 function _camarasVirtuales()
@@ -1710,10 +1618,8 @@ function _camarasVirtuales()
 # Complemento útil para qStopMotion
 
 clear
-sudo mkdir -p /opt/tmp/akvcam
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/2BL5CgEa3YgMx2g/download' -O /opt/tmp/akvcam/akvcam-1.0-q2_amd64.deb
-sudo chmod 777 -R /opt/tmp/akvcam/
-sudo apt install /opt/tmp/akvcam/./akvcam-1.0-q2_amd64.deb -y
+apt-get install akvcam -y
+
 }
 
 function _belle()
@@ -1722,20 +1628,18 @@ function _belle()
 # INSTALAR BELLE
 
 clear
-sudo mkdir -p /opt/tmp/belle
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/pQw6Yyytaz8TQ46/download' -O /opt/tmp/belle/belle-0.7-q2_amd64.deb
-sudo apt install /opt/tmp/belle/./belle-0.7-q2_amd64.deb -y
+apt-get install belle -y
+
 }
 
 function _mypaint()
 {
 	
-# INSTALAR MYPAINT
+# INSTALAR MYPAINT - versión elegida por Quirinux
 
 clear
-sudo mkdir -p /opt/tmp/mypaint
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/TZL8554kj8HLjsK/download' -O /opt/tmp/mypaint/mypaint-2-q2_amd64.deb
-sudo apt install /opt/tmp/mypaint/./mypaint-2-q2_amd64.deb -y
+apt-get install mypaintq -y
+
 }
 
 function _cinelerra()
@@ -1744,24 +1648,18 @@ function _cinelerra()
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
 clear
-mkdir -p /opt/tmp/cinelerra
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/FK6xp4k38b9H3BT/download' -O /opt/tmp/cinelerra/cinelerra.deb
-sudo apt install /opt/tmp/cinelerra/./cinelerra.deb -y
-sudo rm -rf /opt/tmp/*
+apt-get install cinelerragg -y
+
 }
 
 function _blender()
 {
 	
-# ACTUALIZANDO BLENDER
+# ACTUALIZANDO BLENDER - versión elegida por Quirinux
 
 clear
-for paquetes_remover_blender in remove --purge blender-data; do sudo apt-get remove --purge -y $paquetes_remover_blender; done
-sudo mkdir -p /opt/tmp/blender283
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/PfagSW43yP9yGiX/download' -O /opt/tmp/blender283/blender-2.83-q2_amd64.deb
-sudo apt install /opt/tmp/blender283/./blender-2.83-q2_amd64.deb -y
+apt-get install blenderq -y
+
 }
 
 function _ardour()
@@ -1770,9 +1668,7 @@ function _ardour()
 # INSTALAR ARDOUR 6
 
 clear
-sudo mkdir -p /opt/tmp/ardour6
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/YBKRojEoNbM8Nq5/download' -O /opt/tmp/ardour6/ardour6-6.3-q2_amd64.deb
-sudo apt install /opt/tmp/ardour6/./ardour6-6.3-q2_amd64.deb -y
+apt-get install ardour6 -y
 
 # INSTALAR PLUGINS PARA ARDOUR
 
@@ -1789,14 +1685,10 @@ function _pluginEntangle()
 # Luego será necesario ejecutar el comando instalar-plugin-entangle sin permisos de root.
 
 clear
-sudo mkdir -p /opt/tmp/
-sudo wget  --no-check-certificate 'http://my.opendesktop.org/s/kRmqM6HAit8Px2F/download' -O /opt/tmp/entangle-plugin-stopmotion.deb
-for paquetes_python in python-gobject; do sudo apt-get install -y $paquetes_python; done
-sudo apt-get install python3-gi 
-sudo apt install /opt/tmp/./entangle-plugin-stopmotion.deb
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
+apt-get install entangleinstallplugin -y
+
 }
 
 _inicioCheck
 _menuPrincipal
+
