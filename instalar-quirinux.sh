@@ -79,7 +79,7 @@ function _requisitos() {
   sudo apt-get update -y
   for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
   mkdir -p /opt/requisitos/
-  touch -p /opt/requisitos/ok
+  touch  /opt/requisitos/ok
 
 }
 
