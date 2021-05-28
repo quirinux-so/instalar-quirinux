@@ -88,6 +88,7 @@ function _requisitos() {
 # ===========================================================================================
 
 function _instalarDialog() {
+  sudo apt-get update -y
   sudo apt-get install dialog -y
 }
 
