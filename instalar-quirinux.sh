@@ -801,8 +801,8 @@ function _sourcesDebian() {
 
   clear
   sudo mkdir -p /opt/tmp/apt
-  sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.0_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.0_all.deb
-  sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.0_all.deb
+  sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.1_all.deb
+  sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.1_all.deb
   sudo apt-get update -y
   chown -R root:root /etc/apt
 
@@ -820,8 +820,8 @@ function _sourcesDevuan() {
 
   clear
   sudo mkdir -p /opt/tmp/apt
-  sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdev_1.0.0_all.deb' -O /opt/tmp/apt/repoconfigdev_1.0.0_all.deb
-  sudo apt install /opt/tmp/apt/./repoconfigdev_1.0.0_all.deb
+  sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdev_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigdev_1.1.1_all.deb
+  sudo apt install /opt/tmp/apt/./repoconfigdev_1.1.1_all.deb
   sudo apt-get update -y
   chown -R root:root /etc/apt
 
@@ -838,8 +838,8 @@ function _sourcesUbuntu() {
 
   clear
   sudo mkdir -p /opt/tmp/apt
-  sudo wget --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.0_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.0_all.deb
-  sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.0_all.deb
+  sudo wget --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.1_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.1_all.deb
+  sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.1_all.deb
   sudo apt-get update -y
   chown -R root:root /etc/apt
 }
