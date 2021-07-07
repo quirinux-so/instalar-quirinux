@@ -247,9 +247,8 @@ function _menuPrincipal() {
     2 "Instalar Quirinux Edición Pro" \
     3 "Instalar componentes sueltos" \
     4 "Instalar programas sueltos" \
-    5 "Instalar núcleos" \
-    6 "Ayuda" \
-    7 "Salir")
+    5 "Ayuda" \
+    6 "Salir")
 
   echo $opPrincipal
 
@@ -275,18 +274,18 @@ function _menuPrincipal() {
     _instalarProgramasSueltos
   fi
 
-  if [[ $opPrincipal == 5 ]]; then # Instalar núcleos
-    clear
-    _menuNucleos
-    _menuPrincipal
-  fi
+#  if [[ $opPrincipal == 5 ]]; then # Instalar núcleos
+#    clear
+#    _menuNucleos
+#    _menuPrincipal
+#  fi
 
-  if [[ $opPrincipal == 6 ]]; then # Ayuda
+  if [[ $opPrincipal == 5 ]]; then # Ayuda
     clear
     _ayudaPrincipal
   fi
 
-  if [[ $opPrincipal == 7 ]]; then # Salir
+  if [[ $opPrincipal == 6 ]]; then # Salir
     clear
     _salir
   fi
