@@ -1200,7 +1200,6 @@ function _salvapantallas() {
   cd /opt/tmp/screensaver
   sudo tar -xvf /opt/tmp/screensaver/gluqlo-master.tar
   cd /opt/tmp/screensaver/gluqlo-master
-  make && sudo make install
   for usuarios in /home/*/.xscreensaver; do sudo yes | sudo rm $usuarios; done
   for usuarios in /home/*; do sudo yes | sudo cp /opt/tmp/screensaver/gluqlo-master/.xscreensaver $usuarios; done
   sudo apt-get install -f -y
