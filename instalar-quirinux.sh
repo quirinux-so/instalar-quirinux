@@ -2,7 +2,7 @@
 
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
-# Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
+# Licencia:	https://www.gnu.org/licenses/gpl-2.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0 RC_4
 
@@ -382,7 +382,7 @@ function _instalarSueltos() {
       _baseBusterGeneral
       _utiles
       _olive
-      #_wicd
+      _wicd
       ;;
 
     2) # "Programas para realizadores audiovisuales"
@@ -523,7 +523,7 @@ _instalarProgramasSueltos() {
     24 "Storyboarder (editor de storyboards)" off
     25 "Tahoma (animación 2D y Stop-Motion)" off
     26 "Tupitube (animación 2D y stop-motion)" off
-    #27 "Wicd (gestión de red)" off
+    27 "Wicd (gestión de red)" off
     )
 
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
