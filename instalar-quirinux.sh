@@ -523,7 +523,8 @@ _instalarProgramasSueltos() {
     24 "Storyboarder (editor de storyboards)" off
     25 "Tahoma (animación 2D y Stop-Motion)" off
     26 "Tupitube (animación 2D y stop-motion)" off
-    27 "Wicd (gestión de red)" off
+    27 "W-convert (Conversor de video)" off
+    28 "Wicd (gestión de red)" off
     )
 
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -660,7 +661,12 @@ _instalarProgramasSueltos() {
       _tupitube
       ;;
 
-    27) # "Wicd (gestión de red)"
+    27) # "W-Convert (conversor de video)"
+      clear
+      _wconvert
+      ;;
+    
+    28) # "Wicd (gestión de red)"
       clear
       _wicd
       ;;
@@ -748,6 +754,7 @@ function _especializadosPro() {
   _blender
   _ardour
   _pluginEntangle
+  _wconvert
   _borratemp
 
 }
@@ -876,6 +883,17 @@ function _codecs() {
   sudo apt-get autoremove --purge -y
 
 }
+
+function _wconvert() {
+
+  # INSTALAR W-CONVERT: CONVERSOR DE VIDEO PARA WINDOWS Y WHATSAPP
+
+  clear
+  sudo apt-get install w-convert -y
+  sudo apt-get autoremove --purge -y
+
+}
+
 
 function _libresNvidia() {
 
