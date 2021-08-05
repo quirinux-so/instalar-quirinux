@@ -1206,20 +1206,24 @@ function _centroDeSoftware() {
 
 }
 
-function _salvapantallas() {
+function _pantallas() {
 
   # INSTALAR SCREENSAVER GLUCLO
 
   clear
-  for paquetes_screensaver in xscreensaver xscreensaver-gl-extra xscreensaver-data-extra build-essential libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libx11-dev; do sudo apt-get install -y $paquetes_screensaver; done
-  for paquetes_gnome_screensaver in gnome-screensaver; do sudo apt-get remove --purge -y $paquetes_gnome_screensaver; done
-  sudo mkdir -p /opt/tmp/screensaver
-  sudo wget --no-check-certificate 'https://quirinux.ga/extras/gluqlo-master.tar' -O /opt/tmp/screensaver/gluqlo-master.tar
-  cd /opt/tmp/screensaver
-  sudo tar -xvf /opt/tmp/screensaver/gluqlo-master.tar
-  cd /opt/tmp/screensaver/gluqlo-master
-  for usuarios in /home/*/.xscreensaver; do sudo yes | sudo rm $usuarios; done
-  for usuarios in /home/*; do sudo yes | sudo cp /opt/tmp/screensaver/gluqlo-master/.xscreensaver $usuarios; done
+
+  sudo apt-get install -y
+
+#  for paquetes_screensaver in xscreensaver xscreensaver-gl-extra xscreensaver-data-extra build-essential libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libx11-dev; do sudo apt-get install -y $paquetes_screensaver; done
+#  for paquetes_gnome_screensaver in gnome-screensaver; do sudo apt-get remove --purge -y $paquetes_gnome_screensaver; done
+#  sudo mkdir -p /opt/tmp/screensaver
+3  sudo wget --no-check-certificate 'https://quirinux.ga/extras/gluqlo-master.tar' -O /opt/tmp/screensaver/gluqlo-master.tar
+#  cd /opt/tmp/screensaver
+#  sudo tar -xvf /opt/tmp/screensaver/gluqlo-master.tar
+#  cd /opt/tmp/screensaver/gluqlo-master
+#  for usuarios in /home/*/.xscreensaver; do sudo yes | sudo rm $usuarios; done
+#  for usuarios in /home/*; do sudo yes | sudo cp /opt/tmp/screensaver/gluqlo-master/.xscreensaver $usuarios; done
+
   sudo apt-get install -f -y
   sudo apt-get autoremove --purge -y
 
