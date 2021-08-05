@@ -1211,8 +1211,7 @@ function _pantallas() {
   # INSTALAR SCREENSAVER GLUCLO
 
   clear
-  sudo apt-get install gluqlo -y
-  sudo apt-get install -f -y
+  sudo apt-get install gluqlo -f -y
   sudo apt-get autoremove --purge -y
 
 }
