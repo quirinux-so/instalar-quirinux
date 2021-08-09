@@ -1146,6 +1146,8 @@ function _temas() {
   # También instala menú principal de Quirinux y modifica algunos archivos más.
   clear
   apt-get install quirinuxconfig -y
+  update-grub
+  update-grub2
 
   # PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
   clear
