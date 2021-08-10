@@ -274,12 +274,6 @@ function _menuPrincipal() {
     _instalarProgramasSueltos
   fi
 
-#  if [[ $opPrincipal == 5 ]]; then # Instalar núcleos
-#    clear
-#    _menuNucleos
-#    _menuPrincipal
-#  fi
-
   if [[ $opPrincipal == 5 ]]; then # Ayuda
     clear
     _ayudaPrincipal
@@ -305,40 +299,6 @@ function _ayudaPrincipal() {
     --title "AYUDA" \
     --msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
   _menuPrincipal
-}
-
-# ===========================================================================================
-# MENÚ INSTALAR NUCLEOS [CASTELLANO]
-# ===========================================================================================
-
-function _menuNucleos() {
-
-  cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 28 76 4)
-  options=(1 "Instalar kernel AVL de baja latencia" off
-    2 "Instalar kernel GNU Linux-Libre" off)
-
-  choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-  clear
-  for choice in $choices; do
-    case $choice in
-
-    1) # "Instalar kernel AVL de baja latencia"
-      clear
-      _instalarAVL
-      _menuPrincipal
-      ;;
-
-    2) # "Instalar kernel GNU Linux-Libre"
-      clear
-      _instalarGNULinuxLibre
-      _menuPrincipal
-      ;;
-
-    esac
-  done
-  _clear
-  _menuPrincipal
-
 }
 
 function _instalarDialog() {
@@ -382,7 +342,7 @@ function _instalarSueltos() {
       _baseBusterGeneral
       _utiles
       _olive
-      #_wicd
+      _wicd
       ;;
 
     2) # "Programas para realizadores audiovisuales"
@@ -523,7 +483,7 @@ _instalarProgramasSueltos() {
     24 "Storyboarder (editor de storyboards)" off
     25 "Tahoma (animación 2D y Stop-Motion)" off
     26 "Tupitube (animación 2D y stop-motion)" off
-    #27 "Wicd (gestión de red)" off
+    27 "Wicd (gestión de red)" off
     )
 
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -699,6 +659,7 @@ function _controladoresLibres() {
 
 function _programasGeneral() {
   clear
+  _splash
   _baseBusterGeneral
   _ptxconf
   _chimiboga
@@ -761,23 +722,6 @@ function _utiles() {
   _openboard
   _cpuCoreUtils
   _borratemp
-}
-
-function _instalarGNULinuxLibre() {
-  mkdir -p /opt/tmp/libre
-
-  apt-get install linux-headers-4.19.182-gnu linux-image-4.19.182-gnu linux-libre-4.19-headers linux-libre-4.19 freesh-keyring
-  sudo apt-get remove --purge cryptsetup-initramfs -y
-  sudo apt-get autoremove --purge -y
-
-}
-
-function _instalarAVL() {
-
-  apt-get install linux-headers-5.4.28avl2-lowlatency linux-image-5.4.28avl2-lowlatency
-  sudo apt-get remove --purge cryptsetup-initramfs -y
-  sudo apt-get autoremove --purge -y
-
 }
 
 function _config() {
@@ -847,7 +791,7 @@ function _eggs() {
   clear
   sudo mkdir -p /opt/tmp/eggs
   sudo wget --no-check-certificate "http://my.opendesktop.org/s/8JSsp6PNGpjtb6t/download" -O /opt/tmp/eggs/eggs_7.8.46-1_amd64.deb
-  sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb
+  sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb -y
 
 }
 
@@ -856,11 +800,8 @@ function _firmwareWifi() {
   # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
   clear
-  sudo wget --no-check-certificate 'https://quirinux.ga/extras/quirinux-firmware.tar' -O /opt/tmp/quirinux-firmware.tar
-  sudo tar -xvf /opt/tmp/quirinux-firmware.tar -C /opt/tmp/
-  sudo apt install /opt/tmp/quirinux-firmware/./* -y
-  sudo apt-get install inteli915 -y
-  for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done
+  for paquetes_firmware_q in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev; do sudo apt-get install -y $paquetes_firmware_q; done
+  for paquetes_firmware in inteli915 firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done
   sudo apt-get install -f -y
   sudo apt-get autoremove --purge -y
 
@@ -945,38 +886,6 @@ function _libresImpresoras() {
   getweb 2200
   getweb 2300
   getweb 2430
-  # getweb cpwl
-  # getweb 300
-  # getweb 310
-  # getweb 315
-  # getweb 325
-  # getweb 360
-  # getweb 365
-  # getweb 600
-  # getweb 610
-  # getweb 2160
-  # getweb 3160
-  # getweb 3175
-  # getweb 3185
-  # getweb 6110
-  # getweb 500
-  # getweb 301
-  # getweb c310
-  # getweb c511
-  # getweb c810
-  # getweb 3100
-  # getweb 3200
-  # getweb 3300
-  # getweb 3400
-  # getweb 3530
-  # getweb 5100
-  # getweb 5200
-  # getweb 5500
-  # getweb 5600
-  # getweb 5800
-  # getweb 160
-  # getweb 1000
-  # getweb 1005
   getweb 1018
   getweb 1020
   getweb p1005
@@ -1019,7 +928,7 @@ function _baseBusterGeneral() {
   # INSTALAR PAQUETES BASE DE BUSTER
 
   clear
-  for paquetes_buster in mediainfo graphicsmagick mediainfo-gui firefox firefox-l10n-de firefox-l10n-es firefox-l10n-fr firefox-l10n-gl firefox-l10n-ru firefox-l10n-it firefox-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbid-l10n-de thunderbid-l10n-es-es thunderbid-l10n-fr thunderbid-l10n-gl thunderbid-l10n-it thunderbid-l10n-pt-br thunderbid-l10n-pt-ptthunderbid-l10n-ru thunderbid-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer xpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+  for paquetes_buster in mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi simple-scan ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
   sudo apt-get install -f -y
   sudo apt-get autoremove --purge -y
 
@@ -1054,6 +963,15 @@ function _chimiboga() {
   clear
   apt-get install chimiboga -y
 
+}
+
+function _slpash() {
+
+  # INSTALAR SPLASH DE QUIRINUX
+  
+  clear
+  apt-get install quirinuxsplash -y
+  
 }
 
 function _samba() {
@@ -1190,9 +1108,11 @@ function _centroDeSoftware() {
 
 function _salvapantallas() {
 
-  # INSTALAR SCREENSAVER GLUQLO
+  # INSTALAR SCREENSAVER GLUCLO
 
-apt-get install gluqlo -y
+  clear
+  
+  apt-get install gluqlo -y
 
 }
 
@@ -1386,6 +1306,8 @@ function _tipografiasPro() {
 function _opentoonz() {
 
   clear
+  
+  apt-get install opentoonz -y
 
   # Descarga y compila el código fuente de OpenToonz
 
@@ -1412,7 +1334,7 @@ function _opentoonz() {
   make -j$(nproc)
   make install
 
-  # Descarga y copia el ícono del menú de inicio de OpenToonz
+  #~ # Descarga y copia el ícono del menú de inicio de OpenToonz
 
   clear
   apt-get install icons-opentoonz -y
@@ -1591,3 +1513,5 @@ function _pluginEntangle() {
 
 _inicioCheck
 _menuPrincipal
+
+
