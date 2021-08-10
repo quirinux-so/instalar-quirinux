@@ -659,6 +659,7 @@ function _controladoresLibres() {
 
 function _programasGeneral() {
   clear
+  _splash
   _baseBusterGeneral
   _ptxconf
   _chimiboga
@@ -962,6 +963,15 @@ function _chimiboga() {
   clear
   apt-get install chimiboga -y
 
+}
+
+function _slpash() {
+
+  # INSTALAR SPLASH DE QUIRINUX
+  
+  clear
+  apt-get install quirinuxsplash -y
+  
 }
 
 function _samba() {
