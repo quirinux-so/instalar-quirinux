@@ -187,7 +187,7 @@ fi
 
 if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Bullseye
 clear
-_sourcesBullseye
+_sourcesDebianBullseye
 _menuPrincipal
 fi
 
@@ -754,6 +754,9 @@ apt-get update
 
 }
 
+
+function _sourcesDebianBullseye() {
+
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
@@ -1049,7 +1052,7 @@ sudo apt-get install -f -y
 
 }
 
-function _w-convert) {
+function _w-convert() {
 
 # INSTALAR W-CONVERT
 
