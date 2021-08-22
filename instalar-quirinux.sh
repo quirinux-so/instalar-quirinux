@@ -187,7 +187,7 @@ fi
 
 if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Bullseye
 clear
-_sourcesBullseye
+_sourcesDebianBullseye
 _menuPrincipal
 fi
 
@@ -753,6 +753,9 @@ sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 apt-get update
 
 }
+
+
+function _sourcesDebianBullseye() {
 
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
 
