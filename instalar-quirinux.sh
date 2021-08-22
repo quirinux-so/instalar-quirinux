@@ -168,13 +168,14 @@ function _menuRepositorios() {
 
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
---menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 6 \
+--menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
-2 "Configurar repositorios extra para Devuan Beowulf" \
-3 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-4 "No configurar repositorios adicionales" \
-5 "Ayuda" \
-6 "Salir")
+2 "Configurar repositorios extra para Debian Bullseye" \
+3 "Configurar repositorios extra para Devuan Beowulf" \
+4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+5 "No configurar repositorios adicionales" \
+6 "Ayuda" \
+7 "Salir")
 
 echo $opRepositorios
 
@@ -184,28 +185,35 @@ _sourcesDebian
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Bullseye
+clear
+_sourcesBullseye
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Devuan
 clear
 _sourcesDevuan
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
+if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux para Ubuntu
 clear
 _sourcesUbuntu
+_menuPrincipal
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Salir
+if [[ $opRepositorios == 5 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 5 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 6 ]]; then # Salir
+if [[ $opRepositorios == 7 ]]; then # Salir
 clear
 _salir
 fi
@@ -472,7 +480,7 @@ options=(
 24 "Storyboarder (editor de storyboards)" off
 25 "Tahoma (animación 2D y Stop-Motion)" off
 26 "Tupitube (animación 2D y stop-motion)" off
-27 "Wicd (gestión de red)" off
+27 "W-Convert(convertir mp4 para Windows / Whatsapp)" off
 )
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -611,7 +619,7 @@ _tupitube
 
 27) # "Wicd (gestión de red)"
 clear
-_wicd
+_w-convert
 ;;
 
 esac
@@ -648,7 +656,7 @@ _libresRed
 
 function _programasGeneral() {
 clear
-_splash
+#_splash
 _baseBusterGeneral
 _ptxconf
 _chimiboga
@@ -729,12 +737,29 @@ sudo dpkg --add-architecture i386
 
 function _sourcesDebian() {
 
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BUSTER Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.1_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.1_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+
+clear
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+apt-get update
+
+}
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.1_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -778,9 +803,7 @@ chown -R root:root /etc/apt
 
 function _eggs() {
 clear
-sudo mkdir -p /opt/tmp/eggs
-sudo wget --no-check-certificate "http://my.opendesktop.org/s/8JSsp6PNGpjtb6t/download" -O /opt/tmp/eggs/eggs_7.8.46-1_amd64.deb
-sudo apt install /opt/tmp/eggs/./eggs_7.8.46-1_amd64.deb -y
+apt-get install eggs -y
 
 }
 
@@ -839,6 +862,7 @@ function _libresGenius() {
 
 clear
 apt-get install geniusconfig -y
+apt-get install wizardpen -y
 
 }
 
@@ -854,37 +878,7 @@ sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-pri
 sudo apt-get remove --purge hplip -y
 sudo rm -rf /usr/share/hplip
 sudo rm -rf /var/lib/hp
-sudo apt-get install printer-driver-foo2zjs printer-driver-foo2zjs-common -y
-sudo apt-get install tix groff dc cups cups-filters -y
-sudo wget --no-check-certificate 'https://www.quirinux.org/printers/getweb' -O /usr/sbin/getweb
-getweb 1025
-getweb 215
-getweb 1500
-getweb 1600
-getweb 2600n
-getweb 1600w
-getweb 1680
-getweb 1690
-getweb 2480
-getweb 2490
-getweb 2530
-getweb 4690
-getweb 6115
-getweb 110
-getweb 6121
-getweb 2200
-getweb 2300
-getweb 2430
-getweb 1018
-getweb 1020
-getweb p1005
-getweb p1006
-getweb p1007
-getweb p1008
-getweb p1505
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-sudo mkdir -p /opt/tmp/epson
+apt-get install impresoras -y
 apt-get install epsonscan -y
 epson-install
 
@@ -1055,15 +1049,12 @@ sudo apt-get install -f -y
 
 }
 
-function _wicd() {
+function _w-convert) {
 
-# INSTALAR WICD
+# INSTALAR W-CONVERT
 
 clear
-for paquetes_wicd in wicd; do sudo apt-get install -y $paquetes_wicd; done
-for paquetes_nm in network-manager; do sudo apt-get autoremove --purge -y $paquetes_nm; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
+apt-get install w-convert -y
 
 }
 
@@ -1344,7 +1335,7 @@ function _inkscape() {
 # INSTALANDO INKSCAPE
 
 clear
-apt-get install inkscapeq -y
+apt-get install inkscape -y
 
 }
 
@@ -1425,7 +1416,7 @@ function _qstopmotion() {
 # INSTALAR QSTOPMOTION - versión elegida por Quirinux
 
 clear
-apt-get install qstopmotionq -y
+apt-get install qstopmotion -y
 
 }
 
@@ -1453,7 +1444,7 @@ function _mypaint() {
 # INSTALAR MYPAINT - versión elegida por Quirinux
 
 clear
-apt-get install mypaintq -y
+apt-get install mypaint -y
 
 }
 
@@ -1471,16 +1462,16 @@ function _blender() {
 # ACTUALIZANDO BLENDER - versión elegida por Quirinux
 
 clear
-apt-get install blenderq -y
+apt-get install blender -y
 
 }
 
 function _ardour() {
 
-# INSTALAR ARDOUR 6
+# INSTALAR ARDOUR
 
 clear
-apt-get install ardour6 -y
+apt-get install ardour -y
 
 # INSTALAR PLUGINS PARA ARDOUR
 
