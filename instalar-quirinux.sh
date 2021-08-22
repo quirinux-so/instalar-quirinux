@@ -656,7 +656,7 @@ _libresRed
 
 function _programasGeneral() {
 clear
-#_splash
+_splash
 _baseBusterGeneral
 _ptxconf
 _chimiboga
@@ -948,7 +948,7 @@ apt-get install chimiboga -y
 
 }
 
-function _slpash() {
+function _splash() {
 
 # INSTALAR SPLASH DE QUIRINUX
 
