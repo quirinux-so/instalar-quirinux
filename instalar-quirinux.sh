@@ -237,7 +237,7 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 2 "Instalar Quirinux Edición Pro" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
-5 "Actualizar a Bullseye desde Quirinux 2.0"\
+5 "Actualizar a Bullseye desde Quirinux 2.0" \
 6 "Ayuda" \
 7 "Salir")
 
