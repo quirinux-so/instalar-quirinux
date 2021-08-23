@@ -170,12 +170,11 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
-2 "Configurar repositorios extra para Debian Bullseye" \
-3 "Configurar repositorios extra para Devuan Beowulf" \
-4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-5 "No configurar repositorios adicionales" \
-6 "Ayuda" \
-7 "Salir")
+2 "Configurar repositorios extra para Devuan Beowulf" \
+3 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+4 "No configurar repositorios adicionales" \
+5 "Ayuda" \
+6 "Salir")
 
 echo $opRepositorios
 
@@ -185,35 +184,29 @@ _sourcesDebian
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Bullseye
-clear
-_sourcesBullseye
-_menuPrincipal
-fi
-
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Devuan
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
 clear
 _sourcesDevuan
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux para Ubuntu
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
 clear
 _sourcesUbuntu
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 5 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 7 ]]; then # Salir
+if [[ $opRepositorios == 6 ]]; then # Salir
 clear
 _salir
 fi
@@ -244,8 +237,9 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 2 "Instalar Quirinux Edición Pro" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
-5 "Ayuda" \
-6 "Salir")
+5 "Actualizar a Bullseye desde Quirinux 2.0"\
+6 "Ayuda" \
+7 "Salir")
 
 echo $opPrincipal
 
@@ -276,7 +270,12 @@ clear
 _ayudaPrincipal
 fi
 
-if [[ $opPrincipal == 6 ]]; then # Salir
+if [[ $opPrincipal == 6 ]]; then # Actualizar a Bullseye
+clear
+_bullseye
+fi
+
+if [[ $opPrincipal == 7 ]]; then # Salir
 clear
 _salir
 fi
@@ -630,6 +629,71 @@ _menuPrincipal
 }
 
 # ===========================================================================================
+# ACTUALIZAR A BULLSEYE [CASTELLANO]
+# ===========================================================================================
+
+function _bullseye() {
+	
+	FILE="/opt/requisitos/ok-bullseye"
+
+if [ ! -e ${FILE} ]; then
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.1_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.1_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+
+clear
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+apt-get update
+
+# DESINSTALA AQUETES DE REPO QUIRINUX ACTUALIZABLES POR BULLSEYE
+
+sudo apt-get autoremove --purge blenderq godot inkscape mypaintq openboard qstopmotion ardour -y
+
+# ACTUALIZA LO ACTUALIZABLE POR BULLSEYE
+
+sudo apt-get upgrade -y
+sudo apt-get install blender godot inkscape mypaint openboard qstopmotion ardour -y
+
+# REINSTALA CONTROLADORES
+
+_firmwareWifi
+_libresRed
+_ptxconf
+_libresImpresoras
+_codecs
+_libresWacom
+_libresGenius
+_camarasVirtuales
+_mint
+_pulseaudio
+
+else
+
+clear
+_warningPrevia
+
+fi
+
+}
+
+function _warningPrevia() {
+
+dialog --backtitle "MALAS NOTICIAS" \
+--title "LO SIENTO" \
+--msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0" 23 100
+_instalarSueltos
+}
+
+
+# ===========================================================================================
 # FUNCIONES SIN SALIDA EN PANTALLA [NO NECESITAN TRADUCCIÓN]
 # ===========================================================================================
 
@@ -641,6 +705,7 @@ _codecs
 _controladoresLibres
 _programasGeneral
 _pulseaudio
+_previaVerif
 _limpiar
 }
 
@@ -721,6 +786,14 @@ _cpuCoreUtils
 _borratemp
 }
 
+function _previaVerif()
+{
+
+mkdir -p /opt/requisitos/
+touch /opt/requisitos/ok-bullseye
+	
+}
+
 function _config() {
 
 # CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
@@ -743,23 +816,6 @@ clear
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.1_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.1_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
-
-clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
-apt-get update
-
-}
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.1_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -1049,7 +1105,7 @@ sudo apt-get install -f -y
 
 }
 
-function _w-convert) {
+function _w-convert() {
 
 # INSTALAR W-CONVERT
 
@@ -1225,7 +1281,7 @@ sudo apt-get autoremove --purge -y
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 clear
-for paquetes_remover_programas in xsane xarchiver grsync jami blender dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
+for paquetes_remover_programas in xsane xarchiver grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo exfalso kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1444,7 +1500,7 @@ function _mypaint() {
 # INSTALAR MYPAINT - versión elegida por Quirinux
 
 clear
-apt-get install mypaint -y
+apt-get install mypaintq -y
 
 }
 
@@ -1462,7 +1518,7 @@ function _blender() {
 # ACTUALIZANDO BLENDER - versión elegida por Quirinux
 
 clear
-apt-get install blender -y
+apt-get install blenderq -y
 
 }
 
