@@ -57,6 +57,37 @@ fi
 
 }
 
+function _repoCheck() {
+
+FILE="/opt/requisitos/repo-ok"
+
+if [ ! -e ${FILE} ]; then
+
+clear
+_warningRepo
+
+else
+
+clear
+_menuPrincipal
+
+fi
+
+}
+
+# ===========================================================================================
+# WARNING REPOSITORIOS
+# ===========================================================================================v
+
+function _warningRepo() {
+
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "REQUISITO INCLUMPLIDO" \
+--msgbox "Es necesario tener instalados los repositorios de Quirinux\n\nPor favor, elije el que sea compatible con tu distribución." 18 75
+_menuRepositorios
+}
+
+
 # ===========================================================================================
 # INSTALAR REQUISITOS [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
@@ -181,29 +212,30 @@ echo $opRepositorios
 if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux para Buster
 clear
 _sourcesDebian
-_menuPrincipal
+_repoCheck
 fi
 
 if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
 clear
 _sourcesDevuan
-_menuPrincipal
+_repoCheck
 fi
 
 if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
 clear
 _sourcesUbuntu
-_menuPrincipal
+_repoCheck
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # No configurar repositorios adicionales
 clear
-_menuPrincipal
+_repoCheck
 fi
 
 if [[ $opRepositorios == 5 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
+_menuRepositorios
 fi
 
 if [[ $opRepositorios == 6 ]]; then # Salir
@@ -220,7 +252,7 @@ function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Buster XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). Si utilizas Debian XFCE o alguna derivada directa como Mint puedes instalar estos repositorios con tranquilidad. Ofrecemos la opción para instalar también repositorios de Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%. La opción más segura es la de no instalar repositorios, pero puede que algunas aplicaciones no se instalen (de todas formas, lo escencial funcionará)." 23 100
+--msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Buster XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). \n\nSi utilizas Debian XFCE o alguna derivada directa como Mint LMDE puedes instalar estos repositorios con tranquilidad. Ofrecemos la opción para instalar también repositorios de Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%." 18 75
 _menuRepositorios
 }
 
@@ -229,6 +261,8 @@ _menuRepositorios
 # ===========================================================================================
 
 function _menuPrincipal() {
+	
+
 
 opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
@@ -237,7 +271,7 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 2 "Instalar Quirinux Edición Pro" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
-5 "Actualizar a Bullseye desde Quirinux 2.0" \
+5 "Actualizar a Bullseye" \
 6 "Ayuda" \
 7 "Salir")
 
@@ -294,7 +328,7 @@ function _ayudaPrincipal() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
+--msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\n" 18 75
 _menuPrincipal
 }
 
@@ -629,6 +663,20 @@ _menuPrincipal
 
 }
 
+_repoVerif() {
+	
+FILE="/opt/requisitos/repo-ok"
+
+if [ ! -e ${FILE} ]; then
+
+clear
+touch /opt/requisitos/repo-ok
+_menuPrincipal
+
+fi
+
+}
+
 # ===========================================================================================
 # ACTUALIZAR A BULLSEYE [CASTELLANO]
 # ===========================================================================================
@@ -691,7 +739,7 @@ function _warningPrevia() {
 
 dialog --backtitle "MALAS NOTICIAS" \
 --title "LO SIENTO" \
---msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0" 23 100
+--msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0" 18 75
 _menuPrincipal
 }
 
@@ -811,8 +859,12 @@ sudo dpkg --add-architecture i386
 
 }
 
-function _sourcesDebian() {
+# ===========================================================================================
+# INSTALA REPOSITORIOS PARA DEBIAN BUSTER
+# ===========================================================================================
 
+function _sourcesDebian() {
+	
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BUSTER Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
@@ -821,6 +873,7 @@ sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.1
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
+_repoVerif
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
 
@@ -828,10 +881,16 @@ clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 apt-get update
 
+_repoVerif
+
 }
 
-function _sourcesDevuan() {
+# ===========================================================================================
+# INSTALA REPOSITORIOS PARA DEVUAN
+# ===========================================================================================
 
+function _sourcesDevuan() {
+	
 # AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
@@ -846,7 +905,13 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+_repoVerif
+
 }
+
+# ===========================================================================================
+# INSTALA REPOSITORIOS PARA UBUNTU
+# ===========================================================================================
 
 function _sourcesUbuntu() {
 
@@ -863,6 +928,8 @@ chown -R root:root /etc/apt
 function _eggs() {
 clear
 apt-get install eggs -y
+
+_repoVerif
 
 }
 
@@ -1552,6 +1619,4 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
-
-
 
