@@ -265,14 +265,15 @@ clear
 _instalarProgramasSueltos
 fi
 
-if [[ $opPrincipal == 5 ]]; then # Ayuda
-clear
-_ayudaPrincipal
-fi
-
-if [[ $opPrincipal == 6 ]]; then # Actualizar a Bullseye
+if [[ $opPrincipal == 5 ]]; then # Actualizar a Bullseye
 clear
 _bullseye
+
+fi
+
+if [[ $opPrincipal == 6 ]]; then # Ayuda
+clear
+_ayudaPrincipal
 fi
 
 if [[ $opPrincipal == 7 ]]; then # Salir
@@ -638,9 +639,15 @@ function _bullseye() {
 
 if [ ! -e ${FILE} ]; then
 
+clear
+_warningPrevia
+
+else
+
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
+apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.1_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.1_all.deb
@@ -675,10 +682,6 @@ _camarasVirtuales
 _mint
 _pulseaudio
 
-else
-
-clear
-_warningPrevia
 
 fi
 
@@ -689,7 +692,7 @@ function _warningPrevia() {
 dialog --backtitle "MALAS NOTICIAS" \
 --title "LO SIENTO" \
 --msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0" 23 100
-_instalarSueltos
+_menuPrincipal
 }
 
 
