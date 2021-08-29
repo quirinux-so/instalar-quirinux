@@ -710,12 +710,12 @@ apt-get update
 
 # DESINSTALA AQUETES DE REPO QUIRINUX ACTUALIZABLES POR BULLSEYE
 
-sudo apt-get autoremove --purge blenderq godot inkscape mypaintq openboard qstopmotion ardour -y
+sudo apt-get autoremove --purge blenderq godot inkscape mypaintq openboard qstopmotion ardour mintinstall -y
 
 # ACTUALIZA LO ACTUALIZABLE POR BULLSEYE
 
 sudo apt-get upgrade -y
-sudo apt-get install blender godot inkscape mypaint openboard qstopmotion ardour -y
+sudo apt-get install blender godot inkscape mypaint openboard qstopmotion ardour gnome-software gnome-software-plugin-flatpak -y
 
 # REINSTALA CONTROLADORES
 
