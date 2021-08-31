@@ -181,19 +181,26 @@ echo $opRepositorios
 if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux para Buster
 clear
 _sourcesDebian
+_okrepo
 _menuPrincipal
+
+
 fi
 
 if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
 clear
 _sourcesDevuan
+_okrepo
 _menuPrincipal
+
 fi
 
 if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
 clear
 _sourcesUbuntu
+_okrepo
 _menuPrincipal
+
 fi
 
 if [[ $opRepositorios == 4 ]]; then # Salir
@@ -242,7 +249,7 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 7 "Salir")
 
 echo $opPrincipal
-
+_checkrepo
 if [[ $opPrincipal == 1 ]]; then # Instalar Quirinux Edición General
 clear
 _instalarGeneral
@@ -284,6 +291,16 @@ fi
 
 function _instalarDialog() {
 sudo apt-get install dialog -y
+}
+
+function _checkrepo() {
+FILE="/opt/requisitos/ok-repo"
+
+if [ ! -e ${FILE} ]; then
+
+_warningRepo
+
+fi
 }
 
 # ===========================================================================================
@@ -689,10 +706,18 @@ fi
 
 function _warningPrevia() {
 
-dialog --backtitle "MALAS NOTICIAS" \
---title "LO SIENTO" \
---msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0" 23 100
+dialog --backtitle "REQUISITO INCUMPLIDO" \
+--title "NO SE ENCONTRÓ QUIRINUX S/BUSTER" \
+--msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0 sobre Buster" 23 100
 _menuPrincipal
+}
+
+function _warningRepo() {
+
+dialog --backtitle "REQUISITO INCUMPLIDO" \
+--title "SE NECESITAN REPOSITORIOS" \
+--msgbox "\nSe requiere instalar repositorios adicionales de Quirinux. Por favor, elije el que sea compatible con tu distribución." 23 100
+_menuRepositorios
 }
 
 
@@ -791,9 +816,27 @@ _borratemp
 
 function _previaVerif()
 {
+	
+FILE="/opt/requisitos/ok-buster"
 
-mkdir -p /opt/requisitos/
+if [ -e ${FILE} ]; then
+
 touch /opt/requisitos/ok-bullseye
+
+fi
+	
+}
+
+function _okrepo()
+{
+	
+FILE="/opt/requisitos/ok-repo"
+
+if [ ! -e ${FILE} ]; then
+
+touch /opt/requisitos/ok-repo
+
+fi
 	
 }
 
@@ -821,6 +864,7 @@ sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.1
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
+touch /opt/requisitos/ok-buster
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
 
