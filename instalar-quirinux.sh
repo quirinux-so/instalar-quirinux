@@ -181,23 +181,26 @@ echo $opRepositorios
 if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux para Buster
 clear
 _sourcesDebian
-_menuPrincipal
 _okrepo
+_menuPrincipal
+
 
 fi
 
 if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
 clear
 _sourcesDevuan
-_menuPrincipal
 _okrepo
+_menuPrincipal
+
 fi
 
 if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
 clear
 _sourcesUbuntu
-_menuPrincipal
 _okrepo
+_menuPrincipal
+
 fi
 
 if [[ $opRepositorios == 4 ]]; then # Salir
