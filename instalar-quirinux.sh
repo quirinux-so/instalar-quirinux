@@ -356,7 +356,7 @@ clear
 _baseBusterGeneral
 _utiles
 _olive
-_wicd
+_networkmanager
 ;;
 
 2) # "Programas para realizadores audiovisuales"
@@ -486,18 +486,19 @@ options=(
 13 "Imagine (reducir peso de fotografías)" off
 14 "Inkscape (editor de gráficos vectoriales)" off
 15 "Kitchscenarist (editor para guionistas)" off
-16 "Mugshot (gestionar usuarios)" off
-17 "Mystiq (conversor de formatos)" off
-18 "Natron (composición y FX)" off
-19 "Olive (editor de video sencillo)" off
-20 "Openboard (convertir pantalla en pizarra)" off
-21 "Opentoonz (animación 2D industrial)" off
-22 "qStopMotion (animación stop-motion)" off
-23 "Quinema (herramientas para animación)" off
-24 "Storyboarder (editor de storyboards)" off
-25 "Tahoma (animación 2D y Stop-Motion)" off
-26 "Tupitube (animación 2D y stop-motion)" off
-27 "W-Convert(convertir mp4 para Windows / Whatsapp)" off
+16 "Network-manager (gestión de redes)" off
+17 "Mugshot (gestionar usuarios)" off
+18 "Mystiq (conversor de formatos)" off
+19 "Natron (composición y FX)" off
+20 "Olive (editor de video sencillo)" off
+21 "Openboard (convertir pantalla en pizarra)" off
+22 "Opentoonz (animación 2D industrial)" off
+23 "qStopMotion (animación stop-motion)" off
+24 "Quinema (herramientas para animación)" off
+25 "Storyboarder (editor de storyboards)" off
+26 "Tahoma (animación 2D y Stop-Motion)" off
+27 "Tupitube (animación 2D y stop-motion)" off
+28 "W-Convert(convertir mp4 para Windows / Whatsapp)" off
 )
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -580,61 +581,66 @@ clear
 _kitscenarist
 ;;
 
-16) # "Mugshot (gestionar usuarios)"
+16) # "Network-manager (gestionar redes)"
+clear
+_networkmanager
+;;
+
+17) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-17) # "Mystiq (conversor de formatos)"
+18) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-18) # "Natron (composición y FX)"
+19) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-19) # "Olive (editor de video sencillo)"
+20) # "Olive (editor de video sencillo)"
 clear
 _olive
 ;;
 
-20) # "Openboard (convertir pantalla en pizarra)"
+21) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-21) # "Opentoonz (animación 2D industrial)"
+22) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-22) # "qStopMotion (animación stop-motion)"
+23) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-23) # "Quinema (herramientas para animación)"
+24) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-24) # "Storyboarder (editor de storyboards)"
+25) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-25) # "Tahoma (animación 2D y Stop-Motion)"
+26) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-26) # "Tupitube (animación 2D y stop-motion)"
+27) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-27) # "Wicd (gestión de red)"
+28) # "W-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -1264,6 +1270,15 @@ sudo chmod 777 /etc/network/interfaces
 sudo echo "auto lo" >>/etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
+
+}
+
+function _networkmanager()
+{
+
+# ELIMINANDO ERRORES DE INICIO (RED
+clear
+sudo apt-get install network-manager -y
 
 }
 
