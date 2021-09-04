@@ -1530,7 +1530,7 @@ clear
 apt-get install mypaintq -y
 
 else
-apt-get install mypaint
+apt-get install mypaint -y
 
 fi
 
