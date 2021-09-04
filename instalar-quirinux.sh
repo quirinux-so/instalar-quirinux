@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
-# Versión:	2.0 RC_4
+# Versión:	2.0 RC_5
 
 # ===========================================================================================
 # ¿ESTE CÓDIGO TE RESULTA INMANEJABLE?
@@ -702,9 +702,9 @@ _menuRepositorios
 function _instalarGeneral() {
 clear
 _centroDeSoftware
-_firmwareWifi
+#_firmwareWifi
 _codecs
-_controladoresLibres
+#_controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
@@ -718,7 +718,7 @@ clear
 _libresWacom
 _libresGenius
 _libresImpresoras
-_libresRed
+#_libresRed
 }
 
 function _programasGeneral() {
@@ -1100,7 +1100,7 @@ function _cpuCoreUtils() {
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
 clear
-apt-get install cpufreq -y
+apt-get install cpufreq cpufrequtils -y
 
 }
 
@@ -1156,11 +1156,13 @@ function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-clear
-sudo apt-get upgrade -y
-sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
-sudo apt-get autoremove --purge flatpak -y
+#clear
+#sudo apt-get upgrade -y
+#sudo apt-get dist-ugprade -y
+#sudo apt-get install mintinstall -y
+#sudo apt-get autoremove --purge flatpak -y
+
+apt-get install gnome-software -y
 
 # INSTALAR FLATPAK-CONFIG
 
