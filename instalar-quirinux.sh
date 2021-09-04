@@ -170,24 +170,31 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
-2 "Configurar repositorios extra para Devuan Beowulf" \
-3 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-4 "No configurar repositorios adicionales" \
-5 "Ayuda" \
-6 "Salir")
+2 "Configurar repositorios extra para Debian Bullseye" \
+3 "Configurar repositorios extra para Devuan Beowulf" \
+4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+5 "No configurar repositorios adicionales" \
+6 "Ayuda" \
+7 "Salir")
 
 echo $opRepositorios
 
-if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux para Buster
+if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - Debian Buster
 clear
 _sourcesDebian
 _okrepo
 _menuPrincipal
-
-
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux para Devuan
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Debian Bullseye
+clear
+_bullseye
+_okrepo
+_menuPrincipal
+fi
+
+
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
 clear
 _sourcesDevuan
 _okrepo
@@ -195,7 +202,7 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux para Ubuntu
+if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
 clear
 _sourcesUbuntu
 _okrepo
@@ -203,17 +210,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Salir
+if [[ $opRepositorios == 5 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 5 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 6 ]]; then # Salir
+if [[ $opRepositorios == 7 ]]; then # Salir
 clear
 _salir
 fi
@@ -244,9 +251,8 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 2 "Instalar Quirinux Edición Pro" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
-5 "Actualizar a Bullseye desde Quirinux 2.0" \
-6 "Ayuda" \
-7 "Salir")
+5 "Ayuda" \
+6 "Salir")
 
 echo $opPrincipal
 _checkrepo
@@ -272,18 +278,12 @@ clear
 _instalarProgramasSueltos
 fi
 
-if [[ $opPrincipal == 5 ]]; then # Actualizar a Bullseye
-clear
-_bullseye
-
-fi
-
-if [[ $opPrincipal == 6 ]]; then # Ayuda
+if [[ $opPrincipal == 5 ]]; then # Ayuda
 clear
 _ayudaPrincipal
 fi
 
-if [[ $opPrincipal == 7 ]]; then # Salir
+if [[ $opPrincipal == 6 ]]; then # Salir
 clear
 _salir
 fi
@@ -356,7 +356,7 @@ clear
 _baseBusterGeneral
 _utiles
 _olive
-_networkmanager
+_wicd
 ;;
 
 2) # "Programas para realizadores audiovisuales"
@@ -486,7 +486,7 @@ options=(
 13 "Imagine (reducir peso de fotografías)" off
 14 "Inkscape (editor de gráficos vectoriales)" off
 15 "Kitchscenarist (editor para guionistas)" off
-16 "Network-manager (gestión de redes)" off
+16 "Network-Manager (gestion de red)" off
 17 "Mugshot (gestionar usuarios)" off
 18 "Mystiq (conversor de formatos)" off
 19 "Natron (composición y FX)" off
@@ -581,66 +581,66 @@ clear
 _kitscenarist
 ;;
 
-16) # "Network-manager (gestionar redes)"
-clear
-_networkmanager
-;;
-
-17) # "Mugshot (gestionar usuarios)"
+16) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-18) # "Mystiq (conversor de formatos)"
+16) # "Network-manager (gestion de red)"
+clear
+_wicd
+;;
+
+17) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-19) # "Natron (composición y FX)"
+18) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-20) # "Olive (editor de video sencillo)"
+19) # "Olive (editor de video sencillo)"
 clear
 _olive
 ;;
 
-21) # "Openboard (convertir pantalla en pizarra)"
+20) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-22) # "Opentoonz (animación 2D industrial)"
+21) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-23) # "qStopMotion (animación stop-motion)"
+22) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-24) # "Quinema (herramientas para animación)"
+23) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-25) # "Storyboarder (editor de storyboards)"
+24) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-26) # "Tahoma (animación 2D y Stop-Motion)"
+25) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-27) # "Tupitube (animación 2D y stop-motion)"
+26) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-28) # "W-convert (conversor)"
+27) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -653,19 +653,10 @@ _menuPrincipal
 }
 
 # ===========================================================================================
-# ACTUALIZAR A BULLSEYE [CASTELLANO]
+# REPOSITORIOS BULLSEYE
 # ===========================================================================================
 
 function _bullseye() {
-	
-	FILE="/opt/requisitos/ok-bullseye"
-
-if [ ! -e ${FILE} ]; then
-
-clear
-_warningPrevia
-
-else
 
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
 
@@ -683,30 +674,7 @@ clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 apt-get update
 
-# DESINSTALA AQUETES DE REPO QUIRINUX ACTUALIZABLES POR BULLSEYE
-
-sudo apt-get autoremove --purge blenderq godot inkscape mypaintq openboard qstopmotion ardour -y
-
-# ACTUALIZA LO ACTUALIZABLE POR BULLSEYE
-
-sudo apt-get upgrade -y
-sudo apt-get install blender godot inkscape mypaint openboard qstopmotion ardour -y
-
-# REINSTALA CONTROLADORES
-
-_firmwareWifi
-_libresRed
-_ptxconf
-_libresImpresoras
-_codecs
-_libresWacom
-_libresGenius
-_camarasVirtuales
-_mint
-_pulseaudio
-
-
-fi
+touch /opt/requisitos/ok-bullseye
 
 }
 
@@ -913,6 +881,12 @@ chown -R root:root /etc/apt
 function _eggs() {
 clear
 apt-get install eggs -y
+
+}
+
+function _wicd() {
+clear
+apt-get install network-manager -y
 
 }
 
@@ -1273,15 +1247,6 @@ sudo chmod 644 /etc/network/interfaces
 
 }
 
-function _networkmanager()
-{
-
-# ELIMINANDO ERRORES DE INICIO (RED
-clear
-sudo apt-get install network-manager -y
-
-}
-
 function _pulseaudio() {
 
 # REINSTALAR PULSEAUDIO
@@ -1383,6 +1348,17 @@ sudo apt-get autoremove --purge -y
 }
 
 function _baseBusterPro() {
+
+
+FILE="/opt/requisitos/ok-bullseye"
+
+if [ ! -e ${FILE} ]; then
+
+mypaintq qstopmotion -y
+
+fi
+
+else
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
@@ -1531,8 +1507,6 @@ apt-get install quinema -y
 
 function _qstopmotion() {
 
-# INSTALAR QSTOPMOTION - versión elegida por Quirinux
-
 clear
 apt-get install qstopmotion -y
 
@@ -1559,10 +1533,15 @@ apt-get install belle -y
 
 function _mypaint() {
 
-# INSTALAR MYPAINT - versión elegida por Quirinux
+FILE="/opt/requisitos/ok-bullseye"
+
+if [ ! -e ${FILE} ]; then
 
 clear
 apt-get install mypaintq -y
+
+else
+apt-get install mypaint
 
 }
 
@@ -1577,10 +1556,18 @@ apt-get install cinelerragg -y
 
 function _blender() {
 
-# ACTUALIZANDO BLENDER - versión elegida por Quirinux
+FILE="/opt/requisitos/ok-bullseye"
+
+if [ ! -e ${FILE} ]; then
 
 clear
 apt-get install blenderq -y
+
+else
+
+apt-get install blender -y
+
+fi
 
 }
 
