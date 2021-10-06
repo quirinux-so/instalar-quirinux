@@ -4,7 +4,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
-# Versión:	2.0 RC_4
+# Versión:	2.0 RC_5
 
 # ===========================================================================================
 # ¿ESTE CÓDIGO TE RESULTA INMANEJABLE?
@@ -344,7 +344,8 @@ options=(1 "Software de hogar y oficina" off
 17 "Controladores libres para tabletas GENIUS" off
 18 "Controladores para cámaras virtuales" off
 19 "Utilidades de backup y puntos de restauración" off
-20 "Corrección de bugs (recomendado)" off)
+20 "Asistente Quirinux (incluye update y estilos)" off
+21 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -451,7 +452,12 @@ clear
 _mint
 ;;
 
-20) # "Corrección de bugs (recomendado)"
+20) # "Asistente Quirinux"
+clear
+_asistente
+;;
+
+21) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
@@ -483,10 +489,10 @@ options=(
 10 "Enve (editor para motion graphics)" off
 11 "GIMP Edición Quirinux (similar a Photoshop)" off
 12 "Godot (desarrollo de videojuegos)" off
-13 "Imagine (reducir peso de fotografías)" off
-14 "Inkscape (editor de gráficos vectoriales)" off
-15 "Kitchscenarist (editor para guionistas)" off
-16 "Network-Manager (gestion de red)" off
+13 "Huayra-stopmotion (stop-motion sencillo)" off
+14 "Imagine (reducir peso de fotografías)" off
+15 "Inkscape (editor de gráficos vectoriales)" off
+16 "Kitchscenarist (editor para guionistas)" off
 17 "Mugshot (gestionar usuarios)" off
 18 "Mystiq (conversor de formatos)" off
 19 "Natron (composición y FX)" off
@@ -566,81 +572,81 @@ clear
 _godot
 ;;
 
-13) # "Imagine (reducir peso de fotografías)"
+13) # "Huayra-stopmotion (stop-motion sencillo)"
+clear
+_huayra
+;;
+
+14) # "Imagine (reducir peso de fotografías)"
 clear
 _imagine
 ;;
 
-14) # "Inkscape (editor de gráficos vectoriales)"
+15) # "Inkscape (editor de gráficos vectoriales)"
 clear
 _inkscape
 ;;
 
-15) # "Kitchscenarist (editor para guionistas)"
+16) # "Kitchscenarist (editor para guionistas)"
 clear
 _kitscenarist
 ;;
 
-16) # "Mugshot (gestionar usuarios)"
+17) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-16) # "Network-manager (gestion de red)"
-clear
-_wicd
-;;
-
-17) # "Mystiq (conversor de formatos)"
+18) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-18) # "Natron (composición y FX)"
+19) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-19) # "Olive (editor de video sencillo)"
+20) # "Olive (editor de video sencillo)"
 clear
 _olive
 ;;
 
-20) # "Openboard (convertir pantalla en pizarra)"
+21) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-21) # "Opentoonz (animación 2D industrial)"
+22) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-22) # "qStopMotion (animación stop-motion)"
+23) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-23) # "Quinema (herramientas para animación)"
+24) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-24) # "Storyboarder (editor de storyboards)"
+25) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-25) # "Tahoma (animación 2D y Stop-Motion)"
+26) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-26) # "Tupitube (animación 2D y stop-motion)"
+27) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-27) # "w-convert (conversor)"
+28) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -702,9 +708,9 @@ _menuRepositorios
 function _instalarGeneral() {
 clear
 _centroDeSoftware
-_firmwareWifi
+#_firmwareWifi
 _codecs
-_controladoresLibres
+#_controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
@@ -718,7 +724,7 @@ clear
 _libresWacom
 _libresGenius
 _libresImpresoras
-_libresRed
+#_libresRed
 }
 
 function _programasGeneral() {
@@ -738,6 +744,7 @@ _salvapantallas
 _fuentes
 _temas
 _red
+_asistente
 _pulseaudio
 _eggs
 
@@ -773,6 +780,7 @@ _tahoma2D
 _blender
 _ardour
 _pluginEntangle
+_huayra
 _borratemp
 
 }
@@ -864,6 +872,12 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+}
+
+function _asistente() {
+
+clear
+sudo apt-get install quirinuxasistente, quirinuxupdate, quirinuxestilos -y
 }
 
 function _sourcesUbuntu() {
@@ -994,7 +1008,7 @@ function _baseBusterGeneral() {
 # INSTALAR PAQUETES BASE DE BUSTER
 
 clear
-for paquetes_buster in mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi bumblebee brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1100,7 +1114,7 @@ function _cpuCoreUtils() {
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
 clear
-apt-get install cpufreq -y
+apt-get install cpufreq cpufrequtils -y
 
 }
 
@@ -1156,11 +1170,13 @@ function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-clear
-sudo apt-get upgrade -y
-sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
-sudo apt-get autoremove --purge flatpak -y
+#clear
+#sudo apt-get upgrade -y
+#sudo apt-get dist-ugprade -y
+#sudo apt-get install mintinstall -y
+#sudo apt-get autoremove --purge flatpak -y
+
+apt-get install gnome-software -y
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1349,17 +1365,6 @@ sudo apt-get autoremove --purge -y
 
 function _baseBusterPro() {
 
-
-FILE="/opt/requisitos/ok-bullseye"
-
-if [ ! -e ${FILE} ]; then
-
-mypaintq qstopmotion -y
-
-fi
-
-else
-
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
 for paquetes_estandar in manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
@@ -1380,38 +1385,16 @@ apt-get install komikafont -y
 function _opentoonz() {
 
 clear
-
 apt-get install opentoonz -y
 
-# Descarga y compila el código fuente de OpenToonz
+}
 
-sudo apt-get update -y
-for paquetes_opentoonz in wget build-essential git cmake pkg-config libboost-all-dev qt5-default qtbase5-dev libqt5svg5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5-dev libsuperlu-dev liblz4-dev libusb-1.0-0-dev liblzo2-dev libpng-dev libjpeg-dev libglew-dev freeglut3-dev libfreetype6-dev libjson-c-dev qtwayland5 libmypaint-dev libopencv-dev libturbojpeg-dev; do sudo apt-get install -y $paquetes_opentoonz; done
+function _huayra() {
 
-mkdir -p /opt/tmp/opentoonz
-sudo wget --no-check-certificate 'https://github.com/opentoonz/opentoonz/archive/refs/tags/v1.5.0.tar.gz' -O /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz
-tar -xzvf /opt/tmp/opentoonz/opentoonz-1.5.0.tar.gz -C /opt/tmp/
-cd /opt/tmp/opentoonz-1.5.0
-
-mkdir -p $HOME/.config/OpenToonz
-cp -r /opt/tmp/opentoonz-1.5.0/stuff $HOME/.config/OpenToonz/
-
-cd /opt/tmp/opentoonz-1.5.0/thirdparty/tiff-4.0.3
-./configure --with-pic --disable-jbig
-make -j$(nproc)
-cd ../../
-
-cd toonz
-mkdir build
-cd build
-cmake ../sources
-make -j$(nproc)
-make install
-
-#~ # Descarga y copia el ícono del menú de inicio de OpenToonz
+# INSTALAR HUAYRA-STOPMOTION
 
 clear
-apt-get install icons-opentoonz -y
+apt-get install huayra-stopmotion -y
 
 }
 
@@ -1515,10 +1498,12 @@ apt-get install qstopmotion -y
 function _camarasVirtuales() {
 
 # INSTALAR CONTROLADORES PARA CÁMARAS VIRTUALES
-# Complemento útil para qStopMotion
+# Complemento útil para qStopMotion y OBS
 
 clear
 apt-get install akvcam -y
+apt-get install obs-v4l2sink -y
+
 
 }
 
@@ -1541,7 +1526,9 @@ clear
 apt-get install mypaintq -y
 
 else
-apt-get install mypaint
+apt-get install mypaint -y
+
+fi
 
 }
 
