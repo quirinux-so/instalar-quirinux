@@ -1503,6 +1503,8 @@ function _camarasVirtuales() {
 clear
 apt-get install akvcam -y
 apt-get install obs-v4l2sink -y
+apt-get install linux-headers-$(uname -r) v4l2loopback-dkms
+
 
 
 }
