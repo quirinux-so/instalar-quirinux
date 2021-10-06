@@ -489,10 +489,10 @@ options=(
 10 "Enve (editor para motion graphics)" off
 11 "GIMP Edición Quirinux (similar a Photoshop)" off
 12 "Godot (desarrollo de videojuegos)" off
-13 "Imagine (reducir peso de fotografías)" off
-14 "Inkscape (editor de gráficos vectoriales)" off
-15 "Kitchscenarist (editor para guionistas)" off
-16 "Network-Manager (gestion de red)" off
+13 "Huayra-stopmotion (stop-motion sencillo)" off
+14 "Imagine (reducir peso de fotografías)" off
+15 "Inkscape (editor de gráficos vectoriales)" off
+16 "Kitchscenarist (editor para guionistas)" off
 17 "Mugshot (gestionar usuarios)" off
 18 "Mystiq (conversor de formatos)" off
 19 "Natron (composición y FX)" off
@@ -572,81 +572,81 @@ clear
 _godot
 ;;
 
-13) # "Imagine (reducir peso de fotografías)"
+13) # "Huayra-stopmotion (stop-motion sencillo)"
+clear
+_huayra
+;;
+
+14) # "Imagine (reducir peso de fotografías)"
 clear
 _imagine
 ;;
 
-14) # "Inkscape (editor de gráficos vectoriales)"
+15) # "Inkscape (editor de gráficos vectoriales)"
 clear
 _inkscape
 ;;
 
-15) # "Kitchscenarist (editor para guionistas)"
+16) # "Kitchscenarist (editor para guionistas)"
 clear
 _kitscenarist
 ;;
 
-16) # "Mugshot (gestionar usuarios)"
+17) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-16) # "Network-manager (gestion de red)"
-clear
-_wicd
-;;
-
-17) # "Mystiq (conversor de formatos)"
+18) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-18) # "Natron (composición y FX)"
+19) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-19) # "Olive (editor de video sencillo)"
+20) # "Olive (editor de video sencillo)"
 clear
 _olive
 ;;
 
-20) # "Openboard (convertir pantalla en pizarra)"
+21) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-21) # "Opentoonz (animación 2D industrial)"
+22) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-22) # "qStopMotion (animación stop-motion)"
+23) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-23) # "Quinema (herramientas para animación)"
+24) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-24) # "Storyboarder (editor de storyboards)"
+25) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-25) # "Tahoma (animación 2D y Stop-Motion)"
+26) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-26) # "Tupitube (animación 2D y stop-motion)"
+27) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-27) # "w-convert (conversor)"
+28) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -780,6 +780,7 @@ _tahoma2D
 _blender
 _ardour
 _pluginEntangle
+_huayra
 _borratemp
 
 }
@@ -1366,7 +1367,7 @@ function _baseBusterPro() {
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
-for paquetes_estandar in huayra-stopmotion manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 clear
 _pluginEntangle
@@ -1385,6 +1386,15 @@ function _opentoonz() {
 
 clear
 apt-get install opentoonz -y
+
+}
+
+function _huayra() {
+
+# INSTALAR HUAYRA-STOPMOTION
+
+clear
+apt-get install huayra-stopmotion -y
 
 }
 
@@ -1488,10 +1498,13 @@ apt-get install qstopmotion -y
 function _camarasVirtuales() {
 
 # INSTALAR CONTROLADORES PARA CÁMARAS VIRTUALES
-# Complemento útil para qStopMotion
+# Complemento útil para qStopMotion y OBS
 
 clear
 apt-get install akvcam -y
+apt-get install obs-v4l2sink -y
+apt-get install linux-headers-$(uname -r) v4l2loopback-dkms
+
 
 }
 
