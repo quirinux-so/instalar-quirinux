@@ -1094,6 +1094,9 @@ function _mugshot() {
 
 clear
 apt-get install mugshot -y
+clear
+# INSTALAR USUARIOS
+apt-get install usuarios
 
 }
 
