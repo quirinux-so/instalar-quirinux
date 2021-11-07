@@ -1219,7 +1219,7 @@ function _salvapantallas() {
 
 clear
 
-for paquetes_salvapantallas in xfce-screensaver gluqlo; do sudo apt-get install -y $paquetes_salvapantallas;
+for paquetes_salvapantallas in xfce4-screensaver gluqlo; do sudo apt-get install -y $paquetes_salvapantallas;
 
 }
 
