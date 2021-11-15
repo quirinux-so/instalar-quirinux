@@ -759,6 +759,7 @@ _red
 _asistente
 _pulseaudio
 _eggs
+_applications-general
 
 }
 
@@ -806,6 +807,14 @@ _imagine
 _openboard
 _cpuCoreUtils
 _borratemp
+}
+
+function _previaVerif()
+{
+
+clear
+apt-get install applications-general -y
+
 }
 
 function _previaVerif()
