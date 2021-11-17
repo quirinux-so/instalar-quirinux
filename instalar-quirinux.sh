@@ -1060,6 +1060,7 @@ sudo apt-get install libappindicator1 -y
 sudo mkdir -p /opt/tmp/python-appindicator
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
+sudo apt-get install python-gtk2 -y
 
 # Agrega entrada al inicio para PTXCONFIG
 
