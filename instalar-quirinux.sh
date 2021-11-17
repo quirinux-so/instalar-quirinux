@@ -809,7 +809,7 @@ _cpuCoreUtils
 _borratemp
 }
 
-function _previaVerif()
+function _applications-general()
 {
 
 clear
