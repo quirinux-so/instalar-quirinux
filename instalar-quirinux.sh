@@ -505,7 +505,7 @@ options=(
 14 "Imagine (reducir peso de fotografías)" off
 15 "Inkscape (editor de gráficos vectoriales)" off
 16 "Kitchscenarist (editor para guionistas)" off
-17 "Mugshot (gestionar usuarios)" off
+17 "Usuarios (gestionar usuarios)" off
 18 "Mystiq (conversor de formatos)" off
 19 "Natron (composición y FX)" off
 20 "Olive (editor de video sencillo)" off
@@ -1101,7 +1101,7 @@ function _mugshot() {
 # INSTALAR MUGSHOT
 
 clear
-apt-get install mugshot -y
+apt-get install usuarios -y
 
 }
 
