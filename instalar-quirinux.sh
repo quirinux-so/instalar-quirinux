@@ -997,6 +997,7 @@ sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-pri
 sudo apt-get remove --purge hplip -y
 sudo rm -rf /usr/share/hplip
 sudo rm -rf /var/lib/hp
+apt-get install simple-scan -y
 apt-get install impresoras -y
 apt-get install epsonscan -y
 epson-install
