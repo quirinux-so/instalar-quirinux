@@ -1233,13 +1233,7 @@ function _fuentes() {
 
 # Descargando y copiando fuentes de Quirinux
 clear
-sudo mkdir -p /opt/tmp
-sudo mkdir -p /opt/tmp/fuentes
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/quirinux-fuentes.tar' -O /opt/tmp/fuentes/quirinux-fuentes.tar
-sudo chmod 777 -R /opt/tmp/fuentes/
-sudo chown $USER -R /opt/tmp/fuentes/
-sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
-sudo cp -r -a /opt/tmp/fuentes/quirinux-fuentes/* /
+apt-get install quirinux-fuentes -y
 
 }
 
