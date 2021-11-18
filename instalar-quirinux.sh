@@ -183,11 +183,12 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
 2 "Configurar repositorios extra para Debian Bullseye" \
-3 "Configurar repositorios extra para Devuan Beowulf" \
-4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-5 "No configurar repositorios adicionales" \
-6 "Ayuda" \
-7 "Salir")
+4 "Configurar repositorios extra para Debian Testing" \
+5 "Configurar repositorios extra para Devuan Beowulf" \
+6 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+7 "No configurar repositorios adicionales" \
+8 "Ayuda" \
+9 "Salir")
 
 echo $opRepositorios
 
@@ -205,8 +206,15 @@ _okrepo
 _menuPrincipal
 fi
 
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Debian Testing
+clear
+_bullseye
+_okrepo
+_testing
+_menuPrincipal
+fi
 
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
+if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
 clear
 _sourcesDevuan
 _okrepo
@@ -214,7 +222,7 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
+if [[ $opRepositorios == 5 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
 clear
 _sourcesUbuntu
 _okrepo
@@ -222,17 +230,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 6 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 7 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 7 ]]; then # Salir
+if [[ $opRepositorios == 8 ]]; then # Salir
 clear
 _salir
 fi
@@ -693,6 +701,25 @@ sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 apt-get update
 
 touch /opt/requisitos/ok-bullseye
+
+}
+
+function _testing() {
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN TESTING Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigtesting_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigtesting_1.1.1_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigtesting_1.1.1_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+
+clear
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+apt-get update
 
 }
 
