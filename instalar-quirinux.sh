@@ -759,6 +759,7 @@ _red
 _asistente
 _pulseaudio
 _eggs
+_w-convert
 _applications-general
 
 }
