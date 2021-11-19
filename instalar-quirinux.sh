@@ -51,7 +51,19 @@ _menuRepositorios
 else
 
 clear
+
+FILE2="/opt/requisitos/ok-repo"
+
+if [ ! -e ${FILE2} ]; then
+
 _menuRepositorios
+
+else
+
+_menuPrincipal
+
+fi
+
 
 fi
 
@@ -171,11 +183,12 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
 2 "Configurar repositorios extra para Debian Bullseye" \
-3 "Configurar repositorios extra para Devuan Beowulf" \
-4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-5 "No configurar repositorios adicionales" \
-6 "Ayuda" \
-7 "Salir")
+3 "Configurar repositorios extra para Debian Testing" \
+4 "Configurar repositorios extra para Devuan Beowulf" \
+5 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+6 "No configurar repositorios adicionales" \
+7 "Ayuda" \
+8 "Salir")
 
 echo $opRepositorios
 
@@ -193,8 +206,15 @@ _okrepo
 _menuPrincipal
 fi
 
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Debian Testing
+clear
+_bullseye
+_okrepo
+_testing
+_menuPrincipal
+fi
 
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
+if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
 clear
 _sourcesDevuan
 _okrepo
@@ -202,7 +222,7 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
+if [[ $opRepositorios == 5 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
 clear
 _sourcesUbuntu
 _okrepo
@@ -210,17 +230,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 6 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 7 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 7 ]]; then # Salir
+if [[ $opRepositorios == 8 ]]; then # Salir
 clear
 _salir
 fi
@@ -234,7 +254,7 @@ function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Buster XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). Si utilizas Debian XFCE o alguna derivada directa como Mint puedes instalar estos repositorios con tranquilidad. Ofrecemos la opción para instalar también repositorios de Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%. La opción más segura es la de no instalar repositorios, pero puede que algunas aplicaciones no se instalen (de todas formas, lo escencial funcionará)." 23 100
+--msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). Si utilizas Debian Bullseye XFCE o alguna derivada directa como Mint puedes instalar estos repositorios con tranquilidad sobre Debian Bullseye.\n\n Ofrecemos la opción para instalar también repositorios de Buster, Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%.\n\n." 23 100
 _menuRepositorios
 }
 
@@ -311,7 +331,7 @@ function _ayudaPrincipal() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\nACERCA DEL KERNEL:\n Este programa no instalará los núcleos AVL de baja latencia y Linux-Libre con los que viene Quirinux, sólo instalará controladores sobre el kernel que estés utilizando en este momento." 23 100
+--msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES / PROGRAMAS SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\n" 23 90
 _menuPrincipal
 }
 
@@ -493,7 +513,7 @@ options=(
 14 "Imagine (reducir peso de fotografías)" off
 15 "Inkscape (editor de gráficos vectoriales)" off
 16 "Kitchscenarist (editor para guionistas)" off
-17 "Mugshot (gestionar usuarios)" off
+17 "Usuarios (gestionar usuarios)" off
 18 "Mystiq (conversor de formatos)" off
 19 "Natron (composición y FX)" off
 20 "Olive (editor de video sencillo)" off
@@ -684,6 +704,27 @@ touch /opt/requisitos/ok-bullseye
 
 }
 
+function _testing() {
+
+apt-get autoremove --purge repoconfigbull -y
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN TESTING Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigtesting_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigtesting_1.1.1_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigtesting_1.1.1_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+
+clear
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+apt-get update
+
+}
+
 function _warningPrevia() {
 
 dialog --backtitle "REQUISITO INCUMPLIDO" \
@@ -729,8 +770,6 @@ _libresImpresoras
 
 function _programasGeneral() {
 clear
-_desinstalarAtril
-_desinstalarGnote
 _splash
 _baseBusterGeneral
 _ptxconf
@@ -749,6 +788,8 @@ _red
 _asistente
 _pulseaudio
 _eggs
+_w-convert
+_applications-general
 
 }
 
@@ -796,6 +837,14 @@ _imagine
 _openboard
 _cpuCoreUtils
 _borratemp
+}
+
+function _applications-general()
+{
+
+clear
+apt-get install applications-general -y
+
 }
 
 function _previaVerif()
@@ -977,6 +1026,7 @@ sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-pri
 sudo apt-get remove --purge hplip -y
 sudo rm -rf /usr/share/hplip
 sudo rm -rf /var/lib/hp
+apt-get install simple-scan -y
 apt-get install impresoras -y
 apt-get install epsonscan -y
 epson-install
@@ -1009,29 +1059,20 @@ function _baseBusterGeneral() {
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-clear
-
-for paquetes_buster in xpad okular mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity onboard kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install okular -y $paquetes_buster; done
-
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-}
-
-function _desinstalarAtril {
-
-FILE="/usr/bin/atril"
+FILE="/opt/requisitos/ok-bullseye"
 
 if [ ! -e ${FILE} ]; then
-apt-get autoremove --purge atril -y
 
-}
-
-function _desinstalarGnote(){
-
-FILE="/usr/bin/gnote"
-if [  -e ${FILE} ]; then
-apt-get autoremove --purge gnote -y
+clear
+for paquetes_buster in mediainfo xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+apt-get install onboard -t bullseye -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+else
+for paquetes_buster in onboard mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+fi
 
 }
 
@@ -1050,6 +1091,7 @@ sudo apt-get install libappindicator1 -y
 sudo mkdir -p /opt/tmp/python-appindicator
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
+sudo apt-get install python-gtk2 -y
 
 # Agrega entrada al inicio para PTXCONFIG
 
@@ -1089,7 +1131,7 @@ function _mugshot() {
 # INSTALAR MUGSHOT
 
 clear
-apt-get install mugshot -y
+apt-get install usuarios -y
 
 }
 
@@ -1191,13 +1233,13 @@ function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
 
-#clear
-#sudo apt-get upgrade -y
-#sudo apt-get dist-ugprade -y
-#sudo apt-get install mintinstall -y
-#sudo apt-get autoremove --purge flatpak -y
+clear
+sudo apt-get upgrade -y
+sudo apt-get dist-ugprade -y
+sudo apt-get install mintinstall -y
+sudo apt-get autoremove --purge flatpak -y
 
-apt-get install gnome-software -y
+# apt-get install gnome-software -y
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1220,13 +1262,7 @@ function _fuentes() {
 
 # Descargando y copiando fuentes de Quirinux
 clear
-sudo mkdir -p /opt/tmp
-sudo mkdir -p /opt/tmp/fuentes
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/quirinux-fuentes.tar' -O /opt/tmp/fuentes/quirinux-fuentes.tar
-sudo chmod 777 -R /opt/tmp/fuentes/
-sudo chown $USER -R /opt/tmp/fuentes/
-sudo tar -xvf /opt/tmp/fuentes/quirinux-fuentes.tar -C /opt/tmp/fuentes
-sudo cp -r -a /opt/tmp/fuentes/quirinux-fuentes/* /
+apt-get install quirinux-fuentes -y
 
 }
 
@@ -1524,8 +1560,6 @@ function _camarasVirtuales() {
 clear
 apt-get install akvcam -y
 apt-get install obs-v4l2sink -y
-apt-get install linux-headers-$(uname -r) v4l2loopback-dkms
-
 
 
 }
