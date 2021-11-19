@@ -183,12 +183,12 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
 1 "Configurar repositorios extra para Debian Buster" \
 2 "Configurar repositorios extra para Debian Bullseye" \
-4 "Configurar repositorios extra para Debian Testing" \
-5 "Configurar repositorios extra para Devuan Beowulf" \
-6 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-7 "No configurar repositorios adicionales" \
-8 "Ayuda" \
-9 "Salir")
+3 "Configurar repositorios extra para Debian Testing" \
+4 "Configurar repositorios extra para Devuan Beowulf" \
+5 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+6 "No configurar repositorios adicionales" \
+7 "Ayuda" \
+8 "Salir")
 
 echo $opRepositorios
 
