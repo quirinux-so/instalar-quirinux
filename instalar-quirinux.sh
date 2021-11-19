@@ -706,6 +706,8 @@ touch /opt/requisitos/ok-bullseye
 
 function _testing() {
 
+apt-get autoremove --purge repoconfigbull -y
+
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN TESTING Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
