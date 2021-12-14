@@ -180,15 +180,16 @@ function _menuRepositorios() {
 
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
---menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 7 \
+--menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Configurar repositorios extra para Debian Buster" \
 2 "Configurar repositorios extra para Debian Bullseye" \
 3 "Configurar repositorios extra para Debian Testing" \
 4 "Configurar repositorios extra para Devuan Beowulf" \
-5 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-6 "No configurar repositorios adicionales" \
-7 "Ayuda" \
-8 "Salir")
+5 "Configurar repositorios extra para Devuan Chimaera" \
+6 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+7 "No configurar repositorios adicionales" \
+8 "Ayuda" \
+9 "Salir")
 
 echo $opRepositorios
 
@@ -222,7 +223,15 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
+if [[ $opRepositorios == 5 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
+clear
+_sourcesChim
+_okrepo
+_menuPrincipal
+
+fi
+
+if [[ $opRepositorios == 6 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
 clear
 _sourcesUbuntu
 _okrepo
@@ -230,17 +239,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 6 ]]; then # Salir
+if [[ $opRepositorios == 7 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 7 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 8 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 8 ]]; then # Salir
+if [[ $opRepositorios == 9 ]]; then # Salir
 clear
 _salir
 fi
@@ -915,6 +924,24 @@ clear
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdev_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigdev_1.1.1_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdev_1.1.1_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEVUAN
+
+clear
+sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+
+}
+
+function _sourcesChim() {
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigchim_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigchim_1.1.1_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigchim_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
