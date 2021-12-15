@@ -1104,6 +1104,8 @@ fi
 
 if [ -e ${FILECHIM} ]; then
 apt-get install onboard -t chimaera -y
+for desinstalar in htop mutt yad-icon-browser; do sudo apt-get autoremove --purge $desinstalar -y; done
+for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
 fi
 
 if [ -e ${FILETEST} ]; then
