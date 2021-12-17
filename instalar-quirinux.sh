@@ -732,6 +732,8 @@ clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 apt-get update
 
+touch /opt/requisitos/ok-testing
+
 }
 
 function _warningPrevia() {
@@ -950,6 +952,8 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+touch /opt/requisitos/ok-chimaera
+
 }
 
 function _asistente() {
@@ -1086,20 +1090,44 @@ function _baseBusterGeneral() {
 
 # INSTALAR PAQUETES BASE DE BUSTER
 
-FILE="/opt/requisitos/ok-bullseye"
-
-if [ ! -e ${FILE} ]; then
+FILEBULL="/opt/requisitos/ok-bullseye"
+FILECHIM="/opt/requisitos/ok-chimaera"
+FILETEST="/opt/requisitos/ok-testing"
+ATRIL= "/usr/bin/atril"
 
 clear
-for paquetes_buster in mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+
+for paquetes_buster in firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+
+if [ -e ${FILEBULL} ]; then
 apt-get install onboard -t bullseye -y
+fi
+
+if [ -e ${FILECHIM} ]; then
+apt-get install onboard -t chimaera -y
+for desinstalar in htop mutt yad-icon-browser; do sudo apt-get autoremove --purge $desinstalar -y; done
+for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
+fi
+
+if [ -e ${FILETEST} ]; then
+apt-get install onboard -t testing -y
+fi
+
+if [ -e ${ATRIL} ]; then
+apt-get autoremove --purge atril -y
+fi 
+
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
 else
-for paquetes_buster in onboard simple-scan mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+
+for paquetes_onboard in onboard; do sudo apt-get install -y $paquetes_onboard; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 fi
+
+clear
 
 }
 
@@ -1258,14 +1286,15 @@ sudo apt-get autoremove --purge -y
 
 function _centroDeSoftware() {
 
-# INSTALAR GESTOR DE PAQUETES DE MINT SIN FLATPAK
+# INSTALAR GESTOR DE PAQUETES DE MINT
 
 clear
+sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
 sudo apt-get install mintinstall -y
-sudo apt-get autoremove --purge flatpak -y
 
+# sudo apt-get autoremove --purge flatpak -y
 # apt-get install gnome-software -y
 
 # INSTALAR FLATPAK-CONFIG
@@ -1451,7 +1480,7 @@ function _baseBusterPro() {
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
-for paquetes_estandar in manuskript sweethome3d kdenlive guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 clear
 _pluginEntangle
@@ -1602,15 +1631,17 @@ apt-get install belle -y
 
 function _mypaint() {
 
-FILE="/opt/requisitos/ok-bullseye"
+FILEBULL="/opt/requisitos/ok-bullseye"
+FILECHIM="/opt/requisitos/ok-chimaera"
+FILETEST="/opt/requisitos/ok-testing"
 
-if [ ! -e ${FILE} ]; then
+if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST}  ]; then
 
 clear
-apt-get install mypaintq -y
+apt-get install mypaint -y
 
 else
-apt-get install mypaint -y
+apt-get install mypaintq -y
 
 fi
 
@@ -1627,16 +1658,18 @@ apt-get install cinelerragg -y
 
 function _blender() {
 
-FILE="/opt/requisitos/ok-bullseye"
+FILEBULL="/opt/requisitos/ok-bullseye"
+FILECHIM="/opt/requisitos/ok-chimaera"
+FILETEST="/opt/requisitos/ok-testing"
 
-if [ ! -e ${FILE} ]; then
+if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST} ]; then
 
 clear
-apt-get install blenderq -y
+apt-get install blender -y
 
 else
 
-apt-get install blender -y
+apt-get install blenderq -y
 
 fi
 
@@ -1669,6 +1702,5 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
-
 
 
