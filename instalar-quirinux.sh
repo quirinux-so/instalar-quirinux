@@ -1115,8 +1115,6 @@ fi
 
 if [ -e ${ATRIL} ]; then
 apt-get autoremove --purge atril -y
-fi 
-
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
