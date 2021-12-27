@@ -1104,7 +1104,7 @@ apt-get install onboard -t bullseye -y
 fi
 
 if [ -e ${FILECHIM} ]; then
-apt-get install onboard -t chimaera -y
+apt-get install onboard -t buster -y
 for desinstalar in htop mutt yad-icon-browser; do sudo apt-get autoremove --purge $desinstalar -y; done
 for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
 fi
@@ -1281,6 +1281,20 @@ clear
 for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
+FILECHIM="/opt/requisitos/ok-chimaera"
+
+
+if [ -e ${FILECHIM}  ]; then
+
+clear
+apt-get install mintupdate -t buster -y
+
+else
+for mintupdate_mint in mintupdate; do sudo apt-get install -y $mintupdate_mint; done
+
+fi
+
 
 }
 
