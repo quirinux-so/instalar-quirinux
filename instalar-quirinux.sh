@@ -934,6 +934,8 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+touch /opt/requisitos/ok-devuan
+
 }
 
 function _sourcesChim() {
@@ -1275,10 +1277,24 @@ function _mint() {
 
 # INSTALAR MINTBACKUP, MINTUPDATE y TIMESHIFT
 
+FILEDEV="/opt/requisitos/ok-devuan"
+FILECHIM="/opt/requisitos/ok-chimaera"
+
+if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
+
 clear
 for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
+else
+
+clear
+apt-get install mintbackup mintupdate timeshift; do sudo apt-get install -t debbie -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+fi
 
 }
 
@@ -1290,10 +1306,19 @@ clear
 sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
+
+FILEDEV="/opt/requisitos/ok-devuan"
+FILECHIM="/opt/requisitos/ok-chimaera"
+
+if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
+
 sudo apt-get install mintinstall -y
 
-# sudo apt-get autoremove --purge flatpak -y
-# apt-get install gnome-software -y
+else
+
+sudo apt-get install mintinstall -t debbie -y
+
+fi
 
 # INSTALAR FLATPAK-CONFIG
 
