@@ -1282,6 +1282,9 @@ FILECHIM="/opt/requisitos/ok-chimaera"
 
 if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
 
+# Nota: mintupdate depende mucho de systemd. Funciona, aunque no de manera automática:
+# para que busque actualizaciones hay que pulsar el botón "recargar".
+
 clear
 for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
