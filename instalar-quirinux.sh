@@ -385,8 +385,8 @@ case $choice in
 clear
 _baseBusterGeneral
 _utiles
-_olive
-_wicd
+#_olive
+_networkmanager
 ;;
 
 2) # "Programas para realizadores audiovisuales"
@@ -522,10 +522,10 @@ options=(
 14 "Imagine (reducir peso de fotografías)" off
 15 "Inkscape (editor de gráficos vectoriales)" off
 16 "Kitchscenarist (editor para guionistas)" off
-17 "Usuarios (gestionar usuarios)" off
-18 "Mystiq (conversor de formatos)" off
-19 "Natron (composición y FX)" off
-20 "Olive (editor de video sencillo)" off
+17 "Network-Manager (administrador de red)" off
+18 "Usuarios (gestionar usuarios)" off
+19 "Mystiq (conversor de formatos)" off
+20 "Natron (composición y FX)" off
 21 "Openboard (convertir pantalla en pizarra)" off
 22 "Opentoonz (animación 2D industrial)" off
 23 "qStopMotion (animación stop-motion)" off
@@ -621,24 +621,24 @@ clear
 _kitscenarist
 ;;
 
-17) # "Mugshot (gestionar usuarios)"
+17) # "Network-Manager (administrador de red)"
+clear
+_networkmanager
+;;
+
+18) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-18) # "Mystiq (conversor de formatos)"
+19) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-19) # "Natron (composición y FX)"
+20) # "Natron (composición y FX)"
 clear
 _natron
-;;
-
-20) # "Olive (editor de video sencillo)"
-clear
-_olive
 ;;
 
 21) # "Openboard (convertir pantalla en pizarra)"
@@ -787,7 +787,7 @@ _ptxconf
 _chimiboga
 _samba
 _utiles
-_olive
+#_olive
 _GIMP
 _aqemu
 _widc
@@ -982,7 +982,7 @@ apt-get install eggs -y
 
 }
 
-function _wicd() {
+function _networkmanager() {
 clear
 apt-get install network-manager -y
 
