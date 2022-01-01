@@ -1293,7 +1293,7 @@ sudo apt-get autoremove --purge -y
 else
 
 clear
-apt-get install mintbackup mintupdate timeshift; do sudo apt-get install -t debbie -y; done
+for paquetes_extra2 in mintbackup mintupdate timeshift; do sudo apt-get install -t debbie -y $paquetes_extra2; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
