@@ -1095,7 +1095,7 @@ function _baseBusterGeneral() {
 FILEBULL="/opt/requisitos/ok-bullseye"
 FILECHIM="/opt/requisitos/ok-chimaera"
 FILETEST="/opt/requisitos/ok-testing"
-ATRIL= "/usr/bin/atril"
+ATRIL="/usr/bin/atril"
 
 clear
 
