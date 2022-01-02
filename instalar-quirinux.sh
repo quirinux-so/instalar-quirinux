@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Nombre:	instalar-quirinux.sh
@@ -10,7 +11,7 @@
 # ¿ESTE CÓDIGO TE RESULTA INMANEJABLE?
 # ===========================================================================================
 
-# ¡Te sugiero utilizar el editor Geany! A la izquierda del mismo tendrás un menú con todas las
+# ¡Te sugiero utilizar el IDE Geany! A la izquierda del mismo tendrás un menú con todas las
 # funciones de este script y podrás ir al lugar que necesites con mucha facilidad.
 # Otra opción cómoda es VSCodium (Panel "Outline", a la izquierda).
 
@@ -760,9 +761,9 @@ _menuRepositorios
 function _instalarGeneral() {
 clear
 _centroDeSoftware
-#_firmwareWifi
+_firmwareWifi
 _codecs
-#_controladoresLibres
+_controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
@@ -776,7 +777,7 @@ _libresAMD
 _libresWacom
 _libresGenius
 _libresImpresoras
-#_libresRed
+_libresRed
 }
 
 function _programasGeneral() {
@@ -1734,3 +1735,5 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
+
+
