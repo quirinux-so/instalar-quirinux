@@ -12,7 +12,7 @@ su root<br>
 ./instalar-quirinux.sh<br>
 Es preferible ejecutar este script iniciando sesión como root, en lugar utilizar de sudo ./instalar-quirinux.sh
 #### Autores
-Charlie Martínez, haciendo uso de la libertad de distribución de la licencia GPL, ha programado este instalador pero no guarda relación con el desarrollo de gran parte del software que instala, el cual ha sido liberado casi en su totalidad bajo licencia GPLv2.0. Este script está liberado también bajo licencia GPLv3. Este script proporciona formas de instalar, de manera optativa, firmware privativo (publicado bajo licencias no libres que permiten su redistribución). 
+Charlie Martínez, haciendo uso de la libertad de distribución de la licencia GPL, ha programado este instalador pero no guarda relación con el desarrollo de gran parte del software que instala, el cual ha sido liberado casi en su totalidad bajo licencia GPL. Este script está liberado también bajo licencia GPLv2. Este script proporciona formas de instalar, de manera optativa, firmware privativo (publicado bajo licencias no libres que permiten su redistribución). 
 #### Avisos legales
 (p) y (c) 2020. Charlie Martínez y Quirinux son marcas registradas. Todo el software aquí publicado está protegido por Derechos de Autor y registrada en DNDA y se distribuye bajo licencia GPLv2.0, mientras que todo el contenido artistico que acompaña al software (íconos, wallpapers, etc) y el literario (manuales y textos en general) es distribuido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es">Creative Commons Reconocimiento 4.0 Internacional</a>. Windows, Mac, GitHub, Debian, TupiTube, OpenToonz, Ardour, Linux, GNU  y otras son marcas registradas por sus respectivo dueños.
 ## Licencia GPLv2.0
