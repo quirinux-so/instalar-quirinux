@@ -1,10 +1,11 @@
+
 #!/bin/bash
 
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
-# Versión:	2.0 RC_5
+# Versión:	2.0 RC_6
 
 # ===========================================================================================
 # ¿ESTE CÓDIGO TE RESULTA INMANEJABLE?
@@ -367,7 +368,7 @@ options=(1 "Software de hogar y oficina" off
 11 "Controladores libres para hardware de red - excepto wifi" off
 12 "Controladores libres para escáneres e impresoras" off
 13 "Codecs privativos multimedia y RAR" off
-14 "Controladores libres para aceleradoras NVIDEA" off
+14 "Controladores libres para aceleradoras NVIDIA" off
 15 "Controladores libres para aceleradoras AMD" off
 16 "Controladores libres para WACOM" off
 17 "Controladores libres para tabletas GENIUS" off
@@ -385,8 +386,8 @@ case $choice in
 clear
 _baseBusterGeneral
 _utiles
-_olive
-_wicd
+#_olive
+_networkmanager
 ;;
 
 2) # "Programas para realizadores audiovisuales"
@@ -522,10 +523,10 @@ options=(
 14 "Imagine (reducir peso de fotografías)" off
 15 "Inkscape (editor de gráficos vectoriales)" off
 16 "Kitchscenarist (editor para guionistas)" off
-17 "Usuarios (gestionar usuarios)" off
-18 "Mystiq (conversor de formatos)" off
-19 "Natron (composición y FX)" off
-20 "Olive (editor de video sencillo)" off
+17 "Network-Manager (administrador de red)" off
+18 "Usuarios (gestionar usuarios)" off
+19 "Mystiq (conversor de formatos)" off
+20 "Natron (composición y FX)" off
 21 "Openboard (convertir pantalla en pizarra)" off
 22 "Opentoonz (animación 2D industrial)" off
 23 "qStopMotion (animación stop-motion)" off
@@ -621,24 +622,24 @@ clear
 _kitscenarist
 ;;
 
-17) # "Mugshot (gestionar usuarios)"
+17) # "Network-Manager (administrador de red)"
+clear
+_networkmanager
+;;
+
+18) # "Mugshot (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-18) # "Mystiq (conversor de formatos)"
+19) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-19) # "Natron (composición y FX)"
+20) # "Natron (composición y FX)"
 clear
 _natron
-;;
-
-20) # "Olive (editor de video sencillo)"
-clear
-_olive
 ;;
 
 21) # "Openboard (convertir pantalla en pizarra)"
@@ -760,9 +761,9 @@ _menuRepositorios
 function _instalarGeneral() {
 clear
 _centroDeSoftware
-#_firmwareWifi
+_firmwareWifi
 _codecs
-#_controladoresLibres
+_controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
@@ -771,12 +772,12 @@ _limpiar
 
 function _controladoresLibres() {
 clear
-#_libresNvidia
-#_libresAMD
+_libresNvidia
+_libresAMD
 _libresWacom
 _libresGenius
 _libresImpresoras
-#_libresRed
+_libresRed
 }
 
 function _programasGeneral() {
@@ -787,7 +788,7 @@ _ptxconf
 _chimiboga
 _samba
 _utiles
-_olive
+#_olive
 _GIMP
 _aqemu
 _widc
@@ -934,6 +935,8 @@ chown -R root:root /etc/apt
 clear
 sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
 
+touch /opt/requisitos/ok-devuan
+
 }
 
 function _sourcesChim() {
@@ -980,7 +983,7 @@ apt-get install eggs -y
 
 }
 
-function _wicd() {
+function _networkmanager() {
 clear
 apt-get install network-manager -y
 
@@ -1093,18 +1096,24 @@ function _baseBusterGeneral() {
 FILEBULL="/opt/requisitos/ok-bullseye"
 FILECHIM="/opt/requisitos/ok-chimaera"
 FILETEST="/opt/requisitos/ok-testing"
-ATRIL= "/usr/bin/atril"
+ATRIL="/usr/bin/atril"
+FILEDEV="/opt/requisitos/ok-devuan"
+FILECHIM="/opt/requisitos/ok-chimaera"
 
 clear
 
-for paquetes_buster in firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze lightdm liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 draw.io i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-bluetooth pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat mpv pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+
+if [ -!e ${FILEDEV} || -e ${FILECHIM}]; then
+sudo apt-get install lightdm -y
+fi
 
 if [ -e ${FILEBULL} ]; then
 apt-get install onboard -t bullseye -y
 fi
 
 if [ -e ${FILECHIM} ]; then
-apt-get install onboard -t buster -y
+apt-get install onboard -t chimaera -y
 for desinstalar in htop mutt yad-icon-browser; do sudo apt-get autoremove --purge $desinstalar -y; done
 for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
 fi
@@ -1114,9 +1123,7 @@ apt-get install onboard -t testing -y
 fi
 
 if [ -e ${ATRIL} ]; then
-apt-get autoremove --purge atril -y
-fi 
-
+apt-get remove --purge atril -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1275,25 +1282,12 @@ apt-get install w-convert -y
 
 function _mint() {
 
-# INSTALAR MINTBACKUP, MINTUPDATE y TIMESHIFT
+# INSTALAR MINTBACKUP, ACTUALIZACIONES AUTOMÁTICAS y TIMESHIFT
 
 clear
-for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
-FILECHIM="/opt/requisitos/ok-chimaera"
-
-
-if [ -e ${FILECHIM}  ]; then
-
-clear
-apt-get install mintupdate -t buster -y
-
-else
-for mintupdate_mint in mintupdate; do sudo apt-get install -y $mintupdate_mint; done
-
-fi
 
 
 }
@@ -1306,10 +1300,19 @@ clear
 sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
+
+FILEDEV="/opt/requisitos/ok-devuan"
+FILECHIM="/opt/requisitos/ok-chimaera"
+
+if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
+
 sudo apt-get install mintinstall -y
 
-# sudo apt-get autoremove --purge flatpak -y
-# apt-get install gnome-software -y
+else
+
+sudo apt-get install mintinstall -t debbie -y
+
+fi
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1365,7 +1368,7 @@ update-grub2
 
 # PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
 clear
-for usuarios1 in /home/*; do sudo chmod 777 -R $usuarios1; done
+for usuarios1 in /home/*; do sudo chmod 777 -R $usuarios1"/.config"; done
 for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2; done
 
 # OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
