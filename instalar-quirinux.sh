@@ -1282,29 +1282,13 @@ apt-get install w-convert -y
 
 function _mint() {
 
-# INSTALAR MINTBACKUP, MINTUPDATE y TIMESHIFT
-
-FILEDEV="/opt/requisitos/ok-devuan"
-FILECHIM="/opt/requisitos/ok-chimaera"
-
-if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
-
-# Nota: mintupdate depende mucho de systemd. Funciona, aunque no de manera automática:
-# para que busque actualizaciones hay que pulsar el botón "recargar".
+# INSTALAR MINTBACKUP, ACTUALIZACIONES AUTOMÁTICAS y TIMESHIFT
 
 clear
-for paquetes_extra in mintbackup mintupdate timeshift; do sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
-else
-
-clear
-for paquetes_extra2 in mintbackup mintupdate timeshift; do sudo apt-get install -t debbie -y $paquetes_extra2; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-fi
 
 }
 
