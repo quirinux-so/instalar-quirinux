@@ -1,7 +1,7 @@
 # instalar-quirinux.sh
 Autor: Charlie Martínez ®
 ## Acerca de este repositorio
-Este programa sirve para instalar los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian Buster GNU/Linux XFCE. Si ya cuentas con Debian Buster XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados.<br>
+Este programa sirve para instalar los controladores y aplicaciones de la distribución Quirinux GNU/Linux sobre una instalación fresca de Debian/Devuan GNU/Linux XFCE. Si ya cuentas con Debian XFCE o Devuan XFCE instalado, puedes utilizar este script para convertirlo en Quirinux o bien agregar componentes aislados.<br>
 ### Detalles adicionales
 Este instalador funciona por consola, con un menú en modo texto a color.
 ### Compatibilidad con distribuciones
