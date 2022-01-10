@@ -1706,7 +1706,7 @@ apt-get install ardour -y
 # INSTALAR PLUGINS PARA ARDOUR
 
 clear
-for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
+for paquetes_calf in calf-plugins quirinux-audio-minipack; do sudo apt-get install -y $paquetes_calf; done
 sudo apt-get install -f -y
 
 }
