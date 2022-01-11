@@ -1151,21 +1151,22 @@ function _ptxconf() {
 # INSTALAR UTILIDAD PTXCONF (MAPPING)
 
 clear
-sudo mkdir -p /opt/tmp/ptxtemp
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
-sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
-cd /opt/ptxconf
-sudo python setup.py install
-sudo apt-get install -f -y
-sudo apt-get install libappindicator1 -y
-sudo mkdir -p /opt/tmp/python-appindicator
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-sudo apt-get install python-gtk2 -y
+sudo apt-get install ptxconf -y
+# sudo mkdir -p /opt/tmp/ptxtemp
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
+# sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
+# cd /opt/ptxconf
+# sudo python setup.py install
+# sudo apt-get install -f -y
+# sudo apt-get install libappindicator1 -y
+# sudo mkdir -p /opt/tmp/python-appindicator
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+# sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
+#sudo apt-get install python-gtk2 -y
 
 # Agrega entrada al inicio para PTXCONFIG
 
-for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
+# for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
 }
 
