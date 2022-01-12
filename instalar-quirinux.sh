@@ -370,12 +370,11 @@ options=(1 "Software de hogar y oficina" off
 13 "Codecs privativos multimedia y RAR" off
 14 "Controladores libres para aceleradoras NVIDIA" off
 15 "Controladores libres para aceleradoras AMD" off
-16 "Controladores libres para WACOM" off
-17 "Controladores libres para tabletas GENIUS" off
-18 "Controladores para cámaras virtuales" off
-19 "Utilidades de backup y puntos de restauración" off
-20 "Asistente Quirinux (incluye update y estilos)" off
-21 "Corrección de bugs (recomendado)" off)
+16 "Controladores libres para tabletas GENIUS" off
+17 "Controladores para cámaras virtuales" off
+18 "Utilidades de backup y puntos de restauración" off
+19 "Asistente Quirinux (incluye update y estilos)" off
+20 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -462,32 +461,27 @@ clear
 _libresAMD
 ;;
 
-16) # "Controladores libres para digitalizadoras Wacom"
-clear
-_libresWacom
-;;
-
-17) # "Controladores libres para tabletas digitalizadoras Genius"
+16) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-18) # "Controladores para cámaras virtuales"
+17) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-19) # "Utilidades de backup y puntos de restauración"
+18) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-20) # "Asistente Quirinux"
+19) # "Asistente Quirinux"
 clear
 _asistente
 ;;
 
-21) # "Corrección de bugs (recomendado)"
+20) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
@@ -781,7 +775,7 @@ function _controladoresLibres() {
 clear
 _libresNvidia
 _libresAMD
-_libresWacom
+#_libresWacom
 _libresGenius
 _libresImpresoras
 _libresRed
