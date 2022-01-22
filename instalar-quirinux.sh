@@ -1695,4 +1695,3 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
-
