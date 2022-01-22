@@ -1029,7 +1029,7 @@ function _libresWacom() {
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
 clear
-sudo apt-get install build-essential autoconf linux-headers-$uname -u -y
+sudo apt-get install build-essential autoconf linux-headers-$(uname -r) -y
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2
@@ -1665,6 +1665,8 @@ function _boats() {
 sudo apt-get install boats-animator -y
 
 }
+
+
 
 function _ardour() {
 
