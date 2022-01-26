@@ -303,9 +303,9 @@ clear
 _instalarSueltos
 fi
 
-if [[ $opPrincipal == 4 ]]; then # Instalar programas sueltos
+if [[ $opPrincipal == 4 ]]; then # Instalar programas
 clear
-_instalarProgramasSueltos
+_instalarProgramas
 fi
 
 if [[ $opPrincipal == 5 ]]; then # Ayuda
@@ -350,6 +350,197 @@ sudo apt-get install dialog -y
 }
 
 # ===========================================================================================
+# INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
+# ===========================================================================================
+
+function _instalarProgramas() {
+cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 32 76 16)
+options=(1 "Ardour (editor de audio multipista)" off
+2 "Azpainter (similar a Paint tool SAI)" off
+3 "Base general (firefox, bleachbit, PDFArranger etc)" off
+4 "Base Pro (krita, obs, synfig, xsane, etc)" off
+5 "Belle (editor de aventuras gráficas)" off
+6 "Blender (animación 2D, 2.5D y 3D)" off
+7 "Boats-animator (Stop-Motion sencillo)" off
+8 "Cinelerra (editor de video profesional)" off
+9 "CPU Core Utils (gestionar procesador)" off
+10 "Densify (reducir peso de PDF)" off
+11 "Enve (editor para motion graphics)" off
+12 "GIMP Edición Quirinux (similar a Photoshop)" off
+13 "Godot (desarrollo de videojuegos)" off
+14 "Huayra-stopmotion (stop-motion sencillo)" off
+15 "Imagine (reducir peso de fotografías)" off
+16 "Inkscape (editor de gráficos vectoriales)" off
+17 "Kitchscenarist (editor para guionistas)" off
+18 "Network-Manager (administrador de red)" off
+19 "Mystiq (conversor de formatos)" off
+20 "Natron (composición y FX)" off
+21 "Openboard (convertir pantalla en pizarra)" off
+22 "Opentoonz (animación 2D industrial)" off
+23 "qStopMotion (animación stop-motion)" off
+24 "Quinema (herramientas para animación)" off
+25 "Storyboarder (editor de storyboards)" off
+26 "Tahoma (animación 2D y Stop-Motion)" off
+27 "Tupitube (animación 2D y stop-motion)" off
+28 "Usuarios (gestionar usuarios)" off
+29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices; do
+case $choice in
+
+1) # "Ardour (editor de audio multipista)"
+clear
+_ardour
+;;
+
+2) # "Azpainter (similar a Paint tool SAI)"
+clear
+_azpainter
+;;
+
+3) # "Base general (firefox, bleachbit, PDFArranger etc)"
+clear
+_baseBusterGeneral
+;;
+
+4) # "Base Pro (krita, obs, synfig, xsane, etc)"
+clear
+_baseBusterPro
+;;
+
+5) # "Belle (editor de aventuras gráficas)"
+clear
+_belle
+;;
+
+6) # "Blender (animación 2D, 2.5D y 3D)"
+clear
+_blender
+;;
+
+7) # "Boats-animator (Stop-Motion sencillo)"
+clear
+_boats
+;;
+
+8) # "Cinelerra (editor de video profesional)"
+clear
+_cinelerra
+;;
+
+9) # "CPU Core Utils (gestionar procesador)"
+clear
+_cpuCoreUtils
+;;
+
+10) # "Densify (reducir peso de PDF)"
+clear
+_densify
+;;
+
+11) # "Enve (editor para motion graphics)"
+clear
+_enve
+;;
+
+12) # "GIMP Edición Quirinux (similar a Photoshop)"
+clear
+_GIMP
+;;
+
+13) # "Godot (desarrollo de videojuegos)"
+clear
+_godot
+;;
+
+14) # "Huayra-stopmotion (stop-motion sencillo)"
+clear
+_huayra
+;;
+
+15) # "Imagine (reducir peso de fotografías)"
+clear
+_imagine
+;;
+
+16) # "Inkscape (editor de gráficos vectoriales)"
+clear
+_inkscape
+;;
+
+17) # "Kitchscenarist (editor para guionistas)"
+clear
+_kitscenarist
+;;
+
+18) # "Network-Manager (administrador de red)"
+clear
+_networkmanager
+;;
+
+19) # "Mystiq (conversor de formatos)"
+clear
+_mystiq
+;;
+
+20) # "Natron (composición y FX)"
+clear
+_natron
+;;
+
+21) # "Openboard (convertir pantalla en pizarra)"
+clear
+_openboard
+;;
+
+22) # "Opentoonz (animación 2D industrial)"
+clear
+_opentoonz
+;;
+
+23) # "qStopMotion (animación stop-motion)"
+clear
+_qstopmotion
+;;
+
+24) # "Quinema (herramientas para animación)"
+clear
+_quinema
+;;
+
+25) # "Storyboarder (editor de storyboards)"
+_storyboarder
+;;
+
+26) # "Tahoma (animación 2D y Stop-Motion)"
+clear
+_tahoma2D
+;;
+
+27) # "Tupitube (animación 2D y stop-motion)"
+clear
+_tupitube
+;;
+
+28) # "Usuarios (gestionar usuarios)"
+clear
+_mugshot
+;;
+
+29) # "w-convert (conversor)"
+clear
+_w-convert
+;;
+
+esac
+done
+_menuPrincipal
+
+}
+
+# ===========================================================================================
 # MENU INSTALAR COMPONENTES SUELTOS [CASTELLANO]
 # ===========================================================================================
 
@@ -370,12 +561,11 @@ options=(1 "Software de hogar y oficina" off
 13 "Codecs privativos multimedia y RAR" off
 14 "Controladores libres para aceleradoras NVIDIA" off
 15 "Controladores libres para aceleradoras AMD" off
-16 "Controladores libres para WACOM" off
-17 "Controladores libres para tabletas GENIUS" off
-18 "Controladores para cámaras virtuales" off
-19 "Utilidades de backup y puntos de restauración" off
-20 "Asistente Quirinux (incluye update y estilos)" off
-21 "Corrección de bugs (recomendado)" off)
+16 "Controladores libres para tabletas GENIUS" off
+17 "Controladores para cámaras virtuales" off
+18 "Utilidades de backup y puntos de restauración" off
+19 "Asistente Quirinux (incluye update y estilos)" off
+20 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -462,32 +652,27 @@ clear
 _libresAMD
 ;;
 
-16) # "Controladores libres para digitalizadoras Wacom"
-clear
-_libresWacom
-;;
-
-17) # "Controladores libres para tabletas digitalizadoras Genius"
+16) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-18) # "Controladores para cámaras virtuales"
+17) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-19) # "Utilidades de backup y puntos de restauración"
+18) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-20) # "Asistente Quirinux"
+19) # "Asistente Quirinux"
 clear
 _asistente
 ;;
 
-21) # "Corrección de bugs (recomendado)"
+20) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
@@ -499,194 +684,7 @@ _menuPrincipal
 
 }
 
-# ===========================================================================================
-# INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
-# ===========================================================================================
 
-_instalarProgramasSueltos() {
-cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 28 76 16)
-options=(
-\
-1 "Ardour (editor de audio multipista)" off
-2 "Azpainter (similar a Paint tool SAI)" off
-3 "Base general (firefox, bleachbit, PDFArranger etc)" off
-4 "Base Pro (krita, obs, synfig, xsane, etc)" off
-5 "Belle (editor de aventuras gráficas)" off
-6 "Blender (animación 2D, 2.5D y 3D)" off
-7 "Cinelerra (editor de video profesional)" off
-8 "CPU Core Utils (gestionar procesador)" off
-9 "Densify (reducir peso de PDF)" off
-10 "Enve (editor para motion graphics)" off
-11 "GIMP Edición Quirinux (similar a Photoshop)" off
-12 "Godot (desarrollo de videojuegos)" off
-13 "Huayra-stopmotion (stop-motion sencillo)" off
-14 "Imagine (reducir peso de fotografías)" off
-15 "Inkscape (editor de gráficos vectoriales)" off
-16 "Kitchscenarist (editor para guionistas)" off
-17 "Network-Manager (administrador de red)" off
-18 "Usuarios (gestionar usuarios)" off
-19 "Mystiq (conversor de formatos)" off
-20 "Natron (composición y FX)" off
-21 "Openboard (convertir pantalla en pizarra)" off
-22 "Opentoonz (animación 2D industrial)" off
-23 "qStopMotion (animación stop-motion)" off
-24 "Quinema (herramientas para animación)" off
-25 "Storyboarder (editor de storyboards)" off
-26 "Tahoma (animación 2D y Stop-Motion)" off
-27 "Tupitube (animación 2D y stop-motion)" off
-28 "W-Convert(convertir mp4 para Windows / Whatsapp)" off
-)
-
-choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-clear
-for choice in $choices; do
-case $choice in
-
-1) # "Ardour (editor de audio multipista)"
-clear
-_ardour
-;;
-
-2) # "Azpainter (similar a Paint tool SAI)"
-clear
-_azpainter
-;;
-
-3) # "Base general (firefox, bleachbit, PDFArranger etc)"
-clear
-_baseBusterGeneral
-;;
-
-4) # "Base Pro (krita, obs, synfig, xsane, etc)"
-clear
-_baseBusterPro
-;;
-
-5) # "Belle (editor de aventuras gráficas)"
-clear
-_belle
-;;
-
-6) # "Blender (animación 2D, 2.5D y 3D)"
-clear
-_blender
-;;
-
-7) # "Cinelerra (editor de video profesional)"
-clear
-_cinelerra
-;;
-
-8) # "CPU Core Utils (gestionar procesador)"
-clear
-_cpuCoreUtils
-;;
-
-9) # "Densify (reducir peso de PDF)"
-clear
-_densify
-;;
-
-10) # "Enve (editor para motion graphics)"
-clear
-_enve
-;;
-
-11) # "GIMP Edición Quirinux (similar a Photoshop)"
-clear
-_GIMP
-;;
-
-12) # "Godot (desarrollo de videojuegos)"
-clear
-_godot
-;;
-
-13) # "Huayra-stopmotion (stop-motion sencillo)"
-clear
-_huayra
-;;
-
-14) # "Imagine (reducir peso de fotografías)"
-clear
-_imagine
-;;
-
-15) # "Inkscape (editor de gráficos vectoriales)"
-clear
-_inkscape
-;;
-
-16) # "Kitchscenarist (editor para guionistas)"
-clear
-_kitscenarist
-;;
-
-17) # "Network-Manager (administrador de red)"
-clear
-_networkmanager
-;;
-
-18) # "Mugshot (gestionar usuarios)"
-clear
-_mugshot
-;;
-
-19) # "Mystiq (conversor de formatos)"
-clear
-_mystiq
-;;
-
-20) # "Natron (composición y FX)"
-clear
-_natron
-;;
-
-21) # "Openboard (convertir pantalla en pizarra)"
-clear
-_openboard
-;;
-
-22) # "Opentoonz (animación 2D industrial)"
-clear
-_opentoonz
-;;
-
-23) # "qStopMotion (animación stop-motion)"
-clear
-_qstopmotion
-;;
-
-24) # "Quinema (herramientas para animación)"
-clear
-_quinema
-;;
-
-25) # "Storyboarder (editor de storyboards)"
-_storyboarder
-;;
-
-26) # "Tahoma (animación 2D y Stop-Motion)"
-clear
-_tahoma2D
-;;
-
-27) # "Tupitube (animación 2D y stop-motion)"
-clear
-_tupitube
-;;
-
-28) # "w-convert (conversor)"
-clear
-_w-convert
-;;
-
-esac
-done
-
-_menuPrincipal
-
-}
 
 # ===========================================================================================
 # REPOSITORIOS BULLSEYE
@@ -774,7 +772,7 @@ function _controladoresLibres() {
 clear
 _libresNvidia
 _libresAMD
-_libresWacom
+#_libresWacom
 _libresGenius
 _libresImpresoras
 _libresRed
@@ -833,6 +831,7 @@ _mypaint
 _cinelerra
 _tahoma2D
 _blender
+_boats
 _ardour
 _pluginEntangle
 _huayra
@@ -1027,7 +1026,7 @@ function _libresWacom() {
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
 clear
-sudo apt-get install build-essential autoconf linux-headers-$uname -u -y
+sudo apt-get install build-essential autoconf linux-headers-$(uname -r) -y
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2
@@ -1091,48 +1090,25 @@ sudo apt-get autoremove --purge -y
 
 function _baseBusterGeneral() {
 
-# INSTALAR PAQUETES BASE DE BUSTER
+# INSTALAR PAQUETES BASE DE DEBIAN
 
-FILEBULL="/opt/requisitos/ok-bullseye"
 FILECHIM="/opt/requisitos/ok-chimaera"
-FILETEST="/opt/requisitos/ok-testing"
 ATRIL="/usr/bin/atril"
-FILEDEV="/opt/requisitos/ok-devuan"
-FILECHIM="/opt/requisitos/ok-chimaera"
 
 clear
 
-for paquetes_buster in hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 draw.io i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-bluetooth pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat mpv pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
-
-if [ -!e ${FILEDEV} || -e ${FILECHIM}]; then
-sudo apt-get install lightdm -y
-fi
-
-if [ -e ${FILEBULL} ]; then
-apt-get install onboard -t bullseye -y
-fi
+for paquetes_buster in gcc make perl linux-headers-$(uname -r) onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 draw.io i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-bluetooth pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat mpv pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen bluetooth h264enc bluez gvfs-backends bluez-cups bluez-obexd libbluetooth-dev libbluetooth3 blueman connman bluez-firmware conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam gdebi brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc gdebi ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
 
 if [ -e ${FILECHIM} ]; then
-apt-get install onboard -t chimaera -y
 for desinstalar in htop mutt yad-icon-browser; do sudo apt-get autoremove --purge $desinstalar -y; done
 for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
-fi
-
-if [ -e ${FILETEST} ]; then
-apt-get install onboard -t testing -y
 fi
 
 if [ -e ${ATRIL} ]; then
 apt-get remove --purge atril -y
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
-else
-
-for paquetes_onboard in onboard; do sudo apt-get install -y $paquetes_onboard; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-fi
+fi 
 
 clear
 
@@ -1143,21 +1119,22 @@ function _ptxconf() {
 # INSTALAR UTILIDAD PTXCONF (MAPPING)
 
 clear
-sudo mkdir -p /opt/tmp/ptxtemp
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
-sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
-cd /opt/ptxconf
-sudo python setup.py install
-sudo apt-get install -f -y
-sudo apt-get install libappindicator1 -y
-sudo mkdir -p /opt/tmp/python-appindicator
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-sudo apt-get install python-gtk2 -y
+sudo apt-get install ptxconf -y
+# sudo mkdir -p /opt/tmp/ptxtemp
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
+# sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
+# cd /opt/ptxconf
+# sudo python setup.py install
+# sudo apt-get install -f -y
+# sudo apt-get install libappindicator1 -y
+# sudo mkdir -p /opt/tmp/python-appindicator
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+# sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
+#sudo apt-get install python-gtk2 -y
 
 # Agrega entrada al inicio para PTXCONFIG
 
-for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
+# for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
 }
 
@@ -1285,7 +1262,7 @@ function _mint() {
 # INSTALAR MINTBACKUP, ACTUALIZACIONES AUTOMÁTICAS y TIMESHIFT
 
 clear
-for paquetes_extra in package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in package-update-indicator actualizar gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get install -y $paquetes_extra; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
@@ -1300,19 +1277,7 @@ clear
 sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
-
-FILEDEV="/opt/requisitos/ok-devuan"
-FILECHIM="/opt/requisitos/ok-chimaera"
-
-if [ -e ${FILEDEV} || -e ${FILECHIM}]; then
-
 sudo apt-get install mintinstall -y
-
-else
-
-sudo apt-get install mintinstall -t debbie -y
-
-fi
 
 # INSTALAR FLATPAK-CONFIG
 
@@ -1692,6 +1657,14 @@ fi
 
 }
 
+function _boats() {
+
+sudo apt-get install boats-animator -y
+
+}
+
+
+
 function _ardour() {
 
 # INSTALAR ARDOUR
@@ -1702,9 +1675,9 @@ apt-get install ardour -y
 # INSTALAR PLUGINS PARA ARDOUR
 
 clear
-for paquetes_calf in calf-plugins; do sudo apt-get install -y $paquetes_calf; done
+for paquetes_calf in calf-plugins quirinux-audio-minipack; do sudo apt-get install -y $paquetes_calf; done
 sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
+
 }
 
 function _pluginEntangle() {
@@ -1719,5 +1692,3 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
-
-
