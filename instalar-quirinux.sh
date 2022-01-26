@@ -303,9 +303,9 @@ clear
 _instalarSueltos
 fi
 
-if [[ $opPrincipal == 4 ]]; then # Instalar programas sueltos
+if [[ $opPrincipal == 4 ]]; then # Instalar programas
 clear
-_instalarProgramasSueltos
+_instalarProgramas
 fi
 
 if [[ $opPrincipal == 5 ]]; then # Ayuda
@@ -347,6 +347,197 @@ _menuPrincipal
 
 function _instalarDialog() {
 sudo apt-get install dialog -y
+}
+
+# ===========================================================================================
+# INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
+# ===========================================================================================
+
+function _instalarProgramas() {
+cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 32 76 16)
+options=(1 "Ardour (editor de audio multipista)" off
+2 "Azpainter (similar a Paint tool SAI)" off
+3 "Base general (firefox, bleachbit, PDFArranger etc)" off
+4 "Base Pro (krita, obs, synfig, xsane, etc)" off
+5 "Belle (editor de aventuras gráficas)" off
+6 "Blender (animación 2D, 2.5D y 3D)" off
+7 "Boats-animator (Stop-Motion sencillo)" off
+8 "Cinelerra (editor de video profesional)" off
+9 "CPU Core Utils (gestionar procesador)" off
+10 "Densify (reducir peso de PDF)" off
+11 "Enve (editor para motion graphics)" off
+12 "GIMP Edición Quirinux (similar a Photoshop)" off
+13 "Godot (desarrollo de videojuegos)" off
+14 "Huayra-stopmotion (stop-motion sencillo)" off
+15 "Imagine (reducir peso de fotografías)" off
+16 "Inkscape (editor de gráficos vectoriales)" off
+17 "Kitchscenarist (editor para guionistas)" off
+18 "Network-Manager (administrador de red)" off
+19 "Mystiq (conversor de formatos)" off
+20 "Natron (composición y FX)" off
+21 "Openboard (convertir pantalla en pizarra)" off
+22 "Opentoonz (animación 2D industrial)" off
+23 "qStopMotion (animación stop-motion)" off
+24 "Quinema (herramientas para animación)" off
+25 "Storyboarder (editor de storyboards)" off
+26 "Tahoma (animación 2D y Stop-Motion)" off
+27 "Tupitube (animación 2D y stop-motion)" off
+28 "Usuarios (gestionar usuarios)" off
+29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices; do
+case $choice in
+
+1) # "Ardour (editor de audio multipista)"
+clear
+_ardour
+;;
+
+2) # "Azpainter (similar a Paint tool SAI)"
+clear
+_azpainter
+;;
+
+3) # "Base general (firefox, bleachbit, PDFArranger etc)"
+clear
+_baseBusterGeneral
+;;
+
+4) # "Base Pro (krita, obs, synfig, xsane, etc)"
+clear
+_baseBusterPro
+;;
+
+5) # "Belle (editor de aventuras gráficas)"
+clear
+_belle
+;;
+
+6) # "Blender (animación 2D, 2.5D y 3D)"
+clear
+_blender
+;;
+
+7) # "Boats-animator (Stop-Motion sencillo)"
+clear
+_boats
+;;
+
+8) # "Cinelerra (editor de video profesional)"
+clear
+_cinelerra
+;;
+
+9) # "CPU Core Utils (gestionar procesador)"
+clear
+_cpuCoreUtils
+;;
+
+10) # "Densify (reducir peso de PDF)"
+clear
+_densify
+;;
+
+11) # "Enve (editor para motion graphics)"
+clear
+_enve
+;;
+
+12) # "GIMP Edición Quirinux (similar a Photoshop)"
+clear
+_GIMP
+;;
+
+13) # "Godot (desarrollo de videojuegos)"
+clear
+_godot
+;;
+
+14) # "Huayra-stopmotion (stop-motion sencillo)"
+clear
+_huayra
+;;
+
+15) # "Imagine (reducir peso de fotografías)"
+clear
+_imagine
+;;
+
+16) # "Inkscape (editor de gráficos vectoriales)"
+clear
+_inkscape
+;;
+
+17) # "Kitchscenarist (editor para guionistas)"
+clear
+_kitscenarist
+;;
+
+18) # "Network-Manager (administrador de red)"
+clear
+_networkmanager
+;;
+
+19) # "Mystiq (conversor de formatos)"
+clear
+_mystiq
+;;
+
+20) # "Natron (composición y FX)"
+clear
+_natron
+;;
+
+21) # "Openboard (convertir pantalla en pizarra)"
+clear
+_openboard
+;;
+
+22) # "Opentoonz (animación 2D industrial)"
+clear
+_opentoonz
+;;
+
+23) # "qStopMotion (animación stop-motion)"
+clear
+_qstopmotion
+;;
+
+24) # "Quinema (herramientas para animación)"
+clear
+_quinema
+;;
+
+25) # "Storyboarder (editor de storyboards)"
+_storyboarder
+;;
+
+26) # "Tahoma (animación 2D y Stop-Motion)"
+clear
+_tahoma2D
+;;
+
+27) # "Tupitube (animación 2D y stop-motion)"
+clear
+_tupitube
+;;
+
+28) # "Usuarios (gestionar usuarios)"
+clear
+_mugshot
+;;
+
+29) # "w-convert (conversor)"
+clear
+_w-convert
+;;
+
+esac
+done
+_menuPrincipal
+
 }
 
 # ===========================================================================================
@@ -493,201 +684,7 @@ _menuPrincipal
 
 }
 
-# ===========================================================================================
-# INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
-# ===========================================================================================
 
-_instalarProgramasSueltos() {
-cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 29 77 17)
-options=(
-\
-1 "Ardour (editor de audio multipista)" off
-2 "Azpainter (similar a Paint tool SAI)" off
-3 "Base general (firefox, bleachbit, PDFArranger etc)" off
-4 "Base Pro (krita, obs, synfig, xsane, etc)" off
-5 "Belle (editor de aventuras gráficas)" off
-6 "Blender (animación 2D, 2.5D y 3D)" off
-7 "Boats-animator (Stop-Motion sencillo)"off
-8 "Cinelerra (editor de video profesional)" off
-9 "CPU Core Utils (gestionar procesador)" off
-10 "Densify (reducir peso de PDF)" off
-11 "Enve (editor para motion graphics)" off
-12 "GIMP Edición Quirinux (similar a Photoshop)" off
-13 "Godot (desarrollo de videojuegos)" off
-14 "Huayra-stopmotion (stop-motion sencillo)" off
-15 "Imagine (reducir peso de fotografías)" off
-16 "Inkscape (editor de gráficos vectoriales)" off
-17 "Kitchscenarist (editor para guionistas)" off
-18 "Network-Manager (administrador de red)" off
-19 "Usuarios (gestionar usuarios)" off
-20 "Mystiq (conversor de formatos)" off
-21 "Natron (composición y FX)" off
-22 "Openboard (convertir pantalla en pizarra)" off
-23 "Opentoonz (animación 2D industrial)" off
-24 "qStopMotion (animación stop-motion)" off
-25 "Quinema (herramientas para animación)" off
-26 "Storyboarder (editor de storyboards)" off
-27 "Tahoma (animación 2D y Stop-Motion)" off
-28 "Tupitube (animación 2D y stop-motion)" off
-29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off
-)
-
-choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-clear
-for choice in $choices; do
-case $choice in
-
-1) # "Ardour (editor de audio multipista)"
-clear
-_ardour
-;;
-
-2) # "Azpainter (similar a Paint tool SAI)"
-clear
-_azpainter
-;;
-
-3) # "Base general (firefox, bleachbit, PDFArranger etc)"
-clear
-_baseBusterGeneral
-;;
-
-4) # "Base Pro (krita, obs, synfig, xsane, etc)"
-clear
-_baseBusterPro
-;;
-
-5) # "Belle (editor de aventuras gráficas)"
-clear
-_belle
-;;
-
-6) # "Blender (animación 2D, 2.5D y 3D)"
-clear
-_blender
-;;
-
-7) # "Boats-animator (Stop-Motion sencillo)"
-clear
-_boats
-;;
-
-
-8) # "Cinelerra (editor de video profesional)"
-clear
-_cinelerra
-;;
-
-9) # "CPU Core Utils (gestionar procesador)"
-clear
-_cpuCoreUtils
-;;
-
-10) # "Densify (reducir peso de PDF)"
-clear
-_densify
-;;
-
-11) # "Enve (editor para motion graphics)"
-clear
-_enve
-;;
-
-12) # "GIMP Edición Quirinux (similar a Photoshop)"
-clear
-_GIMP
-;;
-
-13) # "Godot (desarrollo de videojuegos)"
-clear
-_godot
-;;
-
-14) # "Huayra-stopmotion (stop-motion sencillo)"
-clear
-_huayra
-;;
-
-15) # "Imagine (reducir peso de fotografías)"
-clear
-_imagine
-;;
-
-16) # "Inkscape (editor de gráficos vectoriales)"
-clear
-_inkscape
-;;
-
-17) # "Kitchscenarist (editor para guionistas)"
-clear
-_kitscenarist
-;;
-
-18) # "Network-Manager (administrador de red)"
-clear
-_networkmanager
-;;
-
-19) # "Mugshot (gestionar usuarios)"
-clear
-_mugshot
-;;
-
-20) # "Mystiq (conversor de formatos)"
-clear
-_mystiq
-;;
-
-21) # "Natron (composición y FX)"
-clear
-_natron
-;;
-
-22) # "Openboard (convertir pantalla en pizarra)"
-clear
-_openboard
-;;
-
-23) # "Opentoonz (animación 2D industrial)"
-clear
-_opentoonz
-;;
-
-24) # "qStopMotion (animación stop-motion)"
-clear
-_qstopmotion
-;;
-
-25) # "Quinema (herramientas para animación)"
-clear
-_quinema
-;;
-
-26) # "Storyboarder (editor de storyboards)"
-_storyboarder
-;;
-
-27) # "Tahoma (animación 2D y Stop-Motion)"
-clear
-_tahoma2D
-;;
-
-28) # "Tupitube (animación 2D y stop-motion)"
-clear
-_tupitube
-;;
-
-29) # "w-convert (conversor)"
-clear
-_w-convert
-;;
-
-esac
-done
-
-_menuPrincipal
-
-}
 
 # ===========================================================================================
 # REPOSITORIOS BULLSEYE
@@ -1695,3 +1692,4 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
+
