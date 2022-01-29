@@ -383,7 +383,8 @@ options=(1 "Ardour (editor de audio multipista)" off
 26 "Tahoma (animación 2D y Stop-Motion)" off
 27 "Tupitube (animación 2D y stop-motion)" off
 28 "Usuarios (gestionar usuarios)" off
-29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+29 "Webapp-manager (convertir sitios en webapps)" off
+30 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -529,7 +530,12 @@ clear
 _mugshot
 ;;
 
-29) # "w-convert (conversor)"
+29) # "Webapp-manager (convertir sitios en webapps)"
+clear
+_webapp
+;;
+
+30) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -1072,6 +1078,17 @@ function _libresRed() {
 
 clear
 for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo modemmanager modem-manager-gui modem-manager-gui-help usb-modeswitch usb-modeswitch-data wvdial; do sudo apt-get install -y $paquetes_red; done
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+
+}
+
+function _webapp() {
+
+# INSTALAR PAQUETES DE RED LIBRES
+
+clear
+for paquetes_webapp in webapp-manager; do sudo apt-get install -y $paquetes_webapp; done
 sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 
