@@ -383,8 +383,7 @@ options=(1 "Ardour (editor de audio multipista)" off
 26 "Tahoma (animación 2D y Stop-Motion)" off
 27 "Tupitube (animación 2D y stop-motion)" off
 28 "Usuarios (gestionar usuarios)" off
-29 "Webapp-manager (convertir sitios en webapps)" off
-30 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -530,12 +529,7 @@ clear
 _mugshot
 ;;
 
-29) # "Webapp-manager (convertir sitios en webapps)"
-clear
-_webapp
-;;
-
-30) # "w-convert (conversor)"
+29) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -980,6 +974,8 @@ sudo wget --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.1
 sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
+
+touch /opt/requisitos/ok-ubuntu
 }
 
 function _eggs() {
@@ -1083,17 +1079,6 @@ sudo apt-get autoremove --purge -y
 
 }
 
-function _webapp() {
-
-# INSTALAR PAQUETES DE RED LIBRES
-
-clear
-for paquetes_webapp in webapp-manager; do sudo apt-get install -y $paquetes_webapp; done
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-}
-
 function _libresAMD() {
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES
@@ -1137,21 +1122,6 @@ function _ptxconf() {
 
 clear
 sudo apt-get install ptxconf -y
-# sudo mkdir -p /opt/tmp/ptxtemp
-# sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
-# sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
-# cd /opt/ptxconf
-# sudo python setup.py install
-# sudo apt-get install -f -y
-# sudo apt-get install libappindicator1 -y
-# sudo mkdir -p /opt/tmp/python-appindicator
-# sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-# sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-#sudo apt-get install python-gtk2 -y
-
-# Agrega entrada al inicio para PTXCONFIG
-
-# for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
 }
 
@@ -1290,6 +1260,9 @@ function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT
 
+FILEUBUNTU="/opt/requisitos/ok-ubuntu"
+if [ !-e ${FILEUBUNTU} ]; then
+
 clear
 sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
@@ -1300,6 +1273,43 @@ sudo apt-get install mintinstall -y
 
 clear
 apt-get install flatpakconfig -y
+
+# INSTALAR FLATPAK
+
+sudo apt-get update -y
+sudo apt-get install flatpak -y
+sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+sudo apt-get reinstall mintinstall -y
+sudo rm /usr/share/applications/mintinstall.desktop
+sudo cp /opt/mintinstall/applications/* /usr/share/applications/
+sudo cp /opt/mintinstall/icons/* /usr/share/icons/
+sudo apt-get install girl1.2-flatpak-1.0 -y
+
+else
+
+# Conserva gnome-software para Ubuntu y agrega soporte para flatpak
+
+clear
+apt-get install gnome-software-plugin-flatpak -y
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo apt-get install gir1.2-flatpak-1.0 -y
+
+fi
+
+if which flatpak >/dev/null 2>&1
+    then
+        # flatpak remote-add --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+        # flatpak remote-add --if-not-exists gnome-apps https://sdk.gnome.org/gnome-apps.flatpakrepo
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        # Create share dirs for flatpak, they're in XDG_DATA_DIRS already but if they don't exist
+        # they won't be monitored by some of the DEs and the first apps installed with Flatpak won't
+        # show in the menu until the user logs out.
+        mkdir -p /var/lib/flatpak/exports/share/applications
+        mkdir -p /var/lib/flatpak/exports/share/icons
+    fi
 
 }
 
