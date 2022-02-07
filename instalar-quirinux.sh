@@ -1319,7 +1319,7 @@ function _salvapantallas() {
 
 clear
 
-apt-get install gluqlo -y
+apt-get install xscreensaver gluqlo -y
 
 }
 
