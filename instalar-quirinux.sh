@@ -366,24 +366,25 @@ options=(1 "Ardour (editor de audio multipista)" off
 9 "CPU Core Utils (gestionar procesador)" off
 10 "Densify (reducir peso de PDF)" off
 11 "Enve (editor para motion graphics)" off
-12 "GIMP Edición Quirinux (similar a Photoshop)" off
-13 "Godot (desarrollo de videojuegos)" off
-14 "Huayra-stopmotion (stop-motion sencillo)" off
-15 "Imagine (reducir peso de fotografías)" off
-16 "Inkscape (editor de gráficos vectoriales)" off
-17 "Kitchscenarist (editor para guionistas)" off
-18 "Network-Manager (administrador de red)" off
-19 "Mystiq (conversor de formatos)" off
-20 "Natron (composición y FX)" off
-21 "Openboard (convertir pantalla en pizarra)" off
-22 "Opentoonz (animación 2D industrial)" off
-23 "qStopMotion (animación stop-motion)" off
-24 "Quinema (herramientas para animación)" off
-25 "Storyboarder (editor de storyboards)" off
-26 "Tahoma (animación 2D y Stop-Motion)" off
-27 "Tupitube (animación 2D y stop-motion)" off
-28 "Usuarios (gestionar usuarios)" off
-29 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+12 "Glaxnimate (animacion vectorial)" off
+13 "GIMP Edición Quirinux (similar a Photoshop)" off
+14 "Godot (desarrollo de videojuegos)" off
+15 "Huayra-stopmotion (stop-motion sencillo)" off
+16 "Imagine (reducir peso de fotografías)" off
+17 "Inkscape (editor de gráficos vectoriales)" off
+18 "Kitchscenarist (editor para guionistas)" off
+19 "Network-Manager (administrador de red)" off
+20 "Mystiq (conversor de formatos)" off
+21 "Natron (composición y FX)" off
+22 "Openboard (convertir pantalla en pizarra)" off
+23 "Opentoonz (animación 2D industrial)" off
+24 "qStopMotion (animación stop-motion)" off
+25 "Quinema (herramientas para animación)" off
+26 "Storyboarder (editor de storyboards)" off
+27 "Tahoma (animación 2D y Stop-Motion)" off
+28 "Tupitube (animación 2D y stop-motion)" off
+29 "Usuarios (gestionar usuarios)" off
+30 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -445,91 +446,96 @@ clear
 _enve
 ;;
 
-12) # "GIMP Edición Quirinux (similar a Photoshop)"
+12 # "Glaxnimate (animación vectorial)"
+clear
+_glaxnimate
+;;
+
+13) # "GIMP Edición Quirinux (similar a Photoshop)"
 clear
 _GIMP
 ;;
 
-13) # "Godot (desarrollo de videojuegos)"
+14) # "Godot (desarrollo de videojuegos)"
 clear
 _godot
 ;;
 
-14) # "Huayra-stopmotion (stop-motion sencillo)"
+15) # "Huayra-stopmotion (stop-motion sencillo)"
 clear
 _huayra
 ;;
 
-15) # "Imagine (reducir peso de fotografías)"
+16) # "Imagine (reducir peso de fotografías)"
 clear
 _imagine
 ;;
 
-16) # "Inkscape (editor de gráficos vectoriales)"
+17) # "Inkscape (editor de gráficos vectoriales)"
 clear
 _inkscape
 ;;
 
-17) # "Kitchscenarist (editor para guionistas)"
+18) # "Kitchscenarist (editor para guionistas)"
 clear
 _kitscenarist
 ;;
 
-18) # "Network-Manager (administrador de red)"
+19) # "Network-Manager (administrador de red)"
 clear
 _networkmanager
 ;;
 
-19) # "Mystiq (conversor de formatos)"
+20) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-20) # "Natron (composición y FX)"
+21) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-21) # "Openboard (convertir pantalla en pizarra)"
+22) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-22) # "Opentoonz (animación 2D industrial)"
+23) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-23) # "qStopMotion (animación stop-motion)"
+24) # "qStopMotion (animación stop-motion)"
 clear
 _qstopmotion
 ;;
 
-24) # "Quinema (herramientas para animación)"
+25) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-25) # "Storyboarder (editor de storyboards)"
+26) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-26) # "Tahoma (animación 2D y Stop-Motion)"
+27) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-27) # "Tupitube (animación 2D y stop-motion)"
+28) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-28) # "Usuarios (gestionar usuarios)"
+29) # "Usuarios (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-29) # "w-convert (conversor)"
+30) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -1527,6 +1533,13 @@ function _tahoma2D() {
 clear
 apt-get install tahoma2d -y
 
+}
+
+function _glaxnimate() {
+	
+clear
+apt-get install glaxnimate -y
+	
 }
 
 function _inkscape() {
