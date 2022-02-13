@@ -446,7 +446,7 @@ clear
 _enve
 ;;
 
-12 # "Glaxnimate (animación vectorial)"
+12) # "Glaxnimate (animación vectorial)"
 clear
 _glaxnimate
 ;;
