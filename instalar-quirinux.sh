@@ -361,30 +361,27 @@ options=(1 "Ardour (editor de audio multipista)" off
 4 "Base Pro (krita, obs, synfig, xsane, etc)" off
 5 "Belle (editor de aventuras gráficas)" off
 6 "Blender (animación 2D, 2.5D y 3D)" off
-7 "Boats-animator (Stop-Motion sencillo)" off
-8 "Cinelerra (editor de video profesional)" off
-9 "CPU Core Utils (gestionar procesador)" off
-10 "Densify (reducir peso de PDF)" off
-11 "Enve (editor para motion graphics)" off
-12 "Glaxnimate (animacion vectorial)" off
-13 "GIMP Edición Quirinux (similar a Photoshop)" off
-14 "Godot (desarrollo de videojuegos)" off
-15 "Huayra-stopmotion (stop-motion sencillo)" off
-16 "Imagine (reducir peso de fotografías)" off
-17 "Inkscape (editor de gráficos vectoriales)" off
-18 "Kitchscenarist (editor para guionistas)" off
-19 "Network-Manager (administrador de red)" off
-20 "Mystiq (conversor de formatos)" off
-21 "Natron (composición y FX)" off
-22 "Openboard (convertir pantalla en pizarra)" off
-23 "Opentoonz (animación 2D industrial)" off
-24 "qStopMotion (animación stop-motion)" off
-25 "Quinema (herramientas para animación)" off
-26 "Storyboarder (editor de storyboards)" off
-27 "Tahoma (animación 2D y Stop-Motion)" off
-28 "Tupitube (animación 2D y stop-motion)" off
-29 "Usuarios (gestionar usuarios)" off
-30 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+7 "Boats-animator (Stop-Motion sencillo)"off
+8 "CPU Core Utils (gestionar procesador)" off
+9 "Densify (reducir peso de PDF)" off
+10 "Enve (editor para motion graphics)" off
+11 "GIMP Edición Quirinux (similar a Photoshop)" off
+12 "Godot (desarrollo de videojuegos)" off
+13 "Huayra-stopmotion (stop-motion sencillo)" off
+14 "Imagine (reducir peso de fotografías)" off
+15 "Inkscape (editor de gráficos vectoriales)" off
+16 "Kitchscenarist (editor para guionistas)" off
+17 "Network-Manager (administrador de red)" off
+18 "Mystiq (conversor de formatos)" off
+19 "Natron (composición y FX)" off
+20 "Openboard (convertir pantalla en pizarra)" off
+21 "Opentoonz (animación 2D industrial)" off
+22 "Quinema (herramientas para animación)" off
+23 "Storyboarder (editor de storyboards)" off
+24 "Tahoma (animación 2D y Stop-Motion)" off
+25 "Tupitube (animación 2D y stop-motion)" off
+26 "Usuarios (gestionar usuarios)" off
+27 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -426,116 +423,101 @@ clear
 _boats
 ;;
 
-8) # "Cinelerra (editor de video profesional)"
-clear
-_cinelerra
-;;
-
-9) # "CPU Core Utils (gestionar procesador)"
+8) # "CPU Core Utils (gestionar procesador)"
 clear
 _cpuCoreUtils
 ;;
 
-10) # "Densify (reducir peso de PDF)"
+9) # "Densify (reducir peso de PDF)"
 clear
 _densify
 ;;
 
-11) # "Enve (editor para motion graphics)"
+10) # "Enve (editor para motion graphics)"
 clear
 _enve
 ;;
 
-12) # "Glaxnimate (animación vectorial)"
-clear
-_glaxnimate
-;;
-
-13) # "GIMP Edición Quirinux (similar a Photoshop)"
+11) # "GIMP Edición Quirinux (similar a Photoshop)"
 clear
 _GIMP
 ;;
 
-14) # "Godot (desarrollo de videojuegos)"
+12) # "Godot (desarrollo de videojuegos)"
 clear
 _godot
 ;;
 
-15) # "Huayra-stopmotion (stop-motion sencillo)"
+13) # "Huayra-stopmotion (stop-motion sencillo)"
 clear
 _huayra
 ;;
 
-16) # "Imagine (reducir peso de fotografías)"
+14) # "Imagine (reducir peso de fotografías)"
 clear
 _imagine
 ;;
 
-17) # "Inkscape (editor de gráficos vectoriales)"
+15) # "Inkscape (editor de gráficos vectoriales)"
 clear
 _inkscape
 ;;
 
-18) # "Kitchscenarist (editor para guionistas)"
+16) # "Kitchscenarist (editor para guionistas)"
 clear
 _kitscenarist
 ;;
 
-19) # "Network-Manager (administrador de red)"
+17) # "Network-Manager (administrador de red)"
 clear
 _networkmanager
 ;;
 
-20) # "Mystiq (conversor de formatos)"
+18) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-21) # "Natron (composición y FX)"
+19) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-22) # "Openboard (convertir pantalla en pizarra)"
+20) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-23) # "Opentoonz (animación 2D industrial)"
+21) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-24) # "qStopMotion (animación stop-motion)"
-clear
-_qstopmotion
-;;
-
-25) # "Quinema (herramientas para animación)"
+22) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-26) # "Storyboarder (editor de storyboards)"
+23) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-27) # "Tahoma (animación 2D y Stop-Motion)"
+24) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-28) # "Tupitube (animación 2D y stop-motion)"
+25) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-29) # "Usuarios (gestionar usuarios)"
+26) # "Usuarios (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-30) # "w-convert (conversor)"
+27) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
@@ -558,20 +540,19 @@ options=(1 "Software de hogar y oficina" off
 4 "Temas y salvapantallas de Quirinux" off
 5 "Centro de software sencillo de usar" off
 6 "Compatibilidad con carpetas compartidas" off
-7 "Herramientas para virtualizar otros sistemas" off
-8 "Herramientas para generar imágenes ISO de Quirinux" off
-9 "Utilidad para usar digitalizadoras con 2 monitores" off
-10 "Firmware para placas de red Wifi" off
-11 "Controladores libres para hardware de red - excepto wifi" off
-12 "Controladores libres para escáneres e impresoras" off
-13 "Codecs privativos multimedia y RAR" off
-14 "Controladores libres para aceleradoras NVIDIA" off
-15 "Controladores libres para aceleradoras AMD" off
-16 "Controladores libres para tabletas GENIUS" off
-17 "Controladores para cámaras virtuales" off
-18 "Utilidades de backup y puntos de restauración" off
-19 "Asistente Quirinux (incluye update y estilos)" off
-20 "Corrección de bugs (recomendado)" off)
+7 "Herramientas para generar imágenes ISO de Quirinux" off
+8 "Utilidad para usar digitalizadoras con 2 monitores" off
+9 "Firmware para placas de red Wifi" off
+10 "Controladores libres para hardware de red - excepto wifi" off
+11 "Controladores libres para escáneres e impresoras" off
+12 "Codecs privativos multimedia y RAR" off
+13 "Controladores libres para aceleradoras NVIDIA" off
+14 "Controladores libres para aceleradoras AMD" off
+15 "Controladores libres para tabletas GENIUS" off
+16 "Controladores para cámaras virtuales" off
+17 "Utilidades de backup y puntos de restauración" off
+18 "Asistente Quirinux (incluye update y estilos)" off
+19 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -613,72 +594,67 @@ clear
 _samba
 ;;
 
-7) # "Herramientas para virtualizar otros sistemas operativos (AQEMU)"
-clear
-_aqemu
-;;
-
-8) # "Herramientas para generar imagenes ISO de Quirinux"
+7) # "Herramientas para generar imagenes ISO de Quirinux"
 clear
 _eggs
 ;;
 
-9) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+8) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
 clear
 _ptxconf
 ;;
 
-10) # "Firmware para placas de red Wifi"
+9) # "Firmware para placas de red Wifi"
 clear
 _firmwareWifi
 ;;
 
-11) # "Controladores libres para hardware de red - excepto wifi"
+10) # "Controladores libres para hardware de red - excepto wifi"
 clear
 _libresRed
 ;;
 
-12) # "Controladores libres para escáneres e impresoras"
+11) # "Controladores libres para escáneres e impresoras"
 clear
 _libresImpresoras
 ;;
 
-13) # "Codecs privativos multimedia y RAR"
+12) # "Codecs privativos multimedia y RAR"
 clear
 _codecs
 ;;
 
-14) # "Controladores libres para aceleradoras gráficas nVidia"
+13) # "Controladores libres para aceleradoras gráficas nVidia"
 clear
 _libresNvidia
 ;;
 
-15) # "Controladores libres para aceleradoras gráficas AMD"
+14) # "Controladores libres para aceleradoras gráficas AMD"
 clear
 _libresAMD
 ;;
 
-16) # "Controladores libres para tabletas digitalizadoras Genius"
+15) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-17) # "Controladores para cámaras virtuales"
+16) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-18) # "Utilidades de backup y puntos de restauración"
+17) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-19) # "Asistente Quirinux"
+18) # "Asistente Quirinux"
 clear
 _asistente
 ;;
 
-20) # "Corrección de bugs (recomendado)"
+19) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
@@ -794,8 +770,7 @@ _samba
 _utiles
 #_olive
 _GIMP
-_aqemu
-_widc
+#_aqemu
 _mint
 _salvapantallas
 _fuentes
@@ -830,11 +805,11 @@ _natron
 _azpainter
 _enve
 _quinema
-_qstopmotion
+#_qstopmotion
 _camarasVirtuales
 _belle
 _mypaint
-_cinelerra
+#_cinelerra
 _tahoma2D
 _blender
 _boats
@@ -852,7 +827,7 @@ _mystiq
 _densify
 _imagine
 _openboard
-_cpuCoreUtils
+#_cpuCoreUtils
 _borratemp
 }
 
@@ -980,8 +955,6 @@ sudo wget --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.1
 sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.1_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
-
-touch /opt/requisitos/ok-ubuntu
 }
 
 function _eggs() {
@@ -1128,6 +1101,21 @@ function _ptxconf() {
 
 clear
 sudo apt-get install ptxconf -y
+# sudo mkdir -p /opt/tmp/ptxtemp
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
+# sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
+# cd /opt/ptxconf
+# sudo python setup.py install
+# sudo apt-get install -f -y
+# sudo apt-get install libappindicator1 -y
+# sudo mkdir -p /opt/tmp/python-appindicator
+# sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
+# sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
+#sudo apt-get install python-gtk2 -y
+
+# Agrega entrada al inicio para PTXCONFIG
+
+# for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
 }
 
@@ -1266,9 +1254,6 @@ function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT
 
-FILEUBUNTU="/opt/requisitos/ok-ubuntu"
-if [ !-e ${FILEUBUNTU} ]; then
-
 clear
 sudo apt-get install gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
@@ -1279,43 +1264,6 @@ sudo apt-get install mintinstall -y
 
 clear
 apt-get install flatpakconfig -y
-
-# INSTALAR FLATPAK
-
-sudo apt-get update -y
-sudo apt-get install flatpak -y
-sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-sudo apt-get reinstall mintinstall -y
-sudo rm /usr/share/applications/mintinstall.desktop
-sudo cp /opt/mintinstall/applications/* /usr/share/applications/
-sudo cp /opt/mintinstall/icons/* /usr/share/icons/
-sudo apt-get install girl1.2-flatpak-1.0 -y
-
-else
-
-# Conserva gnome-software para Ubuntu y agrega soporte para flatpak
-
-clear
-apt-get install gnome-software-plugin-flatpak -y
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-sudo apt-get install gir1.2-flatpak-1.0 -y
-
-fi
-
-if which flatpak >/dev/null 2>&1
-    then
-        # flatpak remote-add --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
-        # flatpak remote-add --if-not-exists gnome-apps https://sdk.gnome.org/gnome-apps.flatpakrepo
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-        # Create share dirs for flatpak, they're in XDG_DATA_DIRS already but if they don't exist
-        # they won't be monitored by some of the DEs and the first apps installed with Flatpak won't
-        # show in the menu until the user logs out.
-        mkdir -p /var/lib/flatpak/exports/share/applications
-        mkdir -p /var/lib/flatpak/exports/share/icons
-    fi
 
 }
 
@@ -1535,13 +1483,6 @@ apt-get install tahoma2d -y
 
 }
 
-function _glaxnimate() {
-	
-clear
-apt-get install glaxnimate -y
-	
-}
-
 function _inkscape() {
 
 # INSTALANDO INKSCAPE
@@ -1732,4 +1673,3 @@ apt-get install entangleinstallplugin -y
 
 _inicioCheck
 _menuPrincipal
-
