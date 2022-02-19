@@ -362,26 +362,25 @@ options=(1 "Ardour (editor de audio multipista)" off
 5 "Belle (editor de aventuras gráficas)" off
 6 "Blender (animación 2D, 2.5D y 3D)" off
 7 "Boats-animator (Stop-Motion sencillo)"off
-8 "CPU Core Utils (gestionar procesador)" off
-9 "Densify (reducir peso de PDF)" off
-10 "Enve (editor para motion graphics)" off
-11 "GIMP Edición Quirinux (similar a Photoshop)" off
-12 "Godot (desarrollo de videojuegos)" off
-13 "Huayra-stopmotion (stop-motion sencillo)" off
-14 "Imagine (reducir peso de fotografías)" off
-15 "Inkscape (editor de gráficos vectoriales)" off
-16 "Kitchscenarist (editor para guionistas)" off
-17 "Network-Manager (administrador de red)" off
-18 "Mystiq (conversor de formatos)" off
-19 "Natron (composición y FX)" off
-20 "Openboard (convertir pantalla en pizarra)" off
-21 "Opentoonz (animación 2D industrial)" off
-22 "Quinema (herramientas para animación)" off
-23 "Storyboarder (editor de storyboards)" off
-24 "Tahoma (animación 2D y Stop-Motion)" off
-25 "Tupitube (animación 2D y stop-motion)" off
-26 "Usuarios (gestionar usuarios)" off
-27 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+8 "Densify (reducir peso de PDF)" off
+9 "Enve (editor para motion graphics)" off
+10 "GIMP Edición Quirinux (similar a Photoshop)" off
+11 "Godot (desarrollo de videojuegos)" off
+12 "Huayra-stopmotion (stop-motion sencillo)" off
+13 "Imagine (reducir peso de fotografías)" off
+14 "Inkscape (editor de gráficos vectoriales)" off
+15 "Kitchscenarist (editor para guionistas)" off
+16 "Network-Manager (administrador de red)" off
+17 "Mystiq (conversor de formatos)" off
+18 "Natron (composición y FX)" off
+19 "Openboard (convertir pantalla en pizarra)" off
+20 "Opentoonz (animación 2D industrial)" off
+21 "Quinema (herramientas para animación)" off
+22 "Storyboarder (editor de storyboards)" off
+23 "Tahoma (animación 2D y Stop-Motion)" off
+24 "Tupitube (animación 2D y stop-motion)" off
+25 "Usuarios (gestionar usuarios)" off
+26 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -423,101 +422,96 @@ clear
 _boats
 ;;
 
-8) # "CPU Core Utils (gestionar procesador)"
-clear
-_cpuCoreUtils
-;;
-
-9) # "Densify (reducir peso de PDF)"
+8) # "Densify (reducir peso de PDF)"
 clear
 _densify
 ;;
 
-10) # "Enve (editor para motion graphics)"
+9) # "Enve (editor para motion graphics)"
 clear
 _enve
 ;;
 
-11) # "GIMP Edición Quirinux (similar a Photoshop)"
+10) # "GIMP Edición Quirinux (similar a Photoshop)"
 clear
 _GIMP
 ;;
 
-12) # "Godot (desarrollo de videojuegos)"
+11) # "Godot (desarrollo de videojuegos)"
 clear
 _godot
 ;;
 
-13) # "Huayra-stopmotion (stop-motion sencillo)"
+12) # "Huayra-stopmotion (stop-motion sencillo)"
 clear
 _huayra
 ;;
 
-14) # "Imagine (reducir peso de fotografías)"
+13) # "Imagine (reducir peso de fotografías)"
 clear
 _imagine
 ;;
 
-15) # "Inkscape (editor de gráficos vectoriales)"
+14) # "Inkscape (editor de gráficos vectoriales)"
 clear
 _inkscape
 ;;
 
-16) # "Kitchscenarist (editor para guionistas)"
+15) # "Kitchscenarist (editor para guionistas)"
 clear
 _kitscenarist
 ;;
 
-17) # "Network-Manager (administrador de red)"
+16) # "Network-Manager (administrador de red)"
 clear
 _networkmanager
 ;;
 
-18) # "Mystiq (conversor de formatos)"
+17) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-19) # "Natron (composición y FX)"
+18) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-20) # "Openboard (convertir pantalla en pizarra)"
+19) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-21) # "Opentoonz (animación 2D industrial)"
+20) # "Opentoonz (animación 2D industrial)"
 clear
 _opentoonz
 ;;
 
-22) # "Quinema (herramientas para animación)"
+21) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-23) # "Storyboarder (editor de storyboards)"
+22) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-24) # "Tahoma (animación 2D y Stop-Motion)"
+23) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-25) # "Tupitube (animación 2D y stop-motion)"
+24) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-26) # "Usuarios (gestionar usuarios)"
+25) # "Usuarios (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-27) # "w-convert (conversor)"
+26) # "w-convert (conversor)"
 clear
 _w-convert
 ;;
