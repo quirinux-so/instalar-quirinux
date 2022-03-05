@@ -571,6 +571,7 @@ case $choice in
 clear
 _baseBusterGeneral
 _utiles
+
 #_olive
 _networkmanager
 ;;
@@ -757,6 +758,7 @@ _programasGeneral
 _pulseaudio
 _previaVerif
 _limpiar
+_final
 }
 
 function _controladoresLibres() {
@@ -800,6 +802,7 @@ _baseBusterPro
 _tipografiasPro
 _especializadosPro
 _limpiar
+_finalpro
 }
 
 function _especializadosPro() {
@@ -1677,6 +1680,26 @@ function _pluginEntangle() {
 
 clear
 apt-get install entangleinstallplugin -y
+
+}
+
+# ===========================================================================================
+# MENSAJE FINAL [CASTELLANO]
+# ===========================================================================================
+
+function _final() {
+
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "ATENCION!" \
+--msgbox "\n INSTALACIÓN FINALIZADA CON ÉXITO.\n\n." 23 100
+
+}
+
+function _finalpro() {
+
+dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
+--title "ATENCIÓN!" \
+--msgbox "\n INSTALACIÓN FINALIZADA CON ÉXITO.\n\nPara activar el plugin entangle stop motion, ejecute el sigiente comando SIN PERMISOS DE ROOT:\n\ninstalar-plugin-entangle" 23 100
 
 }
 
