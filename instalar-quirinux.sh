@@ -86,7 +86,7 @@ for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
 
 FILE="/etc/apt/apt.conf.d/05disable-suggests"
 
-if [ ! -e ${FILE} ]; then
+if [ -e ${FILE} ]; then
 
 sudo rm /etc/apt/apt.conf.d/05disable-suggests
 
