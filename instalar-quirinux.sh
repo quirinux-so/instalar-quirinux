@@ -76,13 +76,27 @@ fi
 
 function _requisitos() {
 
-# INSTALAR WGET Y GIT
+# Instalar WGET y GIT
 
 clear
 sudo apt-get update -y
 for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
+
+# Habilitar paquetes sugeridos. Necesario, por ejemplo, para complementos de GIMP
+
+FILE="/etc/apt/apt.conf.d/05disable-suggests"
+
+if [ ! -e ${FILE} ]; then
+
+sudo rm /etc/apt/apt.conf.d/05disable-suggests
+
+fi
+
+# Crear fichero de verificación
+
 mkdir -p /opt/requisitos/
 touch /opt/requisitos/ok
+
 
 }
 
@@ -665,6 +679,7 @@ _menuPrincipal
 # ===========================================================================================
 # REPOSITORIOS BULLSEYE
 # ===========================================================================================
+
 
 function _bullseye() {
 
@@ -1437,7 +1452,7 @@ function _baseBusterPro() {
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
-for paquetes_estandar in deepin-picker manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
 sudo apt-get install -f -y
 clear
 _pluginEntangle
