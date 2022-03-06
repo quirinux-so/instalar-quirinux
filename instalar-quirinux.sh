@@ -80,7 +80,7 @@ function _requisitos() {
 
 clear
 sudo apt-get update -y
-for paquetes_wget in wget git; do sudo apt-get install -y $paquetes_wget; done
+for paquetes_wget in wget git; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_wget; done
 
 # Crear fichero de verificación
 
@@ -96,7 +96,7 @@ touch /opt/requisitos/ok
 
 function _instalarDialog() {
 sudo apt-get update -y
-sudo apt-get install dialog -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall dialog -y
 }
 
 # ===========================================================================================
@@ -324,7 +324,7 @@ fi
 }
 
 function _instalarDialog() {
-sudo apt-get install dialog -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall dialog -y
 }
 
 function _checkrepo() {
@@ -350,7 +350,7 @@ _menuPrincipal
 }
 
 function _instalarDialog() {
-sudo apt-get install dialog -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall dialog -y
 }
 
 # ===========================================================================================
@@ -837,7 +837,7 @@ function _applications-general()
 {
 
 clear
-apt-get install applications-general -y
+apt-get --install-recommends --install-suggests install  --reinstall applications-general -y
 
 }
 
@@ -872,7 +872,7 @@ function _config() {
 # CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
 
 clear
-apt-get install sudoersquirinux -y
+apt-get --install-recommends --install-suggests install  --reinstall sudoersquirinux -y
 
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
@@ -944,7 +944,7 @@ touch /opt/requisitos/ok-chimaera
 function _asistente() {
 
 clear
-sudo apt-get install quirinuxasistente, quirinuxupdate, quirinuxestilos -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall quirinuxasistente, quirinuxupdate, quirinuxestilos -y
 }
 
 function _sourcesUbuntu() {
@@ -961,13 +961,13 @@ chown -R root:root /etc/apt
 
 function _eggs() {
 clear
-apt-get install eggs -y
+apt-get --install-recommends --install-suggests install  --reinstall eggs -y
 
 }
 
 function _networkmanager() {
 clear
-apt-get install network-manager -y
+apt-get --install-recommends --install-suggests install  --reinstall network-manager -y
 
 }
 
@@ -976,9 +976,9 @@ function _firmwareWifi() {
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
 clear
-for paquetes_firmware_q in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev; do sudo apt-get install -y $paquetes_firmware_q; done
-for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get install -y $paquetes_firmware; done
-sudo apt-get install -f -y
+for paquetes_firmware_q in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_firmware_q; done
+for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_firmware; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 }
@@ -988,8 +988,8 @@ function _codecs() {
 # INSTALAR CODECS Y FORMATOS PRIVATIVOS
 
 clear
-for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get install -y $paquetes_codecs; done
-sudo apt-get install -f -y
+for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_codecs; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 }
@@ -999,8 +999,8 @@ function _libresNvidia() {
 # INSTALAR CONTROLADORES LIBRES DE NVIDIA
 
 clear
-for paquetes_nvidia in bumblebee; do sudo apt-get install -y $paquetes_nvidia; done
-sudo apt-get install -f -y
+for paquetes_nvidia in bumblebee; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_nvidia; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 }
 
@@ -1009,13 +1009,13 @@ function _libresWacom() {
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
 
 clear
-sudo apt-get install build-essential autoconf linux-headers-$(uname -r) -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall build-essential autoconf linux-headers-$(uname -r) -y
 sudo wget --no-check-certificate 'https://quirinux.ga/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd input-wacom-0.46.0
 if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 }
@@ -1025,8 +1025,8 @@ function _libresGenius() {
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
 
 clear
-apt-get install geniusconfig -y
-apt-get install wizardpen -y
+apt-get --install-recommends --install-suggests install  --reinstall geniusconfig -y
+apt-get --install-recommends --install-suggests install  --reinstall wizardpen -y
 
 }
 
@@ -1035,17 +1035,17 @@ function _libresImpresoras() {
 # INSTALAR PAQUETES DE IMPRESIÓN Y ESCANEO LIBRES
 
 clear
-for paquetes_scaner_impresion in build-essential tix foomatic-filters groff dc cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get install -y $paquetes_scaner_impresion; done
-sudo apt-get install cups
-sudo apt-get install -f -y
+for paquetes_scaner_impresion in build-essential tix foomatic-filters groff dc cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_scaner_impresion; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall cups
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
 sudo apt-get remove --purge hplip -y
 sudo rm -rf /usr/share/hplip
 sudo rm -rf /var/lib/hp
-apt-get install impresoras -y
-apt-get install epsonscan -y
+apt-get --install-recommends --install-suggests install  --reinstall impresoras -y
+apt-get --install-recommends --install-suggests install  --reinstall epsonscan -y
 epson-install
-apt-get install simple-scan -y
+apt-get --install-recommends --install-suggests install  --reinstall simple-scan -y
 
 }
 
@@ -1054,8 +1054,8 @@ function _libresRed() {
 # INSTALAR PAQUETES DE RED LIBRES
 
 clear
-for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo usb-modeswitch usb-modeswitch-data wvdial; do sudo apt-get install -y $paquetes_red; done
-sudo apt-get install -f -y
+for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo usb-modeswitch usb-modeswitch-data wvdial; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_red; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 }
@@ -1065,8 +1065,8 @@ function _libresAMD() {
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES
 
 clear
-for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get install -y $paquetes_amd; done
-sudo apt-get install -f
+for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_amd; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f
 sudo apt-get autoremove --purge -y
 
 }
@@ -1077,18 +1077,18 @@ function _baseBusterGeneral() {
 
 clear
 
-for paquetes_buster in bluconfig gcc make perl linux-headers-$(uname -r) onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 draw.io i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in bluconfig gcc make perl linux-headers-$(uname -r) onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 draw.io i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular pinta mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat thunderbird thunderbird-l10n-de thunderbird-l10n-es-es thunderbird-l10n-fr thunderbird-l10n-gl thunderbird-l10n-it thunderbird-l10n-pt-br thunderbird-l10n-pt-pt thunderbird-l10n-ru thunderbird-l10n-es-ar xdemineur default-jre cairo-dock cairo-dock-plug-ins chromium dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_buster; done
 
 FILE="/opt/requisitos/ok-chimaera"
 if [ -e ${FILE} ]; then
 for desinstalar in htop mutt yad-icon-browser; do sudo apt-get remove --purge $desinstalar -y; done
-for instalar in qjackctl gnome-firmware; do sudo apt-get install $instalar -y; done
+for instalar in qjackctl gnome-firmware; do sudo apt-get --install-recommends --install-suggests install  --reinstall $instalar -y; done
 fi
 
 FILE="/usr/bin/atril"
 if [ -e ${FILE} ]; then
 apt-get remove --purge atril -y
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 fi 
 
@@ -1101,18 +1101,18 @@ function _ptxconf() {
 # INSTALAR UTILIDAD PTXCONF (MAPPING)
 
 clear
-sudo apt-get install ptxconf -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall ptxconf -y
 # sudo mkdir -p /opt/tmp/ptxtemp
 # sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
 # sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
 # cd /opt/ptxconf
 # sudo python setup.py install
-# sudo apt-get install -f -y
-# sudo apt-get install libappindicator1 -y
+# sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
+# sudo apt-get --install-recommends --install-suggests install  --reinstall libappindicator1 -y
 # sudo mkdir -p /opt/tmp/python-appindicator
 # sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
 # sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-# sudo apt-get install python-gtk2 -y
+# sudo apt-get --install-recommends --install-suggests install  --reinstall python-gtk2 -y
 
 # Agrega entrada al inicio para PTXCONFIG
 
@@ -1125,7 +1125,7 @@ function _chimiboga() {
 # INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
 
 clear
-apt-get install chimiboga -y
+apt-get --install-recommends --install-suggests install  --reinstall chimiboga -y
 
 }
 
@@ -1134,7 +1134,7 @@ function _splash() {
 # INSTALAR SPLASH DE QUIRINUX
 
 clear
-apt-get install quirinuxsplash -y
+apt-get --install-recommends --install-suggests install  --reinstall quirinuxsplash -y
 
 }
 
@@ -1143,7 +1143,7 @@ function _samba() {
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 
 clear
-apt-get install system-config-samba -y
+apt-get --install-recommends --install-suggests install  --reinstall system-config-samba -y
 
 }
 
@@ -1152,7 +1152,7 @@ function _mugshot() {
 # INSTALAR MUGSHOT
 
 clear
-apt-get install usuarios -y
+apt-get --install-recommends --install-suggests install  --reinstall usuarios -y
 
 }
 
@@ -1161,8 +1161,8 @@ function _mystiq() {
 # INSTALAR CONVERSOR MYSTIQ DESDE OPENSUSE
 
 clear
-for paquetes_mystiq in mystiq; do sudo apt-get install -y $paquetes_mystiq; done
-sudo apt-get install -f -y
+for paquetes_mystiq in mystiq; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_mystiq; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 }
 
@@ -1171,7 +1171,7 @@ function _densify() {
 # INSTALAR DENSIFY (para reducir archivos PDF)
 
 clear
-apt-get install densify -y
+apt-get --install-recommends --install-suggests install  --reinstall densify -y
 
 }
 
@@ -1180,7 +1180,7 @@ function _imagine() {
 # INSTALAR IMAGINE (para reducir imágenes)
 
 clear
-apt-get install imagine -y
+apt-get --install-recommends --install-suggests install  --reinstall imagine -y
 
 }
 
@@ -1189,7 +1189,7 @@ function _openboard() {
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 clear
-apt-get install openboard -y
+apt-get --install-recommends --install-suggests install  --reinstall openboard -y
 
 }
 
@@ -1198,7 +1198,7 @@ function _cpuCoreUtils() {
 # INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
 
 clear
-apt-get install cpufreq cpufrequtils -y
+apt-get --install-recommends --install-suggests install  --reinstall cpufreq cpufrequtils -y
 
 }
 
@@ -1207,7 +1207,7 @@ function _olive() {
 # INSTALAR EDITOR DE VIDEO OLIVE - Version elegida por Quirinux
 
 clear
-apt-get install oliveq -y
+apt-get --install-recommends --install-suggests install  --reinstall oliveq -y
 
 }
 
@@ -1216,7 +1216,7 @@ function _GIMP() {
 # INSTALAR GIMP EDICION QUIRINUX
 
 clear
-apt-get install gimp-quirinux gimp-paint-studio -y
+apt-get --install-recommends --install-suggests install  --reinstall gimp-quirinux gimp-paint-studio -y
 
 }
 
@@ -1225,8 +1225,8 @@ function _aqemu() {
 # INSTALAR PAQUETES DE VIRTUALIZACIÓN
 
 clear
-for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get install -y $paquetes_virtualizacion; done
-sudo apt-get install -f -y
+for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_virtualizacion; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 
 }
 
@@ -1235,7 +1235,7 @@ function _w-convert() {
 # INSTALAR W-CONVERT
 
 clear
-apt-get install w-convert -y
+apt-get --install-recommends --install-suggests install  --reinstall w-convert -y
 
 }
 
@@ -1244,8 +1244,8 @@ function _mint() {
 # INSTALAR MINTBACKUP, ACTUALIZACIONES AUTOMÁTICAS y TIMESHIFT
 
 clear
-for paquetes_extra in package-update-indicator actualizar gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get install -y $paquetes_extra; done
-sudo apt-get install -f -y
+for paquetes_extra in package-update-indicator actualizar gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_extra; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 
@@ -1256,15 +1256,15 @@ function _centroDeSoftware() {
 # INSTALAR GESTOR DE PAQUETES DE MINT
 
 clear
-sudo apt-get install gir1.2-flatpak-1.0 -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall gir1.2-flatpak-1.0 -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall mintinstall -y
 
 # INSTALAR FLATPAK-CONFIG
 
 clear
-apt-get install flatpakconfig -y
+apt-get --install-recommends --install-suggests install  --reinstall flatpakconfig -y
 
 }
 
@@ -1274,7 +1274,7 @@ function _salvapantallas() {
 
 clear
 
-apt-get install xscreensaver gluqlo -y
+apt-get --install-recommends --install-suggests install  --reinstall xscreensaver gluqlo -y
 
 }
 
@@ -1282,7 +1282,7 @@ function _fuentes() {
 
 # Descargando y copiando fuentes de Quirinux
 clear
-apt-get install quirinux-fuentes -y
+apt-get --install-recommends --install-suggests install  --reinstall quirinux-fuentes -y
 
 }
 
@@ -1300,16 +1300,16 @@ sudo chmod u+s /usr/sbin/hddtemp
 
 # INSTALAR TEMAS DE QUIRINUX
 clear
-apt-get install quirinuxtemas -y
+apt-get --install-recommends --install-suggests install  --reinstall quirinuxtemas -y
 
 # INSTALAR ÍCONOS DE QUIRINUX
 clear
-apt-get install icons-winbugs -y
+apt-get --install-recommends --install-suggests install  --reinstall icons-winbugs -y
 
 # MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
 # También instala menú principal de Quirinux y modifica algunos archivos más.
 clear
-apt-get install quirinuxconfig -y
+apt-get --install-recommends --install-suggests install  --reinstall quirinuxconfig -y
 update-grub
 update-grub2
 
@@ -1348,8 +1348,8 @@ sudo apt-get remove --purge pulseuadio pavucontrol -y
 sudo apt-get clean
 sudo apt-get autoremove --purge -y
 sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
-sudo apt-get install pulseaudio rtkit pavucontrol -y
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall pulseaudio rtkit pavucontrol -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 }
@@ -1362,19 +1362,19 @@ for paquetes_irq in irqbalance; do sudo apt-get remove --purge -y $paquetes_irq;
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER TRADUCCIONES DE ESCRITORIO DE IDIOMAS QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_idiomas_task in task-albanian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_task; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER CONJUNTOS DE CARACTERES DE IDIOMAS QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_idiomas_ibus in inicatalan ipolish idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_ibus; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER DICCIONARIOS QUE QUIRINUX NO INCLUYE
@@ -1384,25 +1384,25 @@ for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa a
 for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hunspell; done
 for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_myspell; done
 for paquetes_remover_idiomas_hyphen in hyphen-hr hyphen-hu hyphen-lt; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hyphen; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER FUENTES QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_fonts; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER IDIOMAS DE LIBRE OFFICE QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_idiomas_libreoffice in libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_libreoffice; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 clear
 for paquetes_remover_programas in xsane xarchiver grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter thunderbird fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
-sudo apt-get install -f -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 sudo apt-get autoremove --purge -y
 
 # REMOVER DOCUMENTACIÓN
@@ -1433,7 +1433,7 @@ sudo apt-get update --fix-missing
 
 # CONFIGURANDO DEPENDENCIAS
 clear
-sudo apt-get install -f
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f
 sudo apt-get autoremove --purge -y
 
 # _limpiezaAgresiva
@@ -1444,8 +1444,8 @@ function _baseBusterPro() {
 
 # INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
-for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get install -y $paquetes_estandar; done
-sudo apt-get install -f -y
+for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_estandar; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 clear
 _pluginEntangle
 
@@ -1455,14 +1455,14 @@ function _tipografiasPro() {
 
 # INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
 clear
-apt-get install komikafont -y
+apt-get --install-recommends --install-suggests install  --reinstall komikafont -y
 
 }
 
 function _opentoonz() {
 
 clear
-apt-get install opentoonz -y
+apt-get --install-recommends --install-suggests install  --reinstall opentoonz -y
 
 }
 
@@ -1471,7 +1471,7 @@ function _huayra() {
 # INSTALAR HUAYRA-STOPMOTION
 
 clear
-apt-get install huayra-stopmotion -y
+apt-get --install-recommends --install-suggests install  --reinstall huayra-stopmotion -y
 
 }
 
@@ -1480,7 +1480,7 @@ function _tahoma2D() {
 # INSTALAR TAHOMA 2D
 
 clear
-apt-get install tahoma2d -y
+apt-get --install-recommends --install-suggests install  --reinstall tahoma2d -y
 
 }
 
@@ -1489,7 +1489,7 @@ function _inkscape() {
 # INSTALANDO INKSCAPE
 
 clear
-apt-get install inkscape -y
+apt-get --install-recommends --install-suggests install  --reinstall inkscape -y
 
 }
 
@@ -1498,7 +1498,7 @@ function _tupitube() {
 # INSTALAR TUPITUBE
 
 clear
-apt-get install tupitubedesk -y
+apt-get --install-recommends --install-suggests install  --reinstall tupitubedesk -y
 
 }
 
@@ -1507,7 +1507,7 @@ function _godot() {
 # INSTALAR GODOT
 
 clear
-apt-get install godot -y
+apt-get --install-recommends --install-suggests install  --reinstall godot -y
 
 }
 
@@ -1516,7 +1516,7 @@ function _storyboarder() {
 # INSTALAR STORYBOARDER
 
 clear
-apt-get install storyboarder -y
+apt-get --install-recommends --install-suggests install  --reinstall storyboarder -y
 
 }
 
@@ -1525,7 +1525,7 @@ function _kitscenarist() {
 # INSTALAR KITSCENARIST
 
 clear
-apt-get install kitscenarist -y
+apt-get --install-recommends --install-suggests install  --reinstall kitscenarist -y
 
 }
 
@@ -1534,7 +1534,7 @@ function _natron() {
 # INSTALAR NATRON
 
 clear
-apt-get install natron -y
+apt-get --install-recommends --install-suggests install  --reinstall natron -y
 
 }
 
@@ -1543,7 +1543,7 @@ function _azpainter() {
 # INSTALAR AZPAINTER
 
 clear
-apt-get install azpainter -y
+apt-get --install-recommends --install-suggests install  --reinstall azpainter -y
 
 }
 
@@ -1552,7 +1552,7 @@ function _enve() {
 # INSTALAR ENVE
 
 clear
-apt-get install enve -y
+apt-get --install-recommends --install-suggests install  --reinstall enve -y
 
 }
 
@@ -1561,14 +1561,14 @@ function _quinema() {
 # INSTALAR QUINEMA
 
 clear
-apt-get install quinema -y
+apt-get --install-recommends --install-suggests install  --reinstall quinema -y
 
 }
 
 function _qstopmotion() {
 
 clear
-apt-get install qstopmotion -y
+apt-get --install-recommends --install-suggests install  --reinstall qstopmotion -y
 
 }
 
@@ -1578,8 +1578,8 @@ function _camarasVirtuales() {
 # Complemento útil para qStopMotion y OBS
 
 clear
-apt-get install akvcam -y
-apt-get install obs-v4l2sink -y
+apt-get --install-recommends --install-suggests install  --reinstall akvcam -y
+apt-get --install-recommends --install-suggests install  --reinstall obs-v4l2sink -y
 
 
 }
@@ -1589,7 +1589,7 @@ function _belle() {
 # INSTALAR BELLE
 
 clear
-apt-get install belle -y
+apt-get --install-recommends --install-suggests install  --reinstall belle -y
 
 }
 
@@ -1602,10 +1602,10 @@ FILETEST="/opt/requisitos/ok-testing"
 if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST}  ]; then
 
 clear
-apt-get install mypaint -y
+apt-get --install-recommends --install-suggests install  --reinstall mypaint -y
 
 else
-apt-get install mypaintq -y
+apt-get --install-recommends --install-suggests install  --reinstall mypaintq -y
 
 fi
 
@@ -1616,7 +1616,7 @@ function _cinelerra() {
 # INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
 
 clear
-apt-get install cinelerragg -y
+apt-get --install-recommends --install-suggests install  --reinstall cinelerragg -y
 
 }
 
@@ -1629,11 +1629,11 @@ FILETEST="/opt/requisitos/ok-testing"
 if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST} ]; then
 
 clear
-apt-get install blender -y
+apt-get --install-recommends --install-suggests install  --reinstall blender -y
 
 else
 
-apt-get install blenderq -y
+apt-get --install-recommends --install-suggests install  --reinstall blenderq -y
 
 fi
 
@@ -1641,7 +1641,7 @@ fi
 
 function _boats() {
 
-sudo apt-get install boats-animator -y
+sudo apt-get --install-recommends --install-suggests install  --reinstall boats-animator -y
 
 }
 
@@ -1652,13 +1652,13 @@ function _ardour() {
 # INSTALAR ARDOUR
 
 clear
-apt-get install ardour -y
+apt-get --install-recommends --install-suggests install  --reinstall ardour -y
 
 # INSTALAR PLUGINS PARA ARDOUR
 
 clear
-for paquetes_calf in calf-plugins quirinux-audio-minipack; do sudo apt-get install -y $paquetes_calf; done
-sudo apt-get install -f -y
+for paquetes_calf in calf-plugins quirinux-audio-minipack; do sudo apt-get --install-recommends --install-suggests install  --reinstall -y $paquetes_calf; done
+sudo apt-get --install-recommends --install-suggests install  --reinstall -f -y
 
 }
 
@@ -1668,7 +1668,7 @@ function _pluginEntangle() {
 # Luego será necesario ejecutar el comando instalar-plugin-entangle sin permisos de root.
 
 clear
-apt-get install entangleinstallplugin -y
+apt-get --install-recommends --install-suggests install  --reinstall entangleinstallplugin -y
 
 }
 
