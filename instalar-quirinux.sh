@@ -927,8 +927,8 @@ function _sourcesChim() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigchim_1.1.1_all.deb' -O /opt/tmp/apt/repoconfigchim_1.1.1_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigchim_1.1.1_all.deb
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigchim_1.1.2_all.deb' -O /opt/tmp/apt/repoconfigchim_1.1.2_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigchim_1.1.2_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
