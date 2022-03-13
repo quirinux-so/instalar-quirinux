@@ -353,19 +353,21 @@ function _instalarDialog() {
 sudo sudo apt-get install dialog -y
 }
 
+
+
 # ===========================================================================================
 # INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
 # ===========================================================================================
 
 function _instalarProgramas() {
-cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 32 76 16)
+cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 76 16)
 options=(1 "Ardour (editor de audio multipista)" off
 2 "Azpainter (similar a Paint tool SAI)" off
 3 "Base general (firefox, bleachbit, PDFArranger etc)" off
 4 "Base Pro (krita, obs, synfig, xsane, etc)" off
 5 "Belle (editor de aventuras gráficas)" off
 6 "Blender (animación 2D, 2.5D y 3D)" off
-7 "Boats-animator (Stop-Motion sencillo)"off
+7 "Boats-animator (Stop-Motion sencillo)" off
 8 "Densify (reducir peso de PDF)" off
 9 "Enve (editor para motion graphics)" off
 10 "GIMP Edición Quirinux (similar a Photoshop)" off
@@ -384,7 +386,8 @@ options=(1 "Ardour (editor de audio multipista)" off
 23 "Tahoma (animación 2D y Stop-Motion)" off
 24 "Tupitube (animación 2D y stop-motion)" off
 25 "Usuarios (gestionar usuarios)" off
-26 "W-Convert(convertir mp4 para Windows / Whatsapp)" off)
+26 "Webapp-manager (aplicaciones web)" off
+27 "W-Convert(convertir mp4 para Windows - Whatsapp)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -517,11 +520,17 @@ _mugshot
 
 26) # "w-convert (conversor)"
 clear
+_wapp
+;;
+
+27) # "w-convert (conversor)"
+clear
 _w-convert
 ;;
 
 esac
 done
+
 _menuPrincipal
 
 }
@@ -561,9 +570,6 @@ case $choice in
 clear
 _baseBusterGeneral
 _utiles
-
-#_olive
-_networkmanager
 ;;
 
 2) # "Programas para realizadores audiovisuales"
@@ -666,7 +672,6 @@ _menuPrincipal
 }
 
 
-
 # ===========================================================================================
 # REPOSITORIOS BULLSEYE
 # ===========================================================================================
@@ -733,6 +738,11 @@ dialog --backtitle "REQUISITO INCUMPLIDO" \
 _menuRepositorios
 }
 
+function _wapp() {
+	clear
+	sudo apt-get install webapp-manager -y
+	
+}
 
 # ===========================================================================================
 # FUNCIONES SIN SALIDA EN PANTALLA [NO NECESITAN TRADUCCIÓN]
