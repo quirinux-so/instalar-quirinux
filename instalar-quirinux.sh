@@ -186,33 +186,24 @@ function _menuRepositorios() {
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
-1 "Configurar repositorios extra para Debian Buster" \
-2 "Configurar repositorios extra para Debian Bullseye" \
-3 "Configurar repositorios extra para Debian Testing" \
-4 "Configurar repositorios extra para Devuan Beowulf" \
-5 "Configurar repositorios extra para Devuan Chimaera" \
-6 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-7 "No configurar repositorios adicionales" \
-8 "Ayuda" \
-9 "Salir")
+1 "Configurar repositorios extra para Debian Bullseye" \
+2 "Configurar repositorios extra para Debian Testing" \
+3 "Configurar repositorios extra para Devuan Chimaera" \
+4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
+5 "No configurar repositorios adicionales" \
+6 "Ayuda" \
+7 "Salir")
 
 echo $opRepositorios
 
-if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - Debian Buster
-clear
-_sourcesDebian
-_okrepo
-_menuPrincipal
-fi
-
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Debian Bullseye
+if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - Debian Bullseye
 clear
 _bullseye
 _okrepo
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Debian Testing
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Debian Testing
 clear
 _bullseye
 _okrepo
@@ -220,15 +211,7 @@ _testing
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Devuan Beowulf
-clear
-_sourcesDevuan
-_okrepo
-_menuPrincipal
-
-fi
-
-if [[ $opRepositorios == 5 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
+if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
 clear
 _sourcesChim
 _okrepo
@@ -236,7 +219,7 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 6 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
+if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
 clear
 _sourcesUbuntu
 _okrepo
@@ -244,17 +227,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 7 ]]; then # Salir
+if [[ $opRepositorios == 5 ]]; then # Salir
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 8 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 9 ]]; then # Salir
+if [[ $opRepositorios == 7 ]]; then # Salir
 clear
 _salir
 fi
