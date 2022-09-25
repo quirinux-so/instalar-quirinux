@@ -667,8 +667,8 @@ function _bullseye() {
 clear
 apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.3_all.deb
+sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.6_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.6_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.6_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -681,6 +681,10 @@ apt-get update
 touch /opt/requisitos/ok-bullseye
 
 }
+
+# ===========================================================================================
+# REPOSITORIOS TESTING
+# ===========================================================================================
 
 function _testing() {
 
@@ -914,6 +918,10 @@ touch /opt/requisitos/ok-devuan
 
 }
 
+# ===========================================================================================
+# REPOSITORIOS CHIMAERA
+# ===========================================================================================
+
 function _sourcesChim() {
 
 # AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
@@ -941,6 +949,10 @@ sudo sudo apt-get install quirinuxasistente, quirinuxupdate, quirinuxestilos -y
 }
 
 function _sourcesUbuntu() {
+	
+# ===========================================================================================
+# REPOSITORIOS UBUNTU
+# ===========================================================================================
 
 # AGREGA REPOSITORIOS ADICIONALES PARA UBUNTU
 
