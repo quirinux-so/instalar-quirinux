@@ -672,10 +672,10 @@ sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.6_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
 touch /opt/requisitos/ok-bullseye
@@ -699,10 +699,10 @@ sudo apt install /opt/tmp/apt/./repoconfigtesting_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEBIAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
 touch /opt/requisitos/ok-testing
@@ -777,7 +777,8 @@ _red
 _asistente
 _pulseaudio
 _eggs
-_w-convert
+#_w-convert
+_kernels
 _applications-general
 
 }
@@ -890,10 +891,10 @@ sudo apt-get update -y
 chown -R root:root /etc/apt
 touch /opt/requisitos/ok-buster
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEBIAN
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEBIAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
 }
@@ -909,10 +910,10 @@ sudo apt install /opt/tmp/apt/./repoconfigdev_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEVUAN
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEVUAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 
 touch /opt/requisitos/ok-devuan
 
@@ -933,10 +934,10 @@ sudo apt install /opt/tmp/apt/./repoconfigchim_1.2_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, BACKPORTS DE DEVUAN
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEVUAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free-back/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 
 touch /opt/requisitos/ok-chimaera
 
@@ -1241,6 +1242,15 @@ function _w-convert() {
 
 clear
 sudo apt-get install w-convert -y
+
+}
+
+_kernels() {
+# INSTALAR KERNESL ADICIONALES DE QUIRINUX
+sudo apt-get install linux-image-liquorix-amd64 -y
+sudo apt-get install linux-headers-liquorix-amd64 -y
+sudo apt-get install linux-image-5.15.72-gnu -y
+sudo apt-get install linux-headers-5.15.72-gnu -y
 
 }
 
