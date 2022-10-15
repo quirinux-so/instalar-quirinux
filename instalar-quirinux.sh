@@ -1247,10 +1247,10 @@ sudo apt-get install w-convert -y
 
 _kernels() {
 # INSTALAR KERNESL ADICIONALES DE QUIRINUX
-sudo apt-get install linux-image-liquorix-amd64 -y
-sudo apt-get install linux-headers-liquorix-amd64 -y
-sudo apt-get install linux-image-5.15.72-gnu -y
-sudo apt-get install linux-headers-5.15.72-gnu -y
+#sudo apt-get install linux-image-liquorix-amd64 -y
+#sudo apt-get install linux-headers-liquorix-amd64 -y
+#sudo apt-get install linux-image-5.15.72-gnu -y
+#sudo apt-get install linux-headers-5.15.72-gnu -y
 
 }
 
