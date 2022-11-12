@@ -188,9 +188,8 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Configurar repositorios extra para Debian Bullseye" \
 2 "Configurar repositorios extra para Devuan Chimaera" \
-3 "No configurar repositorios adicionales" \
-4 "Ayuda" \
-5 "Salir")
+3 "Ayuda" \
+4 "Salir")
 
 echo $opRepositorios
 
@@ -209,17 +208,12 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 3 ]]; then # No configurar repositorios adicionales
-clear
-_menuPrincipal
-fi
-
-if [[ $opRepositorios == 4 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # Salir
 clear
 _salir
 fi
@@ -233,7 +227,7 @@ function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "\nQuirinux se crea sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados desde repositorios específicos (Linux Mint, Cinelerra y otros). Si utilizas Debian Bullseye XFCE o alguna derivada directa como Mint puedes instalar estos repositorios con tranquilidad sobre Debian Bullseye.\n\n Ofrecemos la opción para instalar también repositorios de Buster, Devuan y Ubuntu pero no podemos garantizar que vayan a funcionar al 100%.\n\n." 23 100
+--msgbox "\nQuirinux puede crearse sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox y del kernel libre GNU para quien quiera utilizarlos. Si utilizas Debian Bullseye XFCE o Devuan Chimaera XFCE puedes instalar estos repositorios con tranquilidad. Este instalador no es compatible con Ubuntu ni con otras derivadas. n\n." 23 100
 _menuRepositorios
 }
 
@@ -760,7 +754,7 @@ _asistente
 _pulseaudio
 _eggs
 #_w-convert
-
+_kernels
 _applications-general
 
 }
@@ -1224,6 +1218,7 @@ function _w-convert() {
 
 clear
 sudo apt-get install w-convert -y
+
 
 }
 
