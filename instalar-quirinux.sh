@@ -187,12 +187,10 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Configurar repositorios extra para Debian Bullseye" \
-2 "Configurar repositorios extra para Debian Testing" \
-3 "Configurar repositorios extra para Devuan Chimaera" \
-4 "Configurar repositorios extra para Ubuntu 20.04 LTS" \
-5 "No configurar repositorios adicionales" \
-6 "Ayuda" \
-7 "Salir")
+2 "Configurar repositorios extra para Devuan Chimaera" \
+3 "No configurar repositorios adicionales" \
+4 "Ayuda" \
+5 "Salir")
 
 echo $opRepositorios
 
@@ -203,15 +201,7 @@ _okrepo
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Debian Testing
-clear
-_bullseye
-_okrepo
-_testing
-_menuPrincipal
-fi
-
-if [[ $opRepositorios == 3 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
 clear
 _sourcesChim
 _okrepo
@@ -219,25 +209,17 @@ _menuPrincipal
 
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Instalar repositorios Quirinux - Ubuntu 20.04
-clear
-_sourcesUbuntu
-_okrepo
-_menuPrincipal
-
-fi
-
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 3 ]]; then # No configurar repositorios adicionales
 clear
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 6 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 4 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 7 ]]; then # Salir
+if [[ $opRepositorios == 5 ]]; then # Salir
 clear
 _salir
 fi
@@ -667,15 +649,15 @@ function _bullseye() {
 clear
 apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigbull_1.1.6_all.deb' -O /opt/tmp/apt/repoconfigbull_1.1.6_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbull_1.1.6_all.deb
+sudo wget --no-check-certificate 'https://www.quirinux.ga/repo/pool/main/r/repoconfigbull/repoconfigbull_1.3.3_all.deb' -O /opt/tmp/apt/repoconfigbull_1.3.3_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbull_1.3.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
 
 clear
-sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
+sudo cp -r -a /opt/repo-config-bull/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
 touch /opt/requisitos/ok-bullseye
