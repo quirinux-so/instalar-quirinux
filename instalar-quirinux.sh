@@ -1140,7 +1140,7 @@ sudo apt-get install usuarios -y
 
 function _mystiq() {
 
-# INSTALAR CONVERSOR MYSTIQ DESDE OPENSUSE
+# INSTALAR CONVERSOR MYSTIQ
 
 clear
 for paquetes_mystiq in mystiq; do sudo sudo apt-get install -y $paquetes_mystiq; done
@@ -1236,6 +1236,7 @@ sudo apt-get autoremove --purge -y
 
 }
 
+
 function _centroDeSoftware() {
 
 # INSTALAR GESTOR DE PAQUETES DE MINT
@@ -1272,6 +1273,10 @@ sudo apt-get install quirinux-fuentes -y
 }
 
 function _temas() {
+
+# INSTALA PROGRAMAS ADICIONALES PARA GUARDAR Y CARGAR TEMAS
+
+sudo apt-get install xfce4-theme-switcher xfce4-panel-profiles -y
 
 # OTORGANDO PERMISOS PARA MODIFICAR TEMAS
 
