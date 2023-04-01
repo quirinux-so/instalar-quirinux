@@ -5,7 +5,7 @@
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
 # Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
-# Versión:	2.0 RC_6
+# Versión:	2.0 
 
 # ===========================================================================================
 # ¿ESTE CÓDIGO TE RESULTA INMANEJABLE?
@@ -326,12 +326,12 @@ options=(1 "Ardour (editor de audio multipista)" off
 4 "Base Pro (krita, obs, synfig, xsane, etc)" off
 5 "Belle (editor de aventuras gráficas)" off
 6 "Blender (animación 2D, 2.5D y 3D)" off
-7 "Boats-animator (Stop-Motion sencillo)" off
+7 "Boats-animator (Stop-Motion sencillo para Webcam)" off
 8 "Densify (reducir peso de PDF)" off
 9 "Enve (editor para motion graphics)" off
 10 "GIMP Edición Quirinux (similar a Photoshop)" off
 11 "Godot (desarrollo de videojuegos)" off
-12 "Huayra-stopmotion (stop-motion sencillo)" off
+12 "Huayra-stopmotion (stop-motion sencillo para Webcam)" off
 13 "Imagine (reducir peso de fotografías)" off
 14 "Inkscape (editor de gráficos vectoriales)" off
 15 "Kitchscenarist (editor para guionistas)" off
@@ -342,8 +342,8 @@ options=(1 "Ardour (editor de audio multipista)" off
 20 "Opentoonz (animación 2D industrial)" off
 21 "Quinema (herramientas para animación)" off
 22 "Storyboarder (editor de storyboards)" off
-23 "Tahoma (animación 2D y Stop-Motion)" off
-24 "Tupitube (animación 2D y stop-motion)" off
+23 "Tahoma2D (animación 2D y Stop-Motion apto Camaras Reflex)" off
+24 "Tupitube (animación 2D y stop-motion para Webcam)" off
 25 "Usuarios (gestionar usuarios)" off
 26 "Webapp-manager (aplicaciones web)" off)
 #27 "W-Convert(convertir mp4 para Windows - Whatsapp)" off)
@@ -503,22 +503,24 @@ cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 7
 options=(1 "Software de hogar y oficina" off
 2 "Software gráfico y de edición multimedia" off
 3 "Tipografías adicionales (incluye las de Windows)" off
-4 "Temas y salvapantallas de Quirinux" off
-5 "Centro de software sencillo de usar" off
-6 "Compatibilidad con carpetas compartidas" off
-7 "Herramientas para generar imágenes ISO de Quirinux" off
-8 "Utilidad para usar digitalizadoras con 2 monitores" off
-9 "Firmware para placas de red Wifi" off
-10 "Controladores libres para hardware de red - excepto wifi" off
-11 "Controladores libres para escáneres e impresoras" off
-12 "Codecs privativos multimedia y RAR" off
-13 "Controladores libres para aceleradoras NVIDIA" off
-14 "Controladores libres para aceleradoras AMD" off
-15 "Controladores libres para tabletas GENIUS" off
-16 "Controladores para cámaras virtuales" off
-17 "Utilidades de backup y puntos de restauración" off
-18 "Asistente Quirinux (incluye update y estilos)" off
-19 "Corrección de bugs (recomendado)" off)
+4 "Temas y salvapantallas de Quirinux General" off
+5 "Temas y salvapantallas de Quirinux Pro" off
+6 "Centro de software sencillo de usar" off
+7 "Compatibilidad con carpetas compartidas" off
+8 "Herramientas para generar imágenes ISO de Quirinux" off
+9 "Utilidad para usar digitalizadoras con 2 monitores" off
+10 "Firmware para placas de red Wifi" off
+11 "Controladores libres para hardware de red - excepto wifi" off
+12 "Controladores libres para escáneres e impresoras" off
+13 "Codecs privativos multimedia y RAR" off
+14 "Controladores libres para aceleradoras NVIDIA" off
+15 "Controladores libres para aceleradoras AMD" off
+16 "Controladores libres para tabletas GENIUS" off
+17 "Controladores para cámaras virtuales" off
+18 "Utilidades de backup y puntos de restauración" off
+19 "Asistente Quirinux (incluye estilos)" off
+20 "Asistente Quirinux Pro (incluye estilos)" off 
+21 "Corrección de bugs (recomendado)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -542,83 +544,96 @@ _fuentes
 _tipografiasPro
 ;;
 
-4) # "Temas y salvapantallas de Quirinux"
+4) # "Temas y salvapantallas de Quirinux General"
 clear
 _temas
+_temasGeneral
 _salvapantallas
 ;;
 
-5) # "Centro de software sencillo de usar (estilo Android)"
+5) # "Temas y salvapantallas de Quirinux Pro"
+clear
+_temas
+_temasPro
+_salvapantallas
+;;
+
+6) # "Centro de software sencillo de usar (estilo Android)"
 clear
 _centroDeSoftware
 ;;
 
-6) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
+7) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
 clear
 _samba
 ;;
 
-7) # "Herramientas para generar imagenes ISO de Quirinux"
+8) # "Herramientas para generar imagenes ISO de Quirinux"
 clear
 _eggs
 ;;
 
-8) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+9) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
 clear
 _ptxconf
 ;;
 
-9) # "Firmware para placas de red Wifi"
+10) # "Firmware para placas de red Wifi"
 clear
 _firmwareWifi
 ;;
 
-10) # "Controladores libres para hardware de red - excepto wifi"
+11) # "Controladores libres para hardware de red - excepto wifi"
 clear
 _libresRed
 ;;
 
-11) # "Controladores libres para escáneres e impresoras"
+12) # "Controladores libres para escáneres e impresoras"
 clear
 _libresImpresoras
 ;;
 
-12) # "Codecs privativos multimedia y RAR"
+13) # "Codecs privativos multimedia y RAR"
 clear
 _codecs
 ;;
 
-13) # "Controladores libres para aceleradoras gráficas nVidia"
+14) # "Controladores libres para aceleradoras gráficas nVidia"
 clear
 _libresNvidia
 ;;
 
-14) # "Controladores libres para aceleradoras gráficas AMD"
+15) # "Controladores libres para aceleradoras gráficas AMD"
 clear
 _libresAMD
 ;;
 
-15) # "Controladores libres para tabletas digitalizadoras Genius"
+16) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-16) # "Controladores para cámaras virtuales"
+17) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-17) # "Utilidades de backup y puntos de restauración"
+18) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-18) # "Asistente Quirinux"
+19) # "Asistente Quirinux General"
 clear
-_asistente
+_asistenteGeneral
 ;;
 
-19) # "Corrección de bugs (recomendado)"
+20) # "Asistente Quirinux Pro"
+clear
+_asistentePro
+;;
+
+21) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
@@ -656,6 +671,8 @@ apt-get update
 
 touch /opt/requisitos/ok-bullseye
 
+sudo apt-get install quirinux-libre -y
+
 }
 
 # ===========================================================================================
@@ -682,6 +699,8 @@ sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
 touch /opt/requisitos/ok-testing
+
+sudo apt-get install quirinux-libre -y
 
 }
 
@@ -720,6 +739,7 @@ _controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
+_applications-general
 _limpiar
 _final
 }
@@ -755,7 +775,6 @@ _pulseaudio
 _eggs
 #_w-convert
 _kernels
-_applications-general
 
 }
 
@@ -765,6 +784,7 @@ _instalarGeneral
 _baseBusterPro
 _tipografiasPro
 _especializadosPro
+_applications-pro
 _limpiar
 _finalpro
 }
@@ -812,6 +832,14 @@ function _applications-general()
 
 clear
 sudo apt-get install applications-general -y
+
+}
+
+function _applications-pro()
+{
+
+clear
+sudo apt-get install applications-pro -y
 
 }
 
@@ -919,10 +947,18 @@ touch /opt/requisitos/ok-chimaera
 
 }
 
-function _asistente() {
+function _asistenteGeneral() {
 
 clear
-sudo sudo apt-get install quirinuxasistente, quirinuxupdate, quirinuxestilos -y
+sudo apt-get remove --purge quirinux-asistente-general, quirinux-estilos-geberal -y
+sudo sudo apt-get install quirinux-asistente-general, quirinuxupdate, quirinux-estilos-general -y
+}
+
+function _asistentePro() {
+
+clear
+sudo apt-get remove --purge quirinux-asistente-general, quirinux-estilos-geberal -y
+sudo sudo apt-get install quirinux-asistente-general, quirinuxupdate, quirinux-estilos-general -y
 }
 
 function _sourcesUbuntu() {
@@ -981,7 +1017,7 @@ function _libresNvidia() {
 # INSTALAR CONTROLADORES LIBRES DE NVIDIA
 
 clear
-for paquetes_nvidia in bumblebee; do sudo sudo apt-get install -y $paquetes_nvidia; done
+for paquetes_nvidia in xserver-xorg-video-nouveau firmware-misc-nonfree libxnvctrl0 libvdpau1 libvdpau1:i386 vdpau-driver-all vdpau-driver-all:i386 vdpauinfo; do sudo sudo apt-get install -y $paquetes_nvidia; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 }
@@ -1273,7 +1309,7 @@ sudo apt-get install quirinux-fuentes -y
 
 }
 
-function _temas() {
+function temas() {
 
 # INSTALA PROGRAMAS ADICIONALES PARA GUARDAR Y CARGAR TEMAS
 
@@ -1288,10 +1324,6 @@ sudo chmod 777 -R /usr/share/desktop-base/
 sudo chmod 777 -R /usr/share/images/
 sudo chmod 777 -R /usr/share/fonts/
 sudo chmod u+s /usr/sbin/hddtemp
-
-# INSTALAR TEMAS DE QUIRINUX
-clear
-sudo apt-get install quirinuxtemas -y
 
 # INSTALAR ÍCONOS DE QUIRINUX
 clear
@@ -1316,6 +1348,24 @@ sudo chmod 777 -R /usr/share/backgrounds/
 sudo chmod 777 -R /usr/share/desktop-base/
 sudo chmod 777 -R /usr/share/images/
 sudo chmod u+s /usr/sbin/hddtemp
+
+}
+
+# INSTALAR TEMAS DE QUIRINUX GENERAL
+
+function temasGeneral() {
+	
+clear
+sudo apt-get install quirinuxtemas-general quirinuxtemas-igeneral -y
+
+}
+
+# INSTALAR TEMAS DE QUIRINUX PRO
+
+function temasPro() {
+	
+clear
+sudo apt-get install quirinuxtemas-pro quirinuxtemas-ipro -y
 
 }
 
