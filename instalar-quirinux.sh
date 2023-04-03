@@ -80,7 +80,7 @@ function _requisitos() {
 
 clear
 sudo apt-get update -y
-for paquetes_wget in wget git; do sudo sudo apt-get install -y $paquetes_wget; done
+for paquetes_wget in wget git spice-vdagent; do sudo sudo apt-get install -y $paquetes_wget; done
 
 # Crear fichero de verificación
 
