@@ -1385,7 +1385,7 @@ function _pulseaudio() {
 
 # REINSTALAR PULSEAUDIO
 clear
-sudo apt-get remove --purge pulseuadio pavucontrol -y
+sudo apt-get remove --purge pulseaudio pavucontrol -y
 sudo apt-get clean
 sudo apt-get autoremove --purge -y
 sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
