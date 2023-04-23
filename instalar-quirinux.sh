@@ -658,7 +658,7 @@ function _bullseye() {
 clear
 apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://www.quirinux.ga/repo/pool/main/r/repoconfigbull/repoconfigbull_1.3.3_all.deb' -O /opt/tmp/apt/repoconfigbull_1.3.3_all.deb
+sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbull_1.4.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.3.3_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigbull_1.3.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -687,7 +687,7 @@ apt-get autoremove --purge repoconfigbull -y
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigtesting_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigtesting_1.1.3_all.deb
+sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigtesting_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigtesting_1.1.3_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigtesting_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -889,7 +889,7 @@ function _sourcesDebian() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdeb_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.3_all.deb
+sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigdeb_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.3_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -909,7 +909,7 @@ function _sourcesDevuan() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigdev_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdev_1.1.3_all.deb
+sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigdev_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdev_1.1.3_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigdev_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -933,7 +933,7 @@ function _sourcesChim() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/repoconfigchim_1.2_all.deb' -O /opt/tmp/apt/repoconfigchim_1.2_all.deb
+sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigchim/repoconfigchim_1.3_all.deb' -O /opt/tmp/apt/repoconfigchim_1.2_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigchim_1.2_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -971,7 +971,7 @@ function _sourcesUbuntu() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate "https://quirinux.ga/extras/repoconfigubu_1.1.3_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.3_all.deb
+sudo wget --no-check-certificate "https://quirinux.org/extras/repoconfigubu_1.1.3_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.3_all.deb
 sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
@@ -1028,7 +1028,7 @@ function _libresWacom() {
 
 clear
 sudo sudo apt-get install build-essential autoconf linux-headers-$(uname -r) -y
-sudo wget --no-check-certificate 'https://quirinux.ga/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
+sudo wget --no-check-certificate 'https://quirinux.org/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd /opt/tmp
 tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2
 cd input-wacom-0.46.0
