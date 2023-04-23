@@ -187,9 +187,8 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Configurar repositorios extra para Debian Bullseye" \
-2 "Configurar repositorios extra para Devuan Chimaera" \
-3 "Ayuda" \
-4 "Salir")
+2 "Ayuda" \
+3 "Salir")
 
 echo $opRepositorios
 
@@ -200,20 +199,12 @@ _okrepo
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - Devuan Chimaera
-clear
-_sourcesChim
-_okrepo
-_menuPrincipal
-
-fi
-
-if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 2 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Salir
+if [[ $opRepositorios == 3 ]]; then # Salir
 clear
 _salir
 fi
@@ -227,7 +218,7 @@ function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "\nQuirinux puede crearse sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox y del kernel libre GNU para quien quiera utilizarlos. Si utilizas Debian Bullseye XFCE o Devuan Chimaera XFCE puedes instalar estos repositorios con tranquilidad. Este instalador no es compatible con Ubuntu ni con otras derivadas. n\n." 23 100
+--msgbox "\nQuirinux puede crearse sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox y los del kernel Liquorix para quien quiera utilizarlos. Si utilizas Debian Bullseye XFCE puedes instalar estos repositorios con tranquilidad. Este instalador no es compatible con Ubuntu ni con otras derivadas. n\n." 23 100
 _menuRepositorios
 }
 
@@ -658,8 +649,8 @@ function _bullseye() {
 clear
 apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbull_1.4.1_all.deb' -O /opt/tmp/apt/repoconfigbull_1.4.1_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbull_1.4.1_all.deb
+sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbull_1.4.3_all.deb' -O /opt/tmp/apt/repoconfigbull_1.4.3_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbull_1.4.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 
@@ -958,8 +949,9 @@ function _sourcesChim() {
 clear
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigchim/repoconfigchim_1.3_all.deb' -O /opt/tmp/apt/repoconfigchim_1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigchim_1.3_all.deb
+sudo dpkg -i /opt/tmp/apt/./repoconfigchim_1.3_all.deb
 sudo apt-get update -y
+sudo apt-get install -f -y
 chown -R root:root /etc/apt
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEVUAN
@@ -1119,9 +1111,10 @@ function _baseBusterGeneral() {
 
 clear
 
-for paquetes_buster in virtualbox bluconfig gcc make perl linux-headers-$(uname -r) baobab onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat xdemineur default-jre dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo sudo apt-get install -y $paquetes_buster; done
+for paquetes_buster in virtualbox-7.0 bluconfig gcc make perl linux-headers-$(uname -r) baobab onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat xdemineur default-jre dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo sudo apt-get install -y $paquetes_buster; done
 
 FILE="/opt/requisitos/ok-chimaera"
+
 if [ -e ${FILE} ]; then
 for desinstalar in htop mutt yad-icon-browser; do sudo apt-get remove --purge $desinstalar -y; done
 for instalar in qjackctl gnome-firmware; do sudo sudo apt-get install $instalar -y; done
@@ -1384,6 +1377,7 @@ sudo chmod u+s /usr/sbin/hddtemp
 function temasGeneral() {
 	
 clear
+sudo apt-get install quirinuxtemas -y
 sudo apt-get install quirinuxtemas-general quirinuxtemas-igeneral -y
 
 }
