@@ -966,15 +966,15 @@ touch /opt/requisitos/ok-chimaera
 function _asistenteGeneral() {
 
 clear
-sudo apt-get remove --purge quirinux-asistente-general, quirinux-estilos-geberal -y
-sudo sudo apt-get install quirinux-asistente-general, quirinuxupdate, quirinux-estilos-general -y
+sudo apt-get remove --purge quirinux-asistente-general quirinux-estilos-general -y
+sudo sudo apt-get install quirinux-asistente-general actualizar quirinux-estilos-general -y
 }
 
 function _asistentePro() {
 
 clear
-sudo apt-get remove --purge quirinux-asistente-general, quirinux-estilos-geberal -y
-sudo sudo apt-get install quirinux-asistente-general, quirinuxupdate, quirinux-estilos-general -y
+sudo apt-get remove --purge quirinux-asistente-general quirinux-estilos-geberal -y
+sudo sudo apt-get install quirinux-asistente-general actualizar quirinux-estilos-general -y
 }
 
 function _sourcesUbuntu() {
@@ -1330,7 +1330,7 @@ sudo apt-get install quirinux-fuentes -y
 
 }
 
-function temas() {
+function _temas() {
 
 # INSTALA PROGRAMAS ADICIONALES PARA GUARDAR Y CARGAR TEMAS
 
@@ -1339,11 +1339,11 @@ sudo apt-get install xfce4-theme-switcher xfce4-panel-profiles -y
 # OTORGANDO PERMISOS PARA MODIFICAR TEMAS
 
 clear
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
-sudo chmod 777 -R /usr/share/fonts/
+sudo chmod 755 -R /home/
+sudo chmod 755 -R /usr/share/backgrounds/
+sudo chmod 755 -R /usr/share/desktop-base/
+sudo chmod 755 -R /usr/share/images/
+sudo chmod 755 -R /usr/share/fonts/
 sudo chmod u+s /usr/sbin/hddtemp
 
 # INSTALAR ÍCONOS DE QUIRINUX
@@ -1359,15 +1359,15 @@ update-grub2
 
 # PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
 clear
-for usuarios1 in /home/*; do sudo chmod 777 -R $usuarios1"/.config"; done
+for usuarios1 in /home/*; do sudo chmod 755 -R $usuarios1"/.config"; done
 for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2; done
 
 # OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
 clear
-sudo chmod 777 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
+sudo chmod 755 -R /home/
+sudo chmod 755 -R /usr/share/backgrounds/
+sudo chmod 755 -R /usr/share/desktop-base/
+sudo chmod 755 -R /usr/share/images/
 sudo chmod u+s /usr/sbin/hddtemp
 
 }
@@ -1396,7 +1396,7 @@ function _red() {
 # ELIMINANDO ERRORES DE INICIO (RED
 clear
 sudo rm -rf /etc/network/interfaces.d/setup
-sudo chmod 777 /etc/network/interfaces
+sudo chmod 755 /etc/network/interfaces
 sudo echo "auto lo" >>/etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo chmod 644 /etc/network/interfaces
