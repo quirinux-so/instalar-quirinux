@@ -19,19 +19,11 @@
 # FUNCIONES PARA GENERACION DE ISO (DESCOMENTAR REFERENCIAS)
 # ===========================================================================================
 
-function _limpiezaAgresiva() {
+function _limpieza() {
 
 clear
 _remover
-sudo rm -rf /var/lib/apt/lists/lock/*
-sudo rm -rf /var/cache/apt/archives/lock/*
-sudo rm -rf /var/lib/dpkg/lock/*
-sudo rm -rf /lib/live/mount/rootfs/*
-sudo rm -rf /lib/live/mount/*
-sudo rm -rf /var/cache/apt/archives/*.deb
-sudo rm -rf /var/cache/apt/archives/partial/*.deb
-sudo rm -rf /var/cache/apt/partial/*.deb
-sudo rm -rf /.git
+sudo apt-get clean
 
 }
 
@@ -337,7 +329,7 @@ options=(1 "Ardour (editor de audio multipista)" off
 24 "Tupitube (animación 2D y stop-motion para Webcam)" off
 25 "Usuarios (gestionar usuarios)" off
 26 "Webapp-manager (aplicaciones web)" off)
-#27 "W-Convert(convertir mp4 para Windows - Whatsapp)" off)
+27 "Autologin (comando)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -468,15 +460,11 @@ clear
 _mugshot
 ;;
 
-26) # "w-convert (conversor)"
+26) # "Webapp-manager"
 clear
 _wapp
 ;;
 
-#27) # "w-convert (conversor)"
-#clear
-#_w-convert
-#;;
 
 esac
 done
@@ -512,6 +500,7 @@ options=(1 "Software de hogar y oficina" off
 19 "Asistente Quirinux (incluye estilos)" off
 20 "Asistente Quirinux Pro (incluye estilos)" off 
 21 "Corrección de bugs (recomendado)" off)
+21 "Autologin (comando)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -629,6 +618,11 @@ clear
 _pulseaudio
 ;;
 
+22) # "autologin (comando)"
+clear
+_autologin
+;;
+
 esac
 done
 
@@ -666,34 +660,6 @@ sudo apt-get install quirinux-libre -y
 
 }
 
-# ===========================================================================================
-# REPOSITORIOS TESTING
-# ===========================================================================================
-
-function _testing() {
-
-apt-get autoremove --purge repoconfigbull -y
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN TESTING Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigtesting_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigtesting_1.1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigtesting_1.1.3_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEBIAN
-
-clear
-sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
-apt-get update
-
-touch /opt/requisitos/ok-testing
-
-sudo apt-get install quirinux-libre -y
-
-}
 
 function _warningPrevia() {
 
@@ -714,6 +680,12 @@ _menuRepositorios
 function _wapp() {
 	clear
 	sudo apt-get install webapp-manager -y
+	
+}
+
+function _autologin() {
+	clear
+	sudo apt-get install quirinux-autologin -y
 	
 }
 
@@ -772,7 +744,7 @@ _mint
 _salvapantallas
 _fuentes
 _temas
-_red
+#_red
 _asistente
 _pulseaudio
 _eggs
@@ -846,7 +818,7 @@ function _applications-general()
 {
 
 clear
-sudo apt-get install applications-general -y
+sudo apt-get install quirinux-applications-general -y
 
 }
 
@@ -854,7 +826,7 @@ function _applications-pro()
 {
 
 clear
-sudo apt-get install applications-pro -y
+sudo apt-get install quirinux-applications-pro -y
 
 }
 
@@ -896,101 +868,6 @@ sudo apt-get install sudoersquirinux -y
 clear
 sudo dpkg --add-architecture i386
 
-}
-
-function _sourcesDebian() {
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BUSTER Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigdeb_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdeb_1.1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigdeb_1.1.3_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
-touch /opt/requisitos/ok-buster
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEBIAN
-
-clear
-sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
-apt-get update
-
-}
-
-function _sourcesDevuan() {
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://quirinux.org/extras/repoconfigdev_1.1.3_all.deb' -O /opt/tmp/apt/repoconfigdev_1.1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigdev_1.1.3_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEVUAN
-
-clear
-sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
-
-touch /opt/requisitos/ok-devuan
-
-}
-
-# ===========================================================================================
-# REPOSITORIOS CHIMAERA
-# ===========================================================================================
-
-function _sourcesChim() {
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEVUAN Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigchim/repoconfigchim_1.3_all.deb' -O /opt/tmp/apt/repoconfigchim_1.3_all.deb
-sudo dpkg -i /opt/tmp/apt/./repoconfigchim_1.3_all.deb
-sudo apt-get update -y
-sudo apt-get install -f -y
-chown -R root:root /etc/apt
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB, DE DEVUAN
-
-clear
-sudo cp -r -a /opt/repo-config/non-free/* /etc/apt/sources.list.d/
-
-touch /opt/requisitos/ok-chimaera
-
-}
-
-function _asistenteGeneral() {
-
-clear
-sudo apt-get remove --purge quirinux-asistente-general quirinux-estilos-general -y
-sudo sudo apt-get install quirinux-asistente-general actualizar quirinux-estilos-general -y
-}
-
-function _asistentePro() {
-
-clear
-sudo apt-get remove --purge quirinux-asistente-general quirinux-estilos-geberal -y
-sudo sudo apt-get install quirinux-asistente-general actualizar quirinux-estilos-general -y
-}
-
-function _sourcesUbuntu() {
-	
-# ===========================================================================================
-# REPOSITORIOS UBUNTU
-# ===========================================================================================
-
-# AGREGA REPOSITORIOS ADICIONALES PARA UBUNTU
-
-clear
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate "https://quirinux.org/extras/repoconfigubu_1.1.3_all.deb" -O /opt/tmp/apt/repoconfigubu_1.1.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigubu_1.1.3_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
 }
 
 function _eggs() {
@@ -1141,21 +1018,6 @@ sudo apt-get install ptxconf -y
 
 clear
 sudo sudo apt-get install ptxconf -y
-# sudo mkdir -p /opt/tmp/ptxtemp
-# sudo wget --no-check-certificate 'https://quirinux.ga/extras/ptxconf.tar' -O /opt/tmp/ptxtemp/ptxconf.tar
-# sudo tar -xvf /opt/tmp/ptxtemp/ptxconf.tar -C /opt/
-# cd /opt/ptxconf
-# sudo python setup.py install
-# sudo sudo apt-get install -f -y
-# sudo sudo apt-get install libappindicator1 -y
-# sudo mkdir -p /opt/tmp/python-appindicator
-# sudo wget --no-check-certificate 'https://quirinux.ga/extras/python-appindicator_0.4.92-4_amd64.deb' -O /opt/tmp/python-appindicator/python-appindicator_0.4.92-4_amd64.deb
-# sudo apt install /opt/tmp/python-appindicator/./python-appindicator_0.4.92-4_amd64.deb -y
-# sudo sudo apt-get install python-gtk2 -y
-
-# Agrega entrada al inicio para PTXCONFIG
-
-# for usuarios_ptx in /home/*; do sudo yes | sudo cp -r -a -f /opt/ptxconf/.config $usuarios_ptx; done
 
 }
 
@@ -1365,9 +1227,9 @@ for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2;
 # OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
 clear
 sudo chmod 755 -R /home/
-sudo chmod 755 -R /usr/share/backgrounds/
-sudo chmod 755 -R /usr/share/desktop-base/
-sudo chmod 755 -R /usr/share/images/
+sudo chmod 777 -R /usr/share/backgrounds/
+sudo chmod 777 -R /usr/share/desktop-base/
+sudo chmod 777 -R /usr/share/images/
 sudo chmod u+s /usr/sbin/hddtemp
 
 }
@@ -1377,7 +1239,7 @@ sudo chmod u+s /usr/sbin/hddtemp
 function temasGeneral() {
 	
 clear
-sudo apt-get install quirinuxtemas -y
+sudo apt-get remove --purge quirinux
 sudo apt-get install quirinuxtemas-general quirinuxtemas-igeneral -y
 
 }
@@ -1499,7 +1361,7 @@ clear
 sudo sudo apt-get install -f
 sudo apt-get autoremove --purge -y
 
-# _limpiezaAgresiva
+_limpieza
 
 }
 
@@ -1685,18 +1547,7 @@ sudo apt-get install cinelerragg -y
 
 function _blender() {
 
-FILEBULL="/opt/requisitos/ok-bullseye"
-FILECHIM="/opt/requisitos/ok-chimaera"
-FILETEST="/opt/requisitos/ok-testing"
-
-if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST} ]; then
-
-clear
 sudo apt-get install blender -y
-
-else
-
-sudo apt-get install blenderq -y
 
 fi
 
@@ -1720,7 +1571,7 @@ sudo apt-get install ardour -y
 # INSTALAR PLUGINS PARA ARDOUR
 
 clear
-for paquetes_calf in calf-plugins quirinux-audio-minipack; do sudo sudo apt-get install -y $paquetes_calf; done
+for paquetes_calf in calf-plugins quirinux-audio-pack; do sudo sudo apt-get install -y $paquetes_calf; done
 sudo sudo apt-get install -f -y
 
 }
