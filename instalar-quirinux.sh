@@ -1239,7 +1239,8 @@ function temasGeneral() {
 	
 clear
 sudo apt-get remove --purge quirinux
-sudo apt-get install quirinuxtemas-general quirinuxtemas-igeneral -y
+sudo apt-get install quirinuxtemas quirinuxtemas-general quirinuxtemas-igeneral -y
+sudo apt-get install quirinuxsplash quirinux-asistente-general -y
 
 }
 
@@ -1248,7 +1249,8 @@ sudo apt-get install quirinuxtemas-general quirinuxtemas-igeneral -y
 function temasPro() {
 	
 clear
-sudo apt-get install quirinuxtemas-pro quirinuxtemas-ipro -y
+sudo apt-get install quirinuxtemas quirinuxtemas-pro quirinuxtemas-ipro -y
+sudo apt-get install quirinuxsplash quirinux-asistente-pro -y
 
 }
 
