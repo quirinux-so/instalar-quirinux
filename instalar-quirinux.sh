@@ -1238,9 +1238,8 @@ sudo chmod u+s /usr/sbin/hddtemp
 function temasGeneral() {
 	
 clear
-sudo apt-get remove --purge quirinuxtemas-pro quirinuxtemas-ipro quirinux-asistente-pro -y
-sudo apt-get install quirinuxtemas quirinuxtemas-general quirinuxtemas-igeneral -y
-sudo apt-get install quirinuxsplash quirinux-asistente-general -y
+sudo apt-get remove --purge quirinuxtemas-pro quirinuxtemas-ipro quirinux-asistente-pro quirinux-applications-pro -y
+sudo apt-get install quirinuxtemas-general -y
 
 }
 
@@ -1249,9 +1248,8 @@ sudo apt-get install quirinuxsplash quirinux-asistente-general -y
 function temasPro() {
 	
 clear
-sudo apt-get remove --purge quirinuxtemas-general quirinuxtemas-igeneral quirinux-asistente-general -y
-sudo apt-get install quirinuxtemas quirinuxtemas-pro quirinuxtemas-ipro -y
-sudo apt-get install quirinuxsplash quirinux-asistente-pro -y
+sudo apt-get remove --purge quirinuxtemas-general quirinuxtemas-igeneral quirinux-asistente-general quirinux-applications-general -y
+sudo apt-get install quirinuxtemas-pro -y
 
 }
 
