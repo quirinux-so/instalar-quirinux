@@ -329,7 +329,6 @@ options=(1 "Ardour (editor de audio multipista)" off
 24 "Tupitube (animación 2D y stop-motion para Webcam)" off
 25 "Usuarios (gestionar usuarios)" off
 26 "Webapp-manager (aplicaciones web)" off)
-27 "Autologin (comando)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -499,7 +498,7 @@ options=(1 "Software de hogar y oficina" off
 18 "Utilidades de backup y puntos de restauración" off
 19 "Asistente Quirinux (incluye estilos)" off
 20 "Asistente Quirinux Pro (incluye estilos)" off 
-21 "Corrección de bugs (recomendado)" off)
+21 "Corrección de bugs (recomendado)" off
 21 "Autologin (comando)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
