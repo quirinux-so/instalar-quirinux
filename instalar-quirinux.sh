@@ -710,7 +710,7 @@ _controladoresLibres
 _programasGeneral
 _pulseaudio
 _previaVerif
-_applications-general
+_temasGeneral
 _limpiar
 _finalGeneral
 
@@ -767,6 +767,7 @@ clear
 _baseBusterPro
 _tipografiasPro
 _especializadosPro
+_temasPro
 _applications-pro
 _limpiar
 _finalpro
@@ -1220,8 +1221,10 @@ update-grub2
 
 # PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
 clear
-for usuarios1 in /home/*; do sudo chmod 755 -R $usuarios1"/.config"; done
-for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2; done
+#Realizar este cambio a mano y modificar los permisos de manera adecuada. 
+
+#for usuarios1 in /home/*; do sudo chmod 755 -R $usuarios1"/.config"; done
+#for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2; done
 
 # OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
 clear
@@ -1235,7 +1238,7 @@ sudo chmod u+s /usr/sbin/hddtemp
 
 # INSTALAR TEMAS DE QUIRINUX GENERAL
 
-function temasGeneral() {
+function _temasGeneral() {
 	
 clear
 sudo apt-get remove --purge quirinuxtemas-pro quirinuxtemas-ipro quirinux-asistente-pro quirinux-applications-pro -y
@@ -1245,7 +1248,8 @@ sudo apt-get install quirinuxtemas-general -y
 
 # INSTALAR TEMAS DE QUIRINUX PRO
 
-function temasPro() {
+
+function _temasPro() {
 	
 clear
 sudo apt-get remove --purge quirinuxtemas-general quirinuxtemas-igeneral quirinux-asistente-general quirinux-applications-general -y
