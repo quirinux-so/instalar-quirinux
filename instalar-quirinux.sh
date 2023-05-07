@@ -1548,8 +1548,6 @@ function _blender() {
 
 sudo apt-get install blender -y
 
-fi
-
 }
 
 function _boats() {
