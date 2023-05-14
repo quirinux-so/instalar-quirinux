@@ -178,13 +178,13 @@ function _menuRepositorios() {
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
-1 "Configurar repositorios extra para Debian Bullseye" \
+1 "Configurar repositorios extra para DEBIAN" \
 2 "Ayuda" \
 3 "Salir")
 
 echo $opRepositorios
 
-if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - Debian Bullseye
+if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - DEBIAN
 clear
 _bullseye
 _okrepo
@@ -210,7 +210,7 @@ function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
---msgbox "\nQuirinux puede crearse sobre una instalación fresca de Debian Bullseye XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox y los del kernel Liquorix para quien quiera utilizarlos. Si utilizas Debian Bullseye XFCE puedes instalar estos repositorios con tranquilidad. Este instalador no es compatible con Ubuntu ni con otras derivadas. n\n." 23 100
+--msgbox "\nQuirinux puede crearse sobre una instalación fresca de DEBIAN XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox y los del kernel Liquorix para quien quiera utilizarlos. Si utilizas DEBIAN XFCE puedes instalar estos repositorios con tranquilidad. Este instalador no es compatible con Ubuntu ni con otras derivadas. n\n." 23 100
 _menuRepositorios
 }
 
@@ -318,17 +318,15 @@ options=(1 "Ardour (editor de audio multipista)" off
 13 "Imagine (reducir peso de fotografías)" off
 14 "Inkscape (editor de gráficos vectoriales)" off
 15 "Kitchscenarist (editor para guionistas)" off
-16 "Network-Manager (administrador de red)" off
-17 "Mystiq (conversor de formatos)" off
-18 "Natron (composición y FX)" off
-19 "Openboard (convertir pantalla en pizarra)" off
-20 "Opentoonz (animación 2D industrial)" off
-21 "Quinema (herramientas para animación)" off
-22 "Storyboarder (editor de storyboards)" off
-23 "Tahoma2D (animación 2D y Stop-Motion apto Camaras Reflex)" off
-24 "Tupitube (animación 2D y stop-motion para Webcam)" off
-25 "Usuarios (gestionar usuarios)" off
-26 "Webapp-manager (aplicaciones web)" off)
+16 "Mystiq (conversor de formatos)" off
+17 "Natron (composición y FX)" off
+18 "Openboard (convertir pantalla en pizarra)" off
+19 "Quinema (herramientas para animación)" off
+20 "Storyboarder (editor de storyboards)" off
+21 "Tahoma2D (animación 2D y Stop-Motion apto Camaras Reflex)" off
+22 "Tupitube (animación 2D y stop-motion para Webcam)" off
+23 "Usuarios (gestionar usuarios)" off
+24 "Webapp-manager (aplicaciones web)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -347,7 +345,7 @@ _azpainter
 
 3) # "Base general (firefox, bleachbit, PDFArranger etc)"
 clear
-_baseBusterGeneral
+_baseDebian
 ;;
 
 4) # "Base Pro (krita, obs, synfig, xsane, etc)"
@@ -410,56 +408,46 @@ clear
 _kitscenarist
 ;;
 
-16) # "Network-Manager (administrador de red)"
-clear
-_networkmanager
-;;
-
-17) # "Mystiq (conversor de formatos)"
+16) # "Mystiq (conversor de formatos)"
 clear
 _mystiq
 ;;
 
-18) # "Natron (composición y FX)"
+17) # "Natron (composición y FX)"
 clear
 _natron
 ;;
 
-19) # "Openboard (convertir pantalla en pizarra)"
+18) # "Openboard (convertir pantalla en pizarra)"
 clear
 _openboard
 ;;
 
-20) # "Opentoonz (animación 2D industrial)"
-clear
-_opentoonz
-;;
-
-21) # "Quinema (herramientas para animación)"
+19) # "Quinema (herramientas para animación)"
 clear
 _quinema
 ;;
 
-22) # "Storyboarder (editor de storyboards)"
+20) # "Storyboarder (editor de storyboards)"
 _storyboarder
 ;;
 
-23) # "Tahoma (animación 2D y Stop-Motion)"
+21) # "Tahoma (animación 2D y Stop-Motion)"
 clear
 _tahoma2D
 ;;
 
-24) # "Tupitube (animación 2D y stop-motion)"
+22) # "Tupitube (animación 2D y stop-motion)"
 clear
 _tupitube
 ;;
 
-25) # "Usuarios (gestionar usuarios)"
+23) # "Usuarios (gestionar usuarios)"
 clear
 _mugshot
 ;;
 
-26) # "Webapp-manager"
+24) # "Webapp-manager"
 clear
 _wapp
 ;;
@@ -481,25 +469,22 @@ cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 7
 options=(1 "Software de hogar y oficina" off
 2 "Software gráfico y de edición multimedia" off
 3 "Tipografías adicionales (incluye las de Windows)" off
-4 "Temas y salvapantallas de Quirinux General" off
-5 "Temas y salvapantallas de Quirinux Pro" off
-6 "Centro de software sencillo de usar" off
-7 "Compatibilidad con carpetas compartidas" off
-8 "Herramientas para generar imágenes ISO de Quirinux" off
-9 "Utilidad para usar digitalizadoras con 2 monitores" off
-10 "Firmware para placas de red Wifi" off
-11 "Controladores libres para hardware de red - excepto wifi" off
-12 "Controladores libres para escáneres e impresoras" off
-13 "Codecs privativos multimedia y RAR" off
-14 "Controladores libres para aceleradoras NVIDIA" off
-15 "Controladores libres para aceleradoras AMD" off
-16 "Controladores libres para tabletas GENIUS" off
-17 "Controladores para cámaras virtuales" off
-18 "Utilidades de backup y puntos de restauración" off
-19 "Asistente Quirinux (incluye estilos)" off
-20 "Asistente Quirinux Pro (incluye estilos)" off 
-21 "Corrección de bugs (recomendado)" off
-21 "Autologin (comando)" off)
+4 "Centro de software sencillo de usar" off
+5 "Compatibilidad con carpetas compartidas" off
+6 "Herramientas para generar imágenes ISO de Quirinux" off
+7 "Utilidad para usar digitalizadoras con 2 monitores" off
+8 "Firmware para placas de red Wifi" off
+9 "Controladores libres para escáneres e impresoras" off
+10 "Codecs privativos multimedia y RAR" off
+11 "Controladores libres para aceleradoras NVIDIA" off
+12 "Controladores libres para aceleradoras AMD" off
+13 "Controladores libres para tabletas GENIUS" off
+14 "Controladores para cámaras virtuales" off
+15 "Utilidades de backup y puntos de restauración" off
+16 "Estilos y asistente de Quirinux General" off
+17 "Estilos y asistente de Quirinux Pro" off 
+18 "Corrección de bugs (recomendado)" off
+19 "Autologin (comando)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -508,7 +493,7 @@ case $choice in
 
 1) # "Programas para usuarios en general"
 clear
-_baseBusterGeneral
+_baseDebian
 _utiles
 ;;
 
@@ -523,101 +508,83 @@ _fuentes
 _tipografiasPro
 ;;
 
-4) # "Temas y salvapantallas de Quirinux General"
-clear
-_temas
-_temasGeneral
-_salvapantallas
-;;
 
-5) # "Temas y salvapantallas de Quirinux Pro"
-clear
-_temas
-_temasPro
-_salvapantallas
-;;
-
-6) # "Centro de software sencillo de usar (estilo Android)"
+4) # "Centro de software sencillo de usar (estilo Android)"
 clear
 _centroDeSoftware
 ;;
 
-7) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
+5) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
 clear
 _samba
 ;;
 
-8) # "Herramientas para generar imagenes ISO de Quirinux"
+6) # "Herramientas para generar imagenes ISO de Quirinux"
 clear
 _eggs
 ;;
 
-9) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+7) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
 clear
 _ptxconf
 ;;
 
-10) # "Firmware para placas de red Wifi"
+8) # "Firmware para placas de red Wifi"
 clear
 _firmwareWifi
 ;;
 
-11) # "Controladores libres para hardware de red - excepto wifi"
-clear
-_libresRed
-;;
-
-12) # "Controladores libres para escáneres e impresoras"
+9) # "Controladores libres para escáneres e impresoras"
 clear
 _libresImpresoras
 ;;
 
-13) # "Codecs privativos multimedia y RAR"
+10) # "Codecs privativos multimedia y RAR"
 clear
 _codecs
 ;;
 
-14) # "Controladores libres para aceleradoras gráficas nVidia"
+11) # "Controladores libres para aceleradoras gráficas nVidia"
 clear
 _libresNvidia
 ;;
 
-15) # "Controladores libres para aceleradoras gráficas AMD"
+12) # "Controladores libres para aceleradoras gráficas AMD"
 clear
 _libresAMD
 ;;
 
-16) # "Controladores libres para tabletas digitalizadoras Genius"
+13) # "Controladores libres para tabletas digitalizadoras Genius"
 clear
 _libresGenius
 ;;
 
-17) # "Controladores para cámaras virtuales"
+14) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-18) # "Utilidades de backup y puntos de restauración"
+15) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-19) # "Asistente Quirinux General"
+16) # "Asistente Quirinux General"
 clear
-_asistenteGeneral
+_temasGeneral
 ;;
 
-20) # "Asistente Quirinux Pro"
+17) # "Asistente Quirinux Pro"
 clear
-_asistentePro
+_temasPro
 ;;
 
-21) # "Corrección de bugs (recomendado)"
+18) # "Corrección de bugs (recomendado)"
 clear
 _pulseaudio
 ;;
 
-22) # "autologin (comando)"
+19) # "autologin (comando)"
 clear
 _autologin
 ;;
@@ -637,7 +604,7 @@ _menuPrincipal
 
 function _bullseye() {
 
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN BULLSEYE Y EL COMANDO "QUIRINUX-LIBRE"
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
 
 clear
 apt-get autoremove --purge repoconfigdeb -y
@@ -646,6 +613,7 @@ sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfi
 sudo apt install /opt/tmp/apt/./repoconfigbull_1.4.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
+sudo rm /opt/tmp/apt/repoconfigbull_1.4.3_all.deb
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
 
@@ -653,26 +621,17 @@ clear
 sudo cp -r -a /opt/repo-config-bull/non-free/* /etc/apt/sources.list.d/
 apt-get update
 
-touch /opt/requisitos/ok-bullseye
-
 sudo apt-get install quirinux-libre -y
 
-}
+touch /opt/requisitos/ok-bullseye
 
-
-function _warningPrevia() {
-
-dialog --backtitle "REQUISITO INCUMPLIDO" \
---title "NO SE ENCONTRÓ QUIRINUX S/BUSTER" \
---msgbox "\nNo se puede actualizar a Bullseye si antes no se ha instalado Quirinux 2.0 sobre Buster" 23 100
-_menuPrincipal
 }
 
 function _warningRepo() {
 
 dialog --backtitle "REQUISITO INCUMPLIDO" \
 --title "SE NECESITAN REPOSITORIOS" \
---msgbox "\nSe requiere instalar repositorios adicionales de Quirinux. Por favor, elije el que sea compatible con tu distribución." 23 100
+--msgbox "\nSe requiere instalar repositorios adicionales de Quirinux." 23 100
 _menuRepositorios
 }
 
@@ -722,33 +681,27 @@ function _controladoresLibres() {
 clear
 _libresNvidia
 _libresAMD
-#_libresWacom
 _libresGenius
 _libresImpresoras
-_libresRed
+
 }
 
 function _programasGeneral() {
 clear
 _splash
-_baseBusterGeneral
+_baseDebian
 _ptxconf
 _chimiboga
 _samba
 _utiles
-#_olive
 _GIMP
-#_aqemu
 _mint
 _salvapantallas
 _fuentes
 _temas
-#_red
-_asistente
+_temasGeneral
 _pulseaudio
 _eggs
-#_w-convert
-_kernels
 
 }
 
@@ -782,7 +735,6 @@ _inkscape
 _tupitube
 _godot
 _storyboarder
-_opentoonz
 _kitscenarist
 _natron
 _azpainter
@@ -792,7 +744,6 @@ _qstopmotion
 _camarasVirtuales
 _belle
 _mypaint
-#_cinelerra
 _tahoma2D
 _blender
 _boats
@@ -810,7 +761,6 @@ _mystiq
 _densify
 _imagine
 _openboard
-#_cpuCoreUtils
 _borratemp
 }
 
@@ -858,11 +808,6 @@ fi
 
 function _config() {
 
-# CONFIGURACIÓN PREDETERMINADA DE SUDOERS DE QUIRINUX
-
-clear
-sudo apt-get install sudoersquirinux -y
-
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
 clear
@@ -873,12 +818,6 @@ sudo dpkg --add-architecture i386
 function _eggs() {
 clear
 sudo apt-get install eggs -y
-
-}
-
-function _networkmanager() {
-clear
-sudo apt-get install network-manager -y
 
 }
 
@@ -915,22 +854,6 @@ sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
 }
 
-function _libresWacom() {
-
-# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS WACOM
-
-clear
-sudo sudo apt-get install build-essential autoconf linux-headers-$(uname -r) -y
-sudo wget --no-check-certificate 'https://quirinux.org/extras/input-wacom-0.46.0.tar.bz2' -O /opt/tmp/input-wacom-0.46.0.tar.bz2
-cd /opt/tmp
-tar -xjvf /opt/tmp/input-wacom-0.46.0.tar.bz2
-cd input-wacom-0.46.0
-if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-}
-
 function _libresGenius() {
 
 # INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
@@ -960,17 +883,6 @@ sudo apt-get install simple-scan -y
 
 }
 
-function _libresRed() {
-
-# INSTALAR PAQUETES DE RED LIBRES
-
-clear
-for paquetes_red in mobile-broadband-provider-info pppconfig hardinfo usb-modeswitch usb-modeswitch-data wvdial; do sudo sudo apt-get install -y $paquetes_red; done
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-}
-
 function _libresAMD() {
 
 # INSTALAR CONTROLADORES DE VIDEO AMD LIBRES
@@ -982,28 +894,13 @@ sudo apt-get autoremove --purge -y
 
 }
 
-function _baseBusterGeneral() {
+function _baseDebian() {
 
 # INSTALAR PAQUETES BASE DE DEBIAN
 
 clear
 
-for paquetes_buster in virtualbox-7.0 bluconfig gcc make perl linux-headers-$(uname -r) baobab onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins okular mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat xdemineur default-jre dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo sudo apt-get install -y $paquetes_buster; done
-
-FILE="/opt/requisitos/ok-chimaera"
-
-if [ -e ${FILE} ]; then
-for desinstalar in htop mutt yad-icon-browser; do sudo apt-get remove --purge $desinstalar -y; done
-for instalar in qjackctl gnome-firmware; do sudo sudo apt-get install $instalar -y; done
-fi
-
-FILE="/usr/bin/atril"
-if [ -e ${FILE} ]; then
-apt-get remove --purge atril -y
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-fi 
-
+for paquetes_buster in ntp atril virtualbox-7.0 bluconfig gcc make perl linux-headers-$(uname -r) baobab onboard hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 i965-va-driver xauth xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils brasero cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils kcharselect kpat xdemineur default-jre dia tumbler tumbler-plugins-extra ffmpegthumbnailer kpat ktorrent photopc usermode go-mtpfs pdfarranger build-essential gtk3-engines-xfce make automake cmake engrampa python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse breeze-icon-theme-rcc libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs smbclient python-smbc breeze liblensfun-bin galculator gufw pacpl kde-config-tablet imagemagick x264 vlc-plugin-vlsub gnome-system-tools ffmpeg audacity kolourpaint mtp-tools xinput gparted font-manager hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey kazam brasero breeze-icon-theme zip abr2gbr gtkam-gimp gphoto2 gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo sudo apt-get install -y $paquetes_buster; done
 clear
 
 }
@@ -1094,24 +991,6 @@ sudo apt-get install openboard -y
 
 }
 
-function _cpuCoreUtils() {
-
-# INSTALAR PROGRAMA PARA CONFIGURAR EL RENDIMIENTO DEL PROCESADOR
-
-clear
-sudo apt-get install cpufreq cpufrequtils -y
-
-}
-
-function _olive() {
-
-# INSTALAR EDITOR DE VIDEO OLIVE - Version elegida por Quirinux
-
-clear
-sudo apt-get install oliveq -y
-
-}
-
 function _GIMP() {
 
 # INSTALAR GIMP EDICION QUIRINUX
@@ -1120,28 +999,6 @@ clear
 sudo apt-get install gimp-quirinux gimp-paint-studio -y
 
 }
-
-function _aqemu() {
-
-# INSTALAR PAQUETES DE VIRTUALIZACIÓN
-
-clear
-for paquetes_virtualizacion in aqemu qemu-kvm qemu-system-data qemu-block-extra intel-microcode amd-microcode qemu-system libvirt; do sudo sudo apt-get install -y $paquetes_virtualizacion; done
-sudo sudo apt-get install -f -y
-
-}
-
-function _w-convert() {
-
-# INSTALAR W-CONVERT
-
-clear
-sudo apt-get install w-convert -y
-
-
-}
-
-
 
 function _mint() {
 
@@ -1154,7 +1011,6 @@ sudo apt-get autoremove --purge -y
 
 
 }
-
 
 function _centroDeSoftware() {
 
@@ -1188,50 +1044,18 @@ function _fuentes() {
 
 # Descargando y copiando fuentes de Quirinux
 clear
-sudo apt-get install quirinux-fuentes -y
+sudo apt-get install quirinux-fuentes komika -y
 
 }
 
 function _temas() {
 
-# INSTALA PROGRAMAS ADICIONALES PARA GUARDAR Y CARGAR TEMAS
-
-sudo apt-get install xfce4-theme-switcher xfce4-panel-profiles -y
-
-# OTORGANDO PERMISOS PARA MODIFICAR TEMAS
-
-clear
-sudo chmod 755 -R /home/
-sudo chmod 755 -R /usr/share/backgrounds/
-sudo chmod 755 -R /usr/share/desktop-base/
-sudo chmod 755 -R /usr/share/images/
-sudo chmod 755 -R /usr/share/fonts/
-sudo chmod u+s /usr/sbin/hddtemp
-
-# INSTALAR ÍCONOS DE QUIRINUX
-clear
-sudo apt-get install icons-winbugs -y
-
-# MODIFICANDO DENOMINACIÓN DE DEBIAN EN EL GRUB (PARA QUE DIGA 'QUIRINUX')
-# También instala menú principal de Quirinux y modifica algunos archivos más.
-clear
-sudo apt-get install quirinuxconfig -y
+sudo apt-get install quirinuxtemas -y
 update-grub
 update-grub2
 
-# PERSONALIZANDO PANELES DE USUARIO DE QUIRINUX
-clear
-#Realizar este cambio a mano y modificar los permisos de manera adecuada. 
-
-#for usuarios1 in /home/*; do sudo chmod 755 -R $usuarios1"/.config"; done
-#for usuarios2 in /home/*; do sudo yes | sudo cp -r -f -a /etc/skel/* $usuarios2; done
-
 # OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
 clear
-sudo chmod 755 -R /home/
-sudo chmod 777 -R /usr/share/backgrounds/
-sudo chmod 777 -R /usr/share/desktop-base/
-sudo chmod 777 -R /usr/share/images/
 sudo chmod u+s /usr/sbin/hddtemp
 
 }
@@ -1241,8 +1065,8 @@ sudo chmod u+s /usr/sbin/hddtemp
 function _temasGeneral() {
 	
 clear
-sudo apt-get remove --purge quirinuxtemas-pro quirinuxtemas-ipro quirinux-asistente-pro quirinux-applications-pro -y
-sudo apt-get install quirinuxtemas-general -y
+sudo apt-get remove --purge quirinuxtemas-pro quirinux-estilos-pro quirinux-asistente-pro quirinux-applications-pro -y
+sudo apt-get install quirinux-asistente-general -y
 
 }
 
@@ -1252,20 +1076,8 @@ sudo apt-get install quirinuxtemas-general -y
 function _temasPro() {
 	
 clear
-sudo apt-get remove --purge quirinuxtemas-general quirinuxtemas-igeneral quirinux-asistente-general quirinux-applications-general -y
-sudo apt-get install quirinuxtemas-pro -y
-
-}
-
-function _red() {
-
-# ELIMINANDO ERRORES DE INICIO (RED
-clear
-sudo rm -rf /etc/network/interfaces.d/setup
-sudo chmod 755 /etc/network/interfaces
-sudo echo "auto lo" >>/etc/network/interfaces
-sudo echo "iface lo inet loopback" /etc/network/interfaces
-sudo chmod 644 /etc/network/interfaces
+sudo apt-get remove --purge quirinuxtemas-general quirinux-estilos-general quirinux-asistente-general quirinux-applications-general -y
+sudo apt-get install quirinux-asistente-pro -y
 
 }
 
@@ -1382,16 +1194,9 @@ _pluginEntangle
 
 function _tipografiasPro() {
 
-# INSTALAR TIPOGRAFÍAS PARA DIBUJANTES
+# INSTALAR TIPOGRAFÍAS ADICIONALES
 clear
-sudo apt-get install komikafont -y
-
-}
-
-function _opentoonz() {
-
-clear
-sudo apt-get install opentoonz -y
+sudo apt-get install quirinux-fuentes komika -y
 
 }
 
@@ -1537,15 +1342,6 @@ else
 sudo apt-get install mypaintq -y
 
 fi
-
-}
-
-function _cinelerra() {
-
-# INSTALAR EDITOR DE VIDEO PROFESIONAL CINELERRA
-
-clear
-sudo apt-get install cinelerragg -y
 
 }
 
