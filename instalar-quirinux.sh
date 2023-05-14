@@ -484,7 +484,8 @@ options=(1 "Software de hogar y oficina" off
 16 "Estilos y asistente de Quirinux General" off
 17 "Estilos y asistente de Quirinux Pro" off 
 18 "Corrección de bugs (recomendado)" off
-19 "Autologin (comando)" off)
+19 "Autologin (comando)" off
+20 "VirtualBox (Virtualizar)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -589,6 +590,11 @@ clear
 _autologin
 ;;
 
+20) # "Virtualbox (virtualizar)"
+clear
+_virtualbox
+;;
+
 esac
 done
 
@@ -625,6 +631,12 @@ sudo apt-get install quirinux-libre -y
 
 touch /opt/requisitos/ok-bullseye
 
+}
+
+function _virtualbox() {
+	
+sudo apt-get install virtualbox-7.0 -y
+	
 }
 
 function _warningRepo() {
