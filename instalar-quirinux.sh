@@ -635,7 +635,7 @@ touch /opt/requisitos/ok-bullseye
 
 function _virtualbox() {
 	
-sudo apt-get install virtualbox-7.0 -y
+sudo apt-get install virtualbox-7.0 linux-headers-$(uname -r) -y
 	
 }
 
