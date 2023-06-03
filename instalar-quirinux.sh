@@ -178,9 +178,10 @@ function _menuRepositorios() {
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
-1 "Configurar repositorios extra para DEBIAN" \
-2 "Ayuda" \
-3 "Salir")
+1 "Configurar repositorios extra para Debian 11 Bullseye" \
+2 "Configurar repositorios extra para Debian 12 Bookworm" \
+3 "Ayuda" \
+4 "Salir")
 
 echo $opRepositorios
 
@@ -191,12 +192,19 @@ _okrepo
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - DEBIAN
+clear
+_bookworm
+_okrepo
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # Salir
 clear
 _salir
 fi
@@ -604,7 +612,7 @@ _menuPrincipal
 
 
 # ===========================================================================================
-# REPOSITORIOS BULLSEYE
+# REPOSITORIOS BULLSEYE / BOOKWORM
 # ===========================================================================================
 
 
@@ -620,6 +628,31 @@ sudo apt install /opt/tmp/apt/./repoconfigbull_1.4.3_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 sudo rm /opt/tmp/apt/repoconfigbull_1.4.3_all.deb
+
+# ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
+
+clear
+sudo cp -r -a /opt/repo-config-bull/non-free/* /etc/apt/sources.list.d/
+apt-get update
+
+sudo apt-get install quirinux-libre -y
+
+touch /opt/requisitos/ok-bullseye
+
+}
+
+function _bookworm() {
+
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
+
+clear
+apt-get autoremove --purge repoconfigdeb -y
+sudo mkdir -p /opt/tmp/apt
+sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbook_1.0.0_all.deb' -O /opt/tmp/apt/repoconfigbook_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./repoconfigbook_1.0.0_all.deb
+sudo apt-get update -y
+chown -R root:root /etc/apt
+sudo rm /opt/tmp/apt/repoconfigbook_1.0.0_all.deb
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
 
