@@ -72,7 +72,7 @@ function _requisitos() {
 
 clear
 sudo apt-get update -y
-for paquetes_wget in wget git spice-vdagent; do sudo sudo apt-get install -y $paquetes_wget; done
+for paquetes_wget in dialog wget git spice-vdagent; do sudo sudo apt-get install -y $paquetes_wget; done
 
 # Crear fichero de verificación
 
@@ -653,6 +653,7 @@ sudo apt install /opt/tmp/apt/./repoconfigbook_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
 sudo rm /opt/tmp/apt/repoconfigbook_1.0.0_all.deb
+
 touch /opt/requisitos/ok-bookworm
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
@@ -1526,4 +1527,3 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 
 _inicioCheck
 _menuPrincipal
-
