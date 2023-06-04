@@ -182,8 +182,9 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Configurar repositorios extra para Debian 11 Bullseye" \
 #2 "Configurar repositorios extra para Debian 12 Bookworm" \
-2 "Ayuda" \
-3 "Salir")
+2 "Estoy utilizando Debian 11 Base Quirinux" \
+3 "Ayuda" \
+4 "Salir")
 
 echo $opRepositorios
 
@@ -201,12 +202,19 @@ fi
 #_menuPrincipal
 #fi
 
-if [[ $opRepositorios == 2 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 2 ]]; then # Estoy utilizando Debian Base Quirinux
+clear
+_okrepo
+touch /opt/requisitos/ok-bullseye
+_menuPrincipal
+fi
+
+if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 3 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # Salir
 clear
 _salir
 fi
