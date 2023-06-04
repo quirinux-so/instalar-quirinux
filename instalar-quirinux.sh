@@ -924,7 +924,7 @@ function _graficaIntel() {
 FILE="/opt/requisitos/ok-bookworm"
 if [ ! -e ${FILE} ]; then 	
 
-for paquetes_intel in i965-va-driver: do sudo apt-get install -y $paquetes_intel; done
+for paquetes_intel in i965-va-driver; do sudo apt-get install -y $paquetes_intel; done
 
 fi
 	
