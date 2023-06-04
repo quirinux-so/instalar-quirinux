@@ -1526,3 +1526,4 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 
 _inicioCheck
 _menuPrincipal
+
