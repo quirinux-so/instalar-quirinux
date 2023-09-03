@@ -641,18 +641,6 @@ touch /opt/requisitos/ok-bullseye
 }
 
 
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
-
-clear
-sudo cp -r -a /opt/repo-config-bull/non-free/* /etc/apt/sources.list.d/
-apt-get update
-
-sudo apt-get install quirinux-libre -y
-
-touch /opt/requisitos/ok-bullseye
-
-}
-
 function _virtualbox() {
 	
 sudo apt-get install virtualbox-7.0 linux-headers-$(uname -r) -y
