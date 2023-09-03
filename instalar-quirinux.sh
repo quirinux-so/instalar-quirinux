@@ -630,29 +630,16 @@ function _repoconfig() {
 
 clear
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/r/repoquirinux/repoquirinux_1.0.0_all.deb' -O /opt/tmp/apt/repoquirinux_1.0.0_all.deb
-sudo apt install /opt/tmp/apt/./repoquirinux_1.0.0_all.deb
+sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.0_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
-sudo rm /opt/tmp/apt/repoquirinux_1.0.0_all.deb
+sudo apt-get install quirinux-sudoers
+sudo rm /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
 touch /opt/requisitos/ok-bullseye
 
 }
 
-function _bookworm() {
-
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
-
-clear
-apt-get autoremove --purge repoconfigdeb -y
-sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbook_1.0.0_all.deb' -O /opt/tmp/apt/repoconfigbook_1.0.0_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbook_1.0.0_all.deb
-sudo apt-get update -y
-chown -R root:root /etc/apt
-sudo rm /opt/tmp/apt/repoconfigbook_1.0.0_all.deb
-
-touch /opt/requisitos/ok-bookworm
 
 # ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
 
