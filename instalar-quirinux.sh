@@ -179,41 +179,41 @@ function _menuRepositorios() {
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
-1 "Configurar repositorios extra para Debian 11 Bullseye" \
-2 "Configurar repositorios extra para Debian 12 Bookworm" \
-3 "Estoy utilizando Debian 11 Base Quirinux" \
-4 "Ayuda" \
-5 "Salir")
+1 "Agregar repositorios de Quirinux" \
+#2 "Configurar repositorios extra para Debian 12 Bookworm" \
+2 "Estoy utilizando Debian Base Quirinux" \
+3 "Ayuda" \
+4 "Salir")
 
 echo $opRepositorios
 
 if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - DEBIAN
 clear
-_bullseye
+_repoconfig
 _okrepo
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - DEBIAN
-clear
-_bookworm
-_okrepo
-_menuPrincipal
-fi
+#if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - DEBIAN
+#clear
+#_bookworm
+#_okrepo
+#_menuPrincipal
+#fi
 
-if [[ $opRepositorios == 3 ]]; then # Estoy utilizando Debian Base Quirinux
+if [[ $opRepositorios == 2 ]]; then # Estoy utilizando Debian Base Quirinux
 clear
 _okrepo
 touch /opt/requisitos/ok-bullseye
 _menuPrincipal
 fi
 
-if [[ $opRepositorios == 4 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 5 ]]; then # Salir
+if [[ $opRepositorios == 4 ]]; then # Salir
 clear
 _salir
 fi
@@ -625,27 +625,18 @@ _menuPrincipal
 # ===========================================================================================
 
 
-function _bullseye() {
+function _repoconfig() {
 
-# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN Y EL COMANDO "QUIRINUX-LIBRE"
+# AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
 
 clear
 apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfigbull/repoconfigbull_1.4.3_all.deb' -O /opt/tmp/apt/repoconfigbull_1.4.3_all.deb
-sudo apt install /opt/tmp/apt/./repoconfigbull_1.4.3_all.deb
+sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfig/repoconfig_1.0.0_all.deb' -O /opt/tmp/apt/repoconfig_1.0.0_all.deb
+sudo apt install /opt/tmp/apt/./repoconfig_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
-sudo rm /opt/tmp/apt/repoconfigbull_1.4.3_all.deb
-
-# ACTIVA REPOSITORIOS NON-FREE CONTRIB DE DEBIAN
-
-clear
-sudo cp -r -a /opt/repo-config-bull/non-free/* /etc/apt/sources.list.d/
-apt-get update
-
-sudo apt-get install quirinux-libre -y
-
+sudo rm /opt/tmp/apt/repoconfig_1.0.0_all.deb
 touch /opt/requisitos/ok-bullseye
 
 }
