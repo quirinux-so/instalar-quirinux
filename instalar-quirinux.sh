@@ -629,9 +629,8 @@ function _repoconfig() {
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
 
 clear
-apt-get autoremove --purge repoconfigdeb -y
 sudo mkdir -p /opt/tmp/apt
-sudo wget --no-check-certificate 'http://repo.quirinux.org/pool/main/r/repoconfig/repoquirinux_1.0.0_all.deb' -O /opt/tmp/apt/repoquirinux_1.0.0_all.deb
+sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/r/repoquirinux/repoquirinux_1.0.0_all.deb' -O /opt/tmp/apt/repoquirinux_1.0.0_all.deb
 sudo apt install /opt/tmp/apt/./repoquirinux_1.0.0_all.deb
 sudo apt-get update -y
 chown -R root:root /etc/apt
