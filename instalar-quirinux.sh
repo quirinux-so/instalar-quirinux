@@ -180,7 +180,6 @@ opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALAC
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Agregar repositorios de Quirinux" \
-#2 "Configurar repositorios extra para Debian 12 Bookworm" \
 2 "Estoy utilizando Debian Base Quirinux" \
 3 "Ayuda" \
 4 "Salir")
