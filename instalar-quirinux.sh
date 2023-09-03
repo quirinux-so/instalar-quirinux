@@ -1077,7 +1077,7 @@ function _centroDeSoftware() {
 # INSTALAR CENTRO DE SOFTWARE DE MINT
 
 clear
-sudo sudo apt-get install gir1.2-flatpak-1.0 -y
+sudo sudo apt-get install flatpak gir1.2-flatpak-1.0 xdg-desktop-portal-gtk -y
 sudo apt-get upgrade -y
 sudo apt-get dist-ugprade -y
 sudo apt-get install mintinstall -y
