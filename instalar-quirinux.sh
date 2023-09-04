@@ -729,16 +729,28 @@ _eggs
 
 function _instalarPro() {
 
-FILE="/opt/requisitos/ok-pro"
+FILE1="/opt/requisitos/ok-pro"
 
 if [ -e ${FILE} ]; then
 
 _finalpro
 
+FILE2="/opt/requisitos/ok-general"
+
+if [ -e ${FILE2} ]; then
+
+_baseBusterPro
+_tipografiasPro
+_especializadosPro
+_temasPro
+_applications-pro
+_limpiar
+_finalpro
+
+
 else
 
-clear
-
+_instalarGeneral
 _baseBusterPro
 _tipografiasPro
 _especializadosPro
