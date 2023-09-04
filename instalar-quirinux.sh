@@ -731,7 +731,7 @@ function _instalarPro() {
 
 FILE1="/opt/requisitos/ok-pro"
 
-if [ -e ${FILE} ]; then
+if [ -e ${FILE1} ]; then
 
 _finalpro
 
