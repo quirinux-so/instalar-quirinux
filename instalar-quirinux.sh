@@ -735,11 +735,9 @@ if [ -e ${FILE1} ]; then
 
 _finalpro
 
-else
-
 FILE2="/opt/requisitos/ok-general"
 
-if [ -e ${FILE2} ]; then
+elif [ -e ${FILE2} ]; then
 
 _baseBusterPro
 _tipografiasPro
@@ -748,6 +746,7 @@ _temasPro
 _applications-pro
 _limpiar
 _finalpro
+
 
 else
 
