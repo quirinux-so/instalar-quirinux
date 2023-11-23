@@ -80,16 +80,6 @@ touch /opt/requisitos/ok
 
 
 }
-
-# ===========================================================================================
-# INSTALAR DIALOG [CÓDIGO REUTILIZABLE]
-# ===========================================================================================
-
-function _instalarDialog() {
-sudo apt-get update -y
-sudo sudo apt-get install dialog -y
-}
-
 # ===========================================================================================
 # FUNCION SALIR [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
@@ -151,7 +141,6 @@ case $opc in
 clear
 
 _requisitos
-_instalarDialog
 _config
 
 ;;
@@ -174,45 +163,28 @@ esac
 
 function _menuRepositorios() {
 	
-# MODIFICAR NUMERACIÓN CUANDO ESTÉ DISPONIBLE DEBIAN 12 BOOKWORM
-
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "NECESARIOS PARA EL RESTO DE LA INSTALACIÓN" 16 62 8 \
 1 "Agregar repositorios de Quirinux" \
-2 "Estoy utilizando Debian Base Quirinux" \
-3 "Ayuda" \
-4 "Salir")
+2 "Ayuda" \
+3 "Salir")
 
 echo $opRepositorios
 
-if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux - DEBIAN
+if [[ $opRepositorios == 1 ]]; then # Instalar repositorios Quirinux
 clear
 _repoconfig
 _okrepo
 _menuPrincipal
 fi
 
-#if [[ $opRepositorios == 2 ]]; then # Instalar repositorios Quirinux - DEBIAN
-#clear
-#_bookworm
-#_okrepo
-#_menuPrincipal
-#fi
-
-if [[ $opRepositorios == 2 ]]; then # Estoy utilizando Debian Base Quirinux
-clear
-_okrepo
-touch /opt/requisitos/ok-bullseye
-_menuPrincipal
-fi
-
-if [[ $opRepositorios == 3 ]]; then # AyudaRepositorios
+if [[ $opRepositorios == 2 ]]; then # AyudaRepositorios
 clear
 _ayudaRepositorios
 fi
 
-if [[ $opRepositorios == 4 ]]; then # Salir
+if [[ $opRepositorios == 3 ]]; then # Salir
 clear
 _salir
 fi
@@ -239,8 +211,8 @@ function _menuPrincipal() {
 opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
 --menu "Elije una opción" 16 50 8 \
-1 "Instalar Quirinux Edición General" \
-2 "Instalar Quirinux Edición Pro" \
+1 "Instalar Base para Quirinux" \
+2 "Instalar Quirinux Versión 2.0" \
 3 "Instalar componentes sueltos" \
 4 "Instalar programas sueltos" \
 5 "Ayuda" \
@@ -248,15 +220,15 @@ opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIR
 
 echo $opPrincipal
 _checkrepo
-if [[ $opPrincipal == 1 ]]; then # Instalar Quirinux Edición General
+if [[ $opPrincipal == 1 ]]; then # Instalar base para Quirinux
 clear
-_instalarGeneral
+_instalarBase
 _menuPrincipal
 fi
 
-if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux Edición Pro
+if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux 2.0
 clear
-_instalarPro
+_instalarVer2
 _menuPrincipal
 fi
 
@@ -267,7 +239,7 @@ fi
 
 if [[ $opPrincipal == 4 ]]; then # Instalar programas
 clear
-_instalarProgramas
+_instalarVer2gramas
 fi
 
 if [[ $opPrincipal == 5 ]]; then # Ayuda
@@ -317,7 +289,7 @@ sudo sudo apt-get install dialog -y
 # INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
 # ===========================================================================================
 
-function _instalarProgramas() {
+function _instalarVer2gramas() {
 cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 76 16)
 options=(1 "Ardour (editor de audio multipista)" off
 2 "Azpainter (similar a Paint tool SAI)" off
@@ -342,7 +314,8 @@ options=(1 "Ardour (editor de audio multipista)" off
 21 "Tahoma2D (animación 2D y Stop-Motion apto Camaras Reflex)" off
 22 "Tupitube (animación 2D y stop-motion para Webcam)" off
 23 "Usuarios (gestionar usuarios)" off
-24 "Webapp-manager (aplicaciones web)" off)
+24 "Webapp-manager (aplicaciones web)" off
+25 "Televisor para canales online)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -366,7 +339,7 @@ _baseDebian
 
 4) # "Base Pro (krita, obs, synfig, xsane, etc)"
 clear
-_baseBusterPro
+_especializadosDebian
 ;;
 
 5) # "Belle (editor de aventuras gráficas)"
@@ -468,6 +441,11 @@ clear
 _wapp
 ;;
 
+24) # "televisor"
+clear
+_televisor()
+;;
+
 
 esac
 done
@@ -486,22 +464,22 @@ options=(1 "Software de hogar y oficina" off
 2 "Software gráfico y de edición multimedia" off
 3 "Tipografías adicionales (incluye las de Windows)" off
 4 "Centro de software sencillo de usar" off
-5 "Compatibilidad con carpetas compartidas" off
-6 "Herramientas para generar imágenes ISO de Quirinux" off
-7 "Utilidad para usar digitalizadoras con 2 monitores" off
-8 "Firmware para placas de red Wifi" off
-9 "Controladores libres para escáneres e impresoras" off
-10 "Codecs privativos multimedia y RAR" off
-11 "Controladores libres para aceleradoras NVIDIA" off
-12 "Controladores libres para aceleradoras AMD" off
-13 "Controladores libres para tabletas GENIUS" off
-14 "Controladores para cámaras virtuales" off
-15 "Utilidades de backup y puntos de restauración" off
-16 "Estilos y asistente de Quirinux General" off
-17 "Estilos y asistente de Quirinux Pro" off 
-18 "Corrección de bugs (recomendado)" off
-19 "Autologin (comando)" off
-20 "VirtualBox (Virtualizar)" off)
+5 "Herramientas para generar imágenes ISO de Quirinux" off
+6 "Utilidad para usar digitalizadoras con 2 monitores" off
+#7 "Firmware para placas de red Wifi" off ELIMINADO, Se usaran valores predeterminados de Debian 12
+7 "Codecs privativos multimedia y RAR" off
+8 "Controladores para escáneres e impresoras" off
+#10 "Controladores para aceleradoras NVIDIA" off ELIMINADO, Se usaran valores predeterminados de Debian 12
+9 "Controladores adicionales para AMD" off
+10 "Controladores adicionales para Intel" off
+11 "Controladores para tabletas Genius, Huion y Xppen" off
+12 "Controladores para cámaras virtuales" off
+13 "Utilidades de backup y puntos de restauración" off
+14 "Estilos y asistente de Quirinux" off 
+15 "Activar servidor de audio Pipewire" off
+16 "Autologin (comando)" off
+17 "VirtualBox (Virtualizar otros sistemas)" off
+18 "Miniaturas para archivos de imágenes" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -516,7 +494,7 @@ _utiles
 
 2) # "Programas para realizadores audiovisuales"
 clear
-_baseBusterPro
+_especializadosDebian
 ;;
 
 3) # "Tipografías adicionales (incluye las de Windows)"
@@ -531,84 +509,90 @@ clear
 _centroDeSoftware
 ;;
 
-5) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
-clear
-_samba
-;;
+#5) # "Compatibilidad con carpetas compartidas y redes de Microsoft"
+#clear
+#_samba
+#;;
 
-6) # "Herramientas para generar imagenes ISO de Quirinux"
+5) # "Herramientas para generar imagenes ISO de Quirinux"
 clear
 _eggs
 ;;
 
-7) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
+6) # "Utilidad para usar digitalizadoras con 2 monitores (para XFCE)"
 clear
 _ptxconf
 ;;
 
-8) # "Firmware para placas de red Wifi"
-clear
-_firmwareWifi
-;;
+#7) # "Firmware para placas de red Wifi"
+#clear
+#_firmwareWifi
+#;;
 
-9) # "Controladores libres para escáneres e impresoras"
-clear
-_libresImpresoras
-;;
-
-10) # "Codecs privativos multimedia y RAR"
+7) # "Codecs privativos multimedia y RAR"
 clear
 _codecs
 ;;
 
-11) # "Controladores libres para aceleradoras gráficas nVidia"
+8) # "Controladores libres para escáneres e impresoras"
 clear
-_libresNvidia
+_controladoresImpresoras
 ;;
 
-12) # "Controladores libres para aceleradoras gráficas AMD"
+#10) # "Controladores libres para aceleradoras gráficas nVidia"
+#clear
+#_controladoresNvidia
+#_opengl()
+#;;
+
+9) # "Controladores adicionales para AMD"
 clear
-_libresAMD
+_controladoresAMD
 ;;
 
-13) # "Controladores libres para tabletas digitalizadoras Genius"
+10) # "Controladores adicionales para Intel"
 clear
-_libresGenius
+_controladoresIntel
 ;;
 
-14) # "Controladores para cámaras virtuales"
+11) # "Controladores libres para tabletas digitalizadoras Genius, Huion y Xppen"
+clear
+_controladoresGenius
+;;
+
+12) # "Controladores para cámaras virtuales"
 clear
 _camarasVirtuales
 ;;
 
-15) # "Utilidades de backup y puntos de restauración"
+13) # "Utilidades de backup y puntos de restauración"
 clear
 _mint
 ;;
 
-16) # "Asistente Quirinux General"
+14) # "Asistente Quirinux Pro"
 clear
-_temasGeneral
+_temasQuirinux
 ;;
 
-17) # "Asistente Quirinux Pro"
+15) # "Activar servidor de audio Pipewire"
 clear
-_temasPro
+_pipewire
 ;;
 
-18) # "Corrección de bugs (recomendado)"
-clear
-_pulseaudio
-;;
-
-19) # "autologin (comando)"
+16) # "autologin (comando)"
 clear
 _autologin
 ;;
 
-20) # "Virtualbox (virtualizar)"
+17) # "Virtualbox (virtualizar)"
 clear
 _virtualbox
+;;
+
+18) # "Miniaturas para archivos de imágenes"
+clear
+_miniaturas()
 ;;
 
 esac
@@ -620,15 +604,15 @@ _menuPrincipal
 
 
 # ===========================================================================================
-# REPOSITORIOS BULLSEYE / BOOKWORM
+# REPOSITORIOS DE QUIRINUX
 # ===========================================================================================
-
 
 function _repoconfig() {
 
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
 
 clear
+sudo apt-get install wget -y
 sudo mkdir -p /opt/tmp/apt
 sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.0_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
 sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.0_all.deb
@@ -636,14 +620,18 @@ sudo apt-get update -y
 chown -R root:root /etc/apt
 sudo apt-get install quirinux-sudoers
 sudo rm /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
-touch /opt/requisitos/ok-bullseye
-
 }
 
 
 function _virtualbox() {
-	
+
 sudo apt-get install virtualbox-7.0 linux-headers-$(uname -r) -y
+sudo mkdir -p /opt/tmp/virtualbox
+sudo wget --no-check-certificate 'https://download.virtualbox.org/virtualbox/7.0.10/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack' -O /opt/tmp/virtualbox/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+cd /opt/tmp/virtualbox/
+sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+sudo rm /opt/tmp/virtualbox/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+sudo apt-get install quirinux-virtualbox
 	
 }
 
@@ -656,12 +644,14 @@ _menuRepositorios
 }
 
 function _wapp() {
+
 	clear
 	sudo apt-get install webapp-manager -y
 	
 }
 
 function _autologin() {
+
 	clear
 	sudo apt-get install quirinux-autologin -y
 	
@@ -671,13 +661,13 @@ function _autologin() {
 # FUNCIONES SIN SALIDA EN PANTALLA [NO NECESITAN TRADUCCIÓN]
 # ===========================================================================================
 
-function _instalarGeneral() {
+function _instalarBase() {
 
-FILE="/opt/requisitos/ok-general"
+FILE="/opt/requisitos/ok-base"
 
 if [ -e ${FILE} ]; then
 
-_finalGeneral
+_finalBase
 
 else
 
@@ -685,33 +675,151 @@ clear
 _centroDeSoftware
 _firmwareWifi
 _codecs
-_controladoresLibres
-_programasGeneral
-_graficaIntel
+_controladores
+_programasBase
 _virtualbox
-_pulseaudio
-_previaVerif
-_temasGeneral
+_pipewire
+_temasQuirinux
 _limpiar
-_finalGeneral
+_finalBase
 
 fi
 
 }
 
-function _controladoresLibres() {
+function _centroDeSoftware() {
+
+# INSTALAR CENTRO DE SOFTWARE DE MINT
+
 clear
-_libresNvidia
-_libresAMD
-_libresGenius
-_libresImpresoras
+sudo sudo apt-get install flatpak gir1.2-flatpak-1.0 xdg-desktop-portal-gtk -y
+sudo apt-get install mintinstall -y
+
+# INSTALAR FLATPAK-CONFIG, PERMITE DESHABILITAR FLATPAK
+#CHECK SEPT 2023
+clear
+sudo apt-get install flatpakconfig -y
 
 }
 
-function _programasGeneral() {
+function _firmwareWifi() {
+
+# INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
+
+# ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
+
+#clear
+#for paquetes_firmware in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython3-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw firmware-misc-nonfree ; do sudo sudo apt-get install -y $paquetes_firmware; done
+#sudo sudo apt-get install -f -y
+#sudo apt-get autoremove --purge -y
+}
+
+function _codecs() {
+
+# INSTALAR CODECS Y FORMATOS PRIVATIVOS
+for paquetes_codecs in mint-meta-codecs rar unrar; do sudo sudo apt-get install -y $paquetes_codecs; done
+sudo sudo apt-get install -f -y
+sudo apt-get autoremove --purge -y
 clear
-_splash
+
+}
+
+function _controladores() {
+clear
+_opengl
+#_controladoresNvidia
+_controladoresAMD
+_controladoresGenius
+_controladoresIntel
+_controladoresImpresoras
+_quirinuxConfig
+
+}
+function _opengl() {
+
+# ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
+
+#for paquetes_opengl in build-essential g++ libgl-dev libglfw3-dev libopenal-data libopenal1 libgl1-mesa-dri libglx-mesa0 libglu1-mesa libdrm-amdgpu1 libdrm-intel1 libdrm-nouveau2 libdrm-radeon1 libdrm2 libdrm-common libcogl-pango20 libcogl-path20 libegl1 libgl1 libgles2 libglvnd0 libopengl0 libepoxy0 freeglut3-dev; do sudo apt-get install -y $paquetes_opengl; done
+}
+
+function _controladoresNvidia() {
+
+# INSTALAR CONTROLADORES PARA NVIDIA	
+# ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
+
+#clear
+#for paquetes_nvidia in xserver-xorg-video-nouveau firmware-misc-nonfree libvdpau1 dmraid mesa-vulkan-drivers libvulkan1 yt-dlp libegl-mesa0 libgbm1 libgl1-mesa-dri libglapi-mesa libglx-mesa0 mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers libglu1-mesa mesa-utils mesa-utils-bin libaliased-perl quirinuxconfig; do sudo sudo apt-get install --reinstall -y $paquetes_nvidia; done
+
+
+#for paquetes_nvidia in bumblebee bumblebee-nvidia quirinuxconfig; do sudo sudo apt-get install --reinstall -y $paquetes_nvidia; done
+#sudo sudo apt-get install -f -y
+#sudo apt-get autoremove --purge -y
+}
+
+function _controladoresAMD() {
+
+# INSTALAR CÓDIGO OPTIMIZADO PARA EL PROCESADOR
+sudo apt-get install amd64-microcode -y
+
+# INSTALAR CONTROLADORES DE VIDEO AMD
+#ELIMINADO: se utilizaran valores de gráficos por defecto de Debian 12. 
+
+#clear
+#for paquetes_amd in default-jre default-jre-headless xserver-xorg-video-ati xserver-xorg-video-radeon libcolamd2 firmware-amd-graphics xserver-xorg-video-amdgpu amd64-microcode lshw libdrm-amdgpu1 libteamdctl0 gamemode gamemode-daemon libgamemode0 libgamemodeauto0 libie61883-0 quirinuxconfig; do sudo sudo apt-get install --reinstall -y $paquetes_amd; done
+#sudo sudo apt-get install -f
+#sudo apt-get autoremove --purge -y
+}
+
+function _controladoresIntel() {
+
+# INSTALAR CÓDIGO OPTIMIZADO PARA EL PROCESADOR
+sudo apt-get install intel-microcode -y 
+
+# INSTALAR CONTROLADORES PARA GRÁFICA INTEL
+#ELIMINADO: se utilizaran valores de gráficos por defecto de Debian 12. 
+
+#for paquetes_intel in intel-media-va-driver libmfx1 libva-drm2 libigdgmm12 libva-wayland2 libva-x11-2 libva2 i965-va-driver quirinuxconfig; do sudo apt-get install -y $paquetes_intel; done
+}
+
+function _controladoresGenius() {
+
+# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS, HUION y XPPEN.
+
+clear
+sudo apt-get install geniusconfig -y
+sudo apt-get install wizardpen -y
+sudo apt-get install huion-tablet -y
+sudo apt-get install xppen -y
+}
+
+function _controladoresImpresoras() {
+
+# INSTALAR PAQUETES DE IMPRESIÓN Y ESCANEO LIBRES
+
+clear
+sudo sudo apt-get install cups
+sudo sudo apt-get install -f -y
+sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
+sudo apt-get remove --purge hplip -y
+sudo rm -rf /usr/share/hplip
+sudo rm -rf /var/lib/hp
+sudo apt-get install impresoras -y
+sudo apt-get install epsonscan -y
+epson-install
+sudo apt-get install simple-scan -y
+}
+
+function _quirinuxConfig() {
+
+apt install quirinuxconfig -y
+apt install os-prober -y
+	
+}
+
+function _programasBase() {
+clear
 _baseDebian
+_splash
 _ptxconf
 _chimiboga
 _samba
@@ -720,44 +828,42 @@ _GIMP
 _mint
 _salvapantallas
 _fuentes
-_temas
-_temasGeneral
-_pulseaudio
+_pipewire
 _eggs
 
 }
 
-function _instalarPro() {
+function _instalarVer2() {
 
-FILE1="/opt/requisitos/ok-pro"
+FILE1="/opt/requisitos/ok-ver2"
 
 if [ -e ${FILE1} ]; then
 
-_finalpro
+_finalVer2
 
-FILE2="/opt/requisitos/ok-general"
+FILE2="/opt/requisitos/ok-base"
 
 elif [ -e ${FILE2} ]; then
 
-_baseBusterPro
+_especializadosDebian
 _tipografiasPro
 _especializadosPro
-_temasPro
-_applications-pro
+_temasQuirinux
+_applications
 _limpiar
-_finalpro
+_finalVer2
 
 
 else
 
-_instalarGeneral
-_baseBusterPro
+_instalarBase
+_especializadosDebian
 _tipografiasPro
 _especializadosPro
-_temasPro
-_applications-pro
+_temasQuirinux
+_applications
 _limpiar
-_finalpro
+_finalVer2
 
 fi
 
@@ -798,41 +904,20 @@ _openboard
 _borratemp
 }
 
-function _applications-general()
+function _applications()
 {
 
 clear
-sudo apt-get install quirinux-applications-general -y
+sudo apt-get install quirinux-applications -y
 
-}
-
-function _applications-pro()
-{
-
-clear
-sudo apt-get install quirinux-applications-pro -y
-
-}
-
-function _previaVerif()
-{
-	
-FILE="/opt/requisitos/ok-buster"
-
-if [ -e ${FILE} ]; then
-
-touch /opt/requisitos/ok-bullseye
-
-fi
-	
 }
 
 function _okrepo()
 {
 	
-FILE="/opt/requisitos/ok-repo"
+FILE="/etc/apt/sources.list.d/quirinux.list"
 
-if [ ! -e ${FILE} ]; then
+if [ -e ${FILE} ]; then
 
 touch /opt/requisitos/ok-repo
 
@@ -844,118 +929,19 @@ function _config() {
 
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
-clear
-sudo dpkg --add-architecture i386
+# LO DESHABILITAMOS PARA NO DUPLICAR LA INSTALACIÓN DE PAQUETES.
+
+#clear
+#sudo dpkg --add-architecture i386
 
 }
 
 function _eggs() {
+
 clear
 sudo apt-get install eggs -y
-
-}
-
-function _firmwareWifi() {
-
-# INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
-
-# NO ES NECESARIO AL UTILIZAR DEBIAN NON-FREE
-
-FILE="/opt/requisitos/ok-bookworm"
-
-if [ ! -e ${FILE} ]; then 
-
-clear
-for paquetes_firmware_q in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev; do sudo sudo apt-get install -y $paquetes_firmware_q; done
-for paquetes_firmware in firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw firmware-misc-nonfree ; do sudo sudo apt-get install -y $paquetes_firmware; done
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-fi
-
-}
-
-function _codecs() {
-
-# INSTALAR CODECS Y FORMATOS PRIVATIVOS
-
-clear
-for paquetes_codecs in mint-meta-codecs unace-nonfree rar unrar; do sudo sudo apt-get install -y $paquetes_codecs; done
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-}
-
-function _libresNvidia() {
-
-# INSTALAR CONTROLADORES LIBRES DE NVIDIA
-
-FILE="/opt/requisitos/ok-bookworm"
-
-if [ ! -e ${FILE} ]; then 
-
-clear
-for paquetes_nvidia in xserver-xorg-video-nouveau libxnvctrl0 libvdpau1 libvdpau1:i386 vdpau-driver-all vdpau-driver-all:i386 vdpauinfo; do sudo sudo apt-get install -y $paquetes_nvidia; done
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-
-fi
-
-
-}
-
-function _graficaIntel() {
-	
-FILE="/opt/requisitos/ok-bookworm"
-if [ ! -e ${FILE} ]; then 	
-
-for paquetes_intel in i965-va-driver; do sudo apt-get install -y $paquetes_intel; done
-
-fi
-	
-}
-
-function _libresGenius() {
-
-# INSTALAR CONTROLADORES DE TABLETAS GRÁFICAS GENIUS
-
-clear
-sudo apt-get install geniusconfig -y
-sudo apt-get install wizardpen -y
-
-}
-
-function _libresImpresoras() {
-
-# INSTALAR PAQUETES DE IMPRESIÓN Y ESCANEO LIBRES
-
-clear
-for paquetes_scaner_impresion in build-essential tix foomatic-filters groff dc cups cups-pdf ink autoconf git wget avahi-utils system-config-printer-udev colord flex g++ libtool python-dev sane sane-utils system-config-printer system-config-printer-udev unpaper xsltproc zlibc foomatic-db-compressed-ppds ghostscript-x ghostscript-cups gocr-tk gutenprint-locales openprinting-ppds printer-driver-brlaser printer-driver-all printer-driver-cups-pdf cups-client cups-bsd cups-filters cups-pdf cups-ppdc printer-driver-c2050 printer-driver-c2esp printer-driver-cjet printer-driver-dymo printer-driver-escpr printer-driver-fujixerox printer-driver-gutenprint printer-driver-m2300w printer-driver-min12xxw printer-driver-pnm2ppa printer-driver-ptouch printer-driver-pxljr printer-driver-sag-gdi printer-driver-splix; do sudo sudo apt-get install -y $paquetes_scaner_impresion; done
-sudo sudo apt-get install cups
-sudo sudo apt-get install -f -y
-sudo apt-get remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
-sudo apt-get remove --purge hplip -y
-sudo rm -rf /usr/share/hplip
-sudo rm -rf /var/lib/hp
-sudo apt-get install impresoras -y
-sudo apt-get install epsonscan -y
-epson-install
-sudo apt-get install simple-scan -y
-
-}
-
-function _libresAMD() {
-
-# INSTALAR CONTROLADORES DE VIDEO AMD LIBRES
-FILE="/opt/requisitos/ok-bookworm"
-
-if [ ! -e ${FILE} ]; then 
-clear
-for paquetes_amd in mesa-opencl-icd mesa-vulkan-drivers libvulkan1 vulkan-tools vulkan-utils vulkan-validationlayers libdrm-amdgpu1 xserver-xorg-video-amdgpu; do sudo sudo apt-get install -y $paquetes_amd; done
-sudo sudo apt-get install -f
-sudo apt-get autoremove --purge -y
-fi
-
+sudo apt install grub-efi-amd64 -y
+sudo eggs tools ppa --add
 }
 
 function _baseDebian() {
@@ -964,32 +950,21 @@ function _baseDebian() {
 
 clear
 
-# NO ES NECESARIO SI SE USA DEBIAN NON-FREE 
+for paquetes_base in vlc vlc-plugin-svg simple-scan converseen atril baobab onboard bluconfig dia breeze-icon-theme-rcc kpat ktorrent pdfarranger smbclient breeze galculator gufw kde-config-tablet audacity kolourpaint mtp-tools gparted font-manager kcharselect kpat xdemineur engrampa kazam breeze-icon-theme gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings  kdeconnect catfish bleachbit packagekit screenkey; do sudo apt-get install -y $paquetes_base; done
 
-#FILE="/opt/requisitos/ok-bookworm"
-
-#if [ ! -e ${FILE} ]; then 
-#for paquetes_buster in ntp gcc make perl linux-headers-$(uname -r) hunspell-en-gb hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-ru hunspell-de-de-frami libindicator3-7 libcpuid-dev libcpuid15 xinit xinput xkb-data xorg xserver-xephyr xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-libinput xserver-xorg-input-mutouch xserver-xorg-input-multitouch xserver-xorg-input-synaptics xserver-xorg-input-wacom xserver-xorg-input-kbd xserver-xorg-legacy xserver-xorg-video-all xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-fbdev xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vesa btrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfsbtrfs-progs dosfstools dmraid exfat-utils exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools xfsdump xfsprogs udfclient udftools openprinting-ppds printer-driver-escpr alsa-utils cuetools dir2ogg ffmpeg ffmpeg2theora ffmpegthumbnailer flac flake gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-alsa lame mencoder mpeg3-utils mpg123 mpg321 mplayer paprefs pavucontrol pavumeter pulseaudio-module-jack sound-theme-freedesktop vlc vlc-plugin-svg vorbisgain vorbis-tools x264 x265 wav2cdr jq socat pqiv package-update-indicator gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-es-ar firefox-esr-l10n-fr firefox-esr-l10n-pt-br firefox-esr-l10n-pt-pt firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins mediainfo simple-scan xfce4-screensaver graphicsmagick mediainfo-gui firefox-esr firefox-l10n-de firefox-esr-l10n-es firefox-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it firefox-esr-l10n-pt converseen  h264enc gvfs-backends connman conky conky-all libimobiledevice-utils default-jre tumbler tumbler-plugins-extra ffmpegthumbnailer usermode build-essential gtk3-engines-xfce make automake cmake python-glade2 shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse libsmbclient python-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs python-smbc liblensfun-bin pacpl imagemagick x264 gnome-system-tools ffmpeg xinput  hdparm prelink unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar gzip lzip screenkey  zip abr2gbr gtkam-gimp gphoto2; do sudo sudo apt-get install -y $paquetes_buster; done
-
-#fi
-
-for paquetes_base in atril baobab onboard atril bluconfig baobab onboard dia breeze-icon-theme-rcc kpat ktorrent pdfarranger smbclient breeze galculator gufw kde-config-tablet vls vlc-plugin-vlsub audacity kolourpaint mtp-tools gparted font-manager kcharselect kpat xdemineur engrampa kazam breeze-icon-theme gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings vlc qapt-deb-installer ifuse kdeconnect menulibre catfish bleachbit prelink packagekit packagekit-tools; do sudo apt-get install -y $paquetes_base; done
+for librerias in ntp hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-de-de-frami xserver-xorg-input-mutouch xserver-xorg-input-multitouch  btrfs-progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools package-update-indicator gnome-packagekit python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-pt-pt  firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers kdenlive frei0r-plugins mediainfo graphicsmagick mediainfo-gui firefox-esr firefox-esr-l10n-de firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it gvfs-backends connman conky conky-all libimobiledevice-utils default-jre tumbler tumbler-plugins-extra ffmpegthumbnailer usermode build-essential make automake cmake shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse libsmbclient python3-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs python3-smbc liblensfun-bin pacpl imagemagick x264 gnome-system-tools unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full gzip lzip  zip abr2gbr gtkam-gimp gphoto2 qapt-deb-installer ifuse; do sudo sudo apt-get install -y $librerias; done
 
 }
 
 function _ptxconf() {
 
-# Reemplazado por paquete deb
-
-sudo apt-get install ptxconf -y
-
-# INSTALAR UTILIDAD PTXCONF (MAPPING)
+# INSTALAR MAPEADOR PARA TABLETAS GRÁFICAS
 
 clear
 sudo sudo apt-get install ptxconf -y
 
 }
-
+su
 function _chimiboga() {
 
 # INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
@@ -1011,9 +986,9 @@ sudo apt-get install quirinuxsplash -y
 function _samba() {
 
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
-
-clear
-sudo apt-get install system-config-samba -y
+# NO DISPONIBLE
+#clear
+#sudo apt-get install system-config-samba -y
 
 }
 
@@ -1031,9 +1006,11 @@ function _mystiq() {
 # INSTALAR CONVERSOR MYSTIQ
 
 clear
+
 for paquetes_mystiq in mystiq; do sudo sudo apt-get install -y $paquetes_mystiq; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
+
 }
 
 function _densify() {
@@ -1046,7 +1023,6 @@ sudo apt-get install densify -y
 }
 
 function _imagine() {
-
 # INSTALAR IMAGINE (para reducir imágenes)
 
 clear
@@ -1055,7 +1031,6 @@ sudo apt-get install imagine -y
 }
 
 function _openboard() {
-
 # INSTALAR OPENBOARD (Convierte la pantalla en una pizarra)
 
 clear
@@ -1064,7 +1039,6 @@ sudo apt-get install openboard -y
 }
 
 function _GIMP() {
-
 # INSTALAR GIMP EDICION QUIRINUX
 
 clear
@@ -1073,32 +1047,12 @@ sudo apt-get install gimp-quirinux gimp-paint-studio -y
 }
 
 function _mint() {
-
 # INSTALAR MINTBACKUP, ACTUALIZACIONES AUTOMÁTICAS y TIMESHIFT
 
 clear
-for paquetes_extra in package-update-indicator actualizar gnome-packagekit gnome-packagekit-data python3-distro-info python3-pycurl unattended-upgrades actualizar-config mintbackup timeshift; do sudo sudo apt-get install -y $paquetes_extra; done
+for paquetes_extra in python3-requests package-update-indicator actualizar gnome-packagekit gnome-packagekit-common python3-distro-info python3-pycurl unattended-upgrades actualizar mintbackup timeshift timeshift-dbgsym; do sudo sudo apt-get install -y $paquetes_extra; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-
-
-}
-
-function _centroDeSoftware() {
-
-# INSTALAR CENTRO DE SOFTWARE DE MINT
-
-clear
-sudo sudo apt-get install flatpak gir1.2-flatpak-1.0 xdg-desktop-portal-gtk -y
-sudo apt-get upgrade -y
-sudo apt-get dist-ugprade -y
-sudo apt-get install mintinstall -y
-sudo apt-get install flatpakconfig -y
-
-# INSTALAR FLATPAK-CONFIG
-
-clear
-sudo apt-get install flatpakconfig -y
 
 }
 
@@ -1107,9 +1061,16 @@ function _salvapantallas() {
 # INSTALAR SCREENSAVER GLUCLO
 
 clear
-
 sudo apt-get install xscreensaver gluqlo -y
 
+}
+
+function _miniaturas() {
+sudo apt-get install xapp-epub-thumbnailer xapp-appimage-thumbnailer xapp-mp3-thumbnailer xapp-raw-thumbnailer xapp-vorbiscomment-thumbnailer xapp-thumbnailers-common -y
+}
+
+function _televisor() {
+# sudo apt-get install hypnotix -y
 }
 
 function _fuentes() {
@@ -1120,103 +1081,50 @@ sudo apt-get install quirinux-fuentes -y
 
 }
 
-function _temas() {
+function _temasQuirinux() {
+
+# INSTALAR TEMAS DE QUIRINUX 2.0
 
 sudo apt-get install quirinuxtemas -y
+sudo apt-get install circle-flags-svg iso-flag-png mint-common -y
 update-grub
 update-grub2
-
-# OTORGANDO PERMISOS PARA MODIFICAR CONFIGURACIÓN DE CARPETAS DE USUARIO
-clear
-sudo chmod u+s /usr/sbin/hddtemp
+sudo apt-get install quirinux-asistente -y
 
 }
 
-# INSTALAR TEMAS DE QUIRINUX GENERAL
+function _pipewire() {
 
-function _temasGeneral() {
-	
-clear
-sudo apt-get remove --purge quirinuxtemas-pro quirinux-estilos-pro quirinux-asistente-pro quirinux-applications-pro -y
-sudo apt-get install quirinux-asistente-general -y
+# ACTIVAR PIPEWIRE
 
-}
-
-# INSTALAR TEMAS DE QUIRINUX PRO
-
-
-function _temasPro() {
-	
-clear
-sudo apt-get remove --purge quirinuxtemas-general quirinux-estilos-general quirinux-asistente-general quirinux-applications-general -y
-sudo apt-get install quirinux-asistente-pro -y
-
-}
-
-function _pulseaudio() {
-
-# REINSTALAR PULSEAUDIO
-
-FILE="/opt/requisitos/ok-bookworm"
-
-if [ ! -e ${FILE} ]; then 
-clear
-sudo apt-get remove --purge pulseaudio pavucontrol -y
-sudo apt-get clean
-sudo apt-get autoremove --purge -y
-sudo rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse
-sudo sudo apt-get install pulseaudio rtkit pavucontrol -y
-sudo sudo apt-get install -f -y
-sudo apt-get autoremove --purge -y
-fi 
+sudo apt install libwireplumber-0.4-0 wireplumber gstreamer1.0-pipewire libpipewire-0.3-0 libpipewire-0.3-modules pipewire pipewire-alsa pipewire-audio pipewire-bin pipewire-pulse -y
 
 }
 
 function _remover() {
 
-# NO ES NECESARIO SI SE USA DEBIAN NET-INSTALL
-
-# REMOVER IRQBALANCE
-for paquetes_irq in irqbalance; do sudo apt-get remove --purge -y $paquetes_irq; done
-
 # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 clear
-FILE="/opt/requisitos/ok-bookworm"
 
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-ru firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_firefox; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER TRADUCCIONES DE ESCRITORIO DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-# NO ES NECESARIO SI SE USA DEBIAN NET-INSTALL
-
-clear
-FILE="/opt/requisitos/ok-bookworm"
-
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_task in task-albanian-desktop task-cyrillic-desktop task-russian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_task; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER CONJUNTOS DE CARACTERES DE IDIOMAS QUE QUIRINUX NO INCLUYE
-clear
-FILE="/opt/requisitos/ok-bookworm"
 
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_ibus in inicatalan ipolish irussian idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_ibus; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
 
-# REMOVER DICCIONARIOS QUE QUIRINUX NO INCLUYE
-clear
-FILE="/opt/requisitos/ok-bookworm"
 
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_mythes in myspell-ru mythes-ru myaspell-ru myspell-et; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_mythes; done
 for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_aspell; done
 for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hunspell; done
@@ -1224,36 +1132,28 @@ for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell
 for paquetes_remover_idiomas_hyphen in hyphen-hr hypen-ru hyphen-hu hyphen-lt; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_hyphen; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER FUENTES QUE QUIRINUX NO INCLUYE
-clear
-FILE="/opt/requisitos/ok-bookworm"
 
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_fonts; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER IDIOMAS DE LIBRE OFFICE QUE QUIRINUX NO INCLUYE
-clear
-FILE="/opt/requisitos/ok-bookworm"
 
-if [ ! -e ${FILE} ]; then 
 for paquetes_remover_idiomas_libreoffice in libreoffice-help-ru libreoffice-l10n-ru libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do sudo apt-get remove --purge -y $paquetes_remover_idiomas_libreoffice; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
-clear
-FILE="/opt/requisitos/ok-bookworm"
-if [ ! -e ${FILE} ]; then 
+
 for paquetes_remover_programas in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt-get remove --purge -y $paquetes_remover_programas; done
 sudo sudo apt-get install -f -y
 sudo apt-get autoremove --purge -y
-fi
+
 
 # REMOVER DOCUMENTACIÓN
 clear
@@ -1290,11 +1190,11 @@ _limpieza
 
 }
 
-function _baseBusterPro() {
+function _especializadosDebian() {
 
-# INSTALAR PAQUETES ESPECIALIZADOS DESDE BUSTER (KRITA, OBS, SYNFIG, XSANE, ETC)
+# INSTALAR PAQUETES ESPECIALIZADOS DESDE DEBIAN(KRITA, OBS, SYNFIG, XSANE, ETC)
 clear
-for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam k3d gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n dvd-styler obs-studio obs-plugins gir1.2-entangle-0.1; do sudo sudo apt-get install -y $paquetes_estandar; done
+for paquetes_estandar in manuskript sweethome3d guvcview xsane digikam gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa vlc-plugin-fluidsynth fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n obs-studio obs-plugins gir1.2-entangle-0.1; do sudo sudo apt-get install -y $paquetes_estandar; done
 sudo sudo apt-get install -f -y
 clear
 _pluginEntangle
@@ -1368,7 +1268,7 @@ function _kitscenarist() {
 # INSTALAR KITSCENARIST
 
 clear
-sudo apt-get install kitscenarist -y
+# sudo apt-get install kitscenarist -y
 
 }
 
@@ -1438,17 +1338,7 @@ sudo apt-get install belle -y
 
 function _mypaint() {
 
-FILEBULL="/opt/requisitos/ok-bullseye"
-FILECHIM="/opt/requisitos/ok-chimaera"
-FILETEST="/opt/requisitos/ok-testing"
-
-if [ -e ${FILEBULL} || -e ${FILECHIM} || -e ${FILETEST}  ]; then
-
-clear
 sudo apt-get install mypaint -y
-
-else
-sudo apt-get install mypaintq -y
 
 fi
 
@@ -1497,23 +1387,23 @@ sudo apt-get install entangleinstallplugin -y
 # MENSAJE FINAL [CASTELLANO]
 # ===========================================================================================
 
-function _finalGeneral() {
+function _finalBase() {
 
-touch /opt/requisitos/ok-general
+touch /opt/requisitos/ok-base
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "ATENCION!" \
---msgbox "\n Todos los paquetes correspondientes a la edición Quirinux GENERAL han sido instalados." 23 100
+--msgbox "\n Todos los paquetes correspondientes DEBIAN BASE para Quirinux han sido instalados." 23 100
 
 }
 
-function _finalpro() {
+function _finalVer2() {
 
-touch /opt/requisitos/ok-pro
+touch /opt/requisitos/ok-ver2
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "ATENCIÓN!" \
---msgbox "\n Todos los paquetes correspondientes a la edicion QUIRINUX PRO han sido instalados.\n\nPara activar el plugin entangle stop motion, ejecute el sigiente comando SIN PERMISOS DE ROOT:\n\ninstalar-plugin-entangle" 23 100
+--msgbox "\n Todos los paquetes correspondientes a la edicion QUIRINUX 2.0 han sido instalados.\n\nPara activar el plugin entangle stop motion, ejecute el sigiente comando SIN PERMISOS DE ROOT:\n\ninstalar-plugin-entangle" 23 100
 
 }
 
