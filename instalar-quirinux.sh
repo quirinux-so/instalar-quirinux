@@ -441,7 +441,7 @@ clear
 _wapp
 ;;
 
-24) # "televisor"
+25) # "televisor"
 clear
 _televisor()
 ;;
