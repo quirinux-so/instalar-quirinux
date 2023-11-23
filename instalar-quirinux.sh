@@ -26,11 +26,12 @@ sudo apt-get clean
 
 }
 
+function _inicioCheck() {
+	
 # ===========================================================================================
 # VERIFICAR REQUISITOS [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
 
-function _inicioCheck() {
 
 FILE="/opt/requisitos/ok"
 
@@ -61,11 +62,10 @@ fi
 
 }
 
+function _requisitos() {
 # ===========================================================================================
 # INSTALAR REQUISITOS [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
-
-function _requisitos() {
 
 # Instalar WGET y GIT
 
@@ -78,33 +78,33 @@ for paquetes_wget in dialog wget git spice-vdagent; do sudo sudo apt-get install
 mkdir -p /opt/requisitos/
 touch /opt/requisitos/ok
 
-
 }
+
+function _salir() {
+	
 # ===========================================================================================
 # FUNCION SALIR [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
-
-function _salir() {
 
 clear
 exit 0
 
 }
 
+function _borratemp() {
 # ===========================================================================================
 # FUNCION BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
 # ===========================================================================================
 
-function _borratemp() {
 sudo rm -rf /opt/tmp/*
 clear
 }
 
+function _menuCondicional() {
+
 # ===========================================================================================
 # MENÚ CONDICIONAL [CASTELLANO]
 # ===========================================================================================
-
-function _menuCondicional() {
 
 echo " -----------------------------------------------------------------------------
  INSTALAR COMPONENTES DE QUIRINUX 2.0
@@ -136,16 +136,16 @@ read -p " Tu respuesta-> " opc
 
 case $opc in
 
-"1")
+"1") # Continuar
 
 clear
 
 _requisitos
-_config
+_arquitectura32bis
 
 ;;
 
-"0")
+"0") #Salir
 
 clear
 
@@ -157,11 +157,11 @@ esac
 
 }
 
+function _menuRepositorios() {
+	
 # ===========================================================================================
 # MENU REPOSITORIOS [CASTELLANO]
-# ===========================================================================================
-
-function _menuRepositorios() {
+# ===========================================================================================	
 	
 opRepositorios=$(dialog --title "REPOSITORIOS ADICIONALES" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
@@ -190,11 +190,11 @@ _salir
 fi
 }
 
+function _ayudaRepositorios() {
+
 # ===========================================================================================
 # AYUDA DEL MENÚ REPOSITORIOS [CASTELLANO]
 # ===========================================================================================
-
-function _ayudaRepositorios() {
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
@@ -202,11 +202,11 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 _menuRepositorios
 }
 
+function _menuPrincipal() {
+
 # ===========================================================================================
 # MENÚ PRINCIPAL [CASTELLANO]
-# ===========================================================================================
-
-function _menuPrincipal() {
+# ===========================================================================================	
 
 opPrincipal=$(dialog --title "MENÚ PRINCIPAL" --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" --nocancel \
 --stdout \
@@ -234,12 +234,12 @@ fi
 
 if [[ $opPrincipal == 3 ]]; then # Instalar componentes sueltos
 clear
-_instalarSueltos
+_instalarProgramasSueltos
 fi
 
 if [[ $opPrincipal == 4 ]]; then # Instalar programas
 clear
-_instalarVer2gramas
+_instalarComponentesSueltos
 fi
 
 if [[ $opPrincipal == 5 ]]; then # Ayuda
@@ -267,11 +267,11 @@ _warningRepo
 fi
 }
 
+function _ayudaPrincipal() {
+	
 # ===========================================================================================
 # AYUDA DEL MENÚ PRINCIPAL [CASTELLANO]
-# ===========================================================================================
-
-function _ayudaPrincipal() {
+# ===========================================================================================	
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 --title "AYUDA" \
@@ -283,13 +283,10 @@ function _instalarDialog() {
 sudo sudo apt-get install dialog -y
 }
 
-
-
+function _instalarComponentesSueltos() {
 # ===========================================================================================
 # INSTALAR PROGRAMAS SUELTOS [CASTELLANO]
-# ===========================================================================================
-
-function _instalarVer2gramas() {
+# ===========================================================================================	
 cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 76 16)
 options=(1 "Ardour (editor de audio multipista)" off
 2 "Azpainter (similar a Paint tool SAI)" off
@@ -314,13 +311,12 @@ options=(1 "Ardour (editor de audio multipista)" off
 21 "Tahoma2D (animación 2D y Stop-Motion apto Camaras Reflex)" off
 22 "Tupitube (animación 2D y stop-motion para Webcam)" off
 23 "Usuarios (gestionar usuarios)" off
-24 "Webapp-manager (aplicaciones web)" off
-25 "Televisor para canales online)" off)
+24 "Webapp-manager (aplicaciones web)" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
-for choice in $choices; do
-case $choice in
+for programa in $programas; do
+case $programa in
 
 1) # "Ardour (editor de audio multipista)"
 clear
@@ -441,12 +437,6 @@ clear
 _wapp
 ;;
 
-25) # "televisor"
-clear
-_televisor()
-;;
-
-
 esac
 done
 
@@ -454,11 +444,10 @@ _menuPrincipal
 
 }
 
+function _instalarProgramasSueltos() {
 # ===========================================================================================
 # MENU INSTALAR COMPONENTES SUELTOS [CASTELLANO]
-# ===========================================================================================
-
-function _instalarSueltos() {
+# ===========================================================================================	
 cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 76 16)
 options=(1 "Software de hogar y oficina" off
 2 "Software gráfico y de edición multimedia" off
@@ -483,8 +472,8 @@ options=(1 "Software de hogar y oficina" off
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
-for choice in $choices; do
-case $choice in
+for comopente in $componentes; do
+case $componente in 
 
 1) # "Programas para usuarios en general"
 clear
@@ -502,7 +491,6 @@ clear
 _fuentes
 _tipografiasPro
 ;;
-
 
 4) # "Centro de software sencillo de usar (estilo Android)"
 clear
@@ -592,23 +580,19 @@ _virtualbox
 
 18) # "Miniaturas para archivos de imágenes"
 clear
-_miniaturas()
+_miniaturas
 ;;
 
 esac
 done
-
 _menuPrincipal
 
 }
 
-
+function _repoconfig() {
 # ===========================================================================================
 # REPOSITORIOS DE QUIRINUX
 # ===========================================================================================
-
-function _repoconfig() {
-
 # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
 
 clear
@@ -621,7 +605,6 @@ chown -R root:root /etc/apt
 sudo apt-get install quirinux-sudoers
 sudo rm /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
 }
-
 
 function _virtualbox() {
 
@@ -703,12 +686,11 @@ sudo apt-get install flatpakconfig -y
 }
 
 function _firmwareWifi() {
-
+clear
 # INSTALAR FIRMWARE (CONTROLADORES PRIVATIVOS)
 
 # ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
 
-#clear
 #for paquetes_firmware in firmware-intel-sound firmware-ath9k-htc grub-firmware-qemu firmware-misc-nonfree firmware-linux firmware-netronome firmware-samsung firmware-netxen firmware-bnx2 firmware-ipw2x00 firmware-bnx2x ubertooth-firmware-source firmware-linux-free firmware-ti-connectivity firmware-ath9k-htc-dbgsym firmware-linux-nonfree firmware-zd1211 firmware-brcm80211 firmware-siano firmware-microbit-micropython firmware-realtek firmware-libertas firmware-iwlwifi dahdi-firmware-nonfree firmware-cavium firmware-adi firmware-qcom-media firmware-qlogic firmware-ivtv sigrok-firmware-fx2lafw dns323-firmware-tools firmware-amd-graphics firmware-atheros firmware-microbit-micropython3-doc firmware-myricom firmware-intelwimax firmware-ralink expeyes-firmware-dev firmware-linux firmware-linux-nonfree hdmi2usb-fx2-firmware firmware-ralink firmware-realtek firmware-intelwimax firmware-iwlwifi firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-atheros dahdi-firmware-nonfree dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 hdmi2usb-fx2-firmware nxt-firmware sigrok-firmware-fx2lafw dns323-firmware-tools firmware-adi firmware-amd-graphics firmware-atheros firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netronome firmware-netxen firmware-qcom-media firmware-qlogic firmware-ralink firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 dahdi-firmware-nonfree nxt-firmware sigrok-firmware-fx2lafw firmware-misc-nonfree ; do sudo sudo apt-get install -y $paquetes_firmware; done
 #sudo sudo apt-get install -f -y
 #sudo apt-get autoremove --purge -y
@@ -736,10 +718,11 @@ _quirinuxConfig
 
 }
 function _opengl() {
-
+clear
 # ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
 
 #for paquetes_opengl in build-essential g++ libgl-dev libglfw3-dev libopenal-data libopenal1 libgl1-mesa-dri libglx-mesa0 libglu1-mesa libdrm-amdgpu1 libdrm-intel1 libdrm-nouveau2 libdrm-radeon1 libdrm2 libdrm-common libcogl-pango20 libcogl-path20 libegl1 libgl1 libgles2 libglvnd0 libopengl0 libepoxy0 freeglut3-dev; do sudo apt-get install -y $paquetes_opengl; done
+
 }
 
 function _controladoresNvidia() {
@@ -747,7 +730,7 @@ function _controladoresNvidia() {
 # INSTALAR CONTROLADORES PARA NVIDIA	
 # ELIMINADO. Se utilizarán valores predeterminados de Debian 12. 
 
-#clear
+clear
 #for paquetes_nvidia in xserver-xorg-video-nouveau firmware-misc-nonfree libvdpau1 dmraid mesa-vulkan-drivers libvulkan1 yt-dlp libegl-mesa0 libgbm1 libgl1-mesa-dri libglapi-mesa libglx-mesa0 mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers libglu1-mesa mesa-utils mesa-utils-bin libaliased-perl quirinuxconfig; do sudo sudo apt-get install --reinstall -y $paquetes_nvidia; done
 
 
@@ -790,6 +773,7 @@ sudo apt-get install geniusconfig -y
 sudo apt-get install wizardpen -y
 sudo apt-get install huion-tablet -y
 sudo apt-get install xppen -y
+
 }
 
 function _controladoresImpresoras() {
@@ -904,16 +888,14 @@ _openboard
 _borratemp
 }
 
-function _applications()
-{
+function _applications() {
 
 clear
 sudo apt-get install quirinux-applications -y
 
 }
 
-function _okrepo()
-{
+function _okrepo() {
 	
 FILE="/etc/apt/sources.list.d/quirinux.list"
 
@@ -925,15 +907,14 @@ fi
 	
 }
 
-function _config() {
+function _arquitectura32bis() {
 
 # ESTABLECE SOPORTE MULTIARQUITECTURA PARA 32 BITS
 
 # LO DESHABILITAMOS PARA NO DUPLICAR LA INSTALACIÓN DE PAQUETES.
 
-#clear
+clear
 #sudo dpkg --add-architecture i386
-
 }
 
 function _eggs() {
@@ -964,7 +945,7 @@ clear
 sudo sudo apt-get install ptxconf -y
 
 }
-su
+
 function _chimiboga() {
 
 # INSTALAR CHIMIBOGA - CHIMI VIDEOJUEGO
@@ -984,10 +965,9 @@ sudo apt-get install quirinuxsplash -y
 }
 
 function _samba() {
-
+clear
 # INSTALAR SAMBA Y CONFIGURADOR PARA SAMBA DE UBUNTU
 # NO DISPONIBLE
-#clear
 #sudo apt-get install system-config-samba -y
 
 }
@@ -1067,10 +1047,6 @@ sudo apt-get install xscreensaver gluqlo -y
 
 function _miniaturas() {
 sudo apt-get install xapp-epub-thumbnailer xapp-appimage-thumbnailer xapp-mp3-thumbnailer xapp-raw-thumbnailer xapp-vorbiscomment-thumbnailer xapp-thumbnailers-common -y
-}
-
-function _televisor() {
-# sudo apt-get install hypnotix -y
 }
 
 function _fuentes() {
@@ -1340,8 +1316,6 @@ function _mypaint() {
 
 sudo apt-get install mypaint -y
 
-fi
-
 }
 
 function _blender() {
@@ -1355,8 +1329,6 @@ function _boats() {
 sudo sudo apt-get install boats-animator -y
 
 }
-
-
 
 function _ardour() {
 
@@ -1383,12 +1355,10 @@ sudo apt-get install entangleinstallplugin -y
 
 }
 
+function _finalBase() {
 # ===========================================================================================
 # MENSAJE FINAL [CASTELLANO]
 # ===========================================================================================
-
-function _finalBase() {
-
 touch /opt/requisitos/ok-base
 
 dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
@@ -1409,3 +1379,4 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 
 _inicioCheck
 _menuPrincipal
+
