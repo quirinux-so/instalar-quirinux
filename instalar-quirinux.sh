@@ -818,7 +818,7 @@ _eggs
 }
 
 function _instalarVer2() {
-
+_instalarBase
 FILE1="/opt/requisitos/ok-ver2"
 
 if [ -e ${FILE1} ]; then
@@ -1379,4 +1379,6 @@ dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 
 _inicioCheck
 _menuPrincipal
+
+
 
