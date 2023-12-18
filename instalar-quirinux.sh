@@ -663,11 +663,26 @@ _programasBase
 _virtualbox
 _pipewire
 _temasQuirinux
+_idiomas
 _limpiar
 _finalBase
 
 fi
 
+}
+
+function _idiomas() {
+	
+	idiomas=("es_ES.UTF-8" "en_US.UTF-8" "fr_FR.UTF-8" "de_DE.UTF-8" "it_IT.UTF-8" "gl_ES.UTF-8")
+
+# Configura cada idioma
+for idioma in "${idiomas[@]}"; do
+    sudo locale-gen $idioma
+done
+
+# Establece el idioma predeterminado
+sudo update-locale LANG="es_ES.UTF-8" 
+	
 }
 
 function _centroDeSoftware() {
