@@ -673,15 +673,25 @@ fi
 
 function _idiomas() {
 	
-	idiomas=("es_ES.UTF-8" "en_US.UTF-8" "fr_FR.UTF-8" "de_DE.UTF-8" "it_IT.UTF-8" "gl_ES.UTF-8")
+idiomas=("es_ES.UTF-8" "en_US.UTF-8" "fr_FR.UTF-8" "de_DE.UTF-8" "it_IT.UTF-8" "gl_ES.UTF-8" "pt_PT.UTF-8")
 
 # Configura cada idioma
 for idioma in "${idiomas[@]}"; do
-    sudo locale-gen $idioma
+    # Verifica si la configuración ya existe
+    if ! locale -a | grep -q "$idioma"; then
+        sudo locale-gen $idioma
+        echo "Configuración de $idioma completa."
+    fi
+
+    if [ "$idioma" == "pt_PT.UTF-8" ]; then
+        break  # Sale del bucle cuando llega a pt_PT.UTF-8
+    fi
 done
 
 # Establece el idioma predeterminado
-sudo update-locale LANG="es_ES.UTF-8" 
+sudo update-locale LANG="es_ES.UTF-8"
+
+
 	
 }
 
