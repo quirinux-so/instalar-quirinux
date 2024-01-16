@@ -2,7 +2,7 @@
 
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
-# Licencia:	https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+# Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0
 # ===========================================================================================
@@ -101,7 +101,7 @@ ${bold}   ___        _      _
  | |_| | |_| | | |  | | | | | |_| |>  < 
   \__\__\__,_|_|_|  |_|_| |_|\__,_/_/\_\ ${normal}
  
- (p) 2019-2021 Licencia GPLv3, Autor: Charlie Martínez® 
+ (p) 2019-2024 Licencia GPLv2, Autor: Charlie Martínez® 
  Página web: https://www.quirinux.org - E-Mail: cmartinez@quirinux.org "
 	sleep 1
 	echo "
@@ -173,7 +173,7 @@ function _ayudaRepositorios() {
 
 	dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 		--title "AYUDA" \
-		--msgbox "\nQuirinux puede crearse sobre una instalación fresca de DEBIAN XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox para quien quiera utilizarlos y los repositorios de Penguin's Eggs de Piero Proietti para la generación de imágenes ISO personalizadas del sistema. Si utilizas DEBIAN / DEVUAN XFCE puedes instalar estos repositorios con tranquilidad. ADVERTENCIA: Este instalador modificará la configuración de sudoers." 23 100
+		--msgbox "\nQuirinux puede crearse sobre una instalación fresca de DEBIAN XFCE e incluye programas instalados tanto desde el repositorio oficial de Debian como del propio repositorio de Quirinux. Además, agrega los respositorios de VirtualBox para quien quiera utilizarlos. Si utilizas DEBIAN / DEVUAN XFCE puedes instalar estos repositorios con tranquilidad. ADVERTENCIA: Este instalador modificará la configuración de sudoers." 23 100
 
 	_menuRepositorios
 
@@ -256,7 +256,7 @@ function _ayudaPrincipal() {
 
 	dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
 		--title "AYUDA" \
-		--msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\n☛Instalar base para Quirinux:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\n☛Instalar Quirinux Versión 2.0:\nSe instala la base para Quirinux + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\n☛Instalar Programas / Componentes sueltos:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\n" 23 90
+		--msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES / PROGRAMAS SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\n" 23 90
 	_menuPrincipal
 
 }
@@ -570,12 +570,12 @@ function _repoconfig() {
 	clear
 	apt install wget -y
 	sudo mkdir -p /opt/tmp/apt
-	sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.1_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.1_all.deb	
-	sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.1_all.deb
+	sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.0_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
+	sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.0_all.deb
 	sudo apt update -y
 	chown -R root:root /etc/apt
 	apt install quirinux-sudoers
-	sudo rm /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
+	sudo rm /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
 
 }
 
@@ -655,6 +655,7 @@ function _baseDebian() {
 
 	# INSTALAR PROGRAMAS BASE DEBIAN PARA USUARIOS EN GENERAL	
 	_librerias
+	_colorpicker
 	_bleachbit
 	_kazam
 	_engrampa
@@ -887,6 +888,12 @@ function _librerias() {
 
 }
 
+function _colorpicker() {
+	
+	apt install color-picker -y
+	
+}
+
 function _catfish() {
 
 	apt install catfish -y
@@ -1033,7 +1040,7 @@ function _ptxconf() {
 
 function _splash() {
 
-	apt install quirinux-splash -y
+	apt install quirinuxsplash -y
 
 }
 
@@ -1117,7 +1124,7 @@ function _autologin() {
 
 function _temasQuirinux() {
 
-	for paquetes in quirinux-temas; do apt install -y $paquetes; done
+	for paquetes in quirinuxtemas; do apt install -y $paquetes; done
 
 	for paquetes in circle-flags-svg iso-flag-png mint-common; do apt install -y $paquetes; done
 	update-grub
