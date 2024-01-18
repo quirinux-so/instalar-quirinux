@@ -570,12 +570,12 @@ function _repoconfig() {
 	clear
 	apt install wget -y
 	sudo mkdir -p /opt/tmp/apt
-	sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.0_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
-	sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.0_all.deb
+	sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.1_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
+	sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.1_all.deb
 	sudo apt update -y
 	chown -R root:root /etc/apt
 	apt install quirinux-sudoers
-	sudo rm /opt/tmp/apt/quirinux-repo_1.0.0_all.deb
+	sudo rm /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
 
 }
 
