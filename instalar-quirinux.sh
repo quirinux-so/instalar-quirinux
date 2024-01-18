@@ -655,6 +655,8 @@ function _baseDebian() {
 
 	# INSTALAR PROGRAMAS BASE DEBIAN PARA USUARIOS EN GENERAL	
 	_librerias
+	_xfburn
+	_devede
 	_colorpicker
 	_bleachbit
 	_kazam
@@ -679,6 +681,18 @@ function _baseDebian() {
 	_mugshot
 
 }
+
+function _xfburn() {
+	
+	apt install xfburn -y
+	
+	}
+
+function _devede() {
+	
+	apt install devede -y
+	
+	}
 
 function _idiomas() {
 
@@ -1230,7 +1244,7 @@ function _especializadosDebian() {
 
 	# INSTALAR PAQUETES ESPECIALIZADOS DESDE DEBIAN(KRITA, OBS, SYNFIG, XSANE, ETC)
 	clear
-	for paquetes_estandar in gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d devede vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n obs-studio obs-plugins gir1.2-entangle-0.1; do apt install -y $paquetes_estandar; done
+	for paquetes_estandar in gnome-color-manager aegisub dispcalgui birdfont skanlite pencil2d vokoscreen-ng soundconverter hugin calf-plugins invada-studio-plugins-ladspa fluidsynth synfig synfigstudio synfig-examples pikopixel.app entangle darktable rawtherapee krita krita-data krita-gmic krita-l10n obs-studio obs-plugins gir1.2-entangle-0.1; do apt install -y $paquetes_estandar; done
 	apt install -f -y
 	clear
 	_pluginEntangle
