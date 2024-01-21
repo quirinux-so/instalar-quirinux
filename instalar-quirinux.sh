@@ -2,7 +2,7 @@
 
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
-# Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
+# Licencia:	https://www.gnu.org/licenses/gpl-2.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0
 # ===========================================================================================
