@@ -2,7 +2,7 @@
 
 # Nombre:	instalar-quirinux.sh
 # Autor:	Charlie Martínez® <cmartinez@quirinux.org>
-# Licencia:	https://www.gnu.org/licenses/gpl-3.0.txt
+# Licencia:	https://www.gnu.org/licenses/gpl-2.0.txt
 # Descripción:	Convierte una instalación limpia de Debian Buster XFCE 64 Bits en Quirinux 2.0
 # Versión:	2.0
 # ===========================================================================================
@@ -82,6 +82,7 @@ function _borratemp() {
 	# FUNCION BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
 	# ===========================================================================================
 	sudo rm -rf /opt/tmp/*
+	sudo apt-get clean
 	clear
 
 }
@@ -626,6 +627,7 @@ function _instalarBase() {
 		_pipewire
 		_temasQuirinux
 		_idiomas
+		_repararVirtualbox
 		_limpiar
 		touch /opt/requisitos/ok-base
 		_finalBase
@@ -646,8 +648,10 @@ function _programasBase() {
 	_mint
 	_salvapantallas
 	_fuentes
-	_pipewire
+	_gnome-firmware
+	_repararVirtualbox
 	_eggs
+	_pipewire
 
 }
 
@@ -679,6 +683,8 @@ function _baseDebian() {
 	_transmission
 	_atril
 	_mugshot
+	_repararVirtualbox
+	_pipewire
 
 }
 
@@ -818,6 +824,7 @@ function _instalarVer2() {
 		_especializadosQuirinux
 		_temasQuirinux
 		_applications
+		_pipewire
 		_limpiar
 		_finalVer2
 	else
@@ -827,6 +834,7 @@ function _instalarVer2() {
 		_especializadosQuirinux
 		_temasQuirinux
 		_applications
+		_pipewire
 		_limpiar
 		_finalVer2
 	fi
@@ -854,6 +862,7 @@ function _especializadosQuirinux() {
 	_ardour
 	_pluginEntangle
 	_huayra
+	_repararVirtualbox
 	_borratemp
 
 }
@@ -871,6 +880,12 @@ function _utiles() {
 function _applications() {
 
 	apt install quirinux-applications -y
+
+}
+
+function _repararVirtualbox() {
+	
+	sudo rcvboxadd setup
 
 }
 
@@ -900,6 +915,10 @@ function _librerias() {
 	for paquetes in mtp-tools font-manager kcharselect breeze-icon-theme gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings packagekit screenkey; do apt install -y $paquetes; done
 	for librerias in ntp hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-de-de-frami xserver-xorg-input-mutouch xserver-xorg-input-multitouch btrfs-progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools package-update-indicator gnome-packagekit python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-pt-pt firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr mmolch-thumbnailers frei0r-plugins graphicsmagick mediainfo-gui firefox-esr firefox-esr-l10n-de firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it gvfs-backends connman conky conky-all libimobiledevice-utils default-jre tumbler tumbler-plugins-extra ffmpegthumbnailer usermode build-essential make automake cmake shotwell xinput-calibrator libsox-fmt-mp3 gvfs-fuse libsmbclient python3-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs python3-smbc liblensfun-bin pacpl imagemagick x264 gnome-system-tools unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full gzip lzip zip abr2gbr gtkam-gimp gphoto2 qapt-deb-installer ifuse; do apt install -y $librerias; done
 
+}
+
+function _gnome-firmware() {
+	apt install gnome-firmware -y
 }
 
 function _colorpicker() {
@@ -1054,7 +1073,7 @@ function _ptxconf() {
 
 function _splash() {
 
-	apt install quirinuxsplash -y
+	apt install quirinux-splash -y
 
 }
 
@@ -1138,7 +1157,7 @@ function _autologin() {
 
 function _temasQuirinux() {
 
-	for paquetes in quirinuxtemas; do apt install -y $paquetes; done
+	for paquetes in quirinux-temas; do apt install -y $paquetes; done
 
 	for paquetes in circle-flags-svg iso-flag-png mint-common; do apt install -y $paquetes; done
 	update-grub
