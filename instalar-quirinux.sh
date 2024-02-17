@@ -1027,7 +1027,7 @@ function _ayudaPrincipal() {
 
     dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
         --title "AYUDA" \
-        --msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX EDICIÓN GENERAL:\nOficina, internet, compresión de archivos, pdf y editores básicos de gráficos, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX EDICIÓN PRO:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES / PROGRAMAS SUELTOS:\nPermite instalar las cosas por separado y de manera optativa (controladores, programas, codecs, etc).\n\n" 23 90
+        --msgbox "*Programa para crear Quirinux sobre Debian Buster XFCE*\n\nINSTALAR QUIRINUX BASE:\nOficina, internet, compresión de archivos, pdf, GIMP Quirinux, redes, virtualización, audio y video.\n\nINSTALAR QUIRINUX ANIMACIÓN:\nHerramientas de la edición General + Software profesional para la edición de gráficos, animación 2D, 3D y Stop-Motion, audio y video.\n\nINSTALAR COMPONENTES SUELTOS:\nPermite seleccionar e instalar cosas por separado (controladores, programas, codecs, etc).\n\n" 23 90
     _menuPrincipal
 
 }
