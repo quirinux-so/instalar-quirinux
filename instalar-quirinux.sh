@@ -251,7 +251,7 @@ function _instalarBase() {
 
 }
 
-function finalBase() {
+function _finalBase() {
 
     dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
         --title "ATENCION!" \
@@ -287,6 +287,7 @@ function _instalarAnimacion() {
 }
 
 function _paquetesBase() {
+	
     clear
     _centroDeSoftware
     _devede
@@ -324,6 +325,7 @@ function _paquetesBase() {
 }
 
 function _paquetesAnimacion() {
+	
     clear
     _perfiles
     _subtitulos
