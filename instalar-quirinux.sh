@@ -225,7 +225,7 @@ function _menuPrincipal() {
         _menuAnimacion
     fi
 
-    if [[ $opPrincipal == 5 ]]; then # Ayuda
+    if [[ $opPrincipal == 5 ]]; then # Ayuda_sistema
         clear
         _ayudaPrincipal
     fi
@@ -290,6 +290,7 @@ function _paquetesBase() {
 	
     clear
     _centroDeSoftware
+    _sistema
     _devede
     _torrent
     _accesorios
