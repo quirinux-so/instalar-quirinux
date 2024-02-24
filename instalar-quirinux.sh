@@ -299,6 +299,7 @@ function _paquetesBase() {
     _paquetesEstandar
     _devede
     _virtualbox
+    _peek
     _vlc
     _kdenlive
     _juegos
@@ -396,16 +397,17 @@ function _menuBase() {
         18 "Librerías Más Habituales" off
         19 "Openboard: Pizarra en Pantalla" off
         20 "Paquete de Librerías Más Habituales" off
-        21 "Reproductor Multimedia VLC + Complementos" off
-        22 "Screenkey: Muestra en Pantalla lo que se Escribe" off
-        23 "Servidor de Sonido Pipewire" off
-        24 "Teclado en Pantalla para Dispositivos Táctiles" off
-        25 "Tipografías Adicionales (Incluye las de Windows)" off
-        26 "Transmission: Cliente para Torrent" off
-        27 "Utilidades de Sistema (Limpieza, Seguridad y Backup)" off
-        28 "Utilidades para Ficheros PDF" off
-        29 "Virtualbox: Virtualizar otros Sistemas Operativos" off
-        30 "Visualizadores y Organizadores de Imágenes" off
+        21 "Peek: grabar pequeños GIF animados de la pantalla" off
+        22 "Reproductor Multimedia VLC + Complementos" off
+        23 "Screenkey: Muestra en Pantalla lo que se Escribe" off
+        24 "Servidor de Sonido Pipewire" off
+        25 "Teclado en Pantalla para Dispositivos Táctiles" off
+        26 "Tipografías Adicionales (Incluye las de Windows)" off
+        27 "Transmission: Cliente para Torrent" off
+        28 "Utilidades de Sistema (Limpieza, Seguridad y Backup)" off
+        29 "Utilidades para Ficheros PDF" off
+        30 "Virtualbox: Virtualizar otros Sistemas Operativos" off
+        31 "Visualizadores y Organizadores de Imágenes" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -433,16 +435,17 @@ function _menuBase() {
         18) _librerias ;;
         19) _openboard ;;
         20) _librerias ;;
-        21) _vlc ;;
-        22) _screenkey ;;
-        23) _pipewire ;;
-        24) _teclado ;;
-        25) _tipografias ;;
-        26) _torrent ;;
-        27) _sistema ;;
-        28) _pdf ;;
-        29) _virtualbox ;;
-        30) _imagenes ;;
+        21) _peek ;;
+        22) _vlc ;;
+        23) _screenkey ;;
+        24) _pipewire ;;
+        25) _teclado ;;
+        26) _tipografias ;;
+        27) _torrent ;;
+        28) _sistema ;;
+        29) _pdf ;;
+        30) _virtualbox ;;
+        31) _imagenes ;;
         esac
     done
 
@@ -582,6 +585,14 @@ function _virtualbox() {
     rcvboxadd setup
 
 }
+
+function _peek() {
+
+    # Peek: grabar GIF animados pequeños de la pantalla
+    apt install peek -y
+
+}
+
 function _vlc() {
 
     # Reproductor multimedia VLC + Complementos
