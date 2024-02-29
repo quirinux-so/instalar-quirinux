@@ -702,7 +702,7 @@ function _eggs() {
 function _pdf() {
 
     # Utilidades para ficheros PDF
-    for paquetes in atril autofirma densify pdfarranger; do apt install -y $paquetes; done
+    for paquetes in atril autofirma compresorpdf pdfexport pdfarranger; do apt install -y $paquetes; done
 
 }
 
