@@ -357,6 +357,7 @@ function _paquetesAnimacion() {
     _mypaint
     _blender
     _boats
+	_gb-studio
     _limpiar
     touch /opt/requisitos/ok-animacion
 
@@ -469,24 +470,25 @@ function _menuAnimacion() {
         8 "Darktable: Revelado RAW Similar a Lightroom, Ideal para Paisajes" off
         9 "Enve: Motion Graphics Sencillo, Interfaz Similar a After Effects" off
         10 "Entangle: Control para Cámaras DSLR y Plugin Papel Cebolla" off
-        11 "Godot: Animación Cut-out Ideal Videojuegos" off
-        12 "Hugin: Unir Dibujos para Fondos Widescreen" off
-        13 "Huayra Stopmotion: App Sencilla de Stop-motion Webcam en 4:3" off
-        14 "Inkscape: Dibujo Vectorial" off
-        15 "Krita: Dibujo, Pintura y Animación 2D, Modos RGB y CMYK" off
-        16 "Manuskript: Software para Escritores y Guionistas" off
-        17 "MyPaint: Pintura Digital Similar a ArtRage" off
-        18 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
-        19 "Pencil 2D: Animación 2D Estilo Flash 8" off
-        20 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
-        21 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
-        22 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
-        23 "Skanlite: Software para Escanear en Modo Lineart" off
-        24 "Storyboarder: Creación de Storyboard y Animatics" off
-        25 "Sweethome3D: Diseño de Interiores" off
-        26 "Synfig: Animación 2D Cut-out" off
-        27 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
-        28 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+        11 "GB Studio: Editor visual de juegos retro" off
+        12 "Godot: Animación Cut-out Ideal Videojuegos" off
+        13 "Hugin: Unir Dibujos para Fondos Widescreen" off
+        14 "Huayra Stopmotion: App Sencilla de Stop-motion Webcam en 4:3" off
+        15 "Inkscape: Dibujo Vectorial" off
+        16 "Krita: Dibujo, Pintura y Animación 2D, Modos RGB y CMYK" off
+        17 "Manuskript: Software para Escritores y Guionistas" off
+        18 "MyPaint: Pintura Digital Similar a ArtRage" off
+        19 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
+        20 "Pencil 2D: Animación 2D Estilo Flash 8" off
+        21 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
+        22 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
+        23 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
+        24 "Skanlite: Software para Escanear en Modo Lineart" off
+        25 "Storyboarder: Creación de Storyboard y Animatics" off
+        26 "Sweethome3D: Diseño de Interiores" off
+        27 "Synfig: Animación 2D Cut-out" off
+        28 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
+        29 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -504,24 +506,25 @@ function _menuAnimacion() {
         8) _darktable ;;
         9) _enve ;;
         10) _entangle ;;
-        11) _godot ;;
-        12) _hugin ;;
-        13) _huayra ;;
-        14) _inkscape ;;
-        15) _krita ;;
-        16) _manuskript ;;
-        17) _mypaint ;;
-        18) _natron ;;
-        19) _pencil ;;
-        20) _quinema ;;
-        21) _qstopmotion ;;
-        22) _rawtherapee ;;
-        23) _escanerLinea ;;
-        24) _storyboarder ;;
-        25) _sweethome3d ;;
-        26) _synfig ;;
-        27) _tahoma2D ;;
-        28) _tupitube ;;
+        11) _gb-studio ;;
+        12) _godot ;;
+        13) _hugin ;;
+        14) _huayra ;;
+        15) _inkscape ;;
+        16) _krita ;;
+        17) _manuskript ;;
+        18) _mypaint ;;
+        19) _natron ;;
+        20) _pencil ;;
+        21) _quinema ;;
+        22) _qstopmotion ;;
+        23) _rawtherapee ;;
+        24) _escanerLinea ;;
+        25) _storyboarder ;;
+        26) _sweethome3d ;;
+        27) _synfig ;;
+        28) _tahoma2D ;;
+        29) _tupitube ;;
         esac
     done
 
@@ -799,6 +802,12 @@ function _codecs() {
 # ===========================================================================================
 # PAQUETES DE QUIRINUX ANIMACIÓN
 # ===========================================================================================
+
+function _gb-studio() {
+	
+	apt install gb-studio -y
+	
+}
 
 function _perfiles() {
 
