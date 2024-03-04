@@ -13,6 +13,17 @@
 # Otra opción cómoda es VSCodium (Panel "Outline", a la izquierda).
 
 function _inicioCheck() {
+	
+	
+# Verifica si el usuario tiene permisos de administrador
+
+if [ "$EUID" -ne 0 ]; then
+    echo ''
+    echo "Este script debe ejecutarse con permisos de root."
+    echo 'Puedes intentarlo con "sudo" tuusuario, "sudo su" o "su root".'
+    echo ''
+    exit 1
+fi
 
     # ===========================================================================================
     # VERIFICAR REQUISITOS [CÓDIGO REUTILIZABLE]
@@ -142,13 +153,13 @@ function _repoconfig() {
     # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
     clear
     apt install wget -y
-    sudo mkdir -p /opt/tmp/apt
-    sudo wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.1_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
-    sudo apt install /opt/tmp/apt/./quirinux-repo_1.0.1_all.deb
-    sudo apt update -y
+    mkdir -p /opt/tmp/apt
+    wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.1_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
+    apt install /opt/tmp/apt/./quirinux-repo_1.0.1_all.deb -y
+    apt update -y
     chown -R root:root /etc/apt
-    apt install quirinux-sudoers
-    sudo rm /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
+    apt install quirinux-sudoers -y
+    rm /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
 
 }
 
@@ -740,7 +751,7 @@ function _impresoras() {
 
     # Controladores para impresoras y escáneres
     clear
-    apt install cups
+    apt install cups -y
     apt install -f -y
     apt remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
     apt remove --purge hplip -y
