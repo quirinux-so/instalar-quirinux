@@ -334,6 +334,7 @@ function _paquetesBase() {
     _controladoresAMD
     _controladoresIntel
     _limpiar
+    _warpinator
     touch /opt/requisitos/ok-base
 
 }
@@ -421,6 +422,7 @@ function _menuBase() {
         29 "Utilidades para Ficheros PDF" off
         30 "Virtualbox: Virtualizar otros Sistemas Operativos" off
         31 "Visualizadores y Organizadores de Imágenes" off
+	32 "Warpinator: enviar ficheros entre dispositivos" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -459,6 +461,7 @@ function _menuBase() {
         29) _pdf ;;
         30) _virtualbox ;;
         31) _imagenes ;;
+	32) _warpinator;;
         esac
     done
 
@@ -546,6 +549,12 @@ function _menuAnimacion() {
 # ===========================================================================================
 # PAQUETES DE QUIRINUX BASE
 # ===========================================================================================
+
+function _warpinator() {
+
+    apt install warpinator -y
+    
+}
 
 function _centroDeSoftware() {
 
