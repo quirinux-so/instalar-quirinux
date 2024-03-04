@@ -737,8 +737,8 @@ function _gimp() {
 function _pipewire() {
 
     # Servidor de sonido Pipewire
-    for paquetes in libwireplumber-0.4-0 wireplumber gstreamer1.0-pipewire libpipewire-0.3-0 libpipewire-0.3-modules pipewire pipewire-alsa pipewire-audio pipewire-bin pipewire-pulse; do apt install -y $paquetes; done
-
+    apt install quirinux-pipewire -y
+    
 }
 
 function _imagenes() {
