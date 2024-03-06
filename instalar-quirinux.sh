@@ -373,6 +373,7 @@ function _paquetesAnimacion() {
     _blender
     _boats
 	_gb-studio
+	_pikopixel
     _limpiar
     touch /opt/requisitos/ok-animacion
 
@@ -501,15 +502,16 @@ function _menuAnimacion() {
         18 "MyPaint: Pintura Digital Similar a ArtRage" off
         19 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
         20 "Pencil 2D: Animación 2D Estilo Flash 8" off
-        21 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
-        22 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
-        23 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
-        24 "Skanlite: Software para Escanear en Modo Lineart" off
-        25 "Storyboarder: Creación de Storyboard y Animatics" off
-        26 "Sweethome3D: Diseño de Interiores" off
-        27 "Synfig: Animación 2D Cut-out" off
-        28 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
-        29 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+        21 "PikoPixel.app: editor de pixel art" off
+        22 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
+        23 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
+        24 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
+        25 "Skanlite: Software para Escanear en Modo Lineart" off
+        26 "Storyboarder: Creación de Storyboard y Animatics" off
+        27 "Sweethome3D: Diseño de Interiores" off
+        28 "Synfig: Animación 2D Cut-out" off
+        29 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
+        30 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -537,15 +539,17 @@ function _menuAnimacion() {
         18) _mypaint ;;
         19) _natron ;;
         20) _pencil ;;
-        21) _quinema ;;
-        22) _qstopmotion ;;
-        23) _rawtherapee ;;
-        24) _escanerLinea ;;
-        25) _storyboarder ;;
-        26) _sweethome3d ;;
-        27) _synfig ;;
-        28) _tahoma2D ;;
-        29) _tupitube ;;
+        21) _pikopixel ;;
+        22) _quinema ;;
+        23) _qstopmotion ;;
+        24) _rawtherapee ;;
+        25) _escanerLinea ;;
+        26) _storyboarder ;;
+        27) _sweethome3d ;;
+        28) _synfig ;;
+        29) _tahoma2D ;;
+        30) _tupitube ;;
+        
         esac
     done
 
@@ -555,6 +559,12 @@ function _menuAnimacion() {
 # ===========================================================================================
 # PAQUETES DE QUIRINUX BASE
 # ===========================================================================================
+
+function _pikopixel() {
+	
+	apt install pikopixel.app -y
+	
+}
 
 function _owncloud() {
 	
