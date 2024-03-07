@@ -618,7 +618,8 @@ function _torrent() {
 function _accesorios() {
 
     # Accesorios: calculadora, color picker, kpaint y otros
-    for paquetes in galculator color-picker kpaint dia kcharselect; do apt install -y $paquetes; done
+    for paquetes in galculator color-picker kpaint dia kcharselect 
+    kruler; do apt install -y $paquetes; done
 
 }
 
