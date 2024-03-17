@@ -789,9 +789,9 @@ function _impresoras() {
     # Controladores para impresoras y escáneres
     clear
     
-	for paquetes in cups; do apt install -y; done
+	for paquetes in cups; do apt install -y $paquetes; done
 	
-    for paquetes in hplip cups-filters cups hplip-data system-config-printer-udev; do apt remove --purge $paquetes -y
+    for paquetes in hplip cups-filters cups hplip-data system-config-printer-udev; do apt remove --purge -y $paquetes; done
 
     FILE1="/usr/share/hplip"
 	FILE2="/var/lib/hp"
