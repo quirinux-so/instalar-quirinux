@@ -333,8 +333,10 @@ function _paquetesBase() {
     _controladoresTabletas
     _controladoresAMD
     _controladoresIntel
-    _limpiar
     _warpinator
+    _isync
+    _owncloud
+    _limpiar
     touch /opt/requisitos/ok-base
 
 }
@@ -371,6 +373,7 @@ function _paquetesAnimacion() {
     _blender
     _boats
 	_gb-studio
+	_pikopixel
     _limpiar
     touch /opt/requisitos/ok-animacion
 
@@ -407,22 +410,24 @@ function _menuBase() {
         14 "Editor Profesional de Video: Kdenlive" off
         15 "Grabación CD, DVD y Conversión Multimedia" off
         16 "GIMP: Editor de Gráficos" off
-        17 "Juegos: Chimiboga, Buscaminas, Knetwalk" off
-        18 "Librerías Más Habituales" off
-        19 "Openboard: Pizarra en Pantalla" off
-        20 "Paquete de Librerías Más Habituales" off
-        21 "Peek: grabar pequeños GIF animados de la pantalla" off
-        22 "Reproductor Multimedia VLC + Complementos" off
-        23 "Screenkey: Muestra en Pantalla lo que se Escribe" off
-        24 "Servidor de Sonido Pipewire" off
-        25 "Teclado en Pantalla para Dispositivos Táctiles" off
-        26 "Tipografías Adicionales (Incluye las de Windows)" off
-        27 "Transmission: Cliente para Torrent" off
-        28 "Utilidades de Sistema (Limpieza, Seguridad y Backup)" off
-        29 "Utilidades para Ficheros PDF" off
-        30 "Virtualbox: Virtualizar otros Sistemas Operativos" off
-        31 "Visualizadores y Organizadores de Imágenes" off
-	32 "Warpinator: enviar ficheros entre dispositivos" off
+        17 "Isync: sincronizar nubes" off
+        18 "Owncloud: sincronizar nube Ownclod" off
+        19 "Juegos: Chimiboga, Buscaminas, Knetwalk" off
+        20 "Librerías Más Habituales" off
+        21 "Openboard: Pizarra en Pantalla" off
+        22 "Paquete de Librerías Más Habituales" off
+        23 "Peek: grabar pequeños GIF animados de la pantalla" off
+        24 "Reproductor Multimedia VLC + Complementos" off
+        25 "Screenkey: Muestra en Pantalla lo que se Escribe" off
+        26 "Servidor de Sonido Pipewire" off
+        27 "Teclado en Pantalla para Dispositivos Táctiles" off
+        28 "Tipografías Adicionales (Incluye las de Windows)" off
+        29 "qbittorrent: Cliente para Torrent" off
+        30 "Utilidades de Sistema (Limpieza, Seguridad y Backup)" off
+        31 "Utilidades para Ficheros PDF" off
+        32 "Virtualbox: Virtualizar otros Sistemas Operativos" off
+        33 "Visualizadores y Organizadores de Imágenes" off
+        34 "Warpinator: conectar dispositivos" off       
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -446,22 +451,24 @@ function _menuBase() {
         14) _kdenlive ;;
         15) _devede ;;
         16) _gimp ;;
-        17) _juegos ;;
-        18) _librerias ;;
-        19) _openboard ;;
+        17) _isync ;;
+        18) _owncloud ;;
+        19) _juegos ;;
         20) _librerias ;;
-        21) _peek ;;
-        22) _vlc ;;
-        23) _screenkey ;;
-        24) _pipewire ;;
-        25) _teclado ;;
-        26) _tipografias ;;
-        27) _torrent ;;
-        28) _sistema ;;
-        29) _pdf ;;
-        30) _virtualbox ;;
-        31) _imagenes ;;
-	32) _warpinator;;
+        21) _openboard ;;
+        22) _librerias ;;
+        23) _peek ;;
+        24) _vlc ;;
+        25) _screenkey ;;
+        26) _pipewire ;;
+        27) _teclado ;;
+        28) _tipografias ;;
+        29) _torrent ;;
+        30) _sistema ;;
+        31) _pdf ;;
+        32) _virtualbox ;;
+        33) _imagenes ;;
+        34) _warpinator ;;
         esac
     done
 
@@ -495,15 +502,16 @@ function _menuAnimacion() {
         18 "MyPaint: Pintura Digital Similar a ArtRage" off
         19 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
         20 "Pencil 2D: Animación 2D Estilo Flash 8" off
-        21 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
-        22 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
-        23 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
-        24 "Skanlite: Software para Escanear en Modo Lineart" off
-        25 "Storyboarder: Creación de Storyboard y Animatics" off
-        26 "Sweethome3D: Diseño de Interiores" off
-        27 "Synfig: Animación 2D Cut-out" off
-        28 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
-        29 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+        21 "PikoPixel.app: editor de pixel art" off
+        22 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
+        23 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
+        24 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
+        25 "Skanlite: Software para Escanear en Modo Lineart" off
+        26 "Storyboarder: Creación de Storyboard y Animatics" off
+        27 "Sweethome3D: Diseño de Interiores" off
+        28 "Synfig: Animación 2D Cut-out" off
+        29 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
+        30 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -531,15 +539,17 @@ function _menuAnimacion() {
         18) _mypaint ;;
         19) _natron ;;
         20) _pencil ;;
-        21) _quinema ;;
-        22) _qstopmotion ;;
-        23) _rawtherapee ;;
-        24) _escanerLinea ;;
-        25) _storyboarder ;;
-        26) _sweethome3d ;;
-        27) _synfig ;;
-        28) _tahoma2D ;;
-        29) _tupitube ;;
+        21) _pikopixel ;;
+        22) _quinema ;;
+        23) _qstopmotion ;;
+        24) _rawtherapee ;;
+        25) _escanerLinea ;;
+        26) _storyboarder ;;
+        27) _sweethome3d ;;
+        28) _synfig ;;
+        29) _tahoma2D ;;
+        30) _tupitube ;;
+        
         esac
     done
 
@@ -550,10 +560,27 @@ function _menuAnimacion() {
 # PAQUETES DE QUIRINUX BASE
 # ===========================================================================================
 
-function _warpinator() {
+function _owncloud() {
+	
+	# Owncloud: sincronizar nube Owncloud
+	
+	apt install owncloud-client -y
+	
+}
 
-    apt install warpinator -y
-    
+function _isync() {
+	
+	# Sincronizar nubes
+	
+	apt install isync -y
+	
+}
+
+function _warpinator() {
+	
+	# Warpinator: conectar dispositivos
+	apt install warpinator -y
+	
 }
 
 function _centroDeSoftware() {
@@ -577,15 +604,15 @@ function _devede() {
 
 function _torrent() {
 
-    # Transmission: cliente para Torrent
-    apt install transmission -y
+    # qbittorrent: cliente para Torrent
+    apt install qbittorrent -y
 
 }
 
 function _accesorios() {
 
     # Accesorios: calculadora, color picker, kpaint y otros
-    for paquetes in galculator color-picker kpaint dia kcharselect; do apt install -y $paquetes; done
+    for paquetes in galculator color-picker kpaint dia kcharselect kruler; do apt install -y $paquetes; done
 
 }
 
@@ -761,15 +788,25 @@ function _impresoras() {
 
     # Controladores para impresoras y escáneres
     clear
-    apt install cups -y
-    apt install -f -y
-    apt remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
-    apt remove --purge hplip -y
-    rm -rf /usr/share/hplip
-    rm -rf /var/lib/hp
-    apt install impresoras -y
+    
+	for paquetes in cups; do apt install -y; done
+	
+    for paquetes in hplip cups-filters cups hplip-data system-config-printer-udev; do apt remove --purge -y
+
+    FILE1="/usr/share/hplip"
+	FILE2="/var/lib/hp"
+	
+    if [ -e ${FILE2} ]; then
+    rm -rf $FILE
+    fi
+    
+    if if [ -e ${FILE2} ]; then
+    rm -rf $FILE2
+	fi
+    
+    for paquetes in impresoras epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
+    
     epson-install
-    for paquetes in epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
 }
 
 function _controladoresTabletas() {
@@ -816,13 +853,19 @@ function _codecs() {
     # Codecs para comprimir y descomprimir en RAR
     for packages in engrampa rar unrar unrar-nonfree; do apt install -y $packages; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
     clear
 }
 
 # ===========================================================================================
 # PAQUETES DE QUIRINUX ANIMACIÓN
 # ===========================================================================================
+
+function _pikopixel() {
+	
+	apt install pikopixel.app -y
+	
+}
 
 function _gb-studio() {
 	
@@ -1109,50 +1152,50 @@ function _remover() {
     # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
     clear
-    for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-ru firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt remove --purge -y $paquetes_remover_idiomas_firefox; done
+    for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-ru firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do apt remove --purge -y $paquetes_remover_idiomas_firefox; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER TRADUCCIONES DE ESCRITORIO DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_task in task-albanian-desktop task-cyrillic-desktop task-russian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do sudo apt remove --purge -y $paquetes_remover_idiomas_task; done
+    for paquetes_remover_idiomas_task in task-albanian-desktop task-cyrillic-desktop task-russian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do apt remove --purge -y $paquetes_remover_idiomas_task; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER CONJUNTOS DE CARACTERES DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_ibus in inicatalan ipolish irussian idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do sudo apt remove --purge -y $paquetes_remover_idiomas_ibus; done
+    for paquetes_remover_idiomas_ibus in inicatalan ipolish irussian idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do apt remove --purge -y $paquetes_remover_idiomas_ibus; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
-    for paquetes_remover_idiomas_mythes in myspell-ru mythes-ru myaspell-ru myspell-et; do sudo apt remove --purge -y $paquetes_remover_idiomas_mythes; done
+    for paquetes_remover_idiomas_mythes in myspell-ru mythes-ru myaspell-ru myspell-et; do apt remove --purge -y $paquetes_remover_idiomas_mythes; done
 
-    for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do sudo apt remove --purge -y $paquetes_remover_idiomas_aspell; done
+    for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do apt remove --purge -y $paquetes_remover_idiomas_aspell; done
 
-    for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do sudo apt remove --purge -y $paquetes_remover_idiomas_hunspell; done
-    for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do sudo apt remove --purge -y $paquetes_remover_idiomas_myspell; done
+    for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do apt remove --purge -y $paquetes_remover_idiomas_hunspell; done
+    for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do apt remove --purge -y $paquetes_remover_idiomas_myspell; done
 
-    for paquetes_remover_idiomas_hyphen in hyphen-hr hypen-ru hyphen-hu hyphen-lt; do sudo apt remove --purge -y $paquetes_remover_idiomas_hyphen; done
+    for paquetes_remover_idiomas_hyphen in hyphen-hr hypen-ru hyphen-hu hyphen-lt; do apt remove --purge -y $paquetes_remover_idiomas_hyphen; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER FUENTES QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do sudo apt remove --purge -y $paquetes_remover_idiomas_fonts; done
+    for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do apt remove --purge -y $paquetes_remover_idiomas_fonts; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER IDIOMAS DE LIBRE OFFICE QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_libreoffice in libreoffice-help-ru libreoffice-l10n-ru libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do sudo apt remove --purge -y $paquetes_remover_idiomas_libreoffice; done
+    for paquetes_remover_idiomas_libreoffice in libreoffice-help-ru libreoffice-l10n-ru libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do apt remove --purge -y $paquetes_remover_idiomas_libreoffice; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_programas in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt remove --purge -y $paquetes_remover_programas; done
+    for paquetes_remover_programas in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc stacer dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do apt remove --purge -y $paquetes_remover_programas; done
     apt install -f -y
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
     # REMOVER DOCUMENTACIÓN
     clear
@@ -1166,7 +1209,7 @@ function _borratemp() {
     # BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
     # ===========================================================================================
     sudo rm -rf /opt/tmp/*
-    sudo apt-get clean
+    apt-get clean
     clear
 
 }
@@ -1183,16 +1226,16 @@ function _ordenar() {
 
     # LIMPIANDO CACHE
     clear
-    sudo apt clean && sudo apt autoclean
+    apt clean && apt autoclean
 
     # REGENERANDO CACHE
     clear
-    sudo apt update --fix-missing
+    apt update --fix-missing
 
     # CONFIGURANDO DEPENDENCIAS
     clear
     apt install -f
-    sudo apt autoremove --purge -y
+    apt autoremove --purge -y
 
 }
 
