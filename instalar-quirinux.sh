@@ -796,16 +796,15 @@ function _impresoras() {
     FILE1="/usr/share/hplip"
 	FILE2="/var/lib/hp"
 	
-    if [ -e ${FILE2} ]; then
+    if [ -e ${FILE1} ]; then
     rm -rf $FILE
     fi
     
-    if if [ -e ${FILE2} ]; then
+    if [ -e ${FILE2} ]; then
     rm -rf $FILE2
 	fi
     
     for paquetes in impresoras epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
-    
     epson-install
 }
 
