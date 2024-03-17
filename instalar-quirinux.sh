@@ -422,7 +422,7 @@ function _menuBase() {
         26 "Servidor de Sonido Pipewire" off
         27 "Teclado en Pantalla para Dispositivos Táctiles" off
         28 "Tipografías Adicionales (Incluye las de Windows)" off
-        29 "Transmission: Cliente para Torrent" off
+        29 "qbittorrent: Cliente para Torrent" off
         30 "Utilidades de Sistema (Limpieza, Seguridad y Backup)" off
         31 "Utilidades para Ficheros PDF" off
         32 "Virtualbox: Virtualizar otros Sistemas Operativos" off
@@ -560,12 +560,6 @@ function _menuAnimacion() {
 # PAQUETES DE QUIRINUX BASE
 # ===========================================================================================
 
-function _pikopixel() {
-	
-	apt install pikopixel.app -y
-	
-}
-
 function _owncloud() {
 	
 	# Owncloud: sincronizar nube Owncloud
@@ -610,8 +604,8 @@ function _devede() {
 
 function _torrent() {
 
-    # Transmission: cliente para Torrent
-    apt install transmission -y
+    # qbittorrent: cliente para Torrent
+    apt install qbittorrent -y
 
 }
 
@@ -795,15 +789,26 @@ function _impresoras() {
 
     # Controladores para impresoras y escáneres
     clear
-    apt install cups -y
-    apt install -f -y
-    apt remove --purge hplip cups-filters cups hplip-data system-config-printer-udev -y
-    apt remove --purge hplip -y
-    rm -rf /usr/share/hplip
-    rm -rf /var/lib/hp
-    apt install impresoras -y
+    
+	for paquetes in cups; do apt install -y; done
+	
+    for paquetes in hplip cups-filters cups hplip-data 
+    system-config-printer-udev; do apt remove --purge -y
+
+    FILE1="/usr/share/hplip"
+	FILE2="/var/lib/hp"
+	
+    if [ -e ${FILE2} ]; then
+    rm -rf $FILE
+    fi
+    
+    if if [ -e ${FILE2} ]; then
+    rm -rf $FILE2
+	fi
+    
+    for paquetes in impresoras epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
+    
     epson-install
-    for paquetes in epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
 }
 
 function _controladoresTabletas() {
@@ -857,6 +862,12 @@ function _codecs() {
 # ===========================================================================================
 # PAQUETES DE QUIRINUX ANIMACIÓN
 # ===========================================================================================
+
+function _pikopixel() {
+	
+	apt install pikopixel.app -y
+	
+}
 
 function _gb-studio() {
 	
