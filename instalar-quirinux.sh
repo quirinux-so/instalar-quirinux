@@ -659,7 +659,8 @@ function _peek() {
 function _vlc() {
 
     # Reproductor multimedia VLC + Complementos
-    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth vlc-plugin-pipewire vlc-plugin-jack; do apt install -y $paquetes; done
+    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth 
+    vlc-plugin-pipewire vlc-plugin-jack; do apt install -y $paquetes; done
 
 }
 
@@ -673,7 +674,7 @@ function _kdenlive() {
 function _juegos() {
 
     # Juegos: chimiboga, buscaminas solitario y knetwalk
-    for paquetes in kpat chimiboga xdemineur knetwalk; do apt install -y $paquetes; done
+    for paquetes in kpat xdemineur knetwalk; do apt install -y $paquetes; done
 
 }
 
@@ -709,8 +710,10 @@ function _idiomas() {
 }
 
 function _tipografias() {
+	
     # Tipografías adicionales (incluye las de Windows)
     apt install quirinux-fuentes -y
+    
 }
 
 function _audio() {
@@ -818,6 +821,7 @@ function _impresoras() {
     
     for paquetes in impresoras epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
     epson-install
+    
 }
 
 function _controladoresTabletas() {
@@ -865,7 +869,7 @@ function _codecs() {
     for packages in engrampa rar unrar unrar-nonfree; do apt install -y $packages; done
     apt install -f -y
     apt autoremove --purge -y
-    clear
+
 }
 
 # ===========================================================================================
