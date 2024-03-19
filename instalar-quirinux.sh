@@ -630,7 +630,7 @@ function _accesorios() {
 function _teclado() {
 
     # Teclado en pantalla para dispositivos táctiles
-    _audacity()
+    apt install onboard -y
 
 }
 
