@@ -307,7 +307,7 @@ function _paquetesBase() {
     _torrent
     _accesorios
     _teclado
-
+	_audacity
     _paquetesEstandar
     _virtualbox
     _peek
