@@ -308,7 +308,6 @@ function _paquetesBase() {
     _accesorios
     _teclado
 	_audacity
-    _paquetesEstandar
     _virtualbox
     _peek
     _vlc
@@ -631,7 +630,7 @@ function _accesorios() {
 function _teclado() {
 
     # Teclado en pantalla para dispositivos táctiles
-    apt install onboard -y
+    _audacity()
 
 }
 
