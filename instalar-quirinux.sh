@@ -659,8 +659,7 @@ function _peek() {
 function _vlc() {
 
     # Reproductor multimedia VLC + Complementos
-    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth 
-    vlc-plugin-pipewire vlc-plugin-jack; do apt install -y $paquetes; done
+    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth vlc-plugin-pipewire vlc-plugin-jack; do apt install -y $paquetes; done
 
 }
 
