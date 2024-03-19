@@ -374,6 +374,7 @@ function _paquetesAnimacion() {
     _boats
 	_gb-studio
 	_pikopixel
+	_cura
     _limpiar
     touch /opt/requisitos/ok-animacion
 
@@ -489,29 +490,31 @@ function _menuAnimacion() {
         5 "Birdfont: Editor de Tipografías" off
         6 "Blender: Animación Profesional 3D, 2D y 2.5D" off
         7 "Boats: Stopmotion Simple para Webcam en 16:9" off
-        8 "Darktable: Revelado RAW Similar a Lightroom, Ideal para Paisajes" off
-        9 "Enve: Motion Graphics Sencillo, Interfaz Similar a After Effects" off
-        10 "Entangle: Control para Cámaras DSLR y Plugin Papel Cebolla" off
-        11 "GB Studio: Editor visual de juegos retro" off
-        12 "Godot: Animación Cut-out Ideal Videojuegos" off
-        13 "Hugin: Unir Dibujos para Fondos Widescreen" off
-        14 "Huayra Stopmotion: App Sencilla de Stop-motion Webcam en 4:3" off
-        15 "Inkscape: Dibujo Vectorial" off
-        16 "Krita: Dibujo, Pintura y Animación 2D, Modos RGB y CMYK" off
-        17 "Manuskript: Software para Escritores y Guionistas" off
-        18 "MyPaint: Pintura Digital Similar a ArtRage" off
-        19 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
-        20 "Pencil 2D: Animación 2D Estilo Flash 8" off
-        21 "PikoPixel.app: editor de pixel art" off
-        22 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
-        23 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
-        24 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
-        25 "Skanlite: Software para Escanear en Modo Lineart" off
-        26 "Storyboarder: Creación de Storyboard y Animatics" off
-        27 "Sweethome3D: Diseño de Interiores" off
-        28 "Synfig: Animación 2D Cut-out" off
-        29 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
-        30 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+        8 "Ultimaker cura: impresión 3D" off 
+        9 "Darktable: Revelado RAW Similar a Lightroom, Ideal para Paisajes" off
+        10 "Enve: Motion Graphics Sencillo, Interfaz Similar a After Effects" off
+        11 "Entangle: Control para Cámaras DSLR y Plugin Papel Cebolla" off
+        12 "GB Studio: Editor visual de juegos retro" off
+        13 "Godot: Animación Cut-out Ideal Videojuegos" off
+        14 "Hugin: Unir Dibujos para Fondos Widescreen" off
+        15 "Huayra Stopmotion: App Sencilla de Stop-motion Webcam en 4:3" off
+        16 "Inkscape: Dibujo Vectorial" off
+        17 "Krita: Dibujo, Pintura y Animación 2D, Modos RGB y CMYK" off
+        18 "Manuskript: Software para Escritores y Guionistas" off
+        19 "MyPaint: Pintura Digital Similar a ArtRage" off
+        20 "Natron: Composición y Efectos por Nodos, Similar a Nuke" off
+        21 "Pencil 2D: Animación 2D Estilo Flash 8" off
+        22 "PikoPixel.app: editor de pixel art" off
+        23 "Quinema: Scripts para Procesar Imágenes, de Ernesto Bazzano" off
+        24 "QStopMotion: Animación Stopmotion con Webcam o DSLR" off
+        25 "Rawtherapee: Revelado RAW, Ideal para Tonos de Piel" off
+        26 "Skanlite: Software para Escanear en Modo Lineart" off
+        27 "Storyboarder: Creación de Storyboard y Animatics" off
+        28 "Sweethome3D: Diseño de Interiores" off
+        29 "Synfig: Animación 2D Cut-out" off
+        30 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
+        31 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+        
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -526,29 +529,30 @@ function _menuAnimacion() {
         5) _editorFuentes ;;
         6) _blender ;;
         7) _boats ;;
-        8) _darktable ;;
-        9) _enve ;;
-        10) _entangle ;;
-        11) _gb-studio ;;
-        12) _godot ;;
-        13) _hugin ;;
-        14) _huayra ;;
-        15) _inkscape ;;
-        16) _krita ;;
-        17) _manuskript ;;
-        18) _mypaint ;;
-        19) _natron ;;
-        20) _pencil ;;
-        21) _pikopixel ;;
-        22) _quinema ;;
-        23) _qstopmotion ;;
-        24) _rawtherapee ;;
-        25) _escanerLinea ;;
-        26) _storyboarder ;;
-        27) _sweethome3d ;;
-        28) _synfig ;;
-        29) _tahoma2D ;;
-        30) _tupitube ;;
+        8) _cura ;;
+        9) _darktable ;;
+        10) _enve ;;
+        11) _entangle ;;
+        12) _gb-studio ;;
+        13) _godot ;;
+        14) _hugin ;;
+        15) _huayra ;;
+        16) _inkscape ;;
+        17) _krita ;;
+        18) _manuskript ;;
+        19) _mypaint ;;
+        20) _natron ;;
+        21) _pencil ;;
+        22) _pikopixel ;;
+        23) _quinema ;;
+        24) _qstopmotion ;;
+        25) _rawtherapee ;;
+        26) _escanerLinea ;;
+        27) _storyboarder ;;
+        28) _sweethome3d ;;
+        29) _synfig ;;
+        30) _tahoma2D ;;
+        31) _tupitube ;;
         
         esac
     done
@@ -859,6 +863,12 @@ function _codecs() {
 # ===========================================================================================
 # PAQUETES DE QUIRINUX ANIMACIÓN
 # ===========================================================================================
+
+function _cura() {
+	
+	apt install cura -y
+	
+}
 
 function _pikopixel() {
 	
