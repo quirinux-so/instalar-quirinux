@@ -62,11 +62,11 @@ function _requisitos() {
     apt update -y
     apt upgrade -y
 
-    for paquetes_wget in dialog wget git spice-vdagent; do apt install -y $paquetes_wget; done
+    for paquetes in dialog wget git spice-vdagent; do sudo apt install -y $paquetes; done
 
     # Crear fichero de verificación
-    mkdir -p /opt/requisitos/
-    touch /opt/requisitos/ok
+    sudo mkdir -p /opt/requisitos/
+    sudo touch /opt/requisitos/ok
 
 }
 
@@ -153,7 +153,6 @@ function _repoconfig() {
 
     # AGREGA REPOSITORIOS ADICIONALES PARA DEBIAN
     clear
-    apt install wget -y
     mkdir -p /opt/tmp/apt
     wget --no-check-certificate 'https://repo.quirinux.org/pool/main/q/quirinux-repo/quirinux-repo_1.0.1_all.deb' -O /opt/tmp/apt/quirinux-repo_1.0.1_all.deb
     apt install /opt/tmp/apt/./quirinux-repo_1.0.1_all.deb -y
@@ -301,39 +300,43 @@ function _instalarAnimacion() {
 function _paquetesBase() {
 	
     clear
-    _centroDeSoftware
-    _sistema
-    _devede
-    _torrent
-    _accesorios
-    _teclado
-	_audacity
-    _virtualbox
-    _peek
-    _vlc
-    _kdenlive
-    _juegos
-    _appsQuirinux
-    _telegram
-    _jitsi
-    _qrcreator
-    _obs
-    _eggs
-    _pdf
-    _imagine
-    _gimp
-    _pipewire
-    _impresoras
-    _librerias
-    _tipografias
-    _codecs
-    _imagenes
-    _controladoresTabletas
-    _controladoresAMD
-    _controladoresIntel
-    _warpinator
-    _isync
+    
+    _centroDeSoftware  
+    _sistema  
+    _devede  
+    _torrent  
+    _accesorios  
+    _teclado  
+	_audacity   
+    _virtualbox  
+    _peek  
+    _vlc  
+    _kdenlive  
+    _juegos  
+    _appsQuirinux  
+    _telegram  
+    _jitsi  
+    _qrcreator  
+    _openboard  
+    _obs  
+    _eggs  
+    _pdf  
+    _imagine  
+    _gimp  
+    _pipewire  
+    _imagenes    
+    _impresoras 
+    _controladoresTabletas    
+    _controladoresAMD    
+    _controladoresIntel        
+    _librerias    
+    _screenkeys    
+    _tipografias  
+    _codecs  
+    _warpinator  
+    _isync   
     _owncloud
+    
     _limpiar
     touch /opt/requisitos/ok-base
 
@@ -342,6 +345,7 @@ function _paquetesBase() {
 function _paquetesAnimacion() {
 	
     clear
+    
     _audio
     _perfiles
     _subtitulos
@@ -374,6 +378,7 @@ function _paquetesAnimacion() {
 	_gb-studio
 	_pikopixel
 	_cura
+	
     _limpiar
     touch /opt/requisitos/ok-animacion
 
@@ -565,123 +570,101 @@ function _menuAnimacion() {
 # PAQUETES DE QUIRINUX BASE
 # ===========================================================================================
 
-function _audacity() {
-	
-	apt install audacity -y
-	
-}
-
-function _owncloud() {
-	
-	# Owncloud: sincronizar nube Owncloud
-	
-	apt install owncloud-client -y
-	
-}
-
-function _isync() {
-	
-	# Sincronizar nubes
-	
-	apt install isync -y
-	
-}
-
-function _warpinator() {
-	
-	# Warpinator: conectar dispositivos
-	apt install warpinator -y
-	
-}
-
 function _centroDeSoftware() {
 
     # Centro de Software
-    for paquetes in mintinstall flatpak flatpakconfig; do apt install -y $paquetes; done
+    for paquetes in mintinstall flatpak flatpakconfig; do sudo apt install -y $paquetes; done
 
 }
 function _sistema() {
     # Utilidades de sistema (limpieza, seguridad y backup)
-    for paquetes in color-picker stacer bleachbit gparted flatpakconfig gufw baobab catfish quirinux-bluconfig timeshift; do apt install -y $paquetes; done
+    for paquetes in color-picker stacer bleachbit gparted flatpakconfig gufw baobab catfish quirinux-bluconfig timeshift; do sudo apt install -y $paquetes; done
 
 }
 
 function _devede() {
 
     # Grabación de CD, DVD, captura de pantalla y conversores de video
-    for paquetes in devede xfburn converseen handbrake mediainfo kazam; do apt install -y $paquetes; done
+    for paquetes in devede xfburn converseen handbrake mediainfo kazam; do sudo apt install -y $paquetes; done
 
 }
 
 function _torrent() {
 
     # qbittorrent: cliente para Torrent
-    apt install qbittorrent -y
+    for paquetes in qbittorrent; do sudo apt install -y $paquetes; done
 
 }
 
 function _accesorios() {
 
     # Accesorios: calculadora, color picker, kpaint y otros
-    for paquetes in galculator color-picker kpaint dia kcharselect kruler; do apt install -y $paquetes; done
+    for paquetes in galculator color-picker kpaint dia kcharselect kruler; do sudo apt install -y $paquetes; done
 
 }
 
 function _teclado() {
 
     # Teclado en pantalla para dispositivos táctiles
-    apt install onboard -y
+    for paquetes in onboard; do sudo apt install -y $paquetes; done
 
+}
+
+function _audacity() {
+	
+	for paquetes in audacity; do sudo apt install $paquetes; done
+	
 }
 
 function _virtualbox() {
 
     # Virtualbox + Paquete de extensiones
-    apt install virtualbox-7.0 linux-headers-$(uname -r) -y
+    for paquetes in virtualbox-7.0 linux-headers-$(uname -r); do sudo apt install -y $paquetes; done
     sudo mkdir -p /opt/tmp/virtualbox
     sudo wget --no-check-certificate 'https://download.virtualbox.org/virtualbox/7.0.10/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack' -O /opt/tmp/virtualbox/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
     cd /opt/tmp/virtualbox/
-    VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
-    rm /opt/tmp/virtualbox/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
-    apt install quirinux-virtualbox -y
-    rcvboxadd setup
+    sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+    sudo rm /opt/tmp/virtualbox/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+    for paquetes in quirinux-virtualbox; do sudo apt install -y $paquetes; done
+    sudo rcvboxadd setup
 
 }
 
 function _peek() {
 
     # Peek: grabar GIF animados pequeños de la pantalla
-    apt install peek -y
+    for paquetes in peek; do sudo apt install -y $paquetes; done
 
 }
 
 function _vlc() {
 
     # Reproductor multimedia VLC + Complementos
-    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth vlc-plugin-pipewire vlc-plugin-jack; do apt install -y $paquetes; done
+    for paquetes in vlc vlc-plugin-svg vlc-plugin-fluidsynth vlc-plugin-pipewire vlc-plugin-jack; do sudo apt install -y $paquetes; done
 
 }
 
 function _kdenlive() {
 
     # Editor profesional de video Kdenlive
-    for paquetes in kdenlive breeze breeze-icon-theme-rcc; do apt install -y $paquetes; done
+    for paquetes in kdenlive breeze breeze-icon-theme-rcc; do sudo apt install -y $paquetes; done
 
 }
 
 function _juegos() {
 
-    # Juegos: chimiboga, buscaminas solitario y knetwalk
-    for paquetes in kpat xdemineur knetwalk; do apt install -y $paquetes; done
+    # Juegos: chimiboga, buscaminas solitario y knetwalk 
+		# Marzo 2024 chimiboga se retiró porque hace días que esta offline.
+    for paquetes in kpat xdemineur knetwalk; do sudo apt install -y $paquetes; done
 
 }
 
 function _appsQuirinux() {
 
     # Asistente, utilidades, temas y wallpapers de Quirinux
-    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-firefox-base quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do apt install -y $paquetes; done
-    update-grub
-    update-grub2
+    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-firefox-base quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
+    sudo update-grub
+    sudo update-grub2
     _idiomas
 
 }
@@ -707,264 +690,404 @@ function _idiomas() {
 
 }
 
-function _tipografias() {
-	
-    # Tipografías adicionales (incluye las de Windows)
-    apt install quirinux-fuentes -y
-    
-}
-
-function _audio() {
-
-    # Aplicaciones para edición de audio (Ardour, Audacity y plugins)
-    for paquetes in quirinux-audio-config quirinux-audio-pack; do apt install -y $paquetes; done
-
-}
-
 function _telegram() {
 
     # Aplicación de mensajería Telegram
-    apt install telegram -y
+    for paquetes in telegram; do sudo apt install -y $paquetes; done
 
 }
 
 function _jitsi() {
 
     # Aplicación de videoconferencia Jitsi
-    apt install jitsi-meet-electron -y
+    for paquetes in jitsi-meet-electron; do sudo apt install -y $paquetes; done
 
 }
 
 function _openboard() {
 
     # Openboard: pizarra en pantalla
-    apt install openboard -y
+    for paquetes in openboard; do sudo apt install -y $paquetes; done
 
 }
 
 function _qrcreator() {
 
     # Creador de códigos QR
-    apt install qrcreator -y
+    for paquetes in qrcreator; do sudo apt install -y $paquetes; done
 
 }
 
 function _obs() {
 
     # Applicación para streaming OBS Studio
-    for paquetes in akvcam obs-studio obs-plugins obs-v4l2sink; do apt install -y $paquetes; done
+    for paquetes in akvcam obs-studio obs-plugins obs-v4l2sink; do sudo apt install -y $paquetes; done
 
 }
 
 function _eggs() {
 
     # Creador de ISO Penguin's Eggs, de Piero Proietti
-    apt install eggs -y
+    for paquetes in eggs; do sudo apt install -y $paquetes; done
 
 }
 
 function _pdf() {
 
     # Utilidades para ficheros PDF
-    for paquetes in atril autofirma compresorpdf pdfexport pdfarranger; do apt install -y $paquetes; done
+    for paquetes in atril autofirma compresorpdf pdfexport pdfarranger; do sudo apt install -y $paquetes; done
 
 }
 
 function _imagine() {
 
     # Optimizador de imagenes Imagine
-    for paquetes in imagine; do apt install -y $paquetes; done
+    for paquetes in imagine; do sudo apt install -y $paquetes; done
 
 }
 
 function _gimp() {
 
     # GIMP Quirinux con selector para íconos y atajos de Photoshop
-    for paquetes in gimp-quirinux gimp-paint-studio xcftools; do apt install -y $paquetes; done
+    for paquetes in gimp-quirinux gimp-paint-studio xcftools; do sudo apt install -y $paquetes; done
 
 }
 
 function _pipewire() {
 
     # Servidor de sonido Pipewire
-    for paquetes in libwireplumber-0.4-0 wireplumber gstreamer1.0-pipewire libpipewire-0.3-0 libpipewire-0.3-modules pipewire pipewire-alsa pipewire-audio pipewire-bin pipewire-pulse; do apt install -y $paquetes; done
+    for paquetes in libwireplumber-0.4-0 wireplumber gstreamer1.0-pipewire libpipewire-0.3-0 libpipewire-0.3-modules pipewire pipewire-alsa pipewire-audio pipewire-bin pipewire-pulse; do sudo apt install -y $paquetes; done
 
 }
 
 function _imagenes() {
 
     # Visualizadores y organizadores de imágenes
-    for paquetes in shotwell digikam; do apt install -y $paquetes; done
+    for paquetes in shotwell digikam; do sudo apt install -y $paquetes; done
+    
 }
 
 function _impresoras() {
 
     # Controladores para impresoras y escáneres
-    clear
-    
-	for paquetes in cups; do apt install -y $paquetes; done
-	
-    for paquetes in hplip cups-filters cups hplip-data system-config-printer-udev; do apt remove --purge -y $paquetes; done
+
+    for paquetes in hplip cups-filters cups hplip-data system-config-printer-udev; do sudo apt remove --purge -y $paquetes; done
 
     FILE1="/usr/share/hplip"
 	FILE2="/var/lib/hp"
 	
     if [ -e ${FILE1} ]; then
-    rm -rf $FILE
+    sudo rm -rf $FILE
     fi
     
     if [ -e ${FILE2} ]; then
-    rm -rf $FILE2
+    sudo rm -rf $FILE2
 	fi
     
-    for paquetes in impresoras epsonscan simple-scan xsane akvcam; do apt install -y $paquetes; done
-    epson-install
+    for paquetes in impresoras epsonscan simple-scan xsane akvcam; do sudo apt install -y $paquetes; done
+    sudo chmod 775 /usr/local/bin/epson-install
+    sudo epson-install
     
 }
 
 function _controladoresTabletas() {
 
     # Controladores para tabletas de dibujo
-    clear
-    for paquetes in kde-config-tablet geniusconfig wizardpen huion-tablet xppen ptxconf; do apt install -y $paquetes; done
 
-}
-
-function _controladorIntel() {
-
-    # Controlador privativo para el procesador Intel
-    clear
-    apt install intel-microcode -y
+    for paquetes in kde-config-tablet geniusconfig wizardpen huion-tablet xppen ptxconf; do sudo apt install -y $paquetes; done
 
 }
 
 function _controladorAMD() {
 
     # Controlador privativo para el procesador AMD
-    apt install amd64-microcode -y
+    for paquetes in amd64-microcode; do sudo apt install -y $paquetes; done
+
+}
+
+function _controladorIntel() {
+
+    # Controlador privativo para el procesador Intel
+    for paquetes in intel-microcode; do sudo apt install -y $paquetes; done
 
 }
 
 function _librerias() {
 
     # Paquete de librerías más habituales
-    for paquetes in gnome-firmware mencoder mtp-tools font-manager breeze-icon-theme gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings packagekit; do apt install -y $paquetes; done
-    for paquetes in mmolch-thumbnailers xapp-thumbnailers; do apt install -y $paquetes; done
-    for paquetes in ntp hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-de-de-frami xserver-xorg-input-mutouch xserver-xorg-input-multitouch btrfs-progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools package-update-indicator gnome-packagekit python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-pt-pt firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr frei0r-plugins graphicsmagick mediainfo-gui firefox-esr firefox-esr-l10n-de firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it gvfs-backends connman conky conky-all libimobiledevice-utils default-jre tumbler tumbler-plugins-extra ffmpegthumbnailer usermode build-essential make automake cmake xinput-calibrator libsox-fmt-mp3 gvfs-fuse libsmbclient python3-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs python3-smbc liblensfun-bin pacpl imagemagick x264 gnome-system-tools unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full gzip lzip zip abr2gbr gtkam-gimp gphoto2 qapt-deb-installer ifuse; do apt install -y $pquetes; done
+    for paquetes in gnome-firmware mencoder mtp-tools font-manager breeze-icon-theme gambas3-gb-db gambas3-gb-db-form gambas3-gb-form gambas3-gb-form-stock gambas3-gb-gui-qt gambas3-gb-image gambas3-gb-qt5 gambas3-gb-settings packagekit; do sudo apt install -y $paquetes; done
+    
+    for paquetes in mmolch-thumbnailers xapp-appimage-thumbnailer xapp-epub-thumbnailer xapp-mp3-thumbnailer xapp-raw-thumbnailer xapp-thumbnailers-common xapp-vorbiscomment-thumbnailer; do sudo apt install -y $paquetes; done
+    
+    for paquetes in ntp hunspell-es hunspell-en-us hunspell-gl hunspell-it hunspell-pt-pt hunspell-pt-br hunspell-de-de-frami xserver-xorg-input-mutouch xserver-xorg-input-multitouch btrfs-progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs dosfstools dmraid exfat-fuse f2fs-tools fatresize fatsort hfsutils hfsplus lvm2 nilfs-tools nfs-common ntfs-3g jfsutils reiserfsprogs reiser4progs sshfs xfsdump xfsprogs udfclient udftools package-update-indicator gnome-packagekit python3-distro-info python3-pycurl unattended-upgrades libreoffice-l10n-de libreoffice-l10n-es libreoffice-l10n-gl libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-fr firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-pt-pt firefox-esr-l10n-it firefox-esr-l10n-de firefox-esr-l10n-fr frei0r-plugins graphicsmagick mediainfo-gui firefox-esr firefox-esr-l10n-de firefox-esr-l10n-es-es firefox-esr-l10n-fr firefox-esr-l10n-gl firefox-esr-l10n-ru firefox-esr-l10n-it gvfs-backends connman conky conky-all libimobiledevice-utils default-jre tumbler tumbler-plugins-extra ffmpegthumbnailer usermode build-essential make automake cmake xinput-calibrator libsox-fmt-mp3 gvfs-fuse libsmbclient python3-gphoto2cffi libgphoto2-dev dcraw python3-gphoto2cffi python3-gphoto2 gphotofs python3-smbc liblensfun-bin pacpl imagemagick x264 gnome-system-tools unrar-free zip unzip unace bzip2 lzop p7zip p7zip-full gzip lzip zip abr2gbr gtkam-gimp gphoto2 qapt-deb-installer ifuse; do sudo apt install -y $paquetes; done
 
 }
 
 function _screenkey() {
 
     # Screenkey: muestra en pantalla lo que se escribe
-    apt install screenkey -y
+    for paquetes in screenkey; do sudo apt install -y $paquetes; done
 
+}
+
+function _tipografias() {
+	
+    # Tipografías adicionales (incluye las de Windows)
+    for paquetes in quirinux-fuentes; do sudo apt install -y $paquetes; done
+    
 }
 
 function _codecs() {
 
     # Codecs para comprimir y descomprimir en RAR
-    for packages in engrampa rar unrar unrar-nonfree; do apt install -y $packages; done
-    apt install -f -y
-    apt autoremove --purge -y
+    for packages in engrampa rar unrar; do sudo apt install -y $packages; done
 
+}
+
+function _warpinator() {
+	
+	# Warpinator: conectar dispositivos
+	for paquetes in warpinator; do sudo apt install -y $paquetes; done
+	
+}
+
+function _isync() {
+	
+	# Sincronizar nubes
+	
+	for paquetes in isync; do sudo apt install -y $paquetes; done
+	
+}
+
+function _owncloud() {
+	
+	# Owncloud: sincronizar nube Owncloud
+	
+	for paquetes in owncloud-client; do sudo apt install -y $paquetes; done
+	
 }
 
 # ===========================================================================================
 # PAQUETES DE QUIRINUX ANIMACIÓN
 # ===========================================================================================
 
+function _audio() {
+
+    # Aplicaciones para edición de audio (Ardour, Audacity y plugins)
+    for paquetes in quirinux-audio-config quirinux-audio-pack; do sudo apt install -y $paquetes; done
+
+}
+
 function _cura() {
 	
-	apt install cura -y
+	for paquetes in cura; do sudo apt install -y $paquetes; done
 	
 }
 
 function _pikopixel() {
 	
-	apt install pikopixel.app -y
+	for paquetes in pikopixel.app; do sudo apt install -y $paquetes; done
 	
 }
 
 function _gb-studio() {
 	
-	apt install gb-studio -y
+	for paquetes in gb-studio; do sudo apt install -y $paquetes; done
 	
 }
 
 function _perfiles() {
 
     # Administrador de perfiles de color
-    for paquetes in gnome-color-manager dispcalgui; do apt install -y $paquetes; done
+    for paquetes in gnome-color-manager dispcalgui; do sudo apt install -y $paquetes; done
 
 }
 
 function _subtitulos() {
 
     # Aegisub: editor de subtítulos
-    apt install aegisub -y
+    for paquetes in aegisub; do sudo apt install -y $paquetes; done
 
 }
 
 function _editorFuentes() {
 
     # Birdfont: editor de tipografías
-    apt install birdfont -y
+    for paquetes in birdfont; do sudo apt install -y $paquetes; done
 
 }
 
 function _escanerLinea() {
 
     # Skanlite: software para escanear en modo lineart
-    apt install skanlite -y
+    for paquetes in skanlite; do sudo apt install -y $paquetes; done
 
 }
 
 function _pencil() {
 
     # Pencil 2D: Animación 2D estilo Flash 8
-    apt install pencil2d -y
+    for paquetes in pencil2d; do sudo apt install -y $paquetes; done
 
 }
 
 function _hugin() {
 
     # Hugin: unir dibujos para fondos widescreen
-    apt install hugin -y
+    for paquetes in hugin; do sudo apt install -y $paquetes; done
 
 }
 
 function _synfig() {
 
     # Synfig: animación 2D cut-out
-    for paquetes in synfig synfigstudio synfig-examples; do apt install -y $paquetes; done
+    for paquetes in synfig synfigstudio synfig-examples; do sudo apt install -y $paquetes; done
 }
 
 function _darktable() {
 
     # Darktable: revelado RAW similar a Lightroom, ideal para paisajes
-    apt install darktable -y
+    for paquetes in darktable; do sudo apt install -y $paquetes; done
 
 }
 
 function _rawtherapee() {
 
     # Rawtherapee: revelado RAW, ideal para tonos de piel
-    apt install rawtherapee -y
+    for paquetes in rawtherapee; do sudo apt install -y $paquetes; done
 
 }
 
 function _krita() {
 
     # Krita: dibujo, pintura y animación 2D, modos RGB y CMYK
-    for paquetes in krita krita-data krita-gmic krita-l10n; do apt install -y $paquetes; done
+    for paquetes in krita krita-data krita-gmic krita-l10n; do sudo apt install -y $paquetes; done
+
+}
+
+function _manuskript() {
+
+    # Manuskript: software para escritores y guionistas
+    for paquetes in manuskript; do sudo apt install -y $paquetes; done
+
+}
+
+function _sweethome3d() {
+
+    # Sweethome3D: Diseño de interiores
+    for paquetes in sweethome3d; do sudo apt install -y $paquetes; done
+    
+}
+
+function _huayra() {
+
+    # Huayra Stopmotion: app sencilla de stop-motion webcam en 4:3
+    for paquetes in huayra-stopmotion; do sudo apt install -y $paquetes; done
+
+}
+
+function _tahoma2D() {
+
+    # Tahoma2D: Animación 2D y Stom-Motion webcam/DSLR, basado en Open Toonz
+    for paquetes in tahoma2d; do sudo apt install -y $paquetes; done
+
+}
+
+function _inkscape() {
+
+    # Inkscape: dibujo vectorial
+    for paquetes in inkscape; do sudo apt install -y $paquetes; done
+
+}
+
+function _tupitube() {
+
+    # TupiTube: animación 2D y stopmotion webcam ideal para edad escolar
+    for paquetes in tupitubedesk; do sudo apt install -y $paquetes; done
+
+}
+
+function _godot() {
+
+    # Godot: animación cut-out ideal videojuegos    
+    for paquetes in godot; do sudo apt install -y $paquetes; done
+
+}
+
+function _storyboarder() {
+
+    # Storyboarder: Creación de storyboard y animatics optimizado
+    for paquetes in storyboarder; do sudo apt install -y $paquetes; done
+
+}
+
+function _natron() {
+
+    # Natron: composición y efectos por nodos, similar a Nuke
+    for paquetes in natron; do sudo apt install -y $paquetes; done
+
+}
+
+function _azpainter() {
+
+    # AZPainter: Dibujo y entintado, ideal comics
+    for paquetes in azpainter; do sudo apt install -y $paquetes; done
+
+}
+
+function _enve() {
+
+    # Enve: motion graphics sencillo, interfaz similar a After Effects
+    for paquetes in enve; do sudo apt install -y $paquetes; done
+
+}
+
+function _quinema() {
+
+    # Quinema: Scripts para procesar imagenes, de Ernesto Bazzano
+    for paquetes in quinema; do sudo apt install -y $paquetes; done
+
+}
+
+function _qstopmotion() {
+
+    # QStopMotion: animación stopmotion con webcam o DSLR
+    for paquetes in qstopmotion; do sudo apt install -y $paquetes; done
+
+}
+
+function _belle() {
+
+    # Belle (editor de aventuras gráficas animadas)
+    for paquetes in belle; do sudo apt install -y $paquetes; done
+
+}
+
+function _mypaint() {
+
+    # MyPaint: pintura digital similar a ArtRage
+    for paquetes in mypaint; do sudo apt install -y $paquetes; done
+
+}
+
+function _blender() {
+
+    # Blender: animación profesional 3D, 2D Y 2.5D
+    for paquetes in blender; do sudo apt install -y $paquetes; done
+
+}
+
+function _boats() {
+
+    # Boats: stopmotion simple para webcam en 16:9
+    for paquetes in boats-animator; do sudo apt install -y $paquetes; donde
 
 }
 
 function _entangle() {
 
     # Entangle: control para Cámaras DSLR y plugin para stop motion
-    for paquetes in entangle gir1.2-entangle-0.1 entangleinstallplugin; do apt install -y $paquetes; done
+    for paquetes in entangle gir1.2-entangle-0.1 entangleinstallplugin; do sudo apt install -y $paquetes; done
     _entanglePlugin
 
 }
@@ -974,136 +1097,6 @@ function _entanglePlugin() {
     dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
         --title "ATENCIÓN!" \
         --msgbox "\n Para activar el plugin entangle stop motion, ejecute el sigiente comando SIN PERMISOS DE ROOT:\n\ninstalar-plugin-entangle" 23 100
-
-}
-
-function _manuskript() {
-
-    # Manuskript: software para escritores y guionistas
-    apt install manusrkipt -y
-
-}
-
-function _sweethome3d() {
-
-    # Sweethome3D: Diseño de interiores
-    apt install sweethome3d -y
-}
-
-function _huayra() {
-
-    # Huayra Stopmotion: app sencilla de stop-motion webcam en 4:3
-    apt install huayra-stopmotion -y
-
-}
-
-function _tahoma2D() {
-
-    # Tahoma2D: Animación 2D y Stom-Motion webcam/DSLR, basado en Open Toonz
-
-    clear
-    apt install tahoma2d -y
-
-}
-
-function _inkscape() {
-
-    # Inkscape: dibujo vectorial
-    clear
-    apt install inkscape -y
-
-}
-
-function _tupitube() {
-
-    # TupiTube: animación 2D y stopmotion webcam ideal para edad escolar
-    clear
-    apt install tupitubedesk -y
-
-}
-
-function _godot() {
-
-    # Godot: animación cut-out ideal videojuegos
-    clear
-    apt install godot -y
-
-}
-
-function _storyboarder() {
-
-    # Storyboarder: Creación de storyboard y animatics optimizado
-    clear
-    apt install storyboarder -y
-
-}
-
-function _natron() {
-
-    # Natron: composición y efectos por nodos, similar a Nuke
-    clear
-    apt install natron -y
-
-}
-
-function _azpainter() {
-
-    # AZPainter: Dibujo y entintado, ideal comics
-    clear
-    apt install azpainter -y
-
-}
-
-function _enve() {
-
-    # Enve: motion graphics sencillo, interfaz similar a After Effects
-    clear
-    apt install enve -y
-
-}
-
-function _quinema() {
-
-    # Quinema: Scripts para procesar imagenes, de Ernesto Bazzano
-    clear
-    apt install quinema -y
-
-}
-
-function _qstopmotion() {
-
-    # QStopMotion: animación stopmotion con webcam o DSLR
-    clear
-    apt install qstopmotion -y
-
-}
-
-function _belle() {
-
-    # Belle (editor de aventuras gráficas animadas)
-    clear
-    apt install belle -y
-
-}
-
-function _mypaint() {
-
-    # MyPaint: pintura digital similar a ArtRage
-    apt install mypaint -y
-
-}
-
-function _blender() {
-
-    # Blender: animación profesional 3D, 2D Y 2.5D
-    apt install blender -y
-
-}
-
-function _boats() {
-
-    # Boats: stopmotion simple para webcam en 16:9
-    apt install boats-animator -y
 
 }
 
@@ -1171,50 +1164,37 @@ function _remover() {
     # REMOVER TRADUCCIONES DE FIREFOX DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
     clear
-    for paquetes_remover_idiomas_firefox in keditbookmarks firefox-esr-l10n-ru firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do apt remove --purge -y $paquetes_remover_idiomas_firefox; done
-    apt install -f -y
-    apt autoremove --purge -y
+    for paquetes in keditbookmarks firefox-esr-l10n-ru firefox-esr-l10n-bn-bd firefox-esr-l10n-bn-in refox-esr-l10n-kn firefox-esr-l10n-kn firefox-esr-l10n-lt firefox-esr-l10n-ml firefox-esr-l10n-ml firefox-esr-l10n-ar firefox-esr-l10n-ast firefox-esr-l10n-be firefox-esr-l10n-bg firefox-esr-l10n-bn firefox-esr-l10n-bs firefox-esr-l10n-ca firefox-esr-l10n-cs firefox-esr-l10n-cy firefox-esr-l10n-da firefox-esr-l10n-el firefox-esr-l10n-eo firefox-esr-l10n-es-cl firefox-esr-l10n-es-mx firefox-esr-l10n-et firefox-esr-l10n-eu firefox-esr-l10n-fa firefox-esr-l10n-fi firefox-esr-l10n-ga-ie firefox-esr-l10n-gu-in firefox-esr-l10n-he firefox-esr-l10n-hi-in firefox-esr-l10n-hr firefox-esr-l10n-hu firefox-esr-l10n-id firefox-esr-l10n-is firefox-esr-l10n-ja firefox-esr-l10n-kk firefox-esr-l10n-km firefox-esr-l10n-ko firefox-esr-l10n-lv firefox-esr-l10n-mk firefox-esr-l10n-mr firefox-esr-l10n-nb-no firefox-esr-l10n-ne-np firefox-esr-l10n-nl firefox-esr-l10n-nn-no firefox-esr-l10n-pa-in firefox-esr-l10n-pl firefox-esr-l10n-ro firefox-esr-l10n-si firefox-esr-l10n-sk firefox-esr-l10n-sl firefox-esr-l10n-sq firefox-esr-l10n-sr firefox-esr-l10n-sv-se firefox-esr-l10n-ta firefox-esr-l10n-te firefox-esr-l10n-th firefox-esr-l10n-tr firefox-esr-l10n-uk firefox-esr-l10n-vi firefox-esr-l10n-zh-cn firefox-esr-l10n-zh-tw; do sudo apt remove --purge -y $paquetes; done
 
     # REMOVER TRADUCCIONES DE ESCRITORIO DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_task in task-albanian-desktop task-cyrillic-desktop task-russian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do apt remove --purge -y $paquetes_remover_idiomas_task; done
-    apt install -f -y
-    apt autoremove --purge -y
-
+    for paquetes in task-albanian-desktop task-cyrillic-desktop task-russian-desktop task-amharic-desktop task-arabic-desktop task-asturian-desktop task-basque-desktop task-belarusian-desktop task-bengali-desktop task-bosnian-desktop task-bulgarian-desktop task-catalan-desktop task-croatian-desktop task-czech-desktop task-danish-desktop task-dutch-desktop task-dzongkha-desktop task-esperanto-desktop task-estonian-desktop task-finnish-desktop task-georgian-desktop task-greek-desktop task-gujarati-desktop task-hindi-desktop task-hungarian-desktop task-icelandic-desktop task-indonesian-desktop task-irish-desktop task-kannada-desktop task-kazakh-desktop task-khmer-desktop task-kurdish-desktop task-latvian-desktop task-lithuanian-desktop task-macedonian-desktop task-malayalam-desktop task-marathi-desktop task-nepali-desktop task-northern-sami-desktop task-norwegian-desktop task-persian-desktop task-polish-desktop task-punjabi-desktop task-romanian-desktop task-serbian-desktop task-sinhala-desktop task-slovak-desktop task-slovenian-desktop task-south-african-english-desktop task-tamil-desktop task-telugu-desktop task-thai-desktop task-turkish-desktop task-ukrainian-desktop task-uyghur-desktop task-vietnamese-desktop task-welsh-desktop task-xhosa-desktop task-chinese-s-desktop; do sudo apt remove --purge -y $paquetes; done
+    
     # REMOVER CONJUNTOS DE CARACTERES DE IDIOMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_ibus in inicatalan ipolish irussian idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do apt remove --purge -y $paquetes_remover_idiomas_ibus; done
-    apt install -f -y
-    apt autoremove --purge -y
+    for paquetes in inicatalan ipolish irussian idanish idutch ibulgarian icatalan ihungarian ilithuanian inorwegian iswiss iukrainian ihungarian ilithuanian inorwegian ipolish iukrainian iswiss; do sudo apt remove --purge -y $paquetes; done
 
-    for paquetes_remover_idiomas_mythes in myspell-ru mythes-ru myaspell-ru myspell-et; do apt remove --purge -y $paquetes_remover_idiomas_mythes; done
+    for paquetes in myspell-ru mythes-ru myaspell-ru myspell-et; do sudo apt remove --purge -y $paquetes; done
 
-    for paquetes_remover_idiomas_aspell in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do apt remove --purge -y $paquetes_remover_idiomas_aspell; done
+    for paquetes in aspell-hi aspell-ml aspell-mr aspell-pa aspell-ta aspell-te aspell-gu aspell-bn aspell-no aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-da aspell-el aspell-eo aspell-et aspell-eu aspell-he aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lt aspell-lv aspell-nl aspell-no aspell-pl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-pl aspell-eo aspell-am aspell-ar aspell-ar-large aspell-bg aspell-ca aspell-cs aspell-cy aspell-el aspell-et aspell-eu aspell-fa aspell-ga aspell-he aspell-hr aspell-hu aspell-is aspell-kk aspell-ku aspell-lv aspell-nl aspell-ro aspell-sk aspell-sl aspell-sv aspell-tl aspell-uk aspell-uk; do sudo apt remove --purge -y $paquetes; done
 
-    for paquetes_remover_idiomas_hunspell in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do apt remove --purge -y $paquetes_remover_idiomas_hunspell; done
-    for paquetes_remover_idiomas_myspell in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do apt remove --purge -y $paquetes_remover_idiomas_myspell; done
+    for paquetes in hunspell-ar hunspell-ml hunspell-be hunspell-bg hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-eu hunspell-gu hunspell-hi hunspell-hr hunspell-hu hunspell-id hunspell-is hunspell-kk hunspell-kmr hunspell-ko hunspell-lt hunspell-lv hunspell-ne hunspell-nl hunspell-ro hunspell-se hunspell-si hunspell-sl hunspell-sr hunspell-sv hunspell-sv-se hunspell-te hunspell-th hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-vi; do sudo apt remove --purge -y $paquetes; done
+    
+    for paquetes in myspell-eo myspell-fa myspell-ga myspell-he myspell-nb myspell-nn myspell-sk myspell-sq mythes-cs mythes-de-ch mythes-ne mythes-pl mythes-sk; do sudo apt remove --purge -y $paquetes; done
 
-    for paquetes_remover_idiomas_hyphen in hyphen-hr hypen-ru hyphen-hu hyphen-lt; do apt remove --purge -y $paquetes_remover_idiomas_hyphen; done
-    apt install -f -y
-    apt autoremove --purge -y
+    for paquetes in hyphen-hr hypen-ru hyphen-hu hyphen-lt; do sudo apt remove --purge -y $paquetes; done
 
     # REMOVER FUENTES QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_fonts in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do apt remove --purge -y $paquetes_remover_idiomas_fonts; done
-    apt install -f -y
-    apt autoremove --purge -y
-
+    for paquetes in fonts-arabeyes fonts-nanum fonts-crosextra-carlito fonts-nanum-coding fonts-tlwg-kinnari-ttf fonts-tlwg-kinnari fonts-thai-tlwg fonts-tlwg* fonts-vlgothic fonts-arphic-ukai fonts-arphic-uming fonts-lohit-knda fonts-lohit-telu fonts-ukij-uyghur; do sudo apt remove --purge -y $paquetes; done
+    
     # REMOVER IDIOMAS DE LIBRE OFFICE QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_idiomas_libreoffice in libreoffice-help-ru libreoffice-l10n-ru libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do apt remove --purge -y $paquetes_remover_idiomas_libreoffice; done
-    apt install -f -y
-    apt autoremove --purge -y
-
+    for paquetes in libreoffice-help-ru libreoffice-l10n-ru libreoffice-help-ca libreoffice-help-cs libreoffice-help-da libreoffice-help-dz libreoffice-help-el libreoffice-help-et libreoffice-help-eu libreoffice-help-fi libreoffice-help-gl libreoffice-help-hi libreoffice-help-hu libreoffice-help-ja libreoffice-help-km libreoffice-help-ko libreoffice-help-nl libreoffice-help-pl libreoffice-help-sk libreoffice-help-sl libreoffice-help-sv libreoffice-help-zh-cn libreoffice-help-zh-tw fonts-linuxlibertine fonts-droid-fallback fonts-noto-mono libreoffice-l10n-ar libreoffice-l10n-ast libreoffice-l10n-be libreoffice-l10n-bg libreoffice-l10n-bn libreoffice-l10n-bs libreoffice-l10n-ca libreoffice-l10n-cs libreoffice-l10n-da libreoffice-l10n-dz libreoffice-l10n-el libreoffice-l10n-en-za libreoffice-l10n-eo libreoffice-l10n-et libreoffice-l10n-eu libreoffice-l10n-fa libreoffice-l10n-fi libreoffice-l10n-ga libreoffice-l10n-gu libreoffice-l10n-he libreoffice-l10n-hi libreoffice-l10n-hr libreoffice-l10n-hu libreoffice-l10n-id libreoffice-l10n-islibreoffice-l10n-ja libreoffice-l10n-kalibreoffice-l10n-km libreoffice-l10n-ko libreoffice-l10n-lt libreoffice-l10n-lv libreoffice-l10n-mk libreoffice-l10n-ml libreoffice-l10n-mr libreoffice-l10n-nb libreoffice-l10n-ne libreoffice-l10n-nl libreoffice-l10n-nnlibreoffice-l10n-pa-in libreoffice-l10n-pl libreoffice-l10n-ro libreoffice-l10n-si libreoffice-l10n-sk libreoffice-l10n-sl libreoffice-l10n-srlibreoffice-l10n-sv libreoffice-l10n-ta libreoffice-l10n-te libreoffice-l10n-th libreoffice-l10n-tr libreoffice-l10n-ug libreoffice-l10n-uk libreoffice-l10n-vi libreoffice-l10n-xh libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw; do sudo apt remove --purge -y $paquetes; done
+    
     # REMOVER PROGRAMAS QUE QUIRINUX NO INCLUYE
 
-    for paquetes_remover_programas in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do apt remove --purge -y $paquetes_remover_programas; done
-    apt install -f -y
-    apt autoremove --purge -y
+    for paquetes in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt remove --purge -y $paquetes; done
 
     # REMOVER DOCUMENTACIÓN
     clear
@@ -1228,9 +1208,8 @@ function _borratemp() {
     # BORRAR TEMPORALES [CÓDIGO REUTILIZABLE]
     # ===========================================================================================
     sudo rm -rf /opt/tmp/*
-    apt-get clean
-    clear
-
+    sudo apt-get clean
+    
 }
 
 function _ordenar() {
@@ -1240,22 +1219,18 @@ function _ordenar() {
     # ===========================================================================================
 
     # CONFIGURANDO PAQUETES
-    clear
     sudo dpkg --configure -a
 
     # LIMPIANDO CACHE
-    clear
-    apt clean && apt autoclean
+    sudo apt clean && apt autoclean
 
     # REGENERANDO CACHE
-    clear
-    apt update --fix-missing
+    sudo apt update --fix-missing
 
     # CONFIGURANDO DEPENDENCIAS
-    clear
-    apt install -f
-    apt autoremove --purge -y
-
+    sudo apt install -f
+    sudo apt autoremove --purge -y
+    
 }
 
 _inicioCheck
