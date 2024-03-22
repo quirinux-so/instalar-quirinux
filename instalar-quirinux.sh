@@ -1080,7 +1080,7 @@ function _blender() {
 function _boats() {
 
     # Boats: stopmotion simple para webcam en 16:9
-    for paquetes in boats-animator; do sudo apt install -y $paquetes; donde
+    for paquetes in boats-animator; do sudo apt install -y $paquetes; done
 
 }
 
