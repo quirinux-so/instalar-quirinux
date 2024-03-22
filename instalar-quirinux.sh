@@ -612,7 +612,7 @@ function _teclado() {
 
 function _audacity() {
 	
-	for paquetes in audacity; do sudo apt install $paquetes; done
+	for paquetes in audacity; do sudo apt install -y $paquetes; done
 	
 }
 
@@ -1197,7 +1197,6 @@ function _remover() {
     for paquetes in grsync jami dia gsmartcontrol ophcrack ophcrack-cli whowatch htop zulucrypt-cli zulucrypt-cli balena-etcher-electron keepassxc dino-im dino-im-common etherape eterape-data hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux qassel qassel-data jami jami-daemon liferea liferea-data mumble wahay onionshare qtox signal hydra hydra-gtk bmon grub-customizer spek osmo eom eom-common compton mc mc-data pidgin pidgin-data bluetooth khmerconverter fcitx* mozc* webcamoid modem-manager-gui fcitx mlterm-common bluez bluez-firmware culmus synapse apparmor pidgin-otr pidgin-encryption pidgin pidgin-data pidgin-themes pidgin-openpgp libpurple0 dino-im dino-im-common gajim gajim-omemo hexchat hexchat-common hexchat-perl hexchat-plugins hexchat-python3 hexchat-otr iptux quassel quassel-data mumble qtox keepassxc mc mc-data osmo kasumi mlterm parole modem-manager-gui modem-manager-gui-help; do sudo apt remove --purge -y $paquetes; done
 
     # REMOVER DOCUMENTACIÓN
-    clear
     sudo rm -rf /usr/share/doc/*
 
 }
@@ -1222,7 +1221,7 @@ function _ordenar() {
     sudo dpkg --configure -a
 
     # LIMPIANDO CACHE
-    sudo apt clean && apt autoclean
+    sudo apt clean && sudo apt autoclean
 
     # REGENERANDO CACHE
     sudo apt update --fix-missing
