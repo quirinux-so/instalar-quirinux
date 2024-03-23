@@ -313,7 +313,6 @@ function _paquetesBase() {
     _vlc  
     _kdenlive  
     _juegos  
-    _appsQuirinux  
     _telegram  
     _jitsi  
     _qrcreator  
@@ -336,6 +335,7 @@ function _paquetesBase() {
     _warpinator  
     _isync   
     _owncloud
+    _appsQuirinux  
     
     _limpiar
     touch /opt/requisitos/ok-base
@@ -599,7 +599,7 @@ function _torrent() {
 function _accesorios() {
 
     # Accesorios: calculadora, color picker, kpaint y otros
-    for paquetes in galculator color-picker kpaint dia kcharselect kruler; do sudo apt install -y $paquetes; done
+    for paquetes in galculator color-picker kolourpaint dia kcharselect kruler; do sudo apt install -y $paquetes; done
 
 }
 
@@ -659,16 +659,6 @@ function _juegos() {
 
 }
 
-function _appsQuirinux() {
-
-    # Asistente, utilidades, temas y wallpapers de Quirinux
-    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-firefox-base quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
-    sudo update-grub
-    sudo update-grub2
-    _idiomas
-
-}
-
 function _idiomas() {
 
     idiomas=("es_ES.UTF-8" "en_US.UTF-8" "fr_FR.UTF-8" "de_DE.UTF-8" "it_IT.UTF-8" "gl_ES.UTF-8" "pt_PT.UTF-8")
@@ -704,17 +694,17 @@ function _jitsi() {
 
 }
 
-function _openboard() {
-
-    # Openboard: pizarra en pantalla
-    for paquetes in openboard; do sudo apt install -y $paquetes; done
-
-}
-
 function _qrcreator() {
 
     # Creador de códigos QR
     for paquetes in qrcreator; do sudo apt install -y $paquetes; done
+
+}
+
+function _openboard() {
+
+    # Openboard: pizarra en pantalla
+    for paquetes in openboard; do sudo apt install -y $paquetes; done
 
 }
 
@@ -865,6 +855,16 @@ function _owncloud() {
 	
 	for paquetes in owncloud-client; do sudo apt install -y $paquetes; done
 	
+}
+
+function _appsQuirinux() {
+
+    # Asistente, utilidades, temas y wallpapers de Quirinux
+    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-firefox-base quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
+    sudo update-grub
+    sudo update-grub2
+    _idiomas
+
 }
 
 # ===========================================================================================
