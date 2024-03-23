@@ -307,7 +307,7 @@ function _paquetesBase() {
     _torrent  
     _accesorios  
     _teclado  
-	_audacity   
+    _audacity   
     _virtualbox  
     _peek  
     _vlc  
@@ -336,6 +336,7 @@ function _paquetesBase() {
     _warpinator  
     _isync   
     _owncloud
+    _firefoxBase
     
     _limpiar
     touch /opt/requisitos/ok-base
@@ -357,7 +358,6 @@ function _paquetesAnimacion() {
     _darktable
     _rawtherapee
     _krita
-    _entangle
     _manuskript
     _sweethome3d
     _huayra
@@ -375,11 +375,13 @@ function _paquetesAnimacion() {
     _mypaint
     _blender
     _boats
-	_gb-studio
-	_pikopixel
-	_cura
+    _gb-studio
+    _pikopixel
+    _cura
+    _firefoxAnimacion
 	
     _limpiar
+    _entangle
     touch /opt/requisitos/ok-animacion
 
 }
@@ -433,6 +435,7 @@ function _menuBase() {
         32 "Virtualbox: Virtualizar otros Sistemas Operativos" off
         33 "Visualizadores y Organizadores de Imágenes" off
         34 "Warpinator: conectar dispositivos" off       
+	35 "Firefox, favoritos personalizados (general)" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -474,6 +477,7 @@ function _menuBase() {
         32) _virtualbox ;;
         33) _imagenes ;;
         34) _warpinator ;;
+	35) _firefoxBase ;;
         esac
     done
 
@@ -519,6 +523,7 @@ function _menuAnimacion() {
         30 "Synfig: Animación 2D Cut-out" off
         31 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
         32 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
+	33 "Firefox, favoritos personalizados (animación)" off
         
     )
 
@@ -559,6 +564,7 @@ function _menuAnimacion() {
         30) _synfig ;;
         31) _tahoma2D ;;
         32) _tupitube ;;
+		33) _firefoxAnimacion ;;
         
         esac
     done
@@ -662,7 +668,7 @@ function _juegos() {
 function _appsQuirinux() {
 
     # Asistente, utilidades, temas y wallpapers de Quirinux
-    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-firefox-base quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
+    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
     sudo update-grub
     sudo update-grub2
     _idiomas
@@ -865,6 +871,13 @@ function _owncloud() {
 	
 	for paquetes in owncloud-client; do sudo apt install -y $paquetes; done
 	
+}
+
+function _firefoxBase() {
+
+	# Carpetas de favoritos de Quirinux Base
+ 	for paquetes in quirinux-firefox-base; do sudo apt install -y $paquetes; done
+
 }
 
 # ===========================================================================================
@@ -1097,6 +1110,13 @@ function _entanglePlugin() {
     dialog --backtitle "INSTALACIÓN DE QUIRINUX GNU/LINUX V.2.0" \
         --title "ATENCIÓN!" \
         --msgbox "\n Para activar el plugin entangle stop motion, ejecute el sigiente comando SIN PERMISOS DE ROOT:\n\ninstalar-plugin-entangle" 23 100
+
+}
+
+function _firefoxAnimacion() {
+
+	# Carpetas de favoritos de Quirinux Base
+ 	for paquetes in quirinux-firefox-animacion; do sudo apt install -y $paquetes; done
 
 }
 
