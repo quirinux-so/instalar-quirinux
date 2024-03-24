@@ -436,7 +436,7 @@ function _menuBase() {
         32 "Virtualbox: Virtualizar otros Sistemas Operativos" off
         33 "Visualizadores y Organizadores de Imágenes" off
         34 "Warpinator: conectar dispositivos" off       
-	35 "Firefox, favoritos personalizados (general)" off
+	    35 "Firefox, favoritos personalizados (general)" off
     )
 
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -478,7 +478,7 @@ function _menuBase() {
         32) _virtualbox ;;
         33) _imagenes ;;
         34) _warpinator ;;
-	35) _firefoxBase ;;
+	    35) _firefoxBase ;;
         esac
     done
 
@@ -494,7 +494,7 @@ function _menuAnimacion() {
     cmd=(dialog --separate-output --checklist "Barra espaciadora = seleccionar" 23 76 16)
     options=(1 "Administrador de Perfiles de Color" off
         2 "Aegisub: Editor de Subtítulos" off
-        3 "Apps para Edición de Audio (Ardour, Audacity y plugins)"
+        3 "Apps para Edición de Audio (Ardour, Audacity y plugins)" off
         4 "AZPainter: Dibujo y Entintado, Ideal Comics" off
         5 "Belle (Editor de Aventuras Gráficas Animadas)" off
         6 "Birdfont: Editor de Tipografías" off
@@ -565,8 +565,7 @@ function _menuAnimacion() {
         30) _synfig ;;
         31) _tahoma2D ;;
         32) _tupitube ;;
-		33) _firefoxAnimacion ;;
-        
+		33) _firefoxAnimacion ;;        
         esac
     done
 
