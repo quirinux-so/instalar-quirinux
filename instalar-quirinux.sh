@@ -206,7 +206,7 @@ function _menuPrincipal() {
         --menu "Elije una opción" 16 50 8 \
         1 "Instalar Quirinux Base" \
         2 "Instalar Quirinux Animación" \
-        3 "Instalar componentes base sueltos" \
+        3 "Instalar programas base sueltos" \
         4 "Instalar programas de animación sueltos" \
         5 "Ayuda" \
         6 "Salir")
@@ -214,39 +214,40 @@ function _menuPrincipal() {
 
     _checkrepo
 
-    if [[ $opPrincipal == 1 ]]; then # Instalar programas base de todo Quirinux
+    if [[ "$opPrincipal" == "1" ]]; then # Instalar programas base de todo Quirinux
         clear
         _instalarBase
         _menuPrincipal
     fi
 
-    if [[ $opPrincipal == 2 ]]; then # Instalar Quirinux Animación
+    if [[ "$opPrincipal" == "2" ]]; then # Instalar Quirinux Animación
         clear
         _instalarAnimacion
         _menuPrincipal
     fi
 
-    if [[ $opPrincipal == 3 ]]; then # Instalar componentes base sueltos
+    if [[ "$opPrincipal" == "3" ]]; then # Instalar componentes base sueltos
         clear
         _menuBase
     fi
 
-    if [[ $opPrincipal == 4 ]]; then # Instalar programas de animación sueltos
+    if [[ "$opPrincipal" == "4" ]]; then # Instalar programas de animación sueltos
         clear
         _menuAnimacion
     fi
 
-    if [[ $opPrincipal == 5 ]]; then # Ayuda_sistema
+    if [[ "$opPrincipal" == "5" ]]; then # Ayuda_sistema
         clear
         _ayudaPrincipal
     fi
 
-    if [[ $opPrincipal == 6 ]]; then # Salir
+    if [[ "$opPrincipal" == "6" ]]; then # Salir
         clear
         _salir
     fi
 
 }
+
 
 function _instalarBase() {
 
@@ -523,7 +524,7 @@ function _menuAnimacion() {
         30 "Synfig: Animación 2D Cut-out" off
         31 "Tahoma2D: Animación 2D y Stop-Motion Webcam/DSLR, Basado en Open Toonz" off
         32 "TupiTube: Animación 2D y Stopmotion Webcam Ideal para Edad Escolar" off
-	33 "Firefox, favoritos personalizados (animación)" off
+	    33 "Firefox, favoritos personalizados (animación)" off
         
     )
 
