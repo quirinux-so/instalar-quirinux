@@ -605,7 +605,7 @@ function _torrent() {
 function _accesorios() {
 
     # Accesorios: calculadora, color picker, kpaint y otros
-    for paquetes in galculator color-picker kolourpaint dia kcharselect kruler hardinfo; do sudo apt install -y $paquetes; done
+    for paquetes in galculator mystiq color-picker kolourpaint dia kcharselect kruler hardinfo; do sudo apt install -y $paquetes; done
 
 }
 
@@ -654,6 +654,8 @@ function _kdenlive() {
 
     # Editor profesional de video Kdenlive
     for paquetes in kdenlive breeze breeze-icon-theme-rcc; do sudo apt install -y $paquetes; done
+    
+    for paquetes in kdeconnect; do sudo apt remove --purge -y;done
 
 }
 
@@ -668,7 +670,7 @@ function _juegos() {
 function _appsQuirinux() {
 
     # Asistente, utilidades, temas y wallpapers de Quirinux
-    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
+    for paquetes in quirinux-fuentes os-prober mugshot xscreensaver quirinux-actualizar quirinux-applications quirinux-asistente quirinux-autologin quirinux-bluconfig quirinux-config quirinux-estilos quirinux-skel quirinux-notify quirinux-pipewire quirinux-splash quirinux-sudoers quirinux-temas quirinux-usuarios quirinux-wallpapers xqlogout crealib-libersys draw.io gluqlo icons-libreoffice icons-winbugs reiniciar-red webapp-manager xfce4-panel-profiles xfce4-theme-switcher grub2; do sudo apt install -y $paquetes; done
     sudo update-grub
     sudo update-grub2
     _idiomas
